@@ -1,0 +1,34 @@
+server :
+* genereles tetriminos
+* garde en memoire l historique des tetriminos
+* stocke les spectres utilisateurs
+* envoides tetriminos a l utilisateur 
+* reception des spectrs et transmission
+* gestion des room
+
+
+-CREATION D UE ROOM 
+api : /createRoom - username
+partie non alancee :
+    --option
+        possibilite de rejoindre la room 
+        supprimer sa room
+        lancer la partie 
+            roo; bloauee
+            la partie se lance 
+                commuication de l etat de la game d un utilisateur
+                le server envoi les tetriminos a chaque utilisateur
+                le server recoit les les spectres et les transmets
+
+client :
+* gestion de l input utilisateur
+* affichage du tetris actuel
+* gestion local de l etatdu terrein
+* boucle d evenement
+    * gauche droite : deplacement du tetriminos
+    * haut          : rotation
+    * bas           : chute en dirrection dubas
+    * espace        : deplacement direct vers le bas 
+
+* defaite
+* score
