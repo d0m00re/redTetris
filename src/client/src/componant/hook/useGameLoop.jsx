@@ -78,11 +78,11 @@ Tetris algo :
         let cpMap = _.cloneDeep(state.currMap);
         let posTetri = state.currPosTetriminos;
     
-        console.log(state);
+        /*console.log*/(state);
         cpMap[state.currPosTetriminos.y][state.currPosTetriminos.x] = 1;
         dispatch({type : 'UPDATE_TMP_MAP', payload : cpMap});
         // updatetetriminos pos
-        console.log('new pos');
+        /*console.log*/('new pos');
         // change position
         let newPos = nextPos(state.currPosTetriminos, cpMap, state.currentKey);
         
@@ -104,9 +104,9 @@ Tetris algo :
             // if succes  runanither tetriminos
         }
         else{
-            console.log('error : ');
-            console.log(newPos);
-            console.log(cpMap);
+            /*console.log*/('error : ');
+            /*console.log*/(newPos);
+            /*console.log*/(cpMap);
         }
     }
     useInterval(updateMapTestAlgo1, 100);

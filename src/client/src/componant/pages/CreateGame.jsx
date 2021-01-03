@@ -6,8 +6,8 @@ function CreateGame() {
 
     const handleCreateGame = () =>{
         axios.post('http://localhost:4242/newGame')
-        .then(res => console.log(res.data))
-        .catch(err => console.log('error create game'))
+        .then(res => /*console.log*/(res.data))
+        .catch(err => /*console.log*/('error create game'))
     }
 
     return (

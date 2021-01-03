@@ -7,9 +7,9 @@ const useActionUser = () => {
     const [keyPress] = useKeyPress();
     
     useEffect(() => {
-        console.log('key press : ' + keyPress);
-    //    console.log(GameContext);
-        console.log(state);
+        /*console.log*/('key press : ' + keyPress);
+    //    /*console.log*/(GameContext);
+        /*console.log*/(state);
         
     switch(keyPress){
             case 'ArrowRight':
