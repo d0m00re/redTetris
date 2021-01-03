@@ -32,8 +32,8 @@ const RedTetrisBoard = ({currentBoard}) => {
   );
 
   useEffect(() => {
-    /*console.log*/(dimBoard);
-    /*console.log*/(board);
+    console.log(dimBoard);
+    console.log(board);
   }, []);
   return (
     <div >

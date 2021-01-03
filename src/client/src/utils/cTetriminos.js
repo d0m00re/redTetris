@@ -148,7 +148,6 @@ const tetriRed = [
 ]
 
 const tetriminos = [
-    [
         {tetri : tetriCyan, color:'cyan'},
         {tetri : tetriBlue, color:'blue'},
         {tetri : tetriOrange, color:'orange'},
@@ -156,7 +155,8 @@ const tetriminos = [
         {tetri : tetriGreen, color:'green'},
         {tetri : tetriPurple, color:'purple'},
         {tetri : tetriRed, color:'red'},
-    ]
 ]
 
-export default tetriminos;
+module.exports={
+    tetriminos
+};

@@ -13,8 +13,7 @@ const GET_NEXT_TETRIMINOS = "GET_NEXT_TETRIMINOS";
 const CHECK_LINE_COMPLETE = 'CHECK_LINE_COMPLETE';
 
 const Reducer = (state, action) => {
-  /*console.log*/("staeeeee : ");
-  /*console.log*/(state);
+
   switch (action.type) {
     case UPDATE_KEY:
       return {
@@ -27,8 +26,6 @@ const Reducer = (state, action) => {
         tmpMap: action.payload,
       };
     case UPDATE_TETRIMINOS_POS:
-      /*console.log*/("updatetetriminos pos");
-      /*console.log*/(action.payload);
       return {
         ...state,
 

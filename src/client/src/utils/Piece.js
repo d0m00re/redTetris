@@ -10,22 +10,28 @@ function getRandomIntInclusive(min, max) {
 
 class Piece {
     constructor() {
-        this.piece = undefined;
-        this.idRot = 0;
+        this._piece = undefined;
+        this._idRot = 0;
     }
 
     get piece(){
-        return this.piece[this.idRot];
+        return this._piece.tetri[this._idRot];
+    }
+
+    get color(){
+        return this._piece.color;
     }
 
     set piece(piece){
-        this.piece = piece;
-        this.idRot = 0;
+        this._piece = piece;
+        this._idRot = 0;
     }
 
     rotation = () => {
-        this.idRot = (this.idRot + 1) % this.piece.length;
+        this._idRot = (this._idRot + 1) % this._piece.tetri.length;
     }
 }
 
-export default Piece;
+module.exports={
+    Piece
+}
