@@ -2,11 +2,11 @@ const {Piece} = require('./../src/utils/Piece');
 const {tetriminos} = require('./../src/utils/cTetriminos');
 const assert = require('assert');
 
-
 describe('Piece', function() {
     describe('rotation : findLineComplete', function() {
       it('rotation : get', function() {
           let piece = new Piece();
+
           piece.piece = tetriminos[0];
           assert.deepEqual(piece.piece, tetriminos[0].tetri[0]);
       });

@@ -61,7 +61,10 @@ const Reducer = (state, action) => {
 const initialState = {
   currentKey: "",
   username: "d0m",
-  currTetriminos: 1,
+  currTetriminos: {
+    tetri: [[1,1,1], [1,1,1], [1,1,1]],
+    color: 'red'
+  },
   currPosTetriminos: { x: 5, y: 0 },
   currMap: Array(20)
     .fill()

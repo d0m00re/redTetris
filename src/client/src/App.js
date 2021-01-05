@@ -1,13 +1,5 @@
-import logo from "./logo.svg";
-import "./App.css";
-import RedTetrisBoard from "./componant/pages/RedTetrisBoard";
-
 import React from "react";
-
-import GameContext from "./componant/context/contextGame";
-import defaultStateContextGame from "./componant/context/defaultStateContextGame";
-
-import Store, { Context } from "./componant/context/Store";
+import Store from "./componant/context/Store";
 
 import HomeGame from "./componant/pages/HomeGame";
 /*
