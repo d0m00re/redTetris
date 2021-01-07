@@ -7,7 +7,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import CreateGame from './CreateGame';
 
-import useActionUser from './../hook/useActionUser';
 
 import useGameLoop from './../hook/useGameLoop';
 
@@ -22,7 +21,6 @@ const useStyles = makeStyles({
 
 
 const RedTetrisBoard = ({currentBoard}) => {
-  let [keyPress] = useActionUser();
   useGameLoop();
   let [dimBoard, setDimBoard] = useState({ w: 10, h: 20 });
   let [board, setBoard] = useState(

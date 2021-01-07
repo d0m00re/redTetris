@@ -12,7 +12,9 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.2.2",
+    "babel-register": "^6.26.0",
     "clsx": "^1.1.1",
     "fastify-cors": "^5.1.0",
     "html-webpack-plugin": "^4.5.1",
@@ -29,6 +31,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "mocha",
+    "test2": "mocha",
     "eject": "react-scripts eject",
     "startW": "",
     "dev": "webpack --mode development",
@@ -37,7 +40,9 @@
     "start-vm": "webpack-dev-server --watch --config ./webpack.config.js --mode development --open --hot --host 0.0.0.0",
     "start-vm2": "webpack-dev-server --watch --config ./webpack.config.js --mode development --open",
     "client-dev": "webpack-dev-server --colors --hot --inline --host 0.0.0.0 --port 8080",
-    "fiou": "webpack-dev-server"
+    "fiou": "webpack-dev-server",
+    "test:only": "cross-env NODE_ENV=test jest",
+    "test:coverage": "npm run test:only -- --collectCoverageFrom=\"src/**/*.js\" --coverage"
   },
   "eslintConfig": {
     "extends": [
@@ -59,6 +64,7 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.12.10",
-    "mocha": "^8.2.1"
+    "mocha": "^8.2.1",
+    "mocha-loader": "^5.1.5"
   }
 }

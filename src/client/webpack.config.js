@@ -11,6 +11,11 @@ module.exports = {
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
+      {
+        test: /test\.js$/,
+        use: 'mocha-loader',
+        exclude: /node_modules/,
+      },
     ],
   },
   resolve: {

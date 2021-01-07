@@ -1,39 +1,40 @@
-import React,{useEffect, useContext} from 'react'
+import {useState, useEffect} from 'react'
 import useKeyPress from './useKeyPress';
 
-import {Context} from './../context/Store';
 const useActionUser = () => {
-    const [state, dispatch] = useContext(Context);
     const [keyPress] = useKeyPress();
+    const [action, setAction] = useState('');
     
     useEffect(() => {
         
     switch(keyPress){
             case 'ArrowRight':
-                dispatch({type : 'UPDATE_KEY', payload : 'right'});
+                setAction('right');
             break;
             case 'ArrowLeft':
-                dispatch({type : 'UPDATE_KEY', payload : 'left'});
+                setAction('left');
             break;
             case 'ArrowUp':
-                dispatch({type : 'UPDATE_KEY', payload : 'up'});
+                setAction('up');
             break;
             case 'ArrowDown':
-                dispatch({type : 'UPDATE_KEY', payload : 'down'});
+                setAction('down');
             break;
             case 'Space':
-                dispatch({type : 'UPDATE_KEY', payload : 'space'});
+                setAction('space')
             break;
-            case '':
-                dispatch({type : 'UPDATE_KEY', payload : ''});
+            case 'KeyR':
+                setAction('rotate');
             break;
             default:
-
+                if (action !== '')
+                    setAction('')
+                console.log(keyPress);
             break;
         }
     }, [keyPress])
 
-    return ([keyPress])
+    return ([action])
 }
 
 export default useActionUser

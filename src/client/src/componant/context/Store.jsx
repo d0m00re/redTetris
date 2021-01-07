@@ -2,57 +2,66 @@ import React, { createContext, useReducer } from "react";
 import _ from "lodash" // Import the entire lodash library
 const { findLineComplete, deleteAndMooveBottomLine} = require('../hook/checkLineComplete');
 
-const UPDATE_KEY = "UPDATE_KEY";
-const UPDATE_MAP_ADD_TETRIMINOS = "UPDATE_MAP_ADD_TETRIMINOS";
+const UPDATE_FINAL_MAP = "UPDATE_FINAL_MAP";
 const UPDATE_TMP_MAP = "UPDATE_TMP_MAP";
 const UPDATE_TETRIMINOS_POS = "UPDATE_TETRIMINOS_POS";
-
+const TETRI_ROTATION = 'TETRI_ROTATION';
 const PLACE_TETRIMINOS = "PLACE_TETRIMINOS";
 const GET_NEXT_TETRIMINOS = "GET_NEXT_TETRIMINOS";
 
 const CHECK_LINE_COMPLETE = 'CHECK_LINE_COMPLETE';
 
+const tetriBlue = [
+  [
+      [1,0,0],
+      [1,1,1],
+      [0,0,0],
+  ],
+  [
+      [0,1,1],
+      [0,1,0],
+      [0,1,0],
+  ],
+  [
+      [0,0,0],
+      [1,1,1],
+      [0,0,1],
+  ],
+  [
+      [0,1,0],
+      [0,1,0],
+      [1,1,0],
+  ],
+]
+
 const Reducer = (state, action) => {
 
   switch (action.type) {
-    case UPDATE_KEY:
+    case UPDATE_FINAL_MAP:
       return {
         ...state,
-        currentKey: action.payload,
-      };
+          currMap: action.payload
+      }
     case UPDATE_TMP_MAP:
       return {
         ...state,
-        tmpMap: action.payload,
+        tmpMap: action.payload.tmpMap,
+        posTetriminos: action.payload.pos,
       };
     case UPDATE_TETRIMINOS_POS:
       return {
         ...state,
-
         currPosTetriminos: { x: action.payload.x, y: action.payload.y },
       };
-
-    //         copy tmpMap in FinalMap
-    case PLACE_TETRIMINOS:
-      let cpTmpMap = _.cloneDeep(state.tmpMap);
+    case TETRI_ROTATION:
+      console.log('rotation : ');
+      console.log(action.payload);
       return {
-          ...state,
-          currMap: cpTmpMap,
-      };
-    case GET_NEXT_TETRIMINOS:
-        // ask next tetriminos
-      return {
-          ...state,
-          currPosTetriminos: { x: 5, y: 0 },
-      };
+        ...state,
+        currRotation : action.payload
+      }
 
-      case CHECK_LINE_COMPLETE:
-        let newArr = _.cloneDeep(deleteAndMooveBottomLine(state.currMap));
-
-        return{
-          currMap: newArr,
-          ...state
-        }
+   
     default:
       return state;
   }
@@ -61,11 +70,13 @@ const Reducer = (state, action) => {
 const initialState = {
   currentKey: "",
   username: "d0m",
+  currRotation: 0,
   currTetriminos: {
-    tetri: [[1,1,1], [1,1,1], [1,1,1]],
-    color: 'red'
+    color :'blue',
+    tetri : tetriBlue
   },
-  currPosTetriminos: { x: 5, y: 0 },
+
+  posTetriminos: { x: 5, y: 0 },
   currMap: Array(20)
     .fill()
     .map(() => Array(10).fill(0)),
