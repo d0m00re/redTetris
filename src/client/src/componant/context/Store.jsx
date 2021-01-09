@@ -76,7 +76,7 @@ const initialState = {
     tetri : tetriBlue
   },
 
-  posTetriminos: { x: 5, y: 0 },
+  posTetriminos: { x: 5, y: -1 },
   currMap: Array(20)
     .fill()
     .map(() => Array(10).fill(0)),

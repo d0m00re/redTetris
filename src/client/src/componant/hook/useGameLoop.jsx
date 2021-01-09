@@ -40,14 +40,17 @@ const useGameLoop = () => {
         switch(action) {
             case 'rotate':
                     console.log('rotation ->');
-                    dispatch({type : 'TETRI_ROTATION', payload : (state.currRotation + 1) % state.currTetriminos.tetri.length})
+                    ret = checkValidPushTetri(state.currMap, state.currTetriminos.tetri[(state.currRotation + 1) % state.currTetriminos.tetri.length], state.posTetriminos);
+                    if (ret)
+                        dispatch({type : 'TETRI_ROTATION', payload : (state.currRotation + 1) % state.currTetriminos.tetri.length})
             break;
             case 'right':
                 tmpPos = {...state.posTetriminos};
                 cpMap = _.cloneDeep(state.currMap);
                 tmpPos.x += 1;
-                mergeTetriOnMap(cpMap, state.currTetriminos.tetri[state.currRotation], tmpPos);
-                dispatch({type : 'UPDATE_TMP_MAP', payload : {tmpMap : cpMap, pos : tmpPos}});
+                ret = checkAndPush(cpMap, state.currTetriminos.tetri[state.currRotation], tmpPos);
+                if (ret)
+                    dispatch({type : 'UPDATE_TMP_MAP', payload : {tmpMap : cpMap, pos : tmpPos}});
             break;
             case 'left':
                 tmpPos = {...state.posTetriminos};
