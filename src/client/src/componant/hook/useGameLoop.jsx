@@ -18,13 +18,15 @@ const useGameLoop = () => {
         
         if(!checkValidPushTetri(cpMap, currTetriminos.tetri[state.currRotation], pos)){
             console.log('we can t do push this sheet');
+            mergeTetriOnMap(cpMap, currTetriminos.tetri[state.currRotation], state.posTetriminos);
+            dispatch({type : 'UPDATE_FINAL_MAP', payload : cpMap});
             return 1;
         }
-
-        mergeTetriOnMap(cpMap, currTetriminos.tetri[state.currRotation], pos);
-        //1) get next position
-        dispatch({type : 'UPDATE_TMP_MAP', payload : {tmpMap : cpMap, pos : pos}});
-
+        else{
+            mergeTetriOnMap(cpMap, currTetriminos.tetri[state.currRotation], pos);
+            //1) get next position
+            dispatch({type : 'UPDATE_TMP_MAP', payload : {tmpMap : cpMap, pos : pos}});
+        }
 /*
         //2) try insert tetriminos
             //2.1) succes we update the map
@@ -36,10 +38,11 @@ const useGameLoop = () => {
         let tmpPos;
         let cpMap;
         let ret;
+        console.log('go go go');
         console.log(action);
         switch(action) {
             case 'rotate':
-                    console.log('rotation ->');
+                    //console.log('rotation ->');
                     ret = checkValidPushTetri(state.currMap, state.currTetriminos.tetri[(state.currRotation + 1) % state.currTetriminos.tetri.length], state.posTetriminos);
                     if (ret)
                         dispatch({type : 'TETRI_ROTATION', payload : (state.currRotation + 1) % state.currTetriminos.tetri.length})
@@ -71,9 +74,6 @@ const useGameLoop = () => {
                     dispatch({type : 'UPDATE_TMP_MAP', payload : {tmpMap : cpMap, pos : tmpPos}});
             break;
             case 'space':
-
-            break;
-            case 'left':
 
             break;
         }

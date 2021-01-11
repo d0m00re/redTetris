@@ -1,0 +1,16 @@
+{
+    "defaultSeverity" : "error",
+    "extends": [
+        "tslint:recommanded",
+        "tslint-config-pretier"
+    ],
+    "jsRules": {},
+    "rules": {
+        "trailing-comma": [false],
+        "import-name": [false],
+        "variable-name": [false],
+        "function-name": [false],
+        "no-unused-expression":[false]
+    },
+    "rulesDirectory":[]
+}

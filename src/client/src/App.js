@@ -1,6 +1,7 @@
 import React from "react";
 import Store from "./componant/context/Store";
 
+import Home from './componant/pages/Home';
 import HomeGame from "./componant/pages/HomeGame";
 /*
 const GameContext = React.createContext({
@@ -17,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <Store>
-        <HomeGame />
+        <Home />
       </Store>
     </div>
   );

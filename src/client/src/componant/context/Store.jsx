@@ -2,14 +2,13 @@ import React, { createContext, useReducer } from "react";
 import _ from "lodash" // Import the entire lodash library
 const { findLineComplete, deleteAndMooveBottomLine} = require('../hook/checkLineComplete');
 
-const UPDATE_FINAL_MAP = "UPDATE_FINAL_MAP";
-const UPDATE_TMP_MAP = "UPDATE_TMP_MAP";
-const UPDATE_TETRIMINOS_POS = "UPDATE_TETRIMINOS_POS";
-const TETRI_ROTATION = 'TETRI_ROTATION';
-const PLACE_TETRIMINOS = "PLACE_TETRIMINOS";
-const GET_NEXT_TETRIMINOS = "GET_NEXT_TETRIMINOS";
-
-const CHECK_LINE_COMPLETE = 'CHECK_LINE_COMPLETE';
+import {UPDATE_FINAL_MAP,
+      UPDATE_TMP_MAP,
+      UPDATE_TETRIMINOS_POS,
+      TETRI_ROTATION,  
+      UPDATE_USERNAME, 
+      UPDATE_ROOM
+} from './Constant';
 
 const tetriBlue = [
   [
@@ -37,10 +36,13 @@ const tetriBlue = [
 const Reducer = (state, action) => {
 
   switch (action.type) {
+    
     case UPDATE_FINAL_MAP:
+      // check delete line
       return {
         ...state,
-          currMap: action.payload
+          currMap: action.payload,
+          posTetriminos: {x : 5, y : -1}
       }
     case UPDATE_TMP_MAP:
       return {
@@ -61,8 +63,25 @@ const Reducer = (state, action) => {
         currRotation : action.payload
       }
 
+      case UPDATE_USERNAME:
+        //go perform axios request for saving user
+        console.log('username: ');
+        return {
+          ...state,
+          username : action.payload
+        }
+
+      case UPDATE_ROOM:
+        console.log('udpate room : ' + action.payload);
+        return {
+          ...state,
+          roomname : action.payload
+        }
+
    
     default:
+      console.log('fuck');
+      console.log(UPDATE_USERNAME);
       return state;
   }
 };
@@ -70,8 +89,9 @@ const Reducer = (state, action) => {
 const initialState = {
   currentKey: "",
   username: "d0m",
+  roomname: '',
   currRotation: 0,
-  currTetriminos: {
+  currTetriminos: { 
     color :'blue',
     tetri : tetriBlue
   },
