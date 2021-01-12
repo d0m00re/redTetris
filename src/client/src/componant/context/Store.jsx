@@ -80,7 +80,6 @@ const Reducer = (state, action) => {
 
    
     default:
-      console.log('fuck');
       console.log(UPDATE_USERNAME);
       return state;
   }

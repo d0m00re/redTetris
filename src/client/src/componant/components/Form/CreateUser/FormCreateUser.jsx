@@ -1,14 +1,15 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useEffect} from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import {Context} from './../../../context/Store';
-
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   UPDATE_USERNAME, 
 } from './../../../context/Constant';
 const FormCreateUser = () => {
-    const [state, dispatch] = useContext(Context);
+
+  const state= useSelector(state => state.game)
+  const dispatch = useDispatch(); 
 
     //const [username, setUsername] = useState('');
 
@@ -17,12 +18,6 @@ const FormCreateUser = () => {
       console.log({type : UPDATE_USERNAME, payload : event.target.value });
       dispatch({type : UPDATE_USERNAME, payload : event.target.value });
     }
-
-    useEffect(() => {
-      console.log('state : ');
-      console.log(state.username);
-      
-    }, [state.username])
 
     return (
         <>

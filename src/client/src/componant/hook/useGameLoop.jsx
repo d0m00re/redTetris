@@ -1,14 +1,18 @@
-import {useContext, useEffect} from 'react'
-import {Context} from './../context/Store';
-import _, { lowerFirst } from "lodash" // Import the entire lodash library
+import {useEffect} from 'react'
+import _ from "lodash" // Import the entire lodash library
 import useInterval from './useInterval';
 import useActionUser from './../hook/useActionUser';
 
 import {mergeTetriOnMap, checkValidPushTetri, checkAndPush} from './../../logic/tetriLogic';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {updateFinalMap, updateTmpMap, tetriRotation} from './../redux/actions/Game';
 
 const useGameLoop = () => {
-    const [state, dispatch] = useContext(Context);
     let [action] = useActionUser();
+
+    const state= useSelector(state => state.game)
+    const dispatch = useDispatch(); 
 
     const fallAlgo = () => {
         let currTetriminos = state.currTetriminos;
@@ -19,13 +23,13 @@ const useGameLoop = () => {
         if(!checkValidPushTetri(cpMap, currTetriminos.tetri[state.currRotation], pos)){
             console.log('we can t do push this sheet');
             mergeTetriOnMap(cpMap, currTetriminos.tetri[state.currRotation], state.posTetriminos);
-            dispatch({type : 'UPDATE_FINAL_MAP', payload : cpMap});
+           dispatch(updateFinalMap(cpMap));
             return 1;
         }
         else{
             mergeTetriOnMap(cpMap, currTetriminos.tetri[state.currRotation], pos);
             //1) get next position
-            dispatch({type : 'UPDATE_TMP_MAP', payload : {tmpMap : cpMap, pos : pos}});
+            dispatch(updateTmpMap({tmpMap : cpMap, pos : pos}))
         }
 /*
         //2) try insert tetriminos
@@ -45,7 +49,7 @@ const useGameLoop = () => {
                     //console.log('rotation ->');
                     ret = checkValidPushTetri(state.currMap, state.currTetriminos.tetri[(state.currRotation + 1) % state.currTetriminos.tetri.length], state.posTetriminos);
                     if (ret)
-                        dispatch({type : 'TETRI_ROTATION', payload : (state.currRotation + 1) % state.currTetriminos.tetri.length})
+                        dispatch(tetriRotation((state.currRotation + 1) % state.currTetriminos.tetri.length))
             break;
             case 'right':
                 tmpPos = {...state.posTetriminos};
@@ -53,7 +57,7 @@ const useGameLoop = () => {
                 tmpPos.x += 1;
                 ret = checkAndPush(cpMap, state.currTetriminos.tetri[state.currRotation], tmpPos);
                 if (ret)
-                    dispatch({type : 'UPDATE_TMP_MAP', payload : {tmpMap : cpMap, pos : tmpPos}});
+                    dispatch(updateTmpMap({tmpMap : cpMap, pos : tmpPos}));
             break;
             case 'left':
                 tmpPos = {...state.posTetriminos};
@@ -62,7 +66,7 @@ const useGameLoop = () => {
                // mergeTetriOnMap(cpMap, state.currTetriminos.tetri[state.currRotation], tmpPos);
                 ret = checkAndPush(cpMap, state.currTetriminos.tetri[state.currRotation], tmpPos);
                 if (ret)
-                    dispatch({type : 'UPDATE_TMP_MAP', payload : {tmpMap : cpMap, pos : tmpPos}});
+                    dispatch(updateTmpMap({tmpMap : cpMap, pos : tmpPos}))
             break;
             case 'down':
                 tmpPos = {...state.posTetriminos};
@@ -71,7 +75,7 @@ const useGameLoop = () => {
                 ret = checkAndPush(cpMap, state.currTetriminos.tetri[state.currRotation], tmpPos);
                 //mergeTetriOnMap(cpMap, state.currTetriminos.tetri[state.currRotation], tmpPos);
                 if (ret)
-                    dispatch({type : 'UPDATE_TMP_MAP', payload : {tmpMap : cpMap, pos : tmpPos}});
+                    dispatch(updateTmpMap({tmpMap : cpMap, pos : tmpPos}))
             break;
             case 'space':
 

@@ -1,16 +1,17 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import {Context} from './../../../context/Store';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
     UPDATE_ROOM, 
   } from './../../../context/Constant';
 
 const FormCreateRoom = () => {
-    const [state, dispatch] = useContext(Context);
-
+    const state= useSelector(state => state.game)
+    const dispatch = useDispatch(); 
+    
     const handleRoomname = (event) => {
         dispatch({type : UPDATE_ROOM, payload : event.target.value})
     }

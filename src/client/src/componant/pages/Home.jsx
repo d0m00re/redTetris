@@ -16,9 +16,9 @@ const Home = () => {
 
             <FormCreateRoom />
 
-{/*}
+
             <HomeGame/>
-    */}
+
         </div>
     )
 }

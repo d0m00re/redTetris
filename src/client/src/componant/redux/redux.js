@@ -2,7 +2,12 @@ import {
     combineReducers,
     createStore,
   } from 'redux';
-  
+
+
+import GameReducer from './reducers/Game';
+
+
+  //-------------------------------
   // actions.js
   export const activateGeod = geod => ({
     type: 'ACTIVATE_GEOD',
@@ -27,11 +32,12 @@ import {
   
   export const reducers = combineReducers({
     geod,
+    game : GameReducer
   });
   
   // store.js
   export function configureStore(initialState = {}) {
-    const store = createStore(reducers, initialState);
+    const store = createStore(reducers, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
     return store;
   };
   
