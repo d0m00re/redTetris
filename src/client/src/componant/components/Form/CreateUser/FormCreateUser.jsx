@@ -1,28 +1,33 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  UPDATE_USERNAME, 
-} from './../../../context/Constant';
+  SET_USERNAME_FORM
+} from './../../../../redux/Constant/User';
+import { SOCKET_SEND_USERNAME } from '../../../../redux/Constant/SocketIOProtocol';
+
 const FormCreateUser = () => {
 
-  const state= useSelector(state => state.game)
+  const usernameForm = useSelector(state => state.user.usernameForm);
   const dispatch = useDispatch(); 
 
     //const [username, setUsername] = useState('');
 
     const handleUsername = (event) => {
       //setUsername(event.target.value);
-      console.log({type : UPDATE_USERNAME, payload : event.target.value });
-      dispatch({type : UPDATE_USERNAME, payload : event.target.value });
+      dispatch({type : SET_USERNAME_FORM, payload : event.target.value});
+    }
+
+    const submitUsername = (event) => {
+      dispatch({type : SOCKET_SEND_USERNAME});
     }
 
     return (
         <>
-          <TextField label="username" type="text" value={state.username} onChange={handleUsername} />
-          <Button variant='contained'>CREATE USER</Button>
+          <TextField label="username" type="text" value={usernameForm} onChange={handleUsername} />
+          <Button variant='contained' onClick={submitUsername}>CREATE USER</Button>
         </>
     )
 }

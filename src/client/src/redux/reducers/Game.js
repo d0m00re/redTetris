@@ -5,7 +5,7 @@ import {
   TETRI_ROTATION,
   UPDATE_USERNAME,
   UPDATE_ROOM,
-} from "../Constant";
+} from "../Constant/Constant";
 
 const tetriBlue = [
     [
@@ -71,8 +71,6 @@ const GameReducer = (state = initialState, action) => {
         currPosTetriminos: { x: action.payload.x, y: action.payload.y },
       };
     case TETRI_ROTATION:
-      console.log("rotation : ");
-      console.log(action.payload);
       return {
         ...state,
         currRotation: action.payload,
@@ -80,14 +78,12 @@ const GameReducer = (state = initialState, action) => {
 
     case UPDATE_USERNAME:
       //go perform axios request for saving user
-      console.log("username: ");
       return {
         ...state,
         username: action.payload,
       };
 
     case UPDATE_ROOM:
-      console.log("udpate room : " + action.payload);
       return {
         ...state,
         roomname: action.payload,

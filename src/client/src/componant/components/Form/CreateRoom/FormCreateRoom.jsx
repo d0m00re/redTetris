@@ -5,21 +5,30 @@ import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-    UPDATE_ROOM, 
-  } from './../../../context/Constant';
+    SET_ROOMNAME_FORM,  
+} from './../../../../redux/Constant/User';
+
+import {
+    SOCKET_JOIN_ROOM
+} from './../../../../redux/Constant/SocketIOProtocol';
 
 const FormCreateRoom = () => {
-    const state= useSelector(state => state.game)
+    const {roomnameForm} = useSelector(state => state.user)
     const dispatch = useDispatch(); 
     
     const handleRoomname = (event) => {
-        dispatch({type : UPDATE_ROOM, payload : event.target.value})
+        dispatch({type : SET_ROOMNAME_FORM, payload : event.target.value});
+    }
+
+    const submitRoomname = () => {
+        console.log('---> socket_join_room : ' + roomnameForm);        
+        dispatch({type : SOCKET_JOIN_ROOM});
     }
 
     return (
         <>
-            <TextField label="name" type="text" value={state.roomname} onChange={handleRoomname}/>
-            <Button variant='contained'>CREATE ROOM</Button>
+            <TextField label="roomname" type="text" value={roomnameForm} onChange={handleRoomname} />
+            <Button variant='contained' onClick={submitRoomname}>CREATE ROOM</Button>
         </>
     )
 }

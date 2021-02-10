@@ -1,5 +1,5 @@
 import {UPDATE_FINAL_MAP, UPDATE_TMP_MAP, UPDATE_TETRIMINOS_POS,
-    TETRI_ROTATION, UPDATE_USERNAME, UPDATE_ROOM} from '../Constant';
+    TETRI_ROTATION, UPDATE_USERNAME, UPDATE_ROOM} from '../Constant/Constant';
 
 export const updateFinalMap = payload => ({
     type : UPDATE_FINAL_MAP,

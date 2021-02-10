@@ -1,0 +1,23 @@
+# 1 - l utilisateur doit se connecter avec un username
+# 2 - rejoindre une room ou en creer une
+
+# 3 - le propriaitaire de la room peut lancer la partie 
+# 4 - game phase 
+# 5 - end game
+
+# socket io protocol
+
+1) create user
+
+## phase de connection : 
+1 - l utilisateur choisit un username
+    * socket io retourne l username creer
+    * isConnect set 
+2 - validation envoi a socket io l username 
+3 - socket io renvoi un message, qui peut etre une erreur ou un succes
+
+// send to sockeygh io server
+const SOCKET_SEND_USERNAME = 'SOCKET_SEND_USERNAME';
+// socketio send back information
+const SOCKET_RECV_USERNAME = 'SOCKET_RECV_USERNAME';
+// go update

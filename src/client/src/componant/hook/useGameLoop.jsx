@@ -6,7 +6,7 @@ import useActionUser from './../hook/useActionUser';
 import {mergeTetriOnMap, checkValidPushTetri, checkAndPush} from './../../logic/tetriLogic';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {updateFinalMap, updateTmpMap, tetriRotation} from './../redux/actions/Game';
+import {updateFinalMap, updateTmpMap, tetriRotation} from './../../redux/actions/Game';
 
 const useGameLoop = () => {
     let [action] = useActionUser();
@@ -42,8 +42,7 @@ const useGameLoop = () => {
         let tmpPos;
         let cpMap;
         let ret;
-        console.log('go go go');
-        console.log(action);
+
         switch(action) {
             case 'rotate':
                     //console.log('rotation ->');
@@ -80,6 +79,9 @@ const useGameLoop = () => {
             case 'space':
 
             break;
+            default :
+                console.log('default');
+                
         }
         
     }, [action]);

@@ -4,7 +4,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux';
-import { store } from './componant/redux/redux';
+import { store } from './redux/redux';
+
+import {SOCKET_RECV_USERNAME} from './redux/Constant/SocketIOProtocol';
+import {SET_ERROR, SET_USERNAME} from './redux/Constant/User';
+
+import initApiSocket from './socketAdapter';
+
+initApiSocket(store);
 
 ReactDOM.render(
   <React.StrictMode>
