@@ -30,12 +30,31 @@ export class UserList {
         this.users.push(newUser);
     }
 
+    addUser(user : IUser) {
+        this.users.push(user);
+    }
+
     delete(name : string) {
         this.users = this.users.filter(user => user.name !== name);
     }
 
     patch(name : string, user : IUser) {
-        let tmpUser : IUser = this.users.filter(user => user.name === name)[0];
-        tmpUser = user;
+        let index = this.users.findIndex(user => user.name === name);
+        if (index !== -1){
+            this.users[index] = user;
+        }
     }
+
+    getUser(name : string) : User | undefined {
+        return this.users.filter(user => user.name === name)[0];
+    }
+
+    getUsers() : User[] {
+        return this.users;
+    }
+
+    getWithId(id : string) : User {
+        return this.users.filter(user => user.uuid === id)[0];
+    }
+
 }

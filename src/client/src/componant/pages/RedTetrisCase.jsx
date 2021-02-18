@@ -6,9 +6,10 @@ import clsx from 'clsx';
 
 const useStyles = makeStyles({
     root: {
-        border : '1px',
+        border : '5px',
         borderColor : '#666',
-        width: '10% !important',
+        width: '20px !important',
+        height : '20px',
     },
     orange:{
         backgroundColor : 'orange'

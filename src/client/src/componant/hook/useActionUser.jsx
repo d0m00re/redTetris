@@ -27,6 +27,8 @@ const useActionUser = () => {
                 setAction('rotate');
             break;
             default:
+                console.log('action keypress : ' + keyPress);
+                
                 if (action !== '')
                     setAction('')
                 console.log(keyPress);

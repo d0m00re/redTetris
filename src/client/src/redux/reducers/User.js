@@ -11,10 +11,10 @@ const initState = {
     roomnameForm: '',
 
     username: '',
-    room: '',
-    isConnect: false,
+    room: null,
+    isConnect: false, 
 }
-
+ 
 const UserReducer = (state = initState, action) => {
     switch (action.type) {
         case SET_USERNAME_FORM:

@@ -110,9 +110,20 @@ describe('Logic',function() {
             assert.deepEqual(ret, [18, 19]);
         })
     });
-    describe('delete full line', function() {
+    describe('delete 2 full lines', function() {
         it('delete full line', function() {
+            let tab = Array(20).fill().map(() => Array(10).fill(0));
+            tab[19]=Array(10).fill(1);
+            tab[18]=Array(10).fill(1);
+        
+            tab = deleteFullLine(tab);
+
+            let ret = getAllFullLine(tab);
+            console.log('curremt full line');
+            console.log(ret);
             
+            
+            assert.deepEqual(ret, []);
         })
     })
     /*

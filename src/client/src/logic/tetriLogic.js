@@ -30,6 +30,7 @@ const  mergeTetriOnMap = (tetriMap, tetri, pos, value = 1) =>{
     }
 }
 
+// check pos and push it
 const checkAndPush = (tetriMap, tetri, pos, value = 1) => {
     if (!checkValidPushTetri(tetriMap, tetri, pos))
         return (false);
@@ -37,7 +38,21 @@ const checkAndPush = (tetriMap, tetri, pos, value = 1) => {
     return true;
 }
 
-// delete line check
+// ret : new pos, action : find end pos and push it
+
+const checkAndPushSpace = (tetriMap, tetri, pos, value = 1) => {
+    // tant -> y + 1 valid
+    // tetriMap.length === y size
+
+    while (checkValidPushTetri(tetriMap, tetri, {x : pos.x, y : pos.y + 1})) {
+        pos.y += 1;
+    }
+    mergeTetriOnMap(tetriMap, tetri, pos, value);
+    return (true);
+}
+
+
+// delete line check 
 // toruver l id sans aucu zero dedans
 const getAllFullLine = (myMap) => {
     let arrId = [];
@@ -51,15 +66,17 @@ const getAllFullLine = (myMap) => {
     return (arrId)
 }
 
-const deleteFullLine = (myMap) => {
+const deleteFullLine = (myMap, nbLineBlock) => {
     let getLines = getAllFullLine(myMap);
+    //    // exlucde specific line
+    getLines = getLines.filter(index => index + nbLineBlock < myMap.length);
 
-    getLines = myMap.filter((elem, index) => getLines.includes(index));
+    let replaceLine = getLines.map(() => Array(myMap[0].length).fill(0));
 
-  //  for(let i = 0; getLines
-  //  return (getLines);
-    //delete line 1 and add line on the begining
+    
 
+    getLines = myMap.filter((elem, index) => !getLines.includes(index));
+    return replaceLine.concat(getLines);
 } 
 
 module.exports = {
@@ -67,5 +84,6 @@ module.exports = {
     checkValidPushTetri,
     checkAndPush,
     getAllFullLine,
-    deleteFullLine
+    deleteFullLine,
+    checkAndPushSpace,
 }

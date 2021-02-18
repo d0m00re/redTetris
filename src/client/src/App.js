@@ -7,7 +7,7 @@ let board = Array(dimBoard.h).fill().map(()=> Array(dimBoard.w))
 */
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{height:'100vh', display:'flex', flexDirection:'column', width: '100%'}}>
         <Home />
     </div>
   );

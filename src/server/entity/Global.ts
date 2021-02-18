@@ -1,7 +1,25 @@
-import {IUser} from './User';
-import {IRoom, ERoomState} from './Room';
+import {UserList} from './User';
+import {RoomList, ERoomState} from './Room';
 
 export interface IGlobal {
-    users: IUser[];
-    rooms: IRoom[];
+    users: UserList;
+    rooms: RoomList;
+}
+
+export class Global {
+    users : UserList;
+    rooms : RoomList;
+
+    constructor() {
+        this.users =  new UserList();
+        this.rooms = new RoomList();
+    }
+
+    createUser() {
+
+    }
+
+    createRoom() {
+
+    }
 }

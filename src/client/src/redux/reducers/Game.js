@@ -5,6 +5,8 @@ import {
   TETRI_ROTATION,
   UPDATE_USERNAME,
   UPDATE_ROOM,
+
+  SET_NB_LINE_BLOCK,
 } from "../Constant/Constant";
 
 const tetriBlue = [
@@ -47,6 +49,11 @@ const initialState = {
     tmpMap: Array(20)
       .fill()
       .map(() => Array(10).fill(0)),
+    nbLineBlock : 1, // blok line - multiplayer
+
+    //--------------------------------------
+    gameRunning : true, // false : game stop
+    gameEnd : false,
   };
   
 
@@ -88,6 +95,12 @@ const GameReducer = (state = initialState, action) => {
         ...state,
         roomname: action.payload,
       };
+
+    case SET_NB_LINE_BLOCK:
+      return {
+        ...state,
+        nbLineBlock : action.payload
+      }
 
     default:
       console.log(UPDATE_USERNAME);

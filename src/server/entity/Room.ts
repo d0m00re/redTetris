@@ -1,15 +1,116 @@
-import {IUser} from './User';
+import { IUser } from './User';
 
 export enum ERoomState {
-    WAIT_USER = 'WAIT_USER',
-    RUNING_GAME = 'RUNING_GAME',
-    END_GAME = 'END_GAME',
-  }
-  
+  WAIT_USER = 'WAIT_USER',
+  RUNING_GAME = 'RUNING_GAME',
+  END_GAME = 'END_GAME',
+}
+
 export interface IRoom {
-    name: string;
-    uuid: string;
-    userList : IUser[];
-    owner : IUser;
-    state : ERoomState;
+  name: string;
+  uuid: string;
+  userList: IUser[];
+  owner: IUser;
+  state: ERoomState;
+}
+
+export class Room {
+  name: string;
+  uuid: string;
+  userList: IUser[];
+  owner: IUser;
+  state: ERoomState;
+
+  constructor(name : string, owner : IUser) {
+    this.name = name;
+    this.uuid = '';
+    this.userList = [];
+    this.owner = owner;
+    this.state = ERoomState.WAIT_USER;
   }
+}
+
+export class RoomList {
+  rooms: Room[];
+
+  constructor() {
+    this.rooms = [];
+  }
+
+  add(name: string, owner: IUser) {
+    let newUser = new Room(name, owner);
+    this.rooms.push(newUser);
+  }
+
+  addRoom(room : IRoom) {
+    console.log('****add a room : ');
+    console.log(room);
+    
+    
+    this.rooms.push(room);
+  }
+
+  delete(name: string) {
+    this.rooms = this.rooms.filter(user => user.name !== name);
+  }
+/*
+  patch(name: string, user: IUser) {
+S    if (index !== -1) {tq
+      this.rooms[index] = user;
+    }
+  }
+*/
+  get(name: string): Room | undefined {
+    return this.rooms.filter(room => room.name === name)[0];
+  }
+
+  setStatus(name : string, status : ERoomState) : boolean {
+    let tmp = this.getWithName(name);
+    if (tmp !== undefined)
+    {
+      tmp.state = status;
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  run(name : string) : boolean {
+    return this.setStatus(name, ERoomState.RUNING_GAME);
+  }
+
+  stop(name : string) : boolean {
+    return this.setStatus(name, ERoomState.END_GAME);
+  }
+
+  restart(name : string) : boolean {
+    return this.setStatus(name, ERoomState.WAIT_USER);
+  }
+
+  getWithName(name: string): Room | undefined {
+    console.log('getWithName : ' + name);
+    console.log(this.rooms.filter(room => room.name === name));
+    console.log('fullroom :');
+    console.log(this.rooms);
+    
+    
+    
+    return this.rooms.filter(room => room.name === name)[0];
+  }
+
+  roomExist(name: string): boolean {
+    console.log('ROOM EXIST');
+    console.log(this.rooms.filter(room => room.name === name).length === 1);
+    
+    
+    if (this.rooms.filter(room => room.name === name).length === 1)
+      return true;
+    return false;
+  }
+
+  gets(): Room[] {
+    return this.rooms;
+  }
+}

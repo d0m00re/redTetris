@@ -1,0 +1,3 @@
+export const ADD_TETRI = 'ADD_TETRI';
+export const REMOVE_FIRST_TETRI = 'REMOVE_FIRST_TETRI';
+export const RESET_TETRI = 'RESET_TETRI';
