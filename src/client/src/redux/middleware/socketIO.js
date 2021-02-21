@@ -1,9 +1,9 @@
  
-import {SOCKET_SEND_USERNAME, SOCKET_JOIN_ROOM, SOCKET_GET_NEXT_TETRIMINOS, SOCKET_RUN_GAME} from './../Constant/SocketIOProtocol';
+import {SOCKET_SEND_USERNAME, SOCKET_JOIN_ROOM, SOCKET_GET_NEXT_TETRIMINOS, SOCKET_RUN_GAME, SOCKET_JOIN_ROOM_WT_NAME} from './../Constant/SocketIOProtocol';
 
 const socketIoMiddleware = ({ getState }) => {
     return (next) => (action) => {
-        let { type } = action;
+        let { type, payload } = action;
         let state = getState();
         
         let socket = state.generalSocketInfo.socket;
@@ -20,6 +20,10 @@ const socketIoMiddleware = ({ getState }) => {
             socket.emit(SOCKET_JOIN_ROOM, state.user.roomnameForm);
         }
 
+        const socketJoinRoomWtName = (roomname) => {
+            socket.emit(SOCKET_JOIN_ROOM, roomname);
+        }
+
         //run game
         const socketRunGame = () => {
             console.log('Socket run game : room --> ' +  state.user.room.name);
@@ -34,6 +38,10 @@ const socketIoMiddleware = ({ getState }) => {
             case SOCKET_JOIN_ROOM:
                 console.log('SOCKET_JOIN_ROOM');
                 socketJoinRoom();
+            break;
+            case SOCKET_JOIN_ROOM_WT_NAME:
+                console.log('SOCKET JOIN ROOM WITH NAME');
+                socketJoinRoomWtName(payload.roomname);
             break;
             case SOCKET_GET_NEXT_TETRIMINOS:
                 console.log('socket get next tetriminos')

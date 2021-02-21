@@ -3,12 +3,16 @@ import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles';
 
 import {useSelector, useDispatch} from 'react-redux';
+
+import {
+    SOCKET_JOIN_ROOM, SOCKET_JOIN_ROOM_WT_NAME
+} from './../../../../redux/Constant/SocketIOProtocol';
+
 const useStyles = makeStyles({
     button: {
         justifyContent: 'center', marginTop: '8px'
     }
 });
-
 
 const SelectorRooms = () => {
     const classes = useStyles();
@@ -20,14 +24,22 @@ const SelectorRooms = () => {
         
         console.log(roomlist);
         
-    }, [roomlist])
+    }, [roomlist]);
+
+    const submitRoomname = (roomname) => {
+        //console.log('---> socket_join_room : ' + roomnameForm);
+        console.log('ROOMNAME : ' + roomname);
+            
+        dispatch({type : SOCKET_JOIN_ROOM_WT_NAME, payload : {roomname : roomname}});
+    }
+
     return (
         <table>
             <tr>
                 <th>Roomname</th>
                 <th>Owner</th>
                 <th>Status</th>
-                <th>Join</th>
+                <th>Action</th>
             </tr>
             {
                 roomlist.map(elem => 
@@ -36,7 +48,7 @@ const SelectorRooms = () => {
                     <td>{elem.owner.name}</td>
                     <td>{elem?.state}</td>
                     <td>
-                        <Button>JOIN</Button>
+                        <Button onClick={() => submitRoomname(elem.name)}>JOIN</Button>
                     </td>
                     </tr>
                     )

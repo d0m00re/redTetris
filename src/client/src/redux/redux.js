@@ -2,6 +2,7 @@ import {
   applyMiddleware,
   combineReducers,
   createStore,
+  compose
 } from 'redux';
 
 import GameReducer from './reducers/Game';
@@ -18,8 +19,12 @@ export const reducers = combineReducers({
 
 // store.js
 export function configureStore(initialState = {}) {
-  const store = createStore(reducers,  applyMiddleware(SocketClient));//, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-  return store;
+  const store = createStore(reducers,
+                            compose(
+                            applyMiddleware(SocketClient),
+                            window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));//, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+  
+                            return store;
 };
 
 export const store = configureStore();
