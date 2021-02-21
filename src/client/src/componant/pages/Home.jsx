@@ -51,7 +51,7 @@ const Home = () => {
             }
 
             {
-                room !== null &&
+                room !== null && 
                 <> 
                     <Typography>Current room : {room.name}</Typography>
                     <Button onClick={() => {dispatch({type : SOCKET_RUN_GAME})}}>RUN GAME</Button>

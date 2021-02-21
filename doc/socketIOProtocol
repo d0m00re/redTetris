@@ -21,3 +21,73 @@ const SOCKET_SEND_USERNAME = 'SOCKET_SEND_USERNAME';
 // socketio send back information
 const SOCKET_RECV_USERNAME = 'SOCKET_RECV_USERNAME';
 // go update
+
+
+------
+do :
+
+client :
+* delete line : do
+
+// how many line are block
+// one moore element who indics how  
+* block one line on the botom : GOOD
+
+* space management : do 
+
+//--------------------------------------------------------
+to do: 
+ADD END CONDITION : loose or win : go
+
+OPTIONNAL : ADD SCORE SYSTEM inside line destroy
+
+
+
+
+END GAME :  
+* nbLineBlock === heightMap   : could be check onTmp ??? 
+* we can t put new tetriminos : ----
+
+---
+//a la fin de la game on fait quoi???
+Who win???
+    SERVER
+
+-----
+
+When we click on start
+    client send GET_NEXT_TETRIMINOS to server
+    server send back a tetriminos on all room client
+
+tetriminos generator :
+Si on a besoin d un nouveau tetriminos :0
+    * GET_NEXT_TETRIMINOS
+        broadcast next tetriminos on all client on the current room 
+        {tetriminos : tetriminos, err : false, errMsg : ''}
+
+
+
+// room :
+* UPDATE room list
+* update current room user 
+
+si status === WAIT_USER dans ce cas on attend que l owner de la partie la lance
+
+run game button
+    * update server ---> SOCKET_RUN_GAME -->
+        update room STATUS
+        update local room : on in user and other inside listRoom
+
+        then --->
+            SOCKET_UPDATE_ROOM : update room on client
+
+--
+next step:
+    * tetriminos generator
+        ask new tetriminos when :
+                * dic of tetriminos is empty or length  <= 1
+            * check run when we put the tetriminos on map
+            * delete last tetriminos use
+
+            use id for a tetriminos
+

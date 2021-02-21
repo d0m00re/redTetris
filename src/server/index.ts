@@ -25,6 +25,8 @@ export const SOCKET_RUN_GAME = 'SOCKET_RUN_GAME';
 
 export const SOCKET_UPDATE_ROOM = 'SOCKET_UPDATE_ROOM';
 
+export const SOCKET_SEND_TETRIMINOS = 'SOCKET_SEND_TETRIMINOS';
+
 let global : Global = new Global();
 
 let tetriGenerator =  new TetriminosGenerator();
@@ -93,8 +95,6 @@ app.get("/", (req: any, res: any) => {
 // create event connection
 io.on("connection", function (socket: any) {
   socket.on(SOCKET_SEND_USERNAME, function (username: string) {
-    console.log('* send nickname : ' + username);
-
     socket.nickname = username;
     let user: IUser = { name: username, uuid: socket.id, room: '' };
     global.users.addUser(user);
@@ -103,9 +103,7 @@ io.on("connection", function (socket: any) {
     io.emit(SOCKET_RECV_USERNAME, {username : user.name,
                                    error : false,
                                    errorMsg : ''});
-    // emit all room
-    console.log('all room emit : ');
-    
+    // emit all room    
     io.emit(SOCKET_ALL_ROOMS, global.rooms.gets());
     //emit all user
   });
@@ -158,16 +156,9 @@ io.on("connection", function (socket: any) {
     console.log(' get next tetriminos');
     let tetri = tetriGenerator.getRandom();
 
-    let currUser = global.users.getWithId(socket.id);
-    console.log('curr user : ');
-    console.log(currUser);
-    
-    
-    console.log(tetri);
-    
     socket.emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
   })
-
+ 
 
   socket.on(SOCKET_RUN_GAME, (payload : string) => {
     console.log('run game : ' + payload);
@@ -176,20 +167,25 @@ io.on("connection", function (socket: any) {
     socket.emit(SOCKET_UPDATE_ROOM, {
       room : global.rooms.getWithName(payload),
       error : false,
-      errorMsg : ''
+      errorMsg : '' 
+    })
+
+    console.log('SEND TETRIMINOS');
+    console.log({
+      tetri : tetriGenerator.getRandom(),
+      err: false,
+      errorMsg: ''
+    });
+    
+    
+
+    socket.emit(SOCKET_SEND_TETRIMINOS,  {
+      tetri : tetriGenerator.getRandom(),
+      err: false,
+      errorMsg: ''
     })
   })
- /*
-  socket.on("getAllRoom", function () {
-    console.log(' get all room : ');
-    console.log(global.rooms.map(room => room.name));
-    
-    
-    socket.emit("getAllRoom", global.rooms.map(room => room.name));
-  })
 
-  // rejoindre une room
-  */
 });
 
 const server = http.listen(4242, function () {

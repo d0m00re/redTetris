@@ -7,8 +7,6 @@ import {
 import GameReducer from './reducers/Game';
 import GeneralSocketInfoReducer from './reducers/GeneralSocketInfo';
 import UserReducer from './reducers/User';
-import tetri from './reducers/Tetri';
-
 
 import SocketClient from './middleware/socketIO';
 
@@ -16,7 +14,6 @@ export const reducers = combineReducers({
   game: GameReducer,
   generalSocketInfo : GeneralSocketInfoReducer,
   user : UserReducer,
-  tetri : tetri
 });
 
 // store.js

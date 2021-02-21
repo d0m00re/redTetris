@@ -8,7 +8,9 @@
      switch(action.type) {
          case ADD_TETRI:
              console.log('ADD TETRI');
-             console.log(state.tetriList);
+             console.log(action.payload); 
+             
+             console.log([action.payload, ...state.tetriList]);
              
              
              return {

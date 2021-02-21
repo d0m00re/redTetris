@@ -1,3 +1,6 @@
+import _ from "lodash" // Import the entire lodash library
+import {mergeTetriOnMap, deleteFullLine} from './../../logic/tetriLogic';
+
 import {
   UPDATE_FINAL_MAP,
   UPDATE_TMP_MAP,
@@ -9,53 +12,26 @@ import {
   SET_NB_LINE_BLOCK,
 } from "../Constant/Constant";
 
-const tetriBlue = [
-    [
-        [1,0,0],
-        [1,1,1],
-        [0,0,0],
-    ],
-    [
-        [0,1,1],
-        [0,1,0],
-        [0,1,0],
-    ],
-    [
-        [0,0,0],
-        [1,1,1],
-        [0,0,1],
-    ],
-    [
-        [0,1,0],
-        [0,1,0],
-        [1,1,0],
-    ],
-  ]
+import {END_TURN_PUT, ADD_TETRI, REMOVE_FIRST_TETRI, RESET_TETRI,REMOVE_FIRST_TETRI_AND_RESET_ROTATION } from './../Constant/Tetri';
 
+ 
 const initialState = {
-    currentKey: "",
-    username: "d0m",
-    roomname: '',
-    currRotation: 0,
-    currTetriminos: { 
-      color :'blue',
-      tetri : tetriBlue
-    },
-  
-    posTetriminos: { x: 5, y: -1 },
-    currMap: Array(20)
-      .fill()
-      .map(() => Array(10).fill(0)),
-    tmpMap: Array(20)
-      .fill()
-      .map(() => Array(10).fill(0)),
-    nbLineBlock : 1, // blok line - multiplayer
+  currentKey: "",
+  username: "d0m",
+  roomname: '',
+  currRotation: 0,
 
-    //--------------------------------------
-    gameRunning : true, // false : game stop
-    gameEnd : false,
-  };
-  
+  posTetriminos: { x: 5, y: -1 },
+  currMap: Array(20).fill().map(() => Array(10).fill(0)),
+  tmpMap: Array(20).fill().map(() => Array(10).fill(0)),
+  tetriList: [],
+  nbLineBlock: 1, // blok line - multiplayer
+
+  //--------------------------------------
+  gameRunning: true, // false : game stop
+  gameEnd: false,
+};
+
 
 const GameReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -99,7 +75,58 @@ const GameReducer = (state = initialState, action) => {
     case SET_NB_LINE_BLOCK:
       return {
         ...state,
-        nbLineBlock : action.payload
+        nbLineBlock: action.payload
+      }
+
+    case ADD_TETRI:
+      return {
+        ...state,
+        tetriList: [action.payload, ...state.tetriList]
+      }
+    case REMOVE_FIRST_TETRI:
+      let tmp = [...state.tetriList];
+      tmp.shift();
+      return {
+        ...state,
+        tetriList: tmp
+      }
+    case RESET_TETRI:
+      return {
+        ...state,
+        tetriList: []
+      }
+
+    case REMOVE_FIRST_TETRI_AND_RESET_ROTATION:
+      let newTetriList2 = [...state.tetriList];
+      tmp.shift();
+
+      return {
+        ...state,
+        currRotation : 0,
+        tetriList : newTetriList2
+      }
+
+      case END_TURN_PUT:
+        //mergeTetriOnMap(cpMap, currTetriminos.shape[state.currRotation], state.posTetriminos);
+        console.log(' generate new map');
+        //cpMap === state.currMap
+        let cpMap = _.cloneDeep(state.currMap);
+        mergeTetriOnMap(cpMap, state.tetriList[0].shape[state.currRotation], state.posTetriminos);
+        cpMap = deleteFullLine(cpMap, state.nbLineBlock);
+
+        console.log('END TURN PUT');
+        console.log(action.payload);
+        
+        
+        let newTetriList = [...state.tetriList];
+        newTetriList.shift();
+
+      return {
+        ...state,
+        currRotation : 0,
+        tetriList : newTetriList,
+        currMap: cpMap,
+        posTetriminos: { x: 5, y: -1 },
       }
 
     default:
