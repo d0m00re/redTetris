@@ -96,16 +96,6 @@ const GameReducer = (state = initialState, action) => {
         tetriList: []
       }
 
-    case REMOVE_FIRST_TETRI_AND_RESET_ROTATION:
-      let newTetriList2 = [...state.tetriList];
-      tmp.shift();
-
-      return {
-        ...state,
-        currRotation : 0,
-        tetriList : newTetriList2
-      }
-
       case END_TURN_PUT:
         //mergeTetriOnMap(cpMap, currTetriminos.shape[state.currRotation], state.posTetriminos);
         console.log(' generate new map');

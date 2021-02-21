@@ -40,10 +40,10 @@ const Home = () => {
     return (
         <>
         <HeaderBar username={username}/>
-            { !isConnect &&
+            { (!isConnect && room === null) &&
                 <FormCreateUser />
             }
-             { isConnect &&
+             { (isConnect && room === null) &&
                 <CenterPage>
                     <FormCreateRoom />
                     <SelectorRooms />
