@@ -133,20 +133,16 @@ io.on("connection", function (socket: any) {
       io.emit(SOCKET_NEW_ROOM, newRoom); // utile????
     }
       let currentRoom = global.rooms.getWithName(roomName);
+
+      // add user inside userRoom
+      currentRoom?.userList.push(user.name);
+
       let response = {room : currentRoom, err : false, errMsg : ''}
-      // go send patch current room
-      console.log('SOCKET_CONFIRM_JOIN_ROOM');
-      console.log(response);
-      
-      
+     
       io.emit(SOCKET_CONFIRM_JOIN_ROOM, response); // ici on envoii la confirmation de la nouvelle room
       socket.join(roomName);
       user.room = roomName;
       //new room
-    
-    console.log('----========= GENERAL OBJECT ==========-------');
-    
-    console.log(global);
     // send all message history
   //  socket.emit('recvMultiplesMessages', global.rooms.find(room => room.name === roomName)?.msgList);
     

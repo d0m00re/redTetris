@@ -6,18 +6,27 @@ export enum ERoomState {
   END_GAME = 'END_GAME',
 }
 
+export interface IMsg {
+  username : string;
+  date : string;
+  msg : string;
+}
+
 export interface IRoom {
   name: string;
   uuid: string;
-  userList: IUser[];
+  userList: string[];
+  msgList: IMsg[];
   owner: IUser;
   state: ERoomState;
 }
 
+
 export class Room {
   name: string;
   uuid: string;
-  userList: IUser[];
+  userList: string[];
+  msgList: IMsg[];
   owner: IUser;
   state: ERoomState;
 
@@ -25,6 +34,7 @@ export class Room {
     this.name = name;
     this.uuid = '';
     this.userList = [];
+    this.msgList = [];
     this.owner = owner;
     this.state = ERoomState.WAIT_USER;
   }
@@ -40,6 +50,11 @@ export class RoomList {
   add(name: string, owner: IUser) {
     let newUser = new Room(name, owner);
     this.rooms.push(newUser);
+  }
+
+  addUser(roomName : string, userName : string): void {
+    let room = this.rooms.filter(room => room.name === roomName)
+    room[0].userList.push(userName); // = userName;
   }
 
   addRoom(room : IRoom) {
@@ -91,11 +106,6 @@ S    if (index !== -1) {tq
 
   getWithName(name: string): Room | undefined {
     console.log('getWithName : ' + name);
-    console.log(this.rooms.filter(room => room.name === name));
-    console.log('fullroom :');
-    console.log(this.rooms);
-    
-    
     
     return this.rooms.filter(room => room.name === name)[0];
   }
@@ -112,5 +122,10 @@ S    if (index !== -1) {tq
 
   gets(): Room[] {
     return this.rooms;
+  }
+
+  //------------ manage message
+  addMessage({msg, username} : {msg : string, username : string}) {
+    // 
   }
 }

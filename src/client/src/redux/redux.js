@@ -2,8 +2,9 @@ import {
   applyMiddleware,
   combineReducers,
   createStore,
-  compose
 } from 'redux';
+
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 import GameReducer from './reducers/Game';
 import GeneralSocketInfoReducer from './reducers/GeneralSocketInfo';
@@ -18,12 +19,11 @@ export const reducers = combineReducers({
 });
 
 // store.js
-export function configureStore(initialState = {}) {
+export function configureStore(initialState = {}) {  
+  const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(); //process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() : null
+
   const store = createStore(reducers,
-                            compose(
-                            applyMiddleware(SocketClient),
-                            window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));//, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-  
+                            composeWithDevTools(applyMiddleware(SocketClient)));//, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
                             return store;
 };
 

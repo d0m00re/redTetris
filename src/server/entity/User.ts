@@ -43,7 +43,7 @@ export class UserList {
         if (index !== -1){
             this.users[index] = user;
         }
-    }
+    } 
 
     getUser(name : string) : User | undefined {
         return this.users.filter(user => user.name === name)[0];

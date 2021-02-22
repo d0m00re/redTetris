@@ -36,7 +36,7 @@ const socketIoMiddleware = ({ getState }) => {
                 socketSendUsername();
             break;
             case SOCKET_JOIN_ROOM:
-                console.log('SOCKET_JOIN_ROOM');
+                console.log('SOCKET_JOIN_ROOM');  
                 socketJoinRoom();
             break;
             case SOCKET_JOIN_ROOM_WT_NAME:

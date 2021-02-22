@@ -48,24 +48,9 @@ const useGameLoop = () => {
         pos.y += 1;
 
         if (!checkValidPushTetri(cpMap, currTetriminos.shape[state.currRotation], pos)) {
-            //mergeTetriOnMap(cpMap, currTetriminos.shape[state.currRotation], state.posTetriminos);
-
-            //              check delete line
-            // nbLineBlock : disallow line deletion on height - nbLineBlock
-            cpMap = deleteFullLine(cpMap, nbLineBlock);
-
             dispatch({type : END_TURN_PUT, payload : {newMap : cpMap}})
-
             // get next tetriminos
             dispatch({type : SOCKET_GET_NEXT_TETRIMINOS});
-
-            // reset tetri
-            
-            //dispatch({type : REMOVE_FIRST_TETRI});
-            //dispatch(tetriRotation(0));
-
-            // update tetriminos list
-
             return 1;
         }
         else {
