@@ -11,20 +11,72 @@ const useStyles = makeStyles({
         width: '20px !important',
         height : '20px',
     },
-    orange:{
-        backgroundColor : 'orange'
+
+    defaultColor: {
+        backgroundColor: 'white'
     },
-    blue :{
+
+    cyan: {
+        backgroundColor: 'cyan'
+    },
+    
+    blue: {
         backgroundColor: 'blue'
+    },
+    
+    orange: {
+        backgroundColor: 'orange'
+    },
+    
+    yellow: {
+        backgroundColor: 'yellow'
+    },
+    
+    purple: {
+        backgroundColor: 'purple'
+    },
+    
+    green: {
+        backgroundColor: 'chartreuse'
+    },
+    
+    red: {
+        backgroundColor : 'red'
     }
 })
+
+
+
+
 
 const RedTetrisCase=({caseValue, indexCase}) =>{
     const classes = useStyles(); // how to assign UseStyle
 
+    const getColorWtValue = (value) => {
+        switch(value) {
+            case 1:
+                return classes.cyan;
+            case 2:
+                return classes.blue;
+            case 3:
+                return classes.orange;
+            case 4:
+                return classes.yellow;
+            case 5:
+                return classes.purple;
+            case 6:
+                return classes.green;
+            case 7:
+                return classes.red;
+
+            default:
+                return classes.defaultColor;
+        }
+    }
+
     return (
         <Grid item key={'case' + indexCase}
-        className={clsx(classes.root, (caseValue === 0) ? classes.blue : classes.orange)}>{caseValue}</Grid>
+        className={clsx(classes.root, getColorWtValue(caseValue))}>{caseValue}</Grid>
     );
 };
 

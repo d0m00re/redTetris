@@ -3,34 +3,27 @@ import _ from "lodash" // Import the entire lodash library
 import useInterval from './useInterval';
 import useActionUser from './../hook/useActionUser';
 
-import { mergeTetriOnMap, checkValidPushTetri, checkAndPush, checkAndPushSpace, deleteFullLine } from './../../logic/tetriLogic';
+import { mergeTetriOnMap, checkValidPushTetri, checkAndPush, checkAndPushSpace} from './../../logic/tetriLogic';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updateFinalMap, updateTmpMap, tetriRotation } from './../../redux/actions/Game';
+import { updateTmpMap, tetriRotation } from './../../redux/actions/Game';
 
 import {SOCKET_GET_NEXT_TETRIMINOS} from './../../redux/Constant/SocketIOProtocol';
-import {END_TURN_PUT, REMOVE_FIRST_TETRI, REMOVE_FIRST_TETRI_AND_RESET_ROTATION} from './../../redux/Constant/Tetri';
-// return new position
-
-/*
-const deleteFullLine =  (cpMap) => {
-    return cpMap;
-} 
-*/
+import {END_TURN_PUT} from './../../redux/Constant/Tetri';
 
 const useGameLoop = () => {
     let [action] = useActionUser();
 
     const state = useSelector(state => state.game); //nbLineBlock
     const room = useSelector(state => state.user.room);
-    const tetriDico = useSelector(state => state.game.tetriList);
+    const tetriList = useSelector(state => state.game.tetriList);
     const dispatch = useDispatch();
 
     const fallAlgo = () => {
         if (room.state !== 'RUNING_GAME')
             return (0);
 
-        if (!tetriDico[0] || !tetriDico[0].shape) {
+        if (!tetriList[0] || !tetriList[0].shape) {
             console.log('1 invalid tetriminos');
             console.log(state);
             console.log(state.currTetriminos);
@@ -38,13 +31,10 @@ const useGameLoop = () => {
             return 0;
         }
 
-        let currTetriminos = tetriDico[0]; //state.currTetriminos;
-        console.log('curr tetriminos : ');
-        console.log(currTetriminos);
-
+        let currTetriminos = tetriList[0]; //state.currTetriminos;
         let cpMap = _.cloneDeep(state.currMap);
         let pos = { ...state.posTetriminos };
-        let { nbLineBlock } = state;
+      //  let { nbLineBlock } = state;
         pos.y += 1;
 
         if (!checkValidPushTetri(cpMap, currTetriminos.shape[state.currRotation], pos)) {
@@ -55,6 +45,11 @@ const useGameLoop = () => {
         }
         else {
             mergeTetriOnMap(cpMap, currTetriminos.shape[state.currRotation], pos);
+            console.log('merge tetri on map');
+            console.log(currTetriminos.shape[state.currRotation]);
+            console.log(cpMap);
+            
+            
             //1) get next position
             dispatch(updateTmpMap({ tmpMap: cpMap, pos: pos }))
         }
@@ -69,12 +64,12 @@ const useGameLoop = () => {
         let tmpPos;
         let cpMap;
         let ret;
-        let currTetriminos = tetriDico[0];
+        let currTetriminos = tetriList[0];
 
         if (room.state !== 'RUNING_GAME')
             return 0;
 
-        if (!tetriDico[0] || !tetriDico[0].shape) {
+        if (!tetriList[0] || !tetriList[0].shape) {
             console.log('invalid tetriminos');
             console.log(currTetriminos);
             return 0;
@@ -82,7 +77,6 @@ const useGameLoop = () => {
 
         switch (action) {
             case 'rotate':
-                //console.log('rotation ->');
                 ret = checkValidPushTetri(state.currMap, currTetriminos.shape[(state.currRotation + 1) % currTetriminos.shape.length], state.posTetriminos);
                 if (ret)
                     dispatch(tetriRotation((state.currRotation + 1) % currTetriminos.shape.length))
@@ -99,7 +93,6 @@ const useGameLoop = () => {
                 tmpPos = { ...state.posTetriminos };
                 cpMap = _.cloneDeep(state.currMap);
                 tmpPos.x -= 1;
-                // mergeTetriOnMap(cpMap, currTetriminos.shape[state.currRotation], tmpPos);
                 ret = checkAndPush(cpMap, currTetriminos.shape[state.currRotation], tmpPos);
                 if (ret)
                     dispatch(updateTmpMap({ tmpMap: cpMap, pos: tmpPos }))
@@ -114,8 +107,6 @@ const useGameLoop = () => {
                     dispatch(updateTmpMap({ tmpMap: cpMap, pos: tmpPos }))
                 break;
             case 'space':
-                console.log('space');
-
                 tmpPos = { ...state.posTetriminos };
                 cpMap = _.cloneDeep(state.currMap);
 
@@ -125,7 +116,6 @@ const useGameLoop = () => {
                 break;
             default:
                 console.log('default : ' + action);
-
         }
 
     }, [action]);

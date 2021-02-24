@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import RedTetrisCase from './RedTetrisCase';
 
 /*
@@ -6,6 +6,11 @@ import RedTetrisCase from './RedTetrisCase';
                                             className={clsx(classes.root, (elem === 0) ? classes.blue : classes.orange)}>{elem}</Grid>
 */
 const RedTetrisRow = ({row}) => {
+
+    useEffect(() => {
+        console.log(row);
+        
+    }, [row])
 
     return (
         <>

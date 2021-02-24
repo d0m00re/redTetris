@@ -15,16 +15,13 @@ const useActionUser = () => {
                 setAction('left');
             break;
             case 'ArrowUp':
-                setAction('up');
+                setAction('rotate');
             break;
             case 'ArrowDown':
                 setAction('down');
             break;
             case 'Space':
                 setAction('space')
-            break;
-            case 'KeyR':
-                setAction('rotate');
             break;
             default:
                 console.log('action keypress : ' + keyPress);

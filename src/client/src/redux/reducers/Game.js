@@ -101,10 +101,6 @@ const GameReducer = (state = initialState, action) => {
         let cpMap = _.cloneDeep(state.currMap);
         mergeTetriOnMap(cpMap, state.tetriList[0].shape[state.currRotation], state.posTetriminos);
         cpMap = deleteFullLine(cpMap, state.nbLineBlock);
-
-        console.log('END TURN PUT');
-        console.log(action.payload);
-        
         
         let newTetriList = [...state.tetriList];
         newTetriList.shift();

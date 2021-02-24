@@ -1,13 +1,3 @@
-/*
-import cTetriminos from './cTetriminos';
-
-function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min +1)) + min;
-}
-*/
-
 class Piece {
     constructor() {
         this._piece = undefined;

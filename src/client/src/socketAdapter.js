@@ -1,6 +1,6 @@
 import {SOCKET_SEND_TETRIMINOS, SOCKET_UPDATE_ROOM ,SOCKET_GET_NEXT_TETRIMINOS, SOCKET_RECV_USERNAME, SOCKET_CONFIRM_JOIN_ROOM, SOCKET_ALL_ROOMS, SOCKET_NEW_ROOM, SOCKET_RUN_GAME} from './redux/Constant/SocketIOProtocol';
-import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM, SET_ROOM} from './redux/Constant/User';
-import {SET_ROOMS, PATCH_ROOM, DELETE_ROOM, ADD_ROOM} from './redux/Constant/GeneralSocketInfo';
+import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM} from './redux/Constant/User';
+import {SET_ROOMS, PATCH_ROOM, DELETE_ROOM, ADD_ROOM, PATCH_LIST_ROOM, SET_ROOM} from './redux/Constant/GeneralSocketInfo';
 import {ADD_TETRI, REMOVE_FIRST_TETRI, RESET_TETRI} from './redux/Constant/Tetri'
 
 const initApiSocket = (store) => {
@@ -11,12 +11,6 @@ const initApiSocket = (store) => {
     
   
     socket.on('connect', () => {console.log('connect success : ');});// connection
-    
-    /*
-    socket.on(SOCKET_RUN_GAME, (resp) => {
-
-    })
-    */
 
     socket.on(SOCKET_RECV_USERNAME, (resp) => {
       if (resp.err)
@@ -66,14 +60,19 @@ const initApiSocket = (store) => {
     })
 
     socket.on(SOCKET_UPDATE_ROOM, (resp) => {
+      console.log('-------------------------------');
+      
       console.log('SOCKET UPDATE ROOM');
       console.log(resp.room);
       
       if (resp.error) return resp.errorMsg;
 
+
       dispatch({type : SET_ROOM, payload : resp.room});
+      //dispatch
+      dispatch({type : PATCH_LIST_ROOM, payload : resp.room});
       // need update room list
-    })
+    });
 
     socket.on(SOCKET_GET_NEXT_TETRIMINOS, (resp) => {
       console.log('**** SOCKET GET NEXT TETRIMINOS');

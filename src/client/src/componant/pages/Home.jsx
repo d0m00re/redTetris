@@ -34,7 +34,8 @@ const HeaderBar = ({username}) => {
 }
 
 const Home = () => {
-    let {username, room, isConnect} = useSelector(state => state.user);
+    let {username, isConnect} = useSelector(state => state.user);
+    let {room} = useSelector(state => state.user);
     let dispatch = useDispatch();
 
     return (

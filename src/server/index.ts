@@ -31,47 +31,6 @@ let global : Global = new Global();
 
 let tetriGenerator =  new TetriminosGenerator();
 
-// show room user
-/*
-const showRoomUser = (roomName : string) => {
-  const clients = io.sockets.adapter.rooms.get(roomName);
-  console.log('room id : ' + clients.id);
-  
-  //console.log(clients);
-
-  for (const clientId of clients) {
-
-    //this is the socket of each client in the room.
-    const clientSocket = io.sockets.sockets.get(clientId);
-
-    //you can do whatever you need with this
-    console.log(clientSocket.nickname);
-
-  }
-}
-*/
-// utility function :
-// 1 find an user object
-/*
-const findUser = (id : string) => {
-  console.log('id to find : ' + id);
-  console.log(global.users.find(user => user.uuid === id));
-  console.log('-----------');
-  
-  
-  
-  return global.users.find(user => user.uuid === id);
-}
-*/
-// 2 : find room object
-//const findRoom = (roomname : string) => global.rooms.find(room => room.uuid === roomname);
-
-// 3 : 
-
-// 1)
-
-//--------------------------------------------------------
-
 const app = express();
 app.use(cors())
 app.set("port", process.env.PORT || 4242);
@@ -90,17 +49,13 @@ app.get("/", (req: any, res: any) => {
   res.sendFile(path.resolve("./client/index.html"));
 });
 
-// whenever a user connects on port 3000 via
-// a websocket, log that a user has connected
-// create event connection
 io.on("connection", function (socket: any) {
   socket.on(SOCKET_SEND_USERNAME, function (username: string) {
-    socket.nickname = username;
+    socket.username = username;
     let user: IUser = { name: username, uuid: socket.id, room: '' };
     global.users.addUser(user);
-    console.log(global.users);
     // send back username :
-    io.emit(SOCKET_RECV_USERNAME, {username : user.name,
+    socket.emit(SOCKET_RECV_USERNAME, {username : user.name,
                                    error : false,
                                    errorMsg : ''});
     // emit all room    
@@ -113,11 +68,7 @@ io.on("connection", function (socket: any) {
     console.log('* join a room : ' + roomName);
     
     let user : IUser | undefined = global.users.getWithId(socket.id); //findUser(socket.id);
-    // user need to leave this current room
-    console.log('Current user : ');
-    console.log(user);
-    
-    
+ 
     if (user === undefined)
       return 0;
       // unsubscribe to room and reset user.room
@@ -128,7 +79,7 @@ io.on("connection", function (socket: any) {
     }
     let newRoom = null;
     if (global.rooms.roomExist(roomName) === false){
-      newRoom = {name : roomName, uuid : roomName, userList : [], state : ERoomState.WAIT_USER, owner : user};
+      newRoom = {name : roomName, uuid : roomName, userList : [], msgList : [], state : ERoomState.WAIT_USER, owner : user};
       global.rooms.addRoom(newRoom);
       io.emit(SOCKET_NEW_ROOM, newRoom); // utile????
     }
@@ -139,7 +90,7 @@ io.on("connection", function (socket: any) {
 
       let response = {room : currentRoom, err : false, errMsg : ''}
      
-      io.emit(SOCKET_CONFIRM_JOIN_ROOM, response); // ici on envoii la confirmation de la nouvelle room
+      socket.emit(SOCKET_CONFIRM_JOIN_ROOM, response); // ici on envoii la confirmation de la nouvelle room
       socket.join(roomName);
       user.room = roomName;
       //new room
@@ -152,27 +103,43 @@ io.on("connection", function (socket: any) {
     console.log(' get next tetriminos');
     let tetri = tetriGenerator.getRandom();
 
-    socket.emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
+    console.log('----OOOOOOOOOOOOOOOOOOOO--');
+    console.log(socket.rooms);
+    console.log(socket.username);
+    
+    
+     let roomName = global.rooms.getRoomNameWithUsername(socket.username);
+     console.log('-------> ' + roomName);
+     
+
+  //    socket.emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
+  
+    io.in(roomName).emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
   })
  
 
   socket.on(SOCKET_RUN_GAME, (payload : string) => {
     console.log('run game : ' + payload);
     global.rooms.run(payload);
+
+    console.log('|||| ------------');
+    console.log(global.rooms.getWithName(payload));
     
-    socket.emit(SOCKET_UPDATE_ROOM, {
+    
+    io.emit(SOCKET_UPDATE_ROOM, {
       room : global.rooms.getWithName(payload),
       error : false,
       errorMsg : '' 
-    })
+    });
 
+    {/*}
     console.log('SEND TETRIMINOS');
     console.log({
       tetri : tetriGenerator.getRandom(),
       err: false,
       errorMsg: ''
     });
-    
+  */}
     
 
     socket.emit(SOCKET_SEND_TETRIMINOS,  {

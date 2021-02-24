@@ -110,6 +110,20 @@ S    if (index !== -1) {tq
     return this.rooms.filter(room => room.name === name)[0];
   }
 
+  //find room with username
+  containUsername(room : IRoom, username : string) {
+    return (room.userList.findIndex(_username  => _username === username) !== -1);
+  }
+
+  // find room name with username
+  getRoomNameWithUsername(username : string) : string {
+    let roomId = this.rooms.findIndex(room => this.containUsername(room, username));
+
+    if (roomId === -1)
+      return '';
+    return this.rooms[roomId].name;
+  }
+
   roomExist(name: string): boolean {
     console.log('ROOM EXIST');
     console.log(this.rooms.filter(room => room.name === name).length === 1);

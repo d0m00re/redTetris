@@ -19,11 +19,11 @@ export const reducers = combineReducers({
 });
 
 // store.js
-export function configureStore(initialState = {}) {  
-  const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(); //process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() : null
+//                            );
 
-  const store = createStore(reducers,
-                            composeWithDevTools(applyMiddleware(SocketClient)));//, initialState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+export function configureStore(initialState = {}) {  
+
+  const store = createStore(reducers, composeWithDevTools(applyMiddleware(SocketClient)));
                             return store;
 };
 

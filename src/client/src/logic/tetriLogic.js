@@ -1,3 +1,4 @@
+// check pos validity
 const isOutPos = (gMap, pos, absPos)=>{
     if ((gMap.length <= pos.y + absPos.y) || (gMap[0].length <= pos.x +  absPos.x) ||
         absPos.x + pos.x < 0 ||  absPos.y + pos.y < 0)
@@ -25,7 +26,7 @@ const  mergeTetriOnMap = (tetriMap, tetri, pos, value = 1) =>{
     for (let y = 0; y < tetri.length;y++){
         for (let x = 0; x < tetri.length;x++) {
             if (!isOutPos(tetriMap, pos, {x:x,y:y}))
-                tetriMap[y + pos.y][x + pos.x] = (tetri[y][x]) ? value : tetriMap[y + pos.y][x + pos.x];
+            tetriMap[y + pos.y][x + pos.x] = (tetri[y][x]) ? tetri[y][x] : tetriMap[y + pos.y][x + pos.x];//tetriMap[y + pos.y][x + pos.x] = (tetri[y][x]) ? value : tetriMap[y + pos.y][x + pos.x];
         }
     }
 }
