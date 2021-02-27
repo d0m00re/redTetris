@@ -1,21 +1,18 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Textfield from '@material-ui/core/TextField';
 import FormCreateUser from './../components/Form/CreateUser/FormCreateUser';
 import FormCreateRoom from './../components/Form/CreateRoom/FormCreateRoom';
 
-import ListRooms from './../components/List/ListRoom/ListRooms';
-
 import Grid from '@material-ui/core/Grid';
 
-import HomeGame from './../pages/HomeGame';
+import HomeGame from './../Pages/HomeGame';
 
 import SelectorRooms from './../components/List/ListRoom/SelectorRooms'
 
 import {useSelector, useDispatch} from 'react-redux';
 import CenterPage from './../components/Layout/CenterPage'
-import {SOCKET_GET_NEXT_TETRIMINOS, SOCKET_RUN_GAME} from './../../redux/Constant/SocketIOProtocol';
+import {SOCKET_RUN_GAME} from './../../redux/Constant/SocketIOProtocol';
 
 const HeaderBar = ({username}) => {
     return (
@@ -37,9 +34,12 @@ const Home = () => {
     let {username, isConnect} = useSelector(state => state.user);
     let {room} = useSelector(state => state.user);
     let dispatch = useDispatch();
+    const tetriList = useSelector(state => state.game.tetriList);
+
 
     return (
         <>
+        <div>Nb tetriminos list : {tetriList.length}</div>
         <HeaderBar username={username}/>
             { (!isConnect && room === null) &&
                 <FormCreateUser />
@@ -59,23 +59,6 @@ const Home = () => {
                     <HomeGame />
                </>     
             }
-
-            {/*
-            <Typography variant='h5'>
-                username : {username} | roomname : {room?.name}
-            </Typography>
- 
-            { !isConnect &&
-                <FormCreateUser />
-            }
-           
-            <ListRooms />
-        -*/}
-        {/*}
-            <Button onClick={() => dispatch({type : SOCKET_GET_NEXT_TETRIMINOS})}>get tettriminos</Button>
-            <Button onClick={}>Start</Button>
-            <HomeGame/>
-    */}
         </>
     )
 }

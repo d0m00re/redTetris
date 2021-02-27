@@ -24,10 +24,8 @@ const useGameLoop = () => {
             return (0);
 
         if (!tetriList[0] || !tetriList[0].shape) {
-            console.log('1 invalid tetriminos');
-            console.log(state);
+            console.log('Invalid tetriminos.');
             console.log(state.currTetriminos);
-
             return 0;
         }
 
@@ -44,11 +42,8 @@ const useGameLoop = () => {
             return 1;
         }
         else {
-            mergeTetriOnMap(cpMap, currTetriminos.shape[state.currRotation], pos);
-            console.log('merge tetri on map');
-            console.log(currTetriminos.shape[state.currRotation]);
-            console.log(cpMap);
             
+            mergeTetriOnMap(cpMap, currTetriminos.shape[state.currRotation], pos);
             
             //1) get next position
             dispatch(updateTmpMap({ tmpMap: cpMap, pos: pos }))
@@ -71,7 +66,6 @@ const useGameLoop = () => {
 
         if (!tetriList[0] || !tetriList[0].shape) {
             console.log('invalid tetriminos');
-            console.log(currTetriminos);
             return 0;
         }
 
@@ -102,7 +96,6 @@ const useGameLoop = () => {
                 cpMap = _.cloneDeep(state.currMap);
                 tmpPos.y += 1;
                 ret = checkAndPush(cpMap, currTetriminos.shape[state.currRotation], tmpPos);
-                //mergeTetriOnMap(cpMap, currTetriminos.shape[state.currRotation], tmpPos);
                 if (ret)
                     dispatch(updateTmpMap({ tmpMap: cpMap, pos: tmpPos }))
                 break;

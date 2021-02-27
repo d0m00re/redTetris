@@ -12,7 +12,7 @@ import {
   SET_NB_LINE_BLOCK,
 } from "../Constant/Constant";
 
-import {END_TURN_PUT, ADD_TETRI, REMOVE_FIRST_TETRI, RESET_TETRI,REMOVE_FIRST_TETRI_AND_RESET_ROTATION } from './../Constant/Tetri';
+import {END_TURN_PUT, ADD_TETRI, REMOVE_FIRST_TETRI, RESET_TETRI } from './../Constant/Tetri';
 
  
 const initialState = {
@@ -90,7 +90,7 @@ const GameReducer = (state = initialState, action) => {
         ...state,
         tetriList: tmp
       }
-    case RESET_TETRI:
+    case RESET_TETRI: 
       return {
         ...state,
         tetriList: []
@@ -114,7 +114,6 @@ const GameReducer = (state = initialState, action) => {
       }
 
     default:
-      console.log(UPDATE_USERNAME);
       return state;
   }
 };

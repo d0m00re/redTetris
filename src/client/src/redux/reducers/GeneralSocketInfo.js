@@ -13,20 +13,13 @@ const initState = {
 
 const GeneralSocketInfoReducer = (state = initState, action) => {
     switch(action.type) {
-        case ADD_ROOM:
-            console.log('========================== add room');
-            console.log(state.roomlist);
-            console.log(action.payload);
-            
-            
+        case ADD_ROOM:   
             return {
                 ...state,
                 roomlist : [...state.roomlist, action.payload]
             }
         
-        case SET_ROOMS:
-            console.log('-------------------- set rooms');
-             
+        case SET_ROOMS:             
             return {
                 ...state,
                 roomlist : action.payload
@@ -45,12 +38,10 @@ const GeneralSocketInfoReducer = (state = initState, action) => {
             let tmpListRoom = [];
             if (index !== -1)            
             {
-                console.log('ROOM EXIST');
                 tmpListRoom = [...state.roomlist];
                 tmpListRoom[index] = newRoom;
             }
             else {
-                console.log('ROOM DON T EXIST');
                 tmpListRoom = [...state.roomlist, newRoom];
             }
             return {

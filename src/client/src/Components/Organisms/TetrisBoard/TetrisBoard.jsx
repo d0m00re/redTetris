@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import RedTetrisRow from "./RedTetrisRow";
+import TetrisRow from './../../Molecules/TetrisRow/TetrisRow';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import useGameLoop from './../hook/useGameLoop';
+import useGameLoop from './../../hook/useGameLoop';
 
 const useStyles = makeStyles({
     root: {
@@ -17,7 +16,7 @@ const useStyles = makeStyles({
 })
 
 
-const RedTetrisBoard = ({currentBoard}) => {
+const TetrisBoard = ({currentBoard}) => {
   useGameLoop();
 
   return (
@@ -25,7 +24,7 @@ const RedTetrisBoard = ({currentBoard}) => {
       <div style={{width: '50%', height : '50%'}}>
       {currentBoard.map((row, indexRow) => (
         <Grid container direction="row" key={"rowrow" + indexRow} className={useStyles.root}>
-          <RedTetrisRow row={row}></RedTetrisRow>
+          <TetrisRow row={row}></TetrisRow>
         </Grid>
       ))}
       </div>
@@ -33,4 +32,4 @@ const RedTetrisBoard = ({currentBoard}) => {
   );
 };
 
-export default RedTetrisBoard;
+export default TetrisBoard;

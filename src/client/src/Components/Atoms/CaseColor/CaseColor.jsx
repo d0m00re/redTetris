@@ -45,11 +45,7 @@ const useStyles = makeStyles({
     }
 })
 
-
-
-
-
-const RedTetrisCase=({caseValue, indexCase}) =>{
+const CaseColor =({caseValue, indexCase}) =>{
     const classes = useStyles(); // how to assign UseStyle
 
     const getColorWtValue = (value) => {
@@ -80,4 +76,4 @@ const RedTetrisCase=({caseValue, indexCase}) =>{
     );
 };
 
-export default React.memo(RedTetrisCase);
+export default React.memo(CaseColor);

@@ -6,13 +6,7 @@
 
  const TetriReducer = (state = initState, action) => {
      switch(action.type) {
-         case ADD_TETRI:
-             console.log('ADD TETRI');
-             console.log(action.payload); 
-             
-             console.log([action.payload, ...state.tetriList]);
-             
-             
+         case ADD_TETRI: 
              return {
                  tetriList : [action.payload, ...state.tetriList]
              }

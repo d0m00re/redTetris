@@ -5,17 +5,13 @@ import {ADD_TETRI, REMOVE_FIRST_TETRI, RESET_TETRI} from './redux/Constant/Tetri
 
 const initApiSocket = (store) => {
     const dispatch = store.dispatch;
-    const socket = store.getState().generalSocketInfo.socket;
-  
-    console.log(socket);
-    
+    const socket = store.getState().generalSocketInfo.socket;    
   
     socket.on('connect', () => {console.log('connect success : ');});// connection
 
     socket.on(SOCKET_RECV_USERNAME, (resp) => {
       if (resp.err)
       {
-        console.log('Error login');
         dispatch({type : SET_ERROR, payload : {error : true, errorMsg : resp.errorMsg}})
         
       }
@@ -25,11 +21,7 @@ const initApiSocket = (store) => {
       }
     })
 
-    socket.on(SOCKET_CONFIRM_JOIN_ROOM, (resp) => {
-        console.log('socket confirm join room');
-        console.log(resp);
-        
-        
+    socket.on(SOCKET_CONFIRM_JOIN_ROOM, (resp) => { 
         if (resp.err)
         {
             dispatch({type : SET_ERROR, payload : {error : true, errorMsg : resp.errorMsg}})
@@ -42,9 +34,6 @@ const initApiSocket = (store) => {
     });
 
     socket.on(SOCKET_ALL_ROOMS, (resp) => {
-        console.log('* socket all room');
-        console.log(resp);
-        
         dispatch({type : SET_ROOMS, payload : resp});
     });
 
@@ -52,19 +41,11 @@ const initApiSocket = (store) => {
         if (resp.err){
             return 0;
         }
-        console.log('**** SOCKET NEW ROOM');
-        console.log(resp);
-        
-        
+            
         dispatch({type : ADD_ROOM, payload : resp})
     })
 
-    socket.on(SOCKET_UPDATE_ROOM, (resp) => {
-      console.log('-------------------------------');
-      
-      console.log('SOCKET UPDATE ROOM');
-      console.log(resp.room);
-      
+    socket.on(SOCKET_UPDATE_ROOM, (resp) => { 
       if (resp.error) return resp.errorMsg;
 
 
@@ -75,17 +56,12 @@ const initApiSocket = (store) => {
     });
 
     socket.on(SOCKET_GET_NEXT_TETRIMINOS, (resp) => {
-      console.log('**** SOCKET GET NEXT TETRIMINOS');
-
-      console.log(resp);
       dispatch({type : ADD_TETRI, payload : resp.tetri});
     })
 
     // recive tetriminos from server
     socket.on(SOCKET_SEND_TETRIMINOS, (resp) => {
       //SOCKET_SEND_TETRIMINOS
-      console.log('SEND TETRIMINOS RESP --->');
-      console.log(resp);
       dispatch({type : ADD_TETRI, payload : resp.tetri});
     }) 
 

@@ -1,5 +1,5 @@
 import React from "react";
-import Home from './componant/pages/Home';
+import Home from './Components/Pages/Home';
 
 /*
 let dimBoard = {w : 10, h : 20};
