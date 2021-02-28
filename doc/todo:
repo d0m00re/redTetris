@@ -1,20 +1,43 @@
 current :
-* bug partie 2 joueurs :
-    * les deux joueurs peuvent lancer le match
-    * le joueur qui lance a un tetris en plus au debut
-* delete tetri reducer
+    * delete tetri reducer
+    * ajouter la fin de la partie
 todo:
-* remplacer l'envoi des tetris en entier par seulement des id.
-* revoir le layout
-* preparer l envoi des preshot des tetris de chaque joueurs
-* ajouter la condition de defaite
-* tester redux???
 
-* test et debug d une partie a deux joueurss
+    features :
+        * preparer l envoi des preshot des tetris de chaque joueurs
 
-* continuer a rendre lke design atomique dans les composants
+        * gestion fin de partie :
+            * condition de victoire (mort de chaque personne)
+            * condition de defaite (placer un tetri en dehors de la map)
+            * affichage des tetris de chaque personnes (spectre)
+            * 6 joueurs max
+            * changer l ownership de la room a un autres utilisateur aleatoirement
+            * relancer la partie
 
-* mettre en place le futur layout
+    bug :
+        structure :
+            * continuer a rendre lke design atomique dans les composants
+            * separation of concern server
+    test:
+        redux ?
+        socketio ?
+        unit test on logic function
+        story book componant ???
+
+    styles :
+        * mettre en place le futur layout
+        * revoir le layout
+
+    performance:
+        * remplacer l'envoi des tetris en entier par seulement des id. | goal : reduce information size and refresh perf of redux
+
+    deployment:
+        * docker + docker compose 
+        * unit test 
+        * ci cd 
+        * aws
+
+
 
 partie deux joueurs
     * le joueurs ne recoit pas le premier tetriminos? wtf
@@ -28,3 +51,8 @@ use grid for the layout : https://la-cascade.io/css-grid-layout-guide-complet/
 
 log :
     [fix] * le joueur qui lance a un tetris en plus au debut
+
+    28 fev :
+        * [fix] seulement l owner peut lancer la game
+        * [fix] les deux joueurs peuvent lancer le match (add security and hide button)
+

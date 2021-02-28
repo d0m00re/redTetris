@@ -109,6 +109,14 @@ io.on("connection", function (socket: any) {
  
 
   socket.on(SOCKET_RUN_GAME, (payload : string) => {
+    let currentRoom = global.rooms.getWithName(payload);
+
+    if (currentRoom?.owner.name !== null &&  currentRoom?.owner.name !== socket.username)
+    {
+      console.log('User try to launch a game but is not owner of this room');
+      return (0);
+    }
+
     console.log('run game : ' + payload);
     global.rooms.run(payload);
 

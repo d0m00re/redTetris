@@ -78,7 +78,11 @@ const deleteFullLine = (myMap, nbLineBlock) => {
 
     getLines = myMap.filter((elem, index) => !getLines.includes(index));
     return replaceLine.concat(getLines);
-} 
+}
+
+const isLoose = () => {
+    return false;
+}
 
 module.exports = {
     mergeTetriOnMap,
@@ -87,4 +91,5 @@ module.exports = {
     getAllFullLine,
     deleteFullLine,
     checkAndPushSpace,
+    isLoose,
 }

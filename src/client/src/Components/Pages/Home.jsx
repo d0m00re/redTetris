@@ -55,7 +55,10 @@ const Home = () => {
                 room !== null && 
                 <> 
                     <Typography>Current room : {room.name}</Typography>
-                    <Button onClick={() => {dispatch({type : SOCKET_RUN_GAME})}}>RUN GAME</Button>
+                    {
+                        room.owner.name === username &&
+                        <Button onClick={() => {dispatch({type : SOCKET_RUN_GAME})}}>RUN GAME</Button>
+                    }
                     <HomeGame />
                </>     
             }
