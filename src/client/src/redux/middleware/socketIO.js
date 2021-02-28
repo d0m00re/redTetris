@@ -48,7 +48,7 @@ const socketIoMiddleware = ({ getState }) => {
                 socketRunGame();
             break;
             default: 
-                console.log('NO SOCKET ACTION')
+            break;
         }
 
         return next(action);

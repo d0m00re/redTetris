@@ -6,8 +6,7 @@ import useActionUser from './../hook/useActionUser';
 import { mergeTetriOnMap, checkValidPushTetri, checkAndPush, checkAndPushSpace} from './../../logic/tetriLogic';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { updateTmpMap, tetriRotation } from './../../redux/actions/Game';
-
+import { updateTmpMap, tetriRotation, updateTetriminosPos} from './../../redux/actions/Game';
 import {SOCKET_GET_NEXT_TETRIMINOS} from './../../redux/Constant/SocketIOProtocol';
 import {END_TURN_PUT} from './../../redux/Constant/Tetri';
 
@@ -20,6 +19,7 @@ const useGameLoop = () => {
     const dispatch = useDispatch();
 
     const fallAlgo = () => {
+        console.log('fall algo ... call');
         if (room.state !== 'RUNING_GAME')
             return (0);
 
@@ -29,26 +29,30 @@ const useGameLoop = () => {
             return 0;
         }
 
-        let currTetriminos = tetriList[0]; //state.currTetriminos;
         let cpMap = _.cloneDeep(state.currMap);
         let pos = { ...state.posTetriminos };
-      //  let { nbLineBlock } = state;
         pos.y += 1;
 
-        if (!checkValidPushTetri(cpMap, currTetriminos.shape[state.currRotation], pos)) {
+        if (!checkValidPushTetri(state.currMap, state.tetriList[0].shape[state.currRotation], pos)) {
             dispatch({type : END_TURN_PUT, payload : {newMap : cpMap}})
             // get next tetriminos
             if (tetriList.length < 4)
                 dispatch({type : SOCKET_GET_NEXT_TETRIMINOS});
             return 1;
         }
+        
         else {
             
-            mergeTetriOnMap(cpMap, currTetriminos.shape[state.currRotation], pos);
+         //   mergeTetriOnMap(cpMap, currTetriminos.shape[state.currRotation], pos);
             
             //1) get next position
-            dispatch(updateTmpMap({ tmpMap: cpMap, pos: pos }))
+            //dispatch(updateTmpMap({ tmpMap: cpMap, pos: pos }))
+            console.log('UPDATE TETRIMINOS POS');
+            
+            dispatch(updateTetriminosPos(pos)); 
+
         }
+        
         /*
                 //2) try insert tetriminos
                     //2.1) succes we update the map
@@ -68,7 +72,9 @@ const useGameLoop = () => {
         if (!tetriList[0] || !tetriList[0].shape) {
             console.log('invalid tetriminos');
             return 0;
-        }
+        } 
+
+        console.log('$ACTION : ' + action);
 
         switch (action) {
             case 'rotate':
@@ -82,15 +88,16 @@ const useGameLoop = () => {
                 tmpPos.x += 1;
                 ret = checkAndPush(cpMap, currTetriminos.shape[state.currRotation], tmpPos);
                 if (ret)
-                    dispatch(updateTmpMap({ tmpMap: cpMap, pos: tmpPos }));
+                    dispatch(updateTetriminosPos(tmpPos)); 
                 break;
             case 'left':
+                console.log('------>>>>>>')
                 tmpPos = { ...state.posTetriminos };
                 cpMap = _.cloneDeep(state.currMap);
                 tmpPos.x -= 1;
                 ret = checkAndPush(cpMap, currTetriminos.shape[state.currRotation], tmpPos);
                 if (ret)
-                    dispatch(updateTmpMap({ tmpMap: cpMap, pos: tmpPos }))
+                    dispatch(updateTetriminosPos(tmpPos)); 
                 break;
             case 'down':
                 tmpPos = { ...state.posTetriminos };
@@ -98,18 +105,18 @@ const useGameLoop = () => {
                 tmpPos.y += 1;
                 ret = checkAndPush(cpMap, currTetriminos.shape[state.currRotation], tmpPos);
                 if (ret)
-                    dispatch(updateTmpMap({ tmpMap: cpMap, pos: tmpPos }))
+                    dispatch(updateTetriminosPos(tmpPos)); 
                 break;
             case 'space':
                 tmpPos = { ...state.posTetriminos };
                 cpMap = _.cloneDeep(state.currMap);
 
                 checkAndPushSpace(cpMap, currTetriminos.shape[state.currRotation], tmpPos);
-                dispatch(updateTmpMap({ tmpMap: cpMap, pos: tmpPos }));
+                dispatch(updateTetriminosPos(tmpPos)); 
 
                 break;
             default:
-                console.log('default : ' + action);
+            break;
         }
 
     }, [action]);

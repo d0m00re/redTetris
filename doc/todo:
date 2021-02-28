@@ -1,6 +1,7 @@
 current :
     * delete tetri reducer
     * ajouter la fin de la partie
+    * enlever tmp map de redux
 todo:
 
     features :
@@ -56,3 +57,8 @@ log :
         * [fix] seulement l owner peut lancer la game
         * [fix] les deux joueurs peuvent lancer le match (add security and hide button)
 
+
+--
+tmpMap peut etre present en dehors de redux si on veut
+
+pourquoi on a un double update qui se passe?
