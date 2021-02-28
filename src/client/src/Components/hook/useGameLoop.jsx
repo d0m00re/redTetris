@@ -38,7 +38,8 @@ const useGameLoop = () => {
         if (!checkValidPushTetri(cpMap, currTetriminos.shape[state.currRotation], pos)) {
             dispatch({type : END_TURN_PUT, payload : {newMap : cpMap}})
             // get next tetriminos
-            dispatch({type : SOCKET_GET_NEXT_TETRIMINOS});
+            if (tetriList.length < 4)
+                dispatch({type : SOCKET_GET_NEXT_TETRIMINOS});
             return 1;
         }
         else {
@@ -113,7 +114,7 @@ const useGameLoop = () => {
 
     }, [action]);
 
-    useInterval(fallAlgo, 1000);
+    useInterval(fallAlgo, 2000);
 }
 
 export default useGameLoop

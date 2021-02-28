@@ -11,7 +11,7 @@ import HomeGame from './../Pages/HomeGame';
 import SelectorRooms from './../components/List/ListRoom/SelectorRooms'
 
 import {useSelector, useDispatch} from 'react-redux';
-import CenterPage from './../components/Layout/CenterPage'
+import CenterPage from '../Atoms/Layout/CenterPage';//'./../components/Layout/CenterPage'
 import {SOCKET_RUN_GAME} from './../../redux/Constant/SocketIOProtocol';
 
 const HeaderBar = ({username}) => {

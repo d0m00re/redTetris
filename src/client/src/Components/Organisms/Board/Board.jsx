@@ -1,10 +1,10 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import TetrisRow from './../../Molecules/TetrisRow/TetrisRow';
+import TetrisRow from '../../Molecules/TetrisRow/TetrisRow';
 
 import { makeStyles } from '@material-ui/core/styles';
 
-import useGameLoop from './../../hook/useGameLoop';
+import useGameLoop from '../../hook/useGameLoop';
 
 const useStyles = makeStyles({
     root: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 })
 
 
-const TetrisBoard = ({currentBoard}) => {
+const Board = ({currentBoard}) => {
   useGameLoop();
 
   return (
@@ -32,4 +32,4 @@ const TetrisBoard = ({currentBoard}) => {
   );
 };
 
-export default TetrisBoard;
+export default Board;

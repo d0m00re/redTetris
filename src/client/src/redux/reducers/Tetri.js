@@ -10,12 +10,7 @@
              return {
                  tetriList : [action.payload, ...state.tetriList]
              }
-         case REMOVE_FIRST_TETRI:
-            let tmp = [...state.tetriList];
-            tmp.shift();
-            return {
-                tetriList : tmp
-            }
+
         case RESET_TETRI:
             return {
                 tetriList : []

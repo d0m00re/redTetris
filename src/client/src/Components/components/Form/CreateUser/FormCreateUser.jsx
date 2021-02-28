@@ -1,12 +1,9 @@
 import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
 import { useDispatch, useSelector } from 'react-redux';
 
-import clsx from 'clsx';
-
-import CenterPage from '../../Layout/CenterPage';
+import CenterPage from './../../../Atoms/Layout/CenterPage';
 
 import {
   SET_USERNAME_FORM

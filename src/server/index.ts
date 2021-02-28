@@ -101,11 +101,12 @@ io.on("connection", function (socket: any) {
 
   socket.on(SOCKET_GET_NEXT_TETRIMINOS, () => {
     console.log(' get next tetriminos');
-    let tetri = tetriGenerator.getRandom();
+
+    let tetri = [tetriGenerator.getRandom(), tetriGenerator.getRandom()];
 
     console.log('----OOOOOOOOOOOOOOOOOOOO--');
-    console.log(socket.rooms);
-    console.log(socket.username);
+    console.log(tetri);
+    
     
     
      let roomName = global.rooms.getRoomNameWithUsername(socket.username);

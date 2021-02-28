@@ -78,18 +78,12 @@ const GameReducer = (state = initialState, action) => {
         nbLineBlock: action.payload
       }
 
-    case ADD_TETRI:
+    case ADD_TETRI:      
       return {
         ...state,
-        tetriList: [action.payload, ...state.tetriList]
+        tetriList: state.tetriList.concat(action.payload)//[...state.tetriList, ...action.payload]
       }
-    case REMOVE_FIRST_TETRI:
-      let tmp = [...state.tetriList];
-      tmp.shift();
-      return {
-        ...state,
-        tetriList: tmp
-      }
+
     case RESET_TETRI: 
       return {
         ...state,

@@ -1,7 +1,7 @@
 import {SOCKET_SEND_TETRIMINOS, SOCKET_UPDATE_ROOM ,SOCKET_GET_NEXT_TETRIMINOS, SOCKET_RECV_USERNAME, SOCKET_CONFIRM_JOIN_ROOM, SOCKET_ALL_ROOMS, SOCKET_NEW_ROOM, SOCKET_RUN_GAME} from './redux/Constant/SocketIOProtocol';
 import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM} from './redux/Constant/User';
-import {SET_ROOMS, PATCH_ROOM, DELETE_ROOM, ADD_ROOM, PATCH_LIST_ROOM, SET_ROOM} from './redux/Constant/GeneralSocketInfo';
-import {ADD_TETRI, REMOVE_FIRST_TETRI, RESET_TETRI} from './redux/Constant/Tetri'
+import {SET_ROOMS, ADD_ROOM, PATCH_LIST_ROOM, SET_ROOM} from './redux/Constant/GeneralSocketInfo';
+import {ADD_TETRI} from './redux/Constant/Tetri'
 
 const initApiSocket = (store) => {
     const dispatch = store.dispatch;
@@ -64,12 +64,6 @@ const initApiSocket = (store) => {
       //SOCKET_SEND_TETRIMINOS
       dispatch({type : ADD_TETRI, payload : resp.tetri});
     }) 
-
-    /*
-   socket.on('allRooms', (listRoom) => {
-      dispatch({type : ADD_MULTIPLES_ROOMS, payload : listRoom})
-    });
-    */
 }
 
 export default initApiSocket;
