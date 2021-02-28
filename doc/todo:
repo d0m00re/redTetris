@@ -1,0 +1,30 @@
+current :
+* bug partie 2 joueurs :
+    * les deux joueurs peuvent lancer le match
+    * le joueur qui lance a un tetris en plus au debut
+* delete tetri reducer
+todo:
+* remplacer l'envoi des tetris en entier par seulement des id.
+* revoir le layout
+* preparer l envoi des preshot des tetris de chaque joueurs
+* ajouter la condition de defaite
+* tester redux???
+
+* test et debug d une partie a deux joueurss
+
+* continuer a rendre lke design atomique dans les composants
+
+* mettre en place le futur layout
+
+partie deux joueurs
+    * le joueurs ne recoit pas le premier tetriminos? wtf
+optionnal ;
+* ajouter du scoring
+*
+
+pense bete :
+useSelector equality conpare : https://dev.to/tkudlinski/react-redux-useselector-hook-and-equality-checks-2m1d
+use grid for the layout : https://la-cascade.io/css-grid-layout-guide-complet/
+
+log :
+    [fix] * le joueur qui lance a un tetris en plus au debut

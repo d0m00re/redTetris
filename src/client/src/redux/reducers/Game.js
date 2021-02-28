@@ -12,7 +12,7 @@ import {
   SET_NB_LINE_BLOCK,
 } from "../Constant/Constant";
 
-import {END_TURN_PUT, ADD_TETRI, REMOVE_FIRST_TETRI, RESET_TETRI } from './../Constant/Tetri';
+import {END_TURN_PUT, ADD_TETRI, RESET_TETRI } from './../Constant/Tetri';
 
  
 const initialState = {

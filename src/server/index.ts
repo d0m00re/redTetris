@@ -103,18 +103,7 @@ io.on("connection", function (socket: any) {
     console.log(' get next tetriminos');
 
     let tetri = [tetriGenerator.getRandom(), tetriGenerator.getRandom()];
-
-    console.log('----OOOOOOOOOOOOOOOOOOOO--');
-    console.log(tetri);
-    
-    
-    
      let roomName = global.rooms.getRoomNameWithUsername(socket.username);
-     console.log('-------> ' + roomName);
-     
-
-  //    socket.emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
-  
     io.in(roomName).emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
   })
  
@@ -133,21 +122,17 @@ io.on("connection", function (socket: any) {
       errorMsg : '' 
     });
 
-    {/*}
-    console.log('SEND TETRIMINOS');
-    console.log({
-      tetri : tetriGenerator.getRandom(),
-      err: false,
-      errorMsg: ''
-    });
-  */}
-    
-
+    /*
     socket.emit(SOCKET_SEND_TETRIMINOS,  {
-      tetri : tetriGenerator.getRandom(),
+      tetri : [],//tetriGenerator.getRandom(),
       err: false,
       errorMsg: ''
     })
+    */
+   let tetri = [tetriGenerator.getRandom(), tetriGenerator.getRandom()];
+   let roomName = global.rooms.getRoomNameWithUsername(socket.username);
+    io.in(roomName).emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
+
   })
 
 });
