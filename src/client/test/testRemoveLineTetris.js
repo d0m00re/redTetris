@@ -1,5 +1,5 @@
 //import { findLineComplete, checkLineComplete} from './../src/componant/hook/checkLineComplete';
-
+/*
 const { findLineComplete, deleteAndMooveBottomLine} = require('./../src/componant/hook/checkLineComplete');
 
 var assert = require('assert');
@@ -100,3 +100,4 @@ describe('Check line complete', function() {
     });
   })
 });
+*/

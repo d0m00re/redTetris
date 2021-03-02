@@ -1,6 +1,6 @@
 const assert = require('assert');
 
-const {checkAndPush, checkValidPushTetri, mergeTetriOnMap, getAllFullLine, deleteFullLine} = require('./../src/logic/tetriLogic');
+const {checkAndPush, checkValidPushTetri, getAllFullLine, deleteFullLine} = require('./../src/logic/tetriLogic');
 
 const tetriBlue = [
     [
@@ -26,6 +26,7 @@ const tetriBlue = [
   ]
 
 describe('Logic',function() {
+    
     describe('checkValidPushTetri', function(){
         it('check valid {x: 0, y : 0', function() {
             let tab = Array(20).fill().map(() => Array(10).fill(0));
@@ -109,31 +110,5 @@ describe('Logic',function() {
             let ret = getAllFullLine(tab);
             assert.deepEqual(ret, [18, 19]);
         })
-    });
-    describe('delete 2 full lines', function() {
-        it('delete full line', function() {
-            let tab = Array(20).fill().map(() => Array(10).fill(0));
-            tab[19]=Array(10).fill(1);
-            tab[18]=Array(10).fill(1);
-        
-            tab = deleteFullLine(tab);
-
-            let ret = getAllFullLine(tab);
-            console.log('curremt full line');
-            console.log(ret);
-            
-            
-            assert.deepEqual(ret, []);
-        })
-    })
-    /*
-    describe('mergeTetriOnMap', function() {
-
-    });
-    describe('checkValidPushTetri', function() {
-
-    });
-    */
- 
-    
+    });  
 })

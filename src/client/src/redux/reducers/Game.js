@@ -20,7 +20,7 @@ const initialState = {
   roomname: '',
   currRotation: 0,
 
-  posTetriminos: { x: 5, y: -1 },
+  posTetriminos: { x: 5, y: -2 },
   currMap: Array(20).fill().map(() => Array(10).fill(0)),
   tetriList: [],
   nbLineBlock: 1, // blok line - multiplayer
@@ -38,7 +38,7 @@ const GameReducer = (state = initialState, action) => {
       return {
         ...state,
         currMap: action.payload,
-        posTetriminos: { x: 5, y: -1 },
+        posTetriminos: { x: 5, y: -2 },
       };
     case UPDATE_TETRIMINOS_POS:
       return {

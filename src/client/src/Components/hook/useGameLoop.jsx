@@ -9,9 +9,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateTmpMap, tetriRotation, updateTetriminosPos} from './../../redux/actions/Game';
 import {SOCKET_GET_NEXT_TETRIMINOS} from './../../redux/Constant/SocketIOProtocol';
 import {END_TURN_PUT} from './../../redux/Constant/Tetri';
-
+ 
 const useGameLoop = () => {
-    let [action] = useActionUser();
+    let [action, setAction] = useActionUser();
 
     const state = useSelector(state => state.game); //nbLineBlock
     const room = useSelector(state => state.user.room);
@@ -34,6 +34,17 @@ const useGameLoop = () => {
         pos.y += 1;
 
         if (!checkValidPushTetri(state.currMap, state.tetriList[0].shape[state.currRotation], pos)) {
+
+            // check loose
+            // cpMap, tetriList
+            // superposition sur la lgine de 0 === loose
+            //superposition ligne 1 && tetriminos case present sur la partie 0
+
+            // general loose condition
+            // si contact line 0 === loose
+            // si contact line 1 && (pas de contact line 0 && tetriminos case present on line 0)
+            if(pos.y === -1 || pos.y === 0)
+                console.log('error')
             dispatch({type : END_TURN_PUT, payload : {newMap : cpMap}})
             // get next tetriminos
             if (tetriList.length < 4)
@@ -41,16 +52,8 @@ const useGameLoop = () => {
             return 1;
         }
         
-        else {
-            
-         //   mergeTetriOnMap(cpMap, currTetriminos.shape[state.currRotation], pos);
-            
-            //1) get next position
-            //dispatch(updateTmpMap({ tmpMap: cpMap, pos: pos }))
-            console.log('UPDATE TETRIMINOS POS');
-            
-            dispatch(updateTetriminosPos(pos)); 
-
+        else {        
+            dispatch(updateTetriminosPos(pos)); //update tetriminos pos
         }
         
         /*
@@ -121,7 +124,7 @@ const useGameLoop = () => {
 
     }, [action]);
 
-    useInterval(fallAlgo, 2000);
+    useInterval(fallAlgo, 500);
 }
 
 export default useGameLoop

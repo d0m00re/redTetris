@@ -1,0 +1,6 @@
+Loose condition :
+    simplification extrem:
+        // **** : we can t place
+        * si y === -1 ---> error
+        // other height === 2 si on peut pas le placer alors error 
+        * si y === 0 && tetri !== cyan ---> error

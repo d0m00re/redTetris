@@ -1,7 +1,7 @@
 // check pos validity
 const isOutPos = (gMap, pos, absPos)=>{
     if ((gMap.length <= pos.y + absPos.y) || (gMap[0].length <= pos.x +  absPos.x) ||
-        absPos.x + pos.x < 0 ||  absPos.y + pos.y < 0)
+        absPos.x + pos.x < 0 || absPos.y + pos.y < 0)
                 return (true);
     return (false);
 }
@@ -21,6 +21,9 @@ const checkValidPushTetri  = (tetriMap, tetri, pos) =>{
     }
     return (true);
 }
+
+// check case on our current tetri
+
 
 const  mergeTetriOnMap = (tetriMap, tetri, pos, value = 1) =>{
     for (let y = 0; y < tetri.length;y++){
@@ -80,9 +83,6 @@ const deleteFullLine = (myMap, nbLineBlock) => {
     return replaceLine.concat(getLines);
 }
 
-const isLoose = () => {
-    return false;
-}
 
 module.exports = {
     mergeTetriOnMap,
@@ -91,5 +91,4 @@ module.exports = {
     getAllFullLine,
     deleteFullLine,
     checkAndPushSpace,
-    isLoose,
 }
