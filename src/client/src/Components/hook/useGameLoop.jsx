@@ -9,9 +9,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateTmpMap, tetriRotation, updateTetriminosPos} from './../../redux/actions/Game';
 import {SOCKET_GET_NEXT_TETRIMINOS} from './../../redux/Constant/SocketIOProtocol';
 import {END_TURN_PUT} from './../../redux/Constant/Tetri';
- 
+
+import {isLoose} from './../../logic/isLoose';
+
 const useGameLoop = () => {
-    let [action, setAction] = useActionUser();
+    let [action] = useActionUser();
 
     const state = useSelector(state => state.game); //nbLineBlock
     const room = useSelector(state => state.user.room);
@@ -43,13 +45,18 @@ const useGameLoop = () => {
             // general loose condition
             // si contact line 0 === loose
             // si contact line 1 && (pas de contact line 0 && tetriminos case present on line 0)
-            if(pos.y === -1 || pos.y === 0)
-                console.log('error')
+            if(isLoose(state.currMap, state.tetriList[0].shape[state.currRotation], pos))
+            {
+                console.log('game loose');
+                return 0;   
+            }
+            else {
             dispatch({type : END_TURN_PUT, payload : {newMap : cpMap}})
             // get next tetriminos
             if (tetriList.length < 4)
                 dispatch({type : SOCKET_GET_NEXT_TETRIMINOS});
             return 1;
+            }
         }
         
         else {        

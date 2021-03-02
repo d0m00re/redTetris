@@ -1,5 +1,6 @@
 const {isTetriCasePresent, isPosContactBoard} = require('./checkFunction');
 const {cmpArray} = require('./../utils/cmpArray');
+
 const isLoose = (tetriMap, tetri, pos) => {
     let contactMinus = false;
     let contactBoard = false;
@@ -15,20 +16,9 @@ const isLoose = (tetriMap, tetri, pos) => {
         }
     }
 
-    console.log('Test');
-    console.log(tetri[1]);
-    console.log(contactBoard);
-    console.log('pos :' +  pos.y);
-    
-    
-    
-    
     if (cmpArray(tetri[1], [1,1,1,1]) && contactBoard && pos.y === -1)
         return true;
-
-
     return (contactMinus === true && contactBoard === true);
-    //return {contactMinus, contactBoard};
 }
 
 module.exports = {

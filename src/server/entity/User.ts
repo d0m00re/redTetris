@@ -4,17 +4,20 @@ export interface IUser {
     name: string;
     room: string;
     uuid: string;
+    isAlive ?: boolean;
 }
 
 export class User {
     name: string;
     room: string;
     uuid: string;
+    isAlive ?: boolean;
 
     constructor({name, room, uuid} : IUser){
         this.name = name;
         this.room = room;
         this.uuid = uuid;
+        this.isAlive = true;
     }
 }
 
@@ -36,7 +39,7 @@ export class UserList {
 
     delete(name : string) {
         this.users = this.users.filter(user => user.name !== name);
-    }
+    } 
 
     patch(name : string, user : IUser) {
         let index = this.users.findIndex(user => user.name === name);

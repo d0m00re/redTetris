@@ -1,5 +1,5 @@
  
-import {SOCKET_SEND_USERNAME, SOCKET_JOIN_ROOM, SOCKET_GET_NEXT_TETRIMINOS, SOCKET_RUN_GAME, SOCKET_JOIN_ROOM_WT_NAME} from './../Constant/SocketIOProtocol';
+import {SOCKET_USER_DEAD, SOCKET_SEND_USERNAME, SOCKET_JOIN_ROOM, SOCKET_GET_NEXT_TETRIMINOS, SOCKET_RUN_GAME, SOCKET_JOIN_ROOM_WT_NAME} from './../Constant/SocketIOProtocol';
 
 const socketIoMiddleware = ({ getState }) => {
     return (next) => (action) => {
@@ -31,6 +31,11 @@ const socketIoMiddleware = ({ getState }) => {
             socket.emit(SOCKET_GET_NEXT_TETRIMINOS);
         }
 
+        // current user loose the game
+        const socketUserDead = () => {
+            socket.emit(SOCKET_USER_DEAD);
+        }
+
         switch(type) {
             case SOCKET_SEND_USERNAME:
                 socketSendUsername();
@@ -46,6 +51,9 @@ const socketIoMiddleware = ({ getState }) => {
             break;
             case SOCKET_RUN_GAME:
                 socketRunGame();
+            break;
+            case SOCKET_USER_DEAD:
+                socketUserDead();
             break;
             default: 
             break;

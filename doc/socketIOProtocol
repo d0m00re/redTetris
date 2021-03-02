@@ -91,3 +91,11 @@ next step:
 
             use id for a tetriminos
 
+
+LOOSE:
+* store user loose or win inside userlist (user inside server.js)
+
+SERVER SIDE :
+    * SOCKET_USER_DIED : when isLoose === true send SOCKET USER SOCKET_USER_DIED
+        * update userlist of the current room 
+        * update room

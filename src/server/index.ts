@@ -27,6 +27,8 @@ export const SOCKET_UPDATE_ROOM = 'SOCKET_UPDATE_ROOM';
 
 export const SOCKET_SEND_TETRIMINOS = 'SOCKET_SEND_TETRIMINOS';
 
+export const SOCKET_USER_DEAD = 'SOCKET_USER_DEAD';
+
 let global : Global = new Global();
 
 let tetriGenerator =  new TetriminosGenerator();
@@ -50,6 +52,12 @@ app.get("/", (req: any, res: any) => {
 });
 
 io.on("connection", function (socket: any) {
+
+  socket.on(SOCKET_USER_DEAD, function() {
+    // update room userlist with this new user
+
+    // patch room
+  })
   socket.on(SOCKET_SEND_USERNAME, function (username: string) {
     socket.username = username;
     let user: IUser = { name: username, uuid: socket.id, room: '' };

@@ -6,7 +6,7 @@ import {SET_ROOMS, PATCH_LIST_ROOM, DELETE_ROOM, ADD_ROOM} from '../Constant/Gen
 
 const initState = {
     socket : io.connect(WS_BASE),
-    roomlist : [],
+    roomlist : [], 
     userlist : [],
     room : null,
 };
