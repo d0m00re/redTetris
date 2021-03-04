@@ -45,7 +45,7 @@ const SelectorRooms = () => {
                 roomlist.map(elem => 
                     <tr>
                         <td>{elem.name}</td>
-                    <td>{elem.owner.name}</td>
+                    <td>{elem.owner}</td>
                     <td>{elem?.state}</td>
                     <td>
                         <Button onClick={() => submitRoomname(elem.name)}>JOIN</Button>

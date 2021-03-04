@@ -5,7 +5,7 @@ export interface IUser {
     room: string;
     uuid: string;
     isAlive ?: boolean;
-}
+} 
 
 export class User {
     name: string;
@@ -18,6 +18,15 @@ export class User {
         this.room = room;
         this.uuid = uuid;
         this.isAlive = true;
+    }
+
+    getInfo() : IUser {
+        return ({
+            name : this.name,
+            room : this.room,
+            uuid : this.uuid,
+            isAlive : this.isAlive,
+        })
     }
 }
 
@@ -34,7 +43,7 @@ export class UserList {
     }
 
     addUser(user : IUser) {
-        this.users.push(user);
+       this.users.push(new User(user));
     }
 
     delete(name : string) {
@@ -44,7 +53,7 @@ export class UserList {
     patch(name : string, user : IUser) {
         let index = this.users.findIndex(user => user.name === name);
         if (index !== -1){
-            this.users[index] = user;
+            this.users[index] = new User(user);
         }
     } 
 

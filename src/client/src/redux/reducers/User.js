@@ -43,6 +43,7 @@ const UserReducer = (state = initState, action) => {
 
         case SET_ROOM:            
             console.log('SET ROOM');
+            console.log(action.payload)
             
             //return (state.room.name === action.payload.name) ?
             return (action.payload.userList.findIndex(user => user === state.username) !== -1) ?

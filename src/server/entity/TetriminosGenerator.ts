@@ -155,10 +155,6 @@ export interface ITetriminos {
     color : string
 }
 
-export interface ITetriminosList {
-    tetriminos : ITetriminos[]
-}
-
 function getRandomArbitrary(min : number, max : number) {
     return Math.random() * (max - min) + min;
 }

@@ -28,7 +28,7 @@ const HeaderBar = ({username}) => {
             </Grid>
         </header>
     );
-}
+} 
 
 const Home = () => {
     let {username, isConnect} = useSelector(state => state.user);
@@ -56,7 +56,7 @@ const Home = () => {
                 <> 
                     <Typography>Current room : {room.name}</Typography>
                     {
-                        room.owner.name === username &&
+                        room.owner === username &&
                         <Button onClick={() => {dispatch({type : SOCKET_RUN_GAME})}}>RUN GAME</Button>
                     }
                     <HomeGame />

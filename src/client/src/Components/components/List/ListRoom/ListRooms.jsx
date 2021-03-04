@@ -20,7 +20,7 @@ const ListRooms = () => {
             <Typography variant='h3'>List rooms : </Typography>
             {
                 roomlist.map(room => 
-                <Typography variant='h5'>#{room.name}, owner : {room.owner.name}</Typography>
+                <Typography variant='h5'>#{room.name}, owner : {room.owner}</Typography>
                 )
             }
         </div>

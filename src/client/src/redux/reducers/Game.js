@@ -17,7 +17,7 @@ import {END_TURN_PUT, ADD_TETRI, RESET_TETRI } from './../Constant/Tetri';
 const initialState = {
   currentKey: "",
   username: "d0m",
-  roomname: '',
+  roomname: '', 
   currRotation: 0,
 
   posTetriminos: { x: 5, y: -2 },

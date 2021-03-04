@@ -99,3 +99,6 @@ SERVER SIDE :
     * SOCKET_USER_DIED : when isLoose === true send SOCKET USER SOCKET_USER_DIED
         * update userlist of the current room 
         * update room
+
+
+// 

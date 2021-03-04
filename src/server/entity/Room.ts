@@ -1,4 +1,4 @@
-import { IUser } from './User';
+import { IUser, UserList } from './User';
 
 export enum ERoomState {
   WAIT_USER = 'WAIT_USER',
@@ -6,38 +6,44 @@ export enum ERoomState {
   END_GAME = 'END_GAME',
 }
 
-export interface IMsg {
-  username : string;
-  date : string;
-  msg : string;
-}
-
 export interface IRoom {
   name: string;
   uuid: string;
   userList: string[];
-  msgList: IMsg[];
-  owner: IUser;
+  owner: string;
   state: ERoomState;
 }
 
+export interface IRoomConstructor {
+  name : string;
+  owner : string;
+}
 
 export class Room {
   name: string;
   uuid: string;
   userList: string[];
-  msgList: IMsg[];
-  owner: IUser;
+  owner: string;
   state: ERoomState;
 
-  constructor(name : string, owner : IUser) {
+  constructor({name, owner} : IRoomConstructor) {
     this.name = name;
     this.uuid = '';
-    this.userList = [];
-    this.msgList = [];
+    this.userList = [owner];
     this.owner = owner;
     this.state = ERoomState.WAIT_USER;
   }
+
+  getInfo() : IRoom {
+    return ({
+      name : this.name,
+      uuid : this.uuid,
+      userList : [...this.userList],
+      owner : this.owner,
+      state : this.state
+    })
+  }
+
 }
 
 export class RoomList {
@@ -47,8 +53,8 @@ export class RoomList {
     this.rooms = [];
   }
 
-  add(name: string, owner: IUser) {
-    let newUser = new Room(name, owner);
+  add({name, owner} : IRoomConstructor) {
+    let newUser = new Room({name, owner});
     this.rooms.push(newUser);
   }
 
@@ -62,19 +68,13 @@ export class RoomList {
     console.log(room);
     
     
-    this.rooms.push(room);
+    this.rooms.push(new Room(room));
   }
 
   delete(name: string) {
     this.rooms = this.rooms.filter(user => user.name !== name);
   }
-/*
-  patch(name: string, user: IUser) {
-S    if (index !== -1) {tq
-      this.rooms[index] = user;
-    }
-  }
-*/
+
   get(name: string): Room | undefined {
     return this.rooms.filter(room => room.name === name)[0];
   }
@@ -104,9 +104,7 @@ S    if (index !== -1) {tq
     return this.setStatus(name, ERoomState.WAIT_USER);
   }
 
-  getWithName(name: string): Room | undefined {
-    console.log('getWithName : ' + name);
-    
+  getWithName(name: string): Room | undefined {    
     return this.rooms.filter(room => room.name === name)[0];
   }
 
@@ -125,10 +123,6 @@ S    if (index !== -1) {tq
   }
 
   roomExist(name: string): boolean {
-    console.log('ROOM EXIST');
-    console.log(this.rooms.filter(room => room.name === name).length === 1);
-    
-    
     if (this.rooms.filter(room => room.name === name).length === 1)
       return true;
     return false;
@@ -136,10 +130,5 @@ S    if (index !== -1) {tq
 
   gets(): Room[] {
     return this.rooms;
-  }
-
-  //------------ manage message
-  addMessage({msg, username} : {msg : string, username : string}) {
-    // 
   }
 }
