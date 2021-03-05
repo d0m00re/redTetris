@@ -3,7 +3,8 @@ import {
     SET_USERNAME,
     SET_ROOMNAME_FORM,
     SET_IS_CONNECT,
-    SET_ROOM
+    SET_ROOM,
+    SET_USER_ALIVE,
 } from '../Constant/User';
 
 const initState = {
@@ -12,6 +13,7 @@ const initState = {
 
     username: '',
     isConnect: false,
+    alive : true,
     room : null
 }
 
@@ -52,6 +54,11 @@ const UserReducer = (state = initState, action) => {
                 room: action.payload
             } : state
 
+        case SET_USER_ALIVE:
+            return ({
+                ...state,
+                alive : action.payload
+            })
 
         default:
             return state

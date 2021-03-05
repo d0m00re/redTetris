@@ -1,6 +1,15 @@
-import {SOCKET_USER_DEAD, SOCKET_SEND_TETRIMINOS, SOCKET_UPDATE_ROOM ,SOCKET_GET_NEXT_TETRIMINOS, SOCKET_RECV_USERNAME, SOCKET_CONFIRM_JOIN_ROOM, SOCKET_ALL_ROOMS, SOCKET_NEW_ROOM, SOCKET_RUN_GAME} from './redux/Constant/SocketIOProtocol';
-import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM} from './redux/Constant/User';
-import {SET_ROOMS, SET_USERS, ADD_ROOM, PATCH_LIST_ROOM, SET_ROOM, SET_LIST_USERS} from './redux/Constant/GeneralSocketInfo';
+import {SOCKET_USER_DEAD,
+        SOCKET_SEND_TETRIMINOS,
+        SOCKET_UPDATE_ROOM,
+        SOCKET_GET_NEXT_TETRIMINOS,
+        SOCKET_RECV_USERNAME, 
+        SOCKET_CONFIRM_JOIN_ROOM,
+        SOCKET_ALL_ROOMS,
+        SOCKET_NEW_ROOM,
+        SOCKET_RUN_GAME,
+        SOCKET_PATCH_USER} from './redux/Constant/SocketIOProtocol';
+import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM, SET_USER_ALIVE} from './redux/Constant/User';
+import {SET_ROOMS, SET_USERS, ADD_ROOM, PATCH_LIST_ROOM, SET_ROOM, SET_LIST_USERS, PATCH_LIST_USERS, PATCH_USER} from './redux/Constant/GeneralSocketInfo';
 import {ADD_TETRI} from './redux/Constant/Tetri'
 
 const initApiSocket = (store) => {
@@ -9,7 +18,7 @@ const initApiSocket = (store) => {
   
     socket.on('connect', () => {console.log('connect success : ');});// connection
 
-    socket.on(SOCKET_RECV_USERNAME, (resp) => {
+    socket.on(SOCKET_RECV_USERNAME, (resp) => { 
       console.log('SOCKET_RECV_USERNAME')
       if (resp.err)
       {
@@ -54,7 +63,7 @@ const initApiSocket = (store) => {
         }
             
         dispatch({type : ADD_ROOM, payload : resp})
-    })
+    }) 
 
     socket.on(SOCKET_UPDATE_ROOM, (resp) => { 
       console.log('SOCKET UPDATE ROOM');
@@ -77,7 +86,20 @@ const initApiSocket = (store) => {
     socket.on(SOCKET_SEND_TETRIMINOS, (resp) => {
       //SOCKET_SEND_TETRIMINOS
       dispatch({type : ADD_TETRI, payload : resp.tetri});
-    }) 
+    });
+
+    // patch user
+    socket.on(SOCKET_PATCH_USER, (resp) => {
+      console.log('SOCKET PATCH USER');
+      
+      dispatch({type : PATCH_USER, payload : resp})
+      console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+      console.log(store.getState().user.username + ' - ' + resp.name);
+      if (store.getState().user.username === resp.name)
+        dispatch({type : SET_USER_ALIVE, payload : resp.alive});
+    })
+
+    
 }
 
 export default initApiSocket;

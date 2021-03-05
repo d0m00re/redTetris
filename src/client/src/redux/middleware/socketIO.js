@@ -33,7 +33,7 @@ const socketIoMiddleware = ({ getState }) => {
 
         // current user loose the game
         const socketUserDead = () => {
-            socket.emit(SOCKET_USER_DEAD);
+            socket.emit(SOCKET_USER_DEAD); 
         }
 
         switch(type) {

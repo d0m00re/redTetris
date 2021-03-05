@@ -37,6 +37,27 @@ export class UserList {
         this.users = [];
     }
 
+    findIndexWtUsername(username : string) : number {
+        return this.users.findIndex(({name}) => name === username);
+    }
+
+    setUserDead(username : string) : IUser | undefined {
+        let index = this.findIndexWtUsername(username);
+
+        if (index === -1)
+            return undefined;
+
+        this.users[index].isAlive = false;
+
+        return this.users[index].getInfo();
+    }
+
+    /*
+    setUserAlive(username : string) {
+
+    }
+    */
+
     add(name : string) {
         let newUser  = new User({name : name, room : '', uuid : ''});
         this.users.push(newUser);

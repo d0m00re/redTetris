@@ -113,6 +113,8 @@ export class RoomList {
     return (room.userList.findIndex(_username  => _username === username) !== -1);
   }
 
+
+
   // find room name with username
   getRoomNameWithUsername(username : string) : string {
     let roomId = this.rooms.findIndex(room => this.containUsername(room, username));

@@ -56,7 +56,7 @@ const Home = () => {
                 <> 
                     <Typography>Current room : {room.name}</Typography>
                     {
-                        room.owner === username &&
+                        (room.owner === username && room.state === 'WAIT_USER') &&
                         <Button onClick={() => {dispatch({type : SOCKET_RUN_GAME})}}>RUN GAME</Button>
                     }
                     <HomeGame />

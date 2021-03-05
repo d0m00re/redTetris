@@ -7,7 +7,7 @@ import { mergeTetriOnMap, checkValidPushTetri, checkAndPush, checkAndPushSpace} 
 import { useDispatch, useSelector } from 'react-redux';
 
 import { updateTmpMap, tetriRotation, updateTetriminosPos} from './../../redux/actions/Game';
-import {SOCKET_GET_NEXT_TETRIMINOS} from './../../redux/Constant/SocketIOProtocol';
+import {SOCKET_GET_NEXT_TETRIMINOS, SOCKET_USER_DEAD} from './../../redux/Constant/SocketIOProtocol';
 import {END_TURN_PUT} from './../../redux/Constant/Tetri';
 
 import {isLoose} from './../../logic/isLoose';
@@ -17,10 +17,13 @@ const useGameLoop = () => {
 
     const state = useSelector(state => state.game); //nbLineBlock
     const room = useSelector(state => state.user.room);
+    const alive = useSelector(state => state.user.alive);
     const tetriList = useSelector(state => state.game.tetriList);
     const dispatch = useDispatch();
 
     const fallAlgo = () => {
+        if (alive === false)
+            return (1);
         console.log('fall algo ... call');
         if (room.state !== 'RUNING_GAME')
             return (0);
@@ -45,9 +48,10 @@ const useGameLoop = () => {
             // general loose condition
             // si contact line 0 === loose
             // si contact line 1 && (pas de contact line 0 && tetriminos case present on line 0)
-            if(isLoose(state.currMap, state.tetriList[0].shape[state.currRotation], pos))
+            if(isLoose(state.currMap, state.tetriList[0].shape[state.currRotation], {x : pos.x, y : pos.y - 1}))
             {
-                console.log('game loose');
+                console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% game loose');
+                dispatch({type : SOCKET_USER_DEAD});
                 return 0;   
             }
             else {
@@ -71,6 +75,11 @@ const useGameLoop = () => {
     }
 
     useEffect(() => {
+
+
+        if (alive === false)
+            return (1);
+
         let tmpPos;
         let cpMap;
         let ret;

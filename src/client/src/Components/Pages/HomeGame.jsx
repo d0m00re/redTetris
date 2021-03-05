@@ -7,10 +7,12 @@ import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import _ from "lodash"; // Import the entire lodash library
 import {mergeTetriOnMap} from './../../logic/tetriLogic';
+import { SET_USER_ALIVE } from '../../redux/Constant/User';
 
 const HomeGame = () => {
     const [newTmpMap, setTmpMap] = useState(Array(20).fill().map(() => Array(10).fill(0)));
     const tetriList = useSelector(state => state.game.tetriList);
+    const alive = useSelector(state => state.user.alive);
 
     const {game} = useSelector(state => state);
 
@@ -24,9 +26,16 @@ const HomeGame = () => {
 
     return (
         <div>
-                        <Board currentBoard={newTmpMap}/>
             {
-                (tetriList.length > 1) && <>
+                alive &&
+                <Board currentBoard={newTmpMap}/>
+            }
+            {
+                alive === false && 
+                <Typography variant = 'h1'>GAME LOOSE</Typography>
+            }
+            {
+                (tetriList.length > 1 && alive === true) && <>
                     <Typography variant='h3'>Next</Typography>
                     <ViewBoard   currentBoard={tetriList[1].shape[0]}/></>
             }

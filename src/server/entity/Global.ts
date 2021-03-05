@@ -19,6 +19,14 @@ export class Global {
         this.users.addUser(user);
     }
 
+      //user dead
+    setUserDeadInRoom(username : string) : IUser | undefined {
+        // update room
+
+        // return room update
+        return this.users.setUserDead(username);
+    }
+
     deleteUser(username: string) {
 
     }

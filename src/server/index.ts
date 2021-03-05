@@ -29,6 +29,8 @@ export const SOCKET_USER_DEAD = 'SOCKET_USER_DEAD';
 
 export const SOCKET_PATCH_ROOM = 'SOCKET_PATCH_ROOM';
 
+export const SOCKET_PATCH_USER = 'SOCKET_PATCH_USER';
+
 let global : Global = new Global();
 
 let tetriGenerator =  new TetriminosGenerator();
@@ -54,10 +56,21 @@ app.get("/", (req: any, res: any) => {
 io.on("connection", function (socket: any) {
 
   socket.on(SOCKET_USER_DEAD, function() {
-    // update room userlist with this new user
-
-    // patch room
+    console.log('SOCKET USER DEAD');
+    
+    // update room with user dead server side
+    let userUpdate = global.setUserDeadInRoom(socket.username);
+    // room update - client side
+    console.log(userUpdate);
+    
+    if (userUpdate !== undefined)
+    {
+      console.log('user update');
+      
+      io.emit(SOCKET_PATCH_USER, userUpdate);
+    }
   })
+ 
   socket.on(SOCKET_SEND_USERNAME, function (username: string) {
     socket.username = username;
     let user: IUser = { name: username, uuid: socket.id, room: '' };

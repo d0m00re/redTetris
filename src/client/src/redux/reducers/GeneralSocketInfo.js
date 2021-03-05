@@ -1,7 +1,7 @@
 import * as io from 'socket.io-client';
 import {WS_BASE} from './../../config/config';
 
-import {SET_ROOMS, PATCH_LIST_USERS, SET_LIST_USERS, PATCH_LIST_ROOM, DELETE_ROOM, ADD_ROOM} from '../Constant/GeneralSocketInfo';
+import {SET_ROOMS, PATCH_LIST_USERS, SET_LIST_USERS, PATCH_LIST_ROOM, DELETE_ROOM, ADD_ROOM, PATCH_USER} from '../Constant/GeneralSocketInfo';
 
 
 const initState = {
@@ -13,6 +13,8 @@ const initState = {
 
 const GeneralSocketInfoReducer = (state = initState, action) => {
     let index = 0;
+    let newUser = undefined;
+    let tmpUserList = [];
 
     switch(action.type) {
         case ADD_ROOM:   
@@ -58,8 +60,7 @@ const GeneralSocketInfoReducer = (state = initState, action) => {
             }
 
         case PATCH_LIST_USERS:
-            let newUser = action.payload;
-            let tmpUserList = [];
+            newUser = action.payload;
 
             index = state.userlist.findIndex(user => user.name === newUser.name);
             
@@ -76,7 +77,27 @@ const GeneralSocketInfoReducer = (state = initState, action) => {
                 ...state,
                 userlist : tmpUserList
             }
-        
+
+        case PATCH_USER:
+            console.log('PATCH USER');
+            
+            newUser = action.payload;
+
+            index = state.userlist.findIndex(user => user.name === newUser.name);
+            
+
+            if (index !== -1){
+                tmpUserList = [...state.userlist];
+                tmpUserList[index] = newUser;
+            }
+            else {
+                tmpUserList = [...state.userlist, newUser];
+            }
+            
+            return {
+                ...state,
+                userlist : tmpUserList
+            }
 
         default:
             return state;
