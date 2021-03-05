@@ -1,10 +1,9 @@
-import { stringify } from "querystring";
-
 export interface IUser {
     name: string;
     room: string;
     uuid: string;
     isAlive ?: boolean;
+    saveTetriBoard ?: number[][]    
 } 
 
 export class User {
@@ -12,12 +11,14 @@ export class User {
     room: string;
     uuid: string;
     isAlive ?: boolean;
+    saveTetriBoard ?: number[][];
 
     constructor({name, room, uuid} : IUser){
         this.name = name;
         this.room = room;
         this.uuid = uuid;
         this.isAlive = true;
+        this.saveTetriBoard = Array(20).fill([]).map(() => Array(10).fill(0))
     }
 
     getInfo() : IUser {
@@ -26,6 +27,7 @@ export class User {
             room : this.room,
             uuid : this.uuid,
             isAlive : this.isAlive,
+            saveTetriBoard : this.saveTetriBoard
         })
     }
 }
@@ -48,6 +50,17 @@ export class UserList {
             return undefined;
 
         this.users[index].isAlive = false;
+
+        return this.users[index].getInfo();
+    }
+
+    setSaveTetriBoard(username : string , saveTetriBoard : number[][]) : IUser | undefined {
+        let index = this.findIndexWtUsername(username);
+
+        if (index === -1)
+            return (undefined);
+
+        this.users[index].saveTetriBoard = saveTetriBoard;
 
         return this.users[index].getInfo();
     }

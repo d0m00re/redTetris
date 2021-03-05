@@ -19,6 +19,12 @@ export class Global {
         this.users.addUser(user);
     }
 
+    setSaveTetriBoard(username : string , saveTetriBoard : number[][]) : IUser | undefined {
+        return this.users.setSaveTetriBoard(username, saveTetriBoard);
+    }
+
+
+
       //user dead
     setUserDeadInRoom(username : string) : IUser | undefined {
         // update room

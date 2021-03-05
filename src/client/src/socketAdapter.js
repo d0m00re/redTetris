@@ -90,14 +90,16 @@ const initApiSocket = (store) => {
 
     // patch user
     socket.on(SOCKET_PATCH_USER, (resp) => {
+    
       console.log('SOCKET PATCH USER');
       
       dispatch({type : PATCH_USER, payload : resp})
-      console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$')
-      console.log(store.getState().user.username + ' - ' + resp.name);
+      
       if (store.getState().user.username === resp.name)
+      {
         dispatch({type : SET_USER_ALIVE, payload : resp.alive});
-    })
+      }
+      })
 
     
 }

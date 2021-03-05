@@ -7,7 +7,7 @@ import { mergeTetriOnMap, checkValidPushTetri, checkAndPush, checkAndPushSpace} 
 import { useDispatch, useSelector } from 'react-redux';
 
 import { updateTmpMap, tetriRotation, updateTetriminosPos} from './../../redux/actions/Game';
-import {SOCKET_GET_NEXT_TETRIMINOS, SOCKET_USER_DEAD} from './../../redux/Constant/SocketIOProtocol';
+import {SOCKET_GET_NEXT_TETRIMINOS, SOCKET_USER_DEAD, SOCKET_UPDATE_USER_TETRI_BOARD} from './../../redux/Constant/SocketIOProtocol';
 import {END_TURN_PUT} from './../../redux/Constant/Tetri';
 
 import {isLoose} from './../../logic/isLoose';
@@ -40,22 +40,16 @@ const useGameLoop = () => {
 
         if (!checkValidPushTetri(state.currMap, state.tetriList[0].shape[state.currRotation], pos)) {
 
-            // check loose
-            // cpMap, tetriList
-            // superposition sur la lgine de 0 === loose
-            //superposition ligne 1 && tetriminos case present sur la partie 0
-
-            // general loose condition
-            // si contact line 0 === loose
+            // check loose Array(20).map(() => Array(10).fill(0)) 0 === loose
             // si contact line 1 && (pas de contact line 0 && tetriminos case present on line 0)
             if(isLoose(state.currMap, state.tetriList[0].shape[state.currRotation], {x : pos.x, y : pos.y - 1}))
             {
-                console.log('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% game loose');
                 dispatch({type : SOCKET_USER_DEAD});
                 return 0;   
             }
             else {
             dispatch({type : END_TURN_PUT, payload : {newMap : cpMap}})
+            dispatch({type : SOCKET_UPDATE_USER_TETRI_BOARD}); // maybe  data nn - 1
             // get next tetriminos
             if (tetriList.length < 4)
                 dispatch({type : SOCKET_GET_NEXT_TETRIMINOS});
@@ -92,8 +86,6 @@ const useGameLoop = () => {
             console.log('invalid tetriminos');
             return 0;
         } 
-
-        console.log('$ACTION : ' + action);
 
         switch (action) {
             case 'rotate':
@@ -140,7 +132,7 @@ const useGameLoop = () => {
 
     }, [action]);
 
-    useInterval(fallAlgo, 500);
+    useInterval(fallAlgo, 5000);
 }
 
 export default useGameLoop

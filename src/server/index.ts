@@ -7,7 +7,7 @@ import {IUser, UserList} from './entity/User';
 import {IRoom, ERoomState} from './entity/Room';
 import {IGlobal, Global} from './entity/Global';
 import {ITetriminos, TetriminosGenerator} from './entity/TetriminosGenerator';
-
+ 
 export const SOCKET_SEND_USERNAME = 'SOCKET_SEND_USERNAME';
 export const SOCKET_RECV_USERNAME = 'SOCKET_RECV_USERNAME'; 
 export const SOCKET_JOIN_ROOM = 'SOCKET_JOIN_ROOM';
@@ -30,6 +30,8 @@ export const SOCKET_USER_DEAD = 'SOCKET_USER_DEAD';
 export const SOCKET_PATCH_ROOM = 'SOCKET_PATCH_ROOM';
 
 export const SOCKET_PATCH_USER = 'SOCKET_PATCH_USER';
+
+export const SOCKET_UPDATE_USER_TETRI_BOARD = 'SOCKET_UPDATE_USER_TETRI_BOARD';
 
 let global : Global = new Global();
 
@@ -152,6 +154,18 @@ io.on("connection", function (socket: any) {
    let tetri = [tetriGenerator.getRandom(), tetriGenerator.getRandom()];
    let roomName = global.rooms.getRoomNameWithUsername(socket.username);
     io.in(roomName).emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
+  })
+
+  socket.on(SOCKET_UPDATE_USER_TETRI_BOARD, (saveTetriBoard : number[][]) => {
+    console.log(SOCKET_UPDATE_USER_TETRI_BOARD);
+    
+    console.log(saveTetriBoard);
+    
+    let updateTetriBoard = global.setSaveTetriBoard(socket.username, saveTetriBoard);
+    let roomName = global.rooms.getRoomNameWithUsername(socket.username);
+
+   // io.in(roomName).broadcast.emit(SOCKET_PATCH_USER, udpateTetriBoard);
+    socket.broadcast.to(roomName).emit(SOCKET_PATCH_USER, updateTetriBoard);
   })
 });
 
