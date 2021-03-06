@@ -132,7 +132,7 @@ const useGameLoop = () => {
 
     }, [action]);
 
-    useInterval(fallAlgo, 5000);
+    useInterval(fallAlgo, 500);
 }
 
 export default useGameLoop

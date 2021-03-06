@@ -114,7 +114,8 @@ io.on("connection", function (socket: any) {
       let currentRoom = global.rooms.getWithName(roomName);
 
       // add user inside userRoom
-      currentRoom?.userList.push(socket.username);
+      //currentRoom?.userList.push(socket.username);
+      global.rooms.addUser(roomName, socket.username);
 
 
       let response = {room : currentRoom, err : false, errMsg : ''}

@@ -34,6 +34,25 @@ export class Room {
     this.state = ERoomState.WAIT_USER;
   }
 
+  addUser(name : string) : boolean {
+    if (this.userList.findIndex(_name => _name === name) !== -1)
+      return false;
+    this.userList.push(name);
+    return true;
+  }
+
+  removeUser(name : string) : boolean {
+    let lenOri = this.userList.length;
+
+    if (lenOri === 0)
+      return false;
+
+    if (name === this.owner)
+      this.owner = '';
+    this.userList = this.userList.filter(_name => _name !== name);
+    return lenOri === this.userList.length;
+  }
+
   getInfo() : IRoom {
     return ({
       name : this.name,
@@ -60,7 +79,7 @@ export class RoomList {
 
   addUser(roomName : string, userName : string): void {
     let room = this.rooms.filter(room => room.name === roomName)
-    room[0].userList.push(userName); // = userName;
+    room[0].addUser(userName); // = userName;
   }
 
   addRoom(room : IRoom) {
@@ -91,7 +110,11 @@ export class RoomList {
       return false;
     }
   }
+/*
+  setOwner(roomname : string, name : string) : boolean {
 
+  }
+*/
   run(name : string) : boolean {
     return this.setStatus(name, ERoomState.RUNING_GAME);
   }
@@ -112,8 +135,6 @@ export class RoomList {
   containUsername(room : IRoom, username : string) {
     return (room.userList.findIndex(_username  => _username === username) !== -1);
   }
-
-
 
   // find room name with username
   getRoomNameWithUsername(username : string) : string {
