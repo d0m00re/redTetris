@@ -120,10 +120,15 @@ io.on("connection", function (socket: any) {
 
       let response = {room : currentRoom, err : false, errMsg : ''}
      
-      socket.emit(SOCKET_CONFIRM_JOIN_ROOM, response); // ici on envoii la confirmation de la nouvelle room
-      io.emit(SOCKET_PATCH_ROOM, response);
+      console.log(SOCKET_CONFIRM_JOIN_ROOM);
+      console.log(currentRoom);
+     
       socket.join(roomName);
-      user.room = roomName;    
+      user.room = roomName;  
+
+//      socket.in(roomName).emit(SOCKET_CONFIRM_JOIN_ROOM, response); // ici on envoii la confirmation de la nouvelle room
+      io.emit(SOCKET_PATCH_ROOM, response);
+  
   })
 
   socket.on(SOCKET_GET_NEXT_TETRIMINOS, () => {

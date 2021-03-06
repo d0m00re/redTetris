@@ -7,7 +7,8 @@ import {SOCKET_USER_DEAD,
         SOCKET_ALL_ROOMS,
         SOCKET_NEW_ROOM,
         SOCKET_RUN_GAME,
-        SOCKET_PATCH_USER} from './redux/Constant/SocketIOProtocol';
+        SOCKET_PATCH_USER,
+        SOCKET_PATCH_ROOM} from './redux/Constant/SocketIOProtocol';
 import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM, SET_USER_ALIVE} from './redux/Constant/User';
 import {SET_ROOMS, SET_USERS, ADD_ROOM, PATCH_LIST_ROOM, SET_ROOM, SET_LIST_USERS, PATCH_LIST_USERS, PATCH_USER} from './redux/Constant/GeneralSocketInfo';
 import {ADD_TETRI} from './redux/Constant/Tetri'
@@ -31,7 +32,7 @@ const initApiSocket = (store) => {
       }
     })
 
-    socket.on(SOCKET_CONFIRM_JOIN_ROOM, (resp) => {
+    socket.on(SOCKET_CONFIRM_JOIN_ROOM, (resp) => { 
         console.log('CONFIRM JOIN ROOM'); 
         if (resp.err)
         {
@@ -46,18 +47,16 @@ const initApiSocket = (store) => {
 
     socket.on(SOCKET_ALL_ROOMS, (resp) => {
       let {rooms, users} = resp;
-      console.log('SOCKET ALL ROOMS');
-      console.log(resp);
-      console.log('-----------------')
+ 
         dispatch({type : SET_ROOMS, payload : rooms});
-        console.log('||||||||')
-        console.log({type : SET_LIST_USERS, payload : users});
+ 
         
         dispatch({type : SET_LIST_USERS, payload : users})
-        console.log('************')
-      });
+       });
 
+       // de la grosse merde
     socket.on(SOCKET_NEW_ROOM, (resp) => {
+
         if (resp.err){
             return 0;
         }
@@ -69,8 +68,6 @@ const initApiSocket = (store) => {
       console.log('SOCKET UPDATE ROOM');
       
       if (resp.error) return resp.errorMsg;
-
-      console.log(resp)
 
       dispatch({type : SET_ROOM, payload : resp.room});
       //dispatch
@@ -92,6 +89,8 @@ const initApiSocket = (store) => {
     socket.on(SOCKET_PATCH_USER, (resp) => {
     
       console.log('SOCKET PATCH USER');
+      console.log(resp);
+      
       
       dispatch({type : PATCH_USER, payload : resp})
       
@@ -100,6 +99,14 @@ const initApiSocket = (store) => {
         dispatch({type : SET_USER_ALIVE, payload : resp.alive});
       }
       })
+
+    socket.on(SOCKET_PATCH_ROOM, (resp) => {
+      console.log('SOCKET PATCH ROOM: ');
+      console.log(resp);
+      if (resp.room.userList.findIndex(_username => _username === store.getState().user.username) !== -1)
+        dispatch({type : SET_ROOM, payload : resp.room});
+      
+    })
 
     
 }

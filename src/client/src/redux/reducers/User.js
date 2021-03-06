@@ -33,7 +33,7 @@ const UserReducer = (state = initState, action) => {
 
         case SET_USERNAME:
             return {
-                ...state,
+                ...state, 
                 username: action.payload
             }
 
@@ -48,11 +48,12 @@ const UserReducer = (state = initState, action) => {
             console.log(action.payload)
             
             //return (state.room.name === action.payload.name) ?
-            return (action.payload.userList.findIndex(user => user === state.username) !== -1) ?
+            //return (action.payload.userList.findIndex(user => user === state.username) !== -1) ?
+            return (
             {
                 ...state,
                 room: action.payload
-            } : state
+            });// : state
 
         case SET_USER_ALIVE:
             return ({

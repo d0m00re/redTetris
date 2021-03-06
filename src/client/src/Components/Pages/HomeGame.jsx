@@ -16,6 +16,12 @@ const HomeGame = () => {
 
     const {game} = useSelector(state => state);
 
+    const {userlist} = useSelector(state => state.generalSocketInfo);
+    const user = useSelector(state => state.user);
+    const userList = useSelector(state => state?.user?.room?.userList);
+
+    
+
     useEffect(() => {
         if (game.tetriList.length){
             let tmp = _.cloneDeep(game.currMap);
@@ -38,6 +44,13 @@ const HomeGame = () => {
                 (tetriList.length > 1 && alive === true) && <>
                     <Typography variant='h3'>Next</Typography>
                     <ViewBoard   currentBoard={tetriList[1].shape[0]}/></>
+            }
+            {
+                (userList?.length > 1) &&
+            userList.filter(username => username !== user.username).map(username => <>
+                    <Typography variant='h3'>{username}</Typography>
+                    <ViewBoard currentBoard={userlist.filter(user => user.name === username)[0].saveTetriBoard} />
+                </>)
             }
         </div>
     );
