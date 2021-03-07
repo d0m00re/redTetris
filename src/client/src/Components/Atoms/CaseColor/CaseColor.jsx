@@ -6,10 +6,10 @@ import clsx from 'clsx';
 
 const useStyles = makeStyles({
     root: {
-        border : '5px',
         borderColor : '#666',
-        width: '20px !important',
-        height : '20px',
+        width: '30px !important',
+        height : '30px',
+        border : '0.1rem solid'
     },
 
     defaultColor: {
@@ -72,7 +72,7 @@ const CaseColor =({caseValue, indexCase}) =>{
 
     return (
         <Grid item key={'case' + indexCase}
-        className={clsx(classes.root, getColorWtValue(caseValue))}>{caseValue}</Grid>
+        className={clsx(classes.root, getColorWtValue(caseValue))}></Grid>
     );
 };
 

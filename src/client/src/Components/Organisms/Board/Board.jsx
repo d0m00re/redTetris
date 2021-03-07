@@ -18,10 +18,10 @@ const useStyles = makeStyles({
 
 const Board = ({currentBoard}) => {
   useGameLoop();
-
+ 
   return (
     <div >    
-      <div style={{width: '50%', height : '50%'}}>
+      <div>
       {currentBoard.map((row, indexRow) => (
         <Grid container direction="row" key={"rowrow" + indexRow} className={useStyles.root}>
           <TetrisRow row={row}></TetrisRow>

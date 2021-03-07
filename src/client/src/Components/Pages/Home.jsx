@@ -10,57 +10,65 @@ import HomeGame from './../Pages/HomeGame';
 
 import SelectorRooms from './../components/List/ListRoom/SelectorRooms'
 
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CenterPage from '../Atoms/Layout/CenterPage';//'./../components/Layout/CenterPage'
-import {SOCKET_RUN_GAME} from './../../redux/Constant/SocketIOProtocol';
+import { SOCKET_RUN_GAME } from './../../redux/Constant/SocketIOProtocol';
 
-const HeaderBar = ({username}) => {
+const HeaderBar = ({ text, variant }) => {
     return (
-        <header style={{backgroundColor:'orange'}}>
-            <Grid container direction='row' justify='center' alignItems='center'>
+        <header style={{ backgroundColor: 'orange' }}>
+            <Grid container direction='column' justify='center' alignItems='center'>
                 <Grid item>
-                    <Typography variant='h3' style={{margin : '16px'}}>TETRIS V0.1</Typography>
+                    <Typography variant={variant} style={{ margin: '16px' }}>{text}</Typography>
                 </Grid>
-                <Grid item style={{marginLeft : 'auto'}}>
-                    <Typography variant='h5' style={{margin : '16px'}}>{username}</Typography>
-                </Grid>
-
             </Grid>
         </header>
     );
-} 
+}
 
 const Home = () => {
-    let {username, isConnect} = useSelector(state => state.user);
-    let {room} = useSelector(state => state.user);
+    let { username, isConnect } = useSelector(state => state.user);
+    let { room } = useSelector(state => state.user);
     let dispatch = useDispatch();
-    const tetriList = useSelector(state => state.game.tetriList);
-
 
     return (
         <>
-        <div>Nb tetriminos list : {tetriList.length}</div>
-        <HeaderBar username={username}/>
-            { (!isConnect && room === null) &&
-                <FormCreateUser />
-            }
-             { (isConnect && room === null) &&
+            {(!isConnect && room === null) &&
                 <CenterPage>
+                    <HeaderBar text={'RED TETRIS'} variant={'h3'} />
+                    <FormCreateUser />
+                </CenterPage>
+            }
+            {(isConnect && room === null) &&
+                <CenterPage>
+                    <HeaderBar text={`${username}`} variant={'h5'} />
                     <FormCreateRoom />
                     <SelectorRooms />
                 </CenterPage>
             }
 
             {
-                room !== null && 
-                <> 
-                    <Typography>Current room : {room.name}</Typography>
+                room !== null &&
+                <>
                     {
+
                         (room.owner === username && room.state === 'WAIT_USER') &&
-                        <Button onClick={() => {dispatch({type : SOCKET_RUN_GAME})}}>RUN GAME</Button>
+                        <CenterPage>
+                            <HeaderBar text={`${username} @ ${room?.name}`} variant={'h5'} />
+                            <Button onClick={() => { dispatch({ type: SOCKET_RUN_GAME }) }}>RUN GAME</Button>
+                        </CenterPage>
                     }
-                    <HomeGame />
-               </>     
+
+                    {
+
+                        (room.state === 'RUNING_GAME') &&
+                        <CenterPage>
+                            <HeaderBar text={`${username} @ ${room?.name}`} variant={'h5'} />
+                            <Button onClick={() => { dispatch({ type: SOCKET_RUN_GAME }) }}>RUN GAME</Button>
+                            <HomeGame />
+                        </CenterPage>
+                    }
+                </>
             }
         </>
     )

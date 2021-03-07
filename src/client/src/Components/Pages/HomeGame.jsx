@@ -9,6 +9,8 @@ import _ from "lodash"; // Import the entire lodash library
 import {mergeTetriOnMap} from './../../logic/tetriLogic';
 import { SET_USER_ALIVE } from '../../redux/Constant/User';
 
+import ViewBoardAdv from '../Organisms/ViewBoardAdv';
+
 const HomeGame = () => {
     const [newTmpMap, setTmpMap] = useState(Array(20).fill().map(() => Array(10).fill(0)));
     const tetriList = useSelector(state => state.game.tetriList);
@@ -49,7 +51,7 @@ const HomeGame = () => {
                 (userList?.length > 1) &&
             userList.filter(username => username !== user.username).map(username => <>
                     <Typography variant='h3'>{username}</Typography>
-                    <ViewBoard currentBoard={userlist.filter(user => user.name === username)[0].saveTetriBoard} />
+                    <ViewBoardAdv currentBoard={userlist.filter(user => user.name === username)[0].saveTetriBoard} />
                 </>)
             }
         </div>

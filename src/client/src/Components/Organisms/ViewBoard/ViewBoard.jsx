@@ -27,4 +27,4 @@ const ViewBoard = ({currentBoard}) => {
   );
 };
 
-export default ViewBoard; 
+export default ViewBoard;  

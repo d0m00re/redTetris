@@ -3,8 +3,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useDispatch, useSelector } from 'react-redux';
 
-import CenterPage from './../../../Atoms/Layout/CenterPage';
-
 import {
   SET_USERNAME_FORM
 } from './../../../../redux/Constant/User';
@@ -57,10 +55,10 @@ const FormCreateUser = () => {
   }
 
   return (
-    <CenterPage>
+    <>
         <TextField label="username" type="text" value={usernameForm} onChange={handleUsername} variant={'outlined'} />
         <Button variant='contained' onClick={submitUsername} className={classes.button}>Play!</Button>
-  </CenterPage>  )
+  </>  )
 }
 
 export default FormCreateUser;
