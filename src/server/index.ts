@@ -101,16 +101,12 @@ io.on("connection", function (socket: any) {
       socket.leave(user.room);
       user.room = ''; // invalid
     }
-    if (global.rooms.roomExist(roomName) === false) {
-      console.log('ROOM EXIST');
-      
+    if (global.rooms.roomExist(roomName) === false) {      
       newRoom  = {name : roomName, uuid : roomName, userList : [], state : ERoomState.WAIT_USER, owner : socket.username};
       global.createRoom(newRoom);
       
       io.emit(SOCKET_NEW_ROOM, newRoom); // utile????
-    }
-    console.log('AFTER');
-    
+    }    
       let currentRoom = global.rooms.getWithName(roomName);
 
       // add user inside userRoom
@@ -127,7 +123,7 @@ io.on("connection", function (socket: any) {
       user.room = roomName;  
 
 //      socket.in(roomName).emit(SOCKET_CONFIRM_JOIN_ROOM, response); // ici on envoii la confirmation de la nouvelle room
-      io.emit(SOCKET_PATCH_ROOM, response);
+      io.emit(SOCKET_PATCH_ROOM, response); // update user room
   
   })
 

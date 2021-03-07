@@ -13,7 +13,6 @@ const useStyles = makeStyles({
     }
 })
 
-
 const ViewBoard = ({currentBoard}) => {
   return (
     <div >    
@@ -28,4 +27,4 @@ const ViewBoard = ({currentBoard}) => {
   );
 };
 
-export default ViewBoard;
+export default ViewBoard; 

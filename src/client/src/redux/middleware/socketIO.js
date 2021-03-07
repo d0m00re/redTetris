@@ -14,7 +14,7 @@ const socketIoMiddleware = ({ getState }) => {
         let state = getState();
         
         let socket = state.generalSocketInfo.socket;
-
+ 
         // set username
         const socketSendUsername = () => {
             socket.emit(SOCKET_SEND_USERNAME, state.user.usernameForm);

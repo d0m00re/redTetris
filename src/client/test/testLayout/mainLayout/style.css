@@ -1,0 +1,181 @@
+/*
+https://coolors.co/palettes/trending
+*/
+:root {
+    --main-bg-color: #457b9d;
+    --sub-bg-color: #1d3557;
+    --sub-bg-color2: #305fa0;
+
+    --main-typo-color : #e63946;
+    --sub-typo-color : #f1faee;
+    --opt-color : #a8dadc;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-bg-color);
+}
+
+header {
+    background-color: var(--sub-bg-color);
+    color: var(--opt-color);
+    padding: 16px;
+    text-align: center;
+}
+
+.mainSection {
+    display: flex;
+
+    padding: 16px;
+}
+
+main {
+    border :rgb(4, 59, 73) 0.1rem solid;
+    background-color: var(--sub-bg-color2);
+
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.containerBoard {
+
+    display: flex;
+    flex-direction: column;
+    border: 5px groove;
+    border-color: black;
+}
+
+.containerBoard > div {
+    display: flex;
+    flex-direction: row;
+}
+
+.containerBoard > div > div{
+    width : 30px;
+    height : 30px;
+    border : 0.1rem solid;
+}
+
+/*
+next tetri 
+*/
+.nextTetri {
+}
+
+.containerViewNextTetri {
+    margin: 16px;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.viewNextTetri {
+    margin: 8px;
+    width : 80px;
+    height : 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.viewNextTetri > div {
+    display: flex;
+    flex-direction: row;
+}
+
+.viewNextTetri > div > div {
+    width: 20px;
+    height: 20px;
+    border : 0.1rem solid
+}
+
+/*
+ other player boards
+*/
+
+.otherPlayersBoards {
+    display: grid;
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(2, 120px);
+}
+
+.containerPBoard {
+    display: flex;
+    flex-direction: column;
+}
+
+.containerPBoard > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.containerPBoard > div > div{
+    width : 3px;
+    height : 3px;
+    border : 0.1rem solid;
+}
+
+/*
+info
+*/
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: aliceblue;
+    margin: 16px;
+
+
+}
+/*
+button
+*/
+
+.button {
+    display: flex;
+    justify-content: center;
+}
+
+/*
+color
+*/
+
+.cyan {
+    background-color: rgb(9, 194, 194) !important;
+}
+
+.blue {
+    background-color: blue !important;
+}
+
+.orange {
+    background-color: orange !important;
+}
+
+.yellow {
+    background-color: yellow !important;
+
+}
+
+.purple {
+    background-color: purple !important;
+}
+
+.green {
+    background-color: chartreuse !important;
+}
+
+.red {
+    background-color : red !important;
+}
+

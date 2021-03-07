@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" style="height : 100%">
+
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <title>React App</title>
+</head>
+
+<body style="height: 100vh; margin : 0">
+    <main class='board'>
+        <header>miaou @ room1</header>
+        <div class='mainSection'>
+            <section>
+                <div class='containerBoard' w3-include-html='board.html'></div>
+            </section>
+            <section>
+                <div class='nextTetri'>
+                    <div class='info'>
+                        <div>Information :</div>
+                        <div>Score : 66</div>
+                    </div>
+                </div>
+                <div class='containerViewNextTetri'>
+                    <div>Next tetriminos</div>
+                    <div class='viewNextTetri'>
+                        <div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div class='yellow'></div>
+                            <div class='yellow'></div>
+                            <div class='yellow'></div>
+                            <div class='yellow'></div>
+                        </div>
+
+                    </div>
+                </div>
+                <div>
+                    <div class='info'>Fight !!!</div>
+
+                    <div class='otherPlayersBoards'>
+                        <div class='containerPBoard' w3-include-html='board.html'></div>
+                        <div class='containerPBoard' w3-include-html='board.html'></div>
+                        <div class='containerPBoard' w3-include-html='board.html'></div>
+                        <div class='containerPBoard' w3-include-html='board.html'></div>
+                        <div class='containerPBoard' w3-include-html='board.html'></div>
+                        <div class='containerPBoard' w3-include-html='board.html'></div>
+                    </div>
+                    <div class='button'>
+                        <button>LEAVE</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+
+</html>
+
+<script>
+    function includeHTML() {
+        var z, i, elmnt, file, xhttp;
+        /* Loop through a collection of all HTML elements: */
+        z = document.getElementsByTagName("*");
+        for (i = 0; i < z.length; i++) {
+            elmnt = z[i];
+            /*search for elements with a certain atrribute:*/
+            file = elmnt.getAttribute("w3-include-html");
+            if (file) {
+                /* Make an HTTP request using the attribute value as the file name: */
+                xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4) {
+                        if (this.status == 200) { elmnt.innerHTML = this.responseText; }
+                        if (this.status == 404) { elmnt.innerHTML = "Page not found."; }
+                        /* Remove the attribute, and call this function once more: */
+                        elmnt.removeAttribute("w3-include-html");
+                        includeHTML();
+                    }
+                }
+                xhttp.open("GET", file, true);
+                xhttp.send();
+                /* Exit the function: */
+                return;
+            }
+        }
+    }
+
+    includeHTML();
+</script>
