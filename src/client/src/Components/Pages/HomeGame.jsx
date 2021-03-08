@@ -1,15 +1,11 @@
 import React, {useEffect, useState} from 'react'
 
-import Board from '../Organisms/Board/Board';
-import ViewBoard from '../Organisms/ViewBoard/ViewBoard';
-
 import { useSelector } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import _ from "lodash"; // Import the entire lodash library
 import {mergeTetriOnMap} from './../../logic/tetriLogic';
-import { SET_USER_ALIVE } from '../../redux/Constant/User';
 
-import ViewBoardAdv from '../Organisms/ViewBoardAdv';
+import GameRun from './Game/GameRun';
 
 const HomeGame = () => {
     const [newTmpMap, setTmpMap] = useState(Array(20).fill().map(() => Array(10).fill(0)));
@@ -21,8 +17,6 @@ const HomeGame = () => {
     const {userlist} = useSelector(state => state.generalSocketInfo);
     const user = useSelector(state => state.user);
     const userList = useSelector(state => state?.user?.room?.userList);
-
-    
 
     useEffect(() => {
         if (game.tetriList.length){
@@ -36,23 +30,17 @@ const HomeGame = () => {
         <div>
             {
                 alive &&
-                <Board currentBoard={newTmpMap}/>
+                <GameRun newTmpMap={newTmpMap}
+                         tetriList={tetriList}
+                         userList = {userList}
+                         user = {user}
+                         userlist = {userlist} />
+                
             }
+
             {
                 alive === false && 
                 <Typography variant = 'h1'>GAME LOOSE</Typography>
-            }
-            {
-                (tetriList.length > 1 && alive === true) && <>
-                    <Typography variant='h3'>Next</Typography>
-                    <ViewBoard   currentBoard={tetriList[1].shape[0]}/></>
-            }
-            {
-                (userList?.length > 1) &&
-            userList.filter(username => username !== user.username).map(username => <>
-                    <Typography variant='h3'>{username}</Typography>
-                    <ViewBoardAdv currentBoard={userlist.filter(user => user.name === username)[0].saveTetriBoard} />
-                </>)
             }
         </div>
     );

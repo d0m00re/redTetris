@@ -47,7 +47,7 @@ const Home = () => {
                 </CenterPage>
             }
 
-            {
+            { 
                 room !== null &&
                 <>
                     {

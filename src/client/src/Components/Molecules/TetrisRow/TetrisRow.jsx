@@ -6,7 +6,7 @@ const TetrisRow = ({row}) => {
         <>
         {
             row.map((elem, indexElem) => <CaseColor caseValue={elem} indexCase={indexElem} />)
-        }
+        } 
         </>
     )
 }

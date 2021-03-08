@@ -9,25 +9,22 @@ const useStyles = makeStyles({
         backgroundColor : '#333',
         border : '1px',
         borderColor : '#666',
-    },
-    flexRow:{
-        display: 'flex',
-        flexDirection: 'row'
     }
 })
 
-const ViewBoard = ({currentBoard}) => {
-  const styles = useStyles();
 
+const BoardWithoutGameLoop = ({currentBoard}) => { 
   return (
     <div >    
+      <div>
       {currentBoard.map((row, indexRow) => (
-        <div key={"rowrow" + indexRow} className={styles.flexRow}>
+        <Grid container direction="row" key={"rowrow" + indexRow} className={useStyles.root}>
           <TetrisRow row={row}></TetrisRow>
-        </div>
+        </Grid>
       ))}
+      </div>
     </div>
   );
 };
 
-export default ViewBoard;  
+export default BoardWithoutGameLoop;

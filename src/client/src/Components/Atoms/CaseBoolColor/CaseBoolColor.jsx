@@ -5,8 +5,6 @@ import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
     root: {
-        border : '5px',
-        borderColor : '#666',
         width: '5px !important',
         height : '5px',
     },
@@ -20,13 +18,13 @@ const useStyles = makeStyles({
     
 })
 
-const CaseBoolColor = (value) => {
+const CaseBoolColor = ({caseValue}) => {
     const classes = useStyles();
 
     return (
-        <Grid item key={'casouille'}
-              className={clsx(classes.root, (value) ? classes.trueColor : classes.falseColor)}>
-        </Grid>
+        <div key={'casouille'}
+              className={clsx(classes.root, (caseValue !== 0) ? classes.trueColor : classes.falseColor)}>
+        </div>
     )
 }
 

@@ -1,29 +1,29 @@
- import React from 'react';
- import Grid from "@material-ui/core/Grid";
-import TetrisRowAdv from './../../Molecules/TetriRowAdv/TetriRowAdv'
+import React from 'react';
+import TetrisRowAdv from '../../Molecules/TetriRowAdv/TetriRowAdv'
  
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
     root: {
-        backgroundColor : '#333',
-        border : '1px',
-        borderColor : '#666',
-        width : '100%',
+        //backgroundColor : '#333',
+        border : '1px solid black',
+    },
+    flexRow : {
+      display: 'flex',
+      flexDirection: 'row'
     }
-})
+}) 
 
  const ViewBoardAdv = ({currentBoard}) => {
+   const styles = useStyles();
      return (
-        <div >    
-        <div>
+       <div className={styles.root}>
         {currentBoard.map((row, indexRow) => (
-          <Grid container direction="row" key={"rowrow" + indexRow} className={useStyles.root}>
+          <div className={styles.flexRow} key={"rowrow" + indexRow}>
             <TetrisRowAdv row={row}></TetrisRowAdv>
-          </Grid>
+          </div>
         ))}
         </div>
-      </div>
      )
  }
  
