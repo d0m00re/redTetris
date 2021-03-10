@@ -47,11 +47,12 @@ const Home = () => {
                 (room !== null && room !== undefined) &&
                 <>
                     {
-                        (room.owner === username && room.state === 'WAIT_USER') &&
+                        (room.userList.filter(_user => _user === username) && room.state === 'WAIT_USER') &&
                             <GameMenu username={username}
                                       room={room}
                                       funcRunGame={runGame}
-                                      funcLeaveRoom={leaveRoom}/>
+                                      funcLeaveRoom={leaveRoom}
+                                      owner={room.owner === username}/>
                     }
 
                     {
@@ -66,5 +67,7 @@ const Home = () => {
         </>
     )
 }
+
+//room.owner === username
 
 export default Home

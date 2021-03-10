@@ -245,13 +245,13 @@ io.on("connection", function (socket: any) {
 
     socket.emit(SOCKET_LEAVE_ROOM); // reset user room tmp store
     // if we update a room
-    socket.emit(SOCKET_PATCH_ROOM, {room : data.room});
+    io.emit(SOCKET_PATCH_ROOM, {room : data.room});
 
     // if no moore use in it we delete it
     if (roomDelete === true)
-      socket.emit(SOCKET_DELETE_ROOM, roomName);
+      io.emit(SOCKET_DELETE_ROOM, roomName);
     else
-      socket.emit(SOCKET_PATCH_USER, {...data.user, room : ''});
+      io.emit(SOCKET_PATCH_USER, {...data.user, room : ''});
   })
 });
 
