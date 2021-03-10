@@ -33,6 +33,12 @@ export const SOCKET_PATCH_USER = 'SOCKET_PATCH_USER';
 
 export const SOCKET_UPDATE_USER_TETRI_BOARD = 'SOCKET_UPDATE_USER_TETRI_BOARD';
 
+export const  SOCKET_LEAVE_ROOM = 'SOCKET_LEAVE_ROOM';
+
+export const SOCKET_DELETE_ROOM = 'SOCKET_DELETE_ROOM';
+
+
+
 let global : Global = new Global();
 
 let tetriGenerator =  new TetriminosGenerator();
@@ -62,7 +68,35 @@ io.on("connection", function (socket: any) {
     
     // update room with user dead server side
     let userUpdate = global.setUserDeadInRoom(socket.username);
+
+    console.log('user update');
+    console.log(userUpdate);
+    
+    
+
+    // check end game
+    // si user solo alors sa mort signifie la fin de la partie
+    // sinon la fin de la partie dne se finit que si il reste un seul joueur en vie
+    // change game state
+    let roomUpdate = global.checkEndGame(socket.username);
+
+    console.log('roomUpdate');
+    console.log(roomUpdate);
+    
+    
+
+    if (roomUpdate !== undefined){
+      console.log('GO GO GO');
+      
+      console.log(SOCKET_PATCH_ROOM);
+      
+      io.emit(SOCKET_PATCH_ROOM, {room : roomUpdate});
+    }
+
+
     // room update - client side
+    console.log('user update');
+    
     console.log(userUpdate);
     
     if (userUpdate !== undefined)
@@ -155,19 +189,69 @@ io.on("connection", function (socket: any) {
 
    let tetri = [tetriGenerator.getRandom(), tetriGenerator.getRandom()];
    let roomName = global.rooms.getRoomNameWithUsername(socket.username);
-    io.in(roomName).emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
+    //socket.to(roomName).emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
+    console.log(SOCKET_GET_NEXT_TETRIMINOS + ' ===> ' + roomName);
+    
+    io.to(roomName).emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
   })
 
   socket.on(SOCKET_UPDATE_USER_TETRI_BOARD, (saveTetriBoard : number[][]) => {
-    console.log(SOCKET_UPDATE_USER_TETRI_BOARD);
+    //console.log(SOCKET_UPDATE_USER_TETRI_BOARD);
     
-    console.log(saveTetriBoard);
+    //console.log(saveTetriBoard);
     
     let updateTetriBoard = global.setSaveTetriBoard(socket.username, saveTetriBoard);
     let roomName = global.rooms.getRoomNameWithUsername(socket.username);
 
    // io.in(roomName).broadcast.emit(SOCKET_PATCH_USER, udpateTetriBoard);
     socket.broadcast.to(roomName).emit(SOCKET_PATCH_USER, updateTetriBoard);
+  })
+
+  socket.on(SOCKET_LEAVE_ROOM, () => {
+    console.log(SOCKET_LEAVE_ROOM);
+    let roomName = global.rooms.getRoomNameWithUsername(socket.username);
+
+      
+    // server side :
+    //    unsubscribe user
+    socket.leave(roomName);
+
+  //  global.deleteUserInUserlist(socket.username); 
+
+  //true : delete room | false : update the room
+    let roomDelete = global.leaveRoom(socket.username);
+    //    remove user on a specific room
+    //    remove from user list
+    //            Si nb user === 1 // delete room
+    //            if owner
+    //            
+    // unsubscribe user
+    //update user
+    // update room userlist
+
+    // return update room,
+    // return update user
+    console.log('----------------->');
+    console.log(roomDelete);
+    console.log('-------');
+    
+    
+    console.log(global.getIRoomWithRoomname(roomName));
+    
+    let data = {
+      room : global.getIRoomWithRoomname(roomName),
+      user : global.getIUserWithUsername(socket.username)
+    }
+
+    socket.emit(SOCKET_LEAVE_ROOM); // reset user room tmp store
+    // if we update a room
+    socket.emit(SOCKET_PATCH_ROOM, {room : data.room});
+
+    // if no moore use in it we delete it
+    if (roomDelete === true)
+      socket.emit(SOCKET_DELETE_ROOM, roomName);
+    else
+      socket.emit(SOCKET_PATCH_USER, {...data.user, room : ''});
   })
 });
 

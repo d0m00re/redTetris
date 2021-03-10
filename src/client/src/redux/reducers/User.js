@@ -5,6 +5,7 @@ import {
     SET_IS_CONNECT,
     SET_ROOM,
     SET_USER_ALIVE,
+    USER_RESET_ROOM
 } from '../Constant/User';
 
 const initState = {
@@ -56,10 +57,20 @@ const UserReducer = (state = initState, action) => {
             });// : state
 
         case SET_USER_ALIVE:
+            console.log('SET USER ALIVE');
+            
+            console.log(action.payload)
             return ({
                 ...state,
                 alive : action.payload
-            })
+            });
+
+        case USER_RESET_ROOM:
+            return ({
+                ...state,
+                room : null,
+                //alive : true
+            });
 
         default:
             return state

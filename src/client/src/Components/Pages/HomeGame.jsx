@@ -35,7 +35,6 @@ const HomeGame = () => {
                          userList = {userList}
                          user = {user}
                          userlist = {userlist} />
-                
             }
 
             {
@@ -46,4 +45,4 @@ const HomeGame = () => {
     );
 }
 
-export default HomeGame
+export default HomeGame 

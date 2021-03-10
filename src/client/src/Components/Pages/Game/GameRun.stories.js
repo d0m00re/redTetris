@@ -67,6 +67,51 @@ export const ByDefault = () =>
         noGameLoop = {true}
     />
 
+    //--------------------------------
+/*
+newTmpMap, tetriList, userList, user, userlist
+*/
+
+let tetriList2 = [tetri1, tetri1, tetri1];
+let userList2 = ['d0m', 'jack', 'john', 'miaou', 'master', 'hater', 'xRambo'];
+
+let user2 = {
+    usernameForm: "",
+    roomnameForm: "",
+    username: "d0m",
+    isConnect: true,
+    alive: true,
+    room : {
+        name: "room1",
+        uuid: "",
+        userList : ['d0m', 'jack', 'john', 'miaou', 'master', 'hater', 'xRambo'],
+        owner: "d0m",
+        state: "RUNING_GAME"
+    }
+   }
+let userlist2 = [
+    {name : 'd0m',  room : 'room1', uuid : 'gfdgf', isAlive : true, saveTetriBoard : newTmpMap},
+    {name : 'jack', room : 'room1', uuid : 'erte', isAlive : true, saveTetriBoard : newTmpMap},
+    {name : 'john', room : 'room1', uuid : 'dfg', isAlive : true, saveTetriBoard : newTmpMap},
+    {name : 'miaou', room : 'room1', uuid : 'erte', isAlive : true, saveTetriBoard : newTmpMap},
+    {name : 'master', room : 'room1', uuid : 'dfg', isAlive : true, saveTetriBoard : newTmpMap},
+    {name : 'hater', room : 'room1', uuid : 'erte', isAlive : true, saveTetriBoard : newTmpMap},
+    {name : 'xRambo', room : 'room1', uuid : 'dfg', isAlive : true, saveTetriBoard : newTmpMap},
+];
+
+
+export const MaxUser = () =>
+    <GameRun
+        newTmpMap = {newTmpMap}
+        tetriList = {tetriList2}
+        userList = {userList2}
+        user = {user2}
+        userlist = {userlist2}
+        noGameLoop = {true}
+    />
+
+
+
 export default {
     title : 'Page - Game m - miaou'
 } 

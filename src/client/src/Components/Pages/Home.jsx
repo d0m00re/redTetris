@@ -12,24 +12,20 @@ import SelectorRooms from './../components/List/ListRoom/SelectorRooms'
 
 import { useSelector, useDispatch } from 'react-redux';
 import CenterPage from '../Atoms/Layout/CenterPage';//'./../components/Layout/CenterPage'
-import { SOCKET_RUN_GAME } from './../../redux/Constant/SocketIOProtocol';
+import { SOCKET_RUN_GAME, SOCKET_LEAVE_ROOM } from './../../redux/Constant/SocketIOProtocol';
 
-const HeaderBar = ({ text, variant }) => {
-    return (
-        <header style={{ backgroundColor: 'orange' }}>
-            <Grid container direction='column' justify='center' alignItems='center'>
-                <Grid item>
-                    <Typography variant={variant} style={{ margin: '16px' }}>{text}</Typography>
-                </Grid>
-            </Grid>
-        </header>
-    );
-}
+import HeaderBar from './../Organisms/HeaderBar/HeaderBar';
+
+import GameMenu from './../Pages/Game/GameMenu/GameMenu';
 
 const Home = () => {
     let { username, isConnect } = useSelector(state => state.user);
     let { room } = useSelector(state => state.user);
     let dispatch = useDispatch();
+
+    const runGame = () => dispatch({ type: SOCKET_RUN_GAME });
+
+    const leaveRoom = () => dispatch({type : SOCKET_LEAVE_ROOM})
 
     return (
         <>
@@ -48,23 +44,20 @@ const Home = () => {
             }
 
             { 
-                room !== null &&
+                (room !== null && room !== undefined) &&
                 <>
                     {
-
                         (room.owner === username && room.state === 'WAIT_USER') &&
-                        <CenterPage>
-                            <HeaderBar text={`${username} @ ${room?.name}`} variant={'h5'} />
-                            <Button onClick={() => { dispatch({ type: SOCKET_RUN_GAME }) }}>RUN GAME</Button>
-                        </CenterPage>
+                            <GameMenu username={username}
+                                      room={room}
+                                      funcRunGame={runGame}
+                                      funcLeaveRoom={leaveRoom}/>
                     }
 
                     {
-
                         (room.state === 'RUNING_GAME') &&
                         <CenterPage>
                             <HeaderBar text={`${username} @ ${room?.name}`} variant={'h5'} />
-                            <Button onClick={() => { dispatch({ type: SOCKET_RUN_GAME }) }}>RUN GAME</Button>
                             <HomeGame />
                         </CenterPage>
                     }

@@ -21,6 +21,11 @@ export class User {
         this.saveTetriBoard = Array(20).fill([]).map(() => Array(10).fill(0))
     }
 
+    reset() {
+        this.isAlive = true;
+        this.saveTetriBoard = Array(20).fill([]).map(() => Array(10).fill(0));
+    }
+
     getInfo() : IUser {
         return ({
             name : this.name,
@@ -52,6 +57,14 @@ export class UserList {
         this.users[index].isAlive = false;
 
         return this.users[index].getInfo();
+    }
+
+    resetUser(username : string) {
+        let index = this.findIndexWtUsername(username);
+
+        if (index === -1)
+            return undefined;
+        this.users[index].reset();
     }
 
     setSaveTetriBoard(username : string , saveTetriBoard : number[][]) : IUser | undefined {

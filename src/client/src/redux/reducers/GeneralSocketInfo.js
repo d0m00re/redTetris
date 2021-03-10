@@ -29,10 +29,12 @@ const GeneralSocketInfoReducer = (state = initState, action) => {
                 roomlist : action.payload
             }
         case DELETE_ROOM:
+            console.log('reducer delete room : ' + action.payload);
+            
             let tmpRoomList = state.roomlist.filter(room => room.name !== action.payload);
             return {
                 ...state,
-                roomlist : tmpRoomList
+                roomlist : tmpRoomList 
             }
         case PATCH_LIST_ROOM:
             let newRoom = action.payload;
@@ -78,14 +80,11 @@ const GeneralSocketInfoReducer = (state = initState, action) => {
                 userlist : tmpUserList
             }
 
-        case PATCH_USER:
-            console.log('PATCH USER');
-            
+        case PATCH_USER:            
             newUser = action.payload;
 
             index = state.userlist.findIndex(user => user.name === newUser.name);
-            
-
+                        
             if (index !== -1){
                 tmpUserList = [...state.userlist];
                 tmpUserList[index] = newUser;
