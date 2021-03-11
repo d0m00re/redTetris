@@ -18,9 +18,13 @@ import HeaderBar from './../Organisms/HeaderBar/HeaderBar';
 
 import GameMenu from './../Pages/Game/GameMenu/GameMenu';
 
+import GameResult from './Game/GameResult/GameResult';//'./../Pages/GameResult/GameResult';
+
 const Home = () => {
     let { username, isConnect } = useSelector(state => state.user);
     let { room } = useSelector(state => state.user);
+    //let room.state = useSelector(state => state.user.state);
+
     let dispatch = useDispatch();
 
     const runGame = () => dispatch({ type: SOCKET_RUN_GAME });
@@ -61,6 +65,10 @@ const Home = () => {
                             <HeaderBar text={`${username} @ ${room?.name}`} variant={'h5'} />
                             <HomeGame />
                         </CenterPage>
+                    }
+                    {
+                        (room.state === 'END_GAME') &&
+                            <GameResult />
                     }
                 </>
             }

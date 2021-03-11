@@ -68,12 +68,7 @@ io.on("connection", function (socket: any) {
     
     // update room with user dead server side
     let userUpdate = global.setUserDeadInRoom(socket.username);
-
-    console.log('user update');
-    console.log(userUpdate);
-    
-    
-
+  
     // check end game
     // si user solo alors sa mort signifie la fin de la partie
     // sinon la fin de la partie dne se finit que si il reste un seul joueur en vie
@@ -85,11 +80,7 @@ io.on("connection", function (socket: any) {
     
     
 
-    if (roomUpdate !== undefined){
-      console.log('GO GO GO');
-      
-      console.log(SOCKET_PATCH_ROOM);
-      
+    if (roomUpdate !== undefined){  
       io.emit(SOCKET_PATCH_ROOM, {room : roomUpdate});
     }
 
