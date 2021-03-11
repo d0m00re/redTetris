@@ -68,7 +68,9 @@ const Home = () => {
                     }
                     {
                         (room.state === 'END_GAME') &&
-                            <GameResult winner={room.userList[0]} otherPlayer={room.leaderboard}/>
+                            <GameResult winner={room.userList[0]}
+                                        otherPlayer={room.leaderboard}
+                                        funcLeaveRoom={leaveRoom}/>
                     }
                 </>
             }

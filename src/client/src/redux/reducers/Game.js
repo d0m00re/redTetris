@@ -7,20 +7,23 @@ import {
   TETRI_ROTATION,
   UPDATE_USERNAME,
   UPDATE_ROOM,
-
   SET_NB_LINE_BLOCK,
 } from "../Constant/Constant";
+
+import {
+  GAME_RESET_CURRMAP
+} from "../Constant/Game";
 
 import {END_TURN_PUT, ADD_TETRI, RESET_TETRI } from './../Constant/Tetri';
 
  
 const initialState = {
-  currentKey: "",
-  username: "d0m",
+  currentKey: '',
+  username: '',
   roomname: '', 
   currRotation: 0,
 
-  posTetriminos: { x: 5, y: -2 },
+  posTetriminos: { x: 3, y: -2 },
   currMap: Array(20).fill().map(() => Array(10).fill(0)),
   tetriList: [],
   nbLineBlock: 1, // blok line - multiplayer
@@ -38,7 +41,7 @@ const GameReducer = (state = initialState, action) => {
       return {
         ...state,
         currMap: action.payload,
-        posTetriminos: { x: 5, y: -2 },
+        posTetriminos: { x: 3, y: -2 },
       };
     case UPDATE_TETRIMINOS_POS:
       return {
@@ -80,6 +83,16 @@ const GameReducer = (state = initialState, action) => {
       return {
         ...state,
         tetriList: []
+      }
+
+    case GAME_RESET_CURRMAP:
+      return {
+        ...state,
+        currRotation: 0,
+        posTetriminos: { x: 3, y: -2 },
+        currMap: Array(20).fill().map(() => Array(10).fill(0)),
+        tetriList: [],
+        nbLineBlock: 1,
       }
 
       case END_TURN_PUT:

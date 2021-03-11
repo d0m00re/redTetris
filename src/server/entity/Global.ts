@@ -56,8 +56,8 @@ export class Global {
         // get user interface total
         let listUserInterface = room.userList.map(_user => this.users.getUser(_user)?.getInfo());
 
-        let countAlive : number = listUserInterface.filter(_user => _user?.isAlive === true).length;
-        let countDeath : number = listUserInterface.filter(_user => _user?.isAlive === false).length;
+        let countAlive : number = listUserInterface.filter(_user => _user?.alive === true).length;
+        let countDeath : number = listUserInterface.filter(_user => _user?.alive === false).length;
         
         if (countAlive === 0 || (countAlive === 1 && countDeath > 0)) // game loose
         {
@@ -105,12 +105,9 @@ export class Global {
     leaveRoom(username : string) :boolean {
         console.log('leave room');
         
-
-
         this.users.resetUser(username);
         // delete room if no moore user i nit
         let roomIsDelete = this.rooms.deleteUser(username);
-
         return roomIsDelete;
     }
 

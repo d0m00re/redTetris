@@ -2,7 +2,7 @@ export interface IUser {
     name: string;
     room: string;
     uuid: string;
-    isAlive ?: boolean;
+    alive ?: boolean;
     saveTetriBoard ?: number[][]    
 } 
 
@@ -10,19 +10,19 @@ export class User {
     name: string;
     room: string;
     uuid: string;
-    isAlive ?: boolean;
+    alive ?: boolean;
     saveTetriBoard ?: number[][];
 
     constructor({name, room, uuid} : IUser){
         this.name = name;
         this.room = room;
         this.uuid = uuid;
-        this.isAlive = true;
+        this.alive = true;
         this.saveTetriBoard = Array(20).fill([]).map(() => Array(10).fill(0))
     }
 
     reset() {
-        this.isAlive = true;
+        this.alive = true;
         this.saveTetriBoard = Array(20).fill([]).map(() => Array(10).fill(0));
     }
 
@@ -31,7 +31,7 @@ export class User {
             name : this.name,
             room : this.room,
             uuid : this.uuid,
-            isAlive : this.isAlive,
+            alive : this.alive,
             saveTetriBoard : this.saveTetriBoard
         })
     }
@@ -54,7 +54,7 @@ export class UserList {
         if (index === -1)
             return undefined;
 
-        this.users[index].isAlive = false;
+        this.users[index].alive = false;
 
         return this.users[index].getInfo();
     }

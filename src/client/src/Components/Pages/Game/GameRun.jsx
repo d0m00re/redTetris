@@ -55,6 +55,7 @@ const GameRun = ({ newTmpMap, tetriList, userList, user, userlist, noGameLoop = 
                 }
             </div>
             <div className={styles.margin}>
+                
                 {
                     (tetriList.length > 1) && <>
                         <Typography variant='h3'>Next</Typography>

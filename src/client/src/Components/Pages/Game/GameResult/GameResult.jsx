@@ -10,7 +10,7 @@ userlist
 relaunch  game
 */
 
-const GameResult = ({winner, otherPlayer}) => {
+const GameResult = ({winner, otherPlayer, funcPlayAgain, funcLeaveRoom}) => {
     return (
         <CenterPage>
             <>
@@ -23,8 +23,8 @@ const GameResult = ({winner, otherPlayer}) => {
                 )
             }
 
-            <Button>Play Again!</Button>
-            <Button>Leave</Button>
+            <Button onClick={funcPlayAgain}>Play Again!</Button>
+            <Button onClick={funcLeaveRoom}>Leave</Button>
             </>
         </CenterPage>
     )

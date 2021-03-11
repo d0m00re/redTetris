@@ -24,4 +24,4 @@ const GameMenu = ({ username, room, funcRunGame, funcLeaveRoom, owner}) => {
     )
 }
 
-export default GameMenu
+export default GameMenu;

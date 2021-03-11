@@ -222,17 +222,16 @@ io.on("connection", function (socket: any) {
 
     // return update room,
     // return update user
-    console.log('----------------->');
-    console.log(roomDelete);
-    console.log('-------');
-    
-    
     console.log(global.getIRoomWithRoomname(roomName));
     
     let data = {
       room : global.getIRoomWithRoomname(roomName),
       user : global.getIUserWithUsername(socket.username)
     }
+
+    console.log('--> DATA');
+    console.log(data);
+    
 
     socket.emit(SOCKET_LEAVE_ROOM); // reset user room tmp store
     // if we update a room
@@ -241,8 +240,8 @@ io.on("connection", function (socket: any) {
     // if no moore use in it we delete it
     if (roomDelete === true)
       io.emit(SOCKET_DELETE_ROOM, roomName);
-    else
-      io.emit(SOCKET_PATCH_USER, {...data.user, room : ''});
+    //else
+    io.emit(SOCKET_PATCH_USER, {...data.user, room : ''});
   })
 });
 

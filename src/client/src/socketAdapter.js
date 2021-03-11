@@ -12,7 +12,10 @@ import {SOCKET_USER_DEAD,
         SOCKET_DELETE_ROOM} from './redux/Constant/SocketIOProtocol';
 import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM, SET_USER_ALIVE, USER_RESET_ROOM} from './redux/Constant/User';
 import {SET_ROOMS, SET_USERS, ADD_ROOM, PATCH_LIST_ROOM, DELETE_ROOM, SET_ROOM, SET_LIST_USERS, PATCH_LIST_USERS, PATCH_USER} from './redux/Constant/GeneralSocketInfo';
-import {ADD_TETRI} from './redux/Constant/Tetri'
+import {ADD_TETRI} from './redux/Constant/Tetri';
+
+import {GAME_RESET_CURRMAP} from './redux/Constant/Game';
+
 
 const initApiSocket = (store) => {
     const dispatch = store.dispatch;
@@ -118,7 +121,11 @@ const initApiSocket = (store) => {
        
       if (store.getState().user.username === resp.name)
       {        
-        dispatch({type : SET_USER_ALIVE, payload : resp.isAlive});
+        console.log('resp alive -->');
+        console.log(resp);
+        
+        
+        dispatch({type : SET_USER_ALIVE, payload : resp.alive});
       }
       
       })
@@ -132,7 +139,8 @@ const initApiSocket = (store) => {
       });
 
     socket.on(SOCKET_LEAVE_ROOM, () => {
-      dispatch({type : USER_RESET_ROOM})
+      dispatch({type : USER_RESET_ROOM});
+      dispatch({type : GAME_RESET_CURRMAP});
     })
 
     socket.on(SOCKET_DELETE_ROOM, (roomName) => {

@@ -51,9 +51,9 @@ let user = {
     }
    }
 let userlist = [
-    {name : 'd0m',  room : 'room1', uuid : 'gfdgf', isAlive : true, saveTetriBoard : newTmpMap},
-    {name : 'jack', room : 'room1', uuid : 'erte', isAlive : true, saveTetriBoard : newTmpMap},
-    {name : 'john', room : 'room1', uuid : 'dfg', isAlive : true, saveTetriBoard : newTmpMap},
+    {name : 'd0m',  room : 'room1', uuid : 'gfdgf', alive : true, saveTetriBoard : newTmpMap},
+    {name : 'jack', room : 'room1', uuid : 'erte', alive : true, saveTetriBoard : newTmpMap},
+    {name : 'john', room : 'room1', uuid : 'dfg', alive : true, saveTetriBoard : newTmpMap},
 ];
 
 
@@ -90,13 +90,13 @@ let user2 = {
     }
    }
 let userlist2 = [
-    {name : 'd0m',  room : 'room1', uuid : 'gfdgf', isAlive : true, saveTetriBoard : newTmpMap},
-    {name : 'jack', room : 'room1', uuid : 'erte', isAlive : true, saveTetriBoard : newTmpMap},
-    {name : 'john', room : 'room1', uuid : 'dfg', isAlive : true, saveTetriBoard : newTmpMap},
-    {name : 'miaou', room : 'room1', uuid : 'erte', isAlive : true, saveTetriBoard : newTmpMap},
-    {name : 'master', room : 'room1', uuid : 'dfg', isAlive : true, saveTetriBoard : newTmpMap},
-    {name : 'hater', room : 'room1', uuid : 'erte', isAlive : true, saveTetriBoard : newTmpMap},
-    {name : 'xRambo', room : 'room1', uuid : 'dfg', isAlive : true, saveTetriBoard : newTmpMap},
+    {name : 'd0m',  room : 'room1', uuid : 'gfdgf', alive : true, saveTetriBoard : newTmpMap},
+    {name : 'jack', room : 'room1', uuid : 'erte', alive : true, saveTetriBoard : newTmpMap},
+    {name : 'john', room : 'room1', uuid : 'dfg', alive : true, saveTetriBoard : newTmpMap},
+    {name : 'miaou', room : 'room1', uuid : 'erte', alive : true, saveTetriBoard : newTmpMap},
+    {name : 'master', room : 'room1', uuid : 'dfg', alive : true, saveTetriBoard : newTmpMap},
+    {name : 'hater', room : 'room1', uuid : 'erte', alive : true, saveTetriBoard : newTmpMap},
+    {name : 'xRambo', room : 'room1', uuid : 'dfg', alive : true, saveTetriBoard : newTmpMap},
 ];
 
 

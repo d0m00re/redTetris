@@ -1,0 +1,1 @@
+export const GAME_RESET_CURRMAP = 'GAME_RESET_CURRMAP';
