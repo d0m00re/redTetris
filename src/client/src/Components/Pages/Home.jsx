@@ -29,7 +29,7 @@ const Home = () => {
 
     const runGame = () => dispatch({ type: SOCKET_RUN_GAME });
 
-    const leaveRoom = () => dispatch({type : SOCKET_LEAVE_ROOM})
+    const leaveRoom = () => dispatch({type : SOCKET_LEAVE_ROOM});
 
     return (
         <>
@@ -68,7 +68,7 @@ const Home = () => {
                     }
                     {
                         (room.state === 'END_GAME') &&
-                            <GameResult />
+                            <GameResult winner={room.userList[0]} otherPlayer={room.leaderboard}/>
                     }
                 </>
             }

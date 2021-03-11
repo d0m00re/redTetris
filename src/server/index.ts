@@ -127,7 +127,7 @@ io.on("connection", function (socket: any) {
       user.room = ''; // invalid
     }
     if (global.rooms.roomExist(roomName) === false) {      
-      newRoom  = {name : roomName, uuid : roomName, userList : [], state : ERoomState.WAIT_USER, owner : socket.username};
+      newRoom  = {name : roomName, uuid : roomName, userList : [], state : ERoomState.WAIT_USER, owner : socket.username, leaderboard : []};
       global.createRoom(newRoom);
       
       io.emit(SOCKET_NEW_ROOM, newRoom); // utile????

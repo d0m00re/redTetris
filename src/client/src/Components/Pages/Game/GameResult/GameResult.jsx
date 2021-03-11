@@ -10,11 +10,18 @@ userlist
 relaunch  game
 */
 
-const GameResult = () => {
+const GameResult = ({winner, otherPlayer}) => {
     return (
         <CenterPage>
             <>
             <Typography>Result Board</Typography>
+    <Typography> Winner : {winner}</Typography>
+            {
+                otherPlayer.length > 0 &&
+                otherPlayer.map((user, index) =>
+            <Typography>{index + 1}) {user.username}, score {user.score}</Typography>    
+                )
+            }
 
             <Button>Play Again!</Button>
             <Button>Leave</Button>

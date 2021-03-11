@@ -12,11 +12,17 @@ export interface IRoom {
   userList: string[];
   owner: string;
   state: ERoomState;
+  leaderboard : IGameLeaderboard[];
 }
 
 export interface IRoomConstructor {
   name: string;
   owner: string;
+}
+
+export interface IGameLeaderboard {
+  username : string;
+  score : number;
 }
 
 export class Room {
@@ -25,6 +31,7 @@ export class Room {
   userList: string[];
   owner: string;
   state: ERoomState;
+  leaderboard : IGameLeaderboard[];
 
   constructor({ name, owner }: IRoomConstructor) {
     this.name = name;
@@ -32,7 +39,22 @@ export class Room {
     this.userList = [owner];
     this.owner = owner;
     this.state = ERoomState.WAIT_USER;
+    this.leaderboard = [];
   }
+
+  /*
+  ** leaderboard management
+  */
+
+  leaderboardReset() {
+    this.leaderboard = [];
+  }
+
+  leaderboardAdd(user : IGameLeaderboard) {
+    this.leaderboard.unshift(user);
+  }
+
+  //-----------------------------
 
   emptyUserList(): boolean {
     return this.userList.length === 0;
@@ -85,7 +107,8 @@ export class Room {
       uuid: this.uuid,
       userList: [...this.userList],
       owner: this.owner,
-      state: this.state
+      state: this.state,
+      leaderboard : this.leaderboard
     })
   }
 

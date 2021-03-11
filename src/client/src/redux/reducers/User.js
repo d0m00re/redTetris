@@ -57,9 +57,6 @@ const UserReducer = (state = initState, action) => {
             });// : state
 
         case SET_USER_ALIVE:
-            console.log('SET USER ALIVE');
-            
-            console.log(action.payload)
             return ({
                 ...state,
                 alive : action.payload

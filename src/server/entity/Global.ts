@@ -82,6 +82,10 @@ export class Global {
         // update room
 
         // return room update
+        let room : Room | undefined = this.rooms.getRoomWithUsername(username);
+        
+        room?.leaderboardAdd({username : username, score : 0});
+        
         return this.users.setUserDead(username);
     }
 
