@@ -29,3 +29,8 @@ export const SOCKET_UPDATE_USER_TETRI_BOARD = 'SOCKET_UPDATE_USER_TETRI_BOARD';
 export const SOCKET_LEAVE_ROOM = 'SOCKET_LEAVE_ROOM';
 
 export const SOCKET_DELETE_ROOM = 'SOCKET_DELETE_ROOM';
+
+// launch new party  on the same room go back on basic state
+export const SOCKET_PLAY_AGAIN = 'SOCKET_PLAY_AGAIN';
+
+export const SOCKET_RESET_ROOM = 'SOCKET_RESET_ROOM';

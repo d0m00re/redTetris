@@ -37,6 +37,10 @@ export const  SOCKET_LEAVE_ROOM = 'SOCKET_LEAVE_ROOM';
 
 export const SOCKET_DELETE_ROOM = 'SOCKET_DELETE_ROOM';
 
+export const SOCKET_PLAY_AGAIN = 'SOCKET_PLAY_AGAIN';
+
+export const SOCKET_RESET_ROOM = 'SOCKET_RESET_ROOM';
+
 
 
 let global : Global = new Global();
@@ -62,6 +66,30 @@ app.get("/", (req: any, res: any) => {
 });
 
 io.on("connection", function (socket: any) {
+
+  socket.on(SOCKET_PLAY_AGAIN, function() {
+    // set all user alive on the room
+    // send back room reset
+    // 
+    console.log('PLAY AGAIN');
+    let room  = global.rooms.getRoomWithUsername(socket.username);
+    let user = global.users.getUser(socket.username);
+    let roomName = global.rooms.getRoomNameWithUsername(socket.username);
+
+    if (room !== undefined)
+    {
+      room.restart();
+      room.leaderboardReset();
+      io.emit(SOCKET_PATCH_ROOM, {room : room.getInfo()});
+    }
+
+    if (user !== undefined) {
+      user.reset();
+      io.emit(SOCKET_PATCH_USER, user.getInfo());
+    }
+
+    io.in(roomName).emit(SOCKET_RESET_ROOM);
+  });
 
   socket.on(SOCKET_USER_DEAD, function() {
     console.log('SOCKET USER DEAD');
@@ -202,7 +230,6 @@ io.on("connection", function (socket: any) {
     console.log(SOCKET_LEAVE_ROOM);
     let roomName = global.rooms.getRoomNameWithUsername(socket.username);
 
-      
     // server side :
     //    unsubscribe user
     socket.leave(roomName);

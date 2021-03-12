@@ -12,7 +12,7 @@ import SelectorRooms from './../components/List/ListRoom/SelectorRooms'
 
 import { useSelector, useDispatch } from 'react-redux';
 import CenterPage from '../Atoms/Layout/CenterPage';//'./../components/Layout/CenterPage'
-import { SOCKET_RUN_GAME, SOCKET_LEAVE_ROOM } from './../../redux/Constant/SocketIOProtocol';
+import { SOCKET_RUN_GAME, SOCKET_LEAVE_ROOM, SOCKET_PLAY_AGAIN } from './../../redux/Constant/SocketIOProtocol';
 
 import HeaderBar from './../Organisms/HeaderBar/HeaderBar';
 
@@ -30,6 +30,8 @@ const Home = () => {
     const runGame = () => dispatch({ type: SOCKET_RUN_GAME });
 
     const leaveRoom = () => dispatch({type : SOCKET_LEAVE_ROOM});
+
+    const playAgain = () => dispatch({type : SOCKET_PLAY_AGAIN});
 
     return (
         <>
@@ -70,7 +72,8 @@ const Home = () => {
                         (room.state === 'END_GAME') &&
                             <GameResult winner={room.userList[0]}
                                         otherPlayer={room.leaderboard}
-                                        funcLeaveRoom={leaveRoom}/>
+                                        funcLeaveRoom={leaveRoom}
+                                        funcPlayAgain={playAgain}/>
                     }
                 </>
             }

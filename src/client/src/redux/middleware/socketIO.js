@@ -6,7 +6,8 @@ import {SOCKET_USER_DEAD,
         SOCKET_RUN_GAME,
         SOCKET_JOIN_ROOM_WT_NAME,
         SOCKET_UPDATE_USER_TETRI_BOARD, 
-        SOCKET_LEAVE_ROOM
+        SOCKET_LEAVE_ROOM,
+        SOCKET_PLAY_AGAIN
 } from './../Constant/SocketIOProtocol';
 
 const socketIoMiddleware = ({ getState }) => {
@@ -57,6 +58,11 @@ const socketIoMiddleware = ({ getState }) => {
             socket.emit(SOCKET_LEAVE_ROOM);
         }
 
+        const socketPlayAgain = () => {
+            console.log(SOCKET_PLAY_AGAIN);
+            socket.emit(SOCKET_PLAY_AGAIN);
+        }
+
         switch(type) {
             case SOCKET_SEND_USERNAME:
                 socketSendUsername();
@@ -77,11 +83,13 @@ const socketIoMiddleware = ({ getState }) => {
                 socketUserDead();
             break;
             case SOCKET_UPDATE_USER_TETRI_BOARD:
-                console.log('GO GO GO GO');
                 socketUpdateTetriBoard();
             break;
             case SOCKET_LEAVE_ROOM:
                 socketLeaveRoom();
+            break;
+            case SOCKET_PLAY_AGAIN:
+                socketPlayAgain();
             break;
             default: 
             break;

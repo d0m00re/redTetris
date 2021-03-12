@@ -19,7 +19,7 @@ const GameResult = ({winner, otherPlayer, funcPlayAgain, funcLeaveRoom}) => {
             {
                 otherPlayer.length > 0 &&
                 otherPlayer.map((user, index) =>
-            <Typography>{index + 1}) {user.username}, score {user.score}</Typography>    
+            <Typography>{index + 1}) {user.username}, score : {user.score}</Typography>    
                 )
             }
 
