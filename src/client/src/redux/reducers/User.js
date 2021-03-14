@@ -8,7 +8,7 @@ import {
     USER_RESET_ROOM
 } from '../Constant/User';
 
-const initState = {
+export const initialState = {
     usernameForm: '',
     roomnameForm: '',
 
@@ -18,7 +18,7 @@ const initState = {
     room : null
 }
 
-const UserReducer = (state = initState, action) => {
+const UserReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USERNAME_FORM:
             return {

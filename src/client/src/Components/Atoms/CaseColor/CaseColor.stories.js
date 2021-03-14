@@ -4,8 +4,6 @@ import CaseColor from './CaseColor';
 
 const Template = (args) => <CaseColor {...args} />;
 
-let title = 'Case Color'
-
 export const ByDefault = () => <CaseColor caseValue={7} />;
 export const Primary = () => <CaseColor caseValue={6} />;
 
@@ -20,5 +18,5 @@ Tertiary.args = { ...Primary.args, label: '📚📕📈🤓' };
 //export const TestArg = () => <CaseColor [caseValue]="test" />
 
 export default {
-    title: title
+    title: 'Atoms/CaseColor'
 };

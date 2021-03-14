@@ -4,14 +4,14 @@ import {WS_BASE} from './../../config/config';
 import {SET_ROOMS, PATCH_LIST_USERS, SET_LIST_USERS, PATCH_LIST_ROOM, DELETE_ROOM, ADD_ROOM, PATCH_USER} from '../Constant/GeneralSocketInfo';
 
 
-const initState = {
+export const initialState = {
     socket : io.connect(WS_BASE),
     roomlist : [], 
     userlist : [], 
     room : null,
 };
 
-const GeneralSocketInfoReducer = (state = initState, action) => {
+const GeneralSocketInfoReducer = (state = initialState, action) => {
     let index = 0;
     let newUser = undefined;
     let tmpUserList = [];

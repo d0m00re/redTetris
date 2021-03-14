@@ -3,21 +3,19 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { Provider } from 'react-redux';
 import { store } from './redux/redux';
 
-import {SOCKET_RECV_USERNAME} from './redux/Constant/SocketIOProtocol';
-import {SET_ERROR, SET_USERNAME} from './redux/Constant/User';
-
 import initApiSocket from './socketAdapter';
+
+import {ProviderWrapper} from './indexUtils';
 
 initApiSocket(store);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <ProviderWrapper store={store}>
       <App />
-    </Provider>
+    </ProviderWrapper>
   </React.StrictMode>,
   document.getElementById('root')
 );

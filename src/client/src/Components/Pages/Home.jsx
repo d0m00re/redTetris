@@ -1,14 +1,5 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import FormCreateUser from './../components/Form/CreateUser/FormCreateUser';
-import FormCreateRoom from './../components/Form/CreateRoom/FormCreateRoom';
-
-import Grid from '@material-ui/core/Grid';
-
 import HomeGame from './../Pages/HomeGame';
-
-import SelectorRooms from './../components/List/ListRoom/SelectorRooms'
 
 import { useSelector, useDispatch } from 'react-redux';
 import CenterPage from '../Atoms/Layout/CenterPage';//'./../components/Layout/CenterPage'
@@ -19,6 +10,10 @@ import HeaderBar from './../Organisms/HeaderBar/HeaderBar';
 import GameMenu from './../Pages/Game/GameMenu/GameMenu';
 
 import GameResult from './Game/GameResult/GameResult';//'./../Pages/GameResult/GameResult';
+
+import Login from './Login/Login';
+
+import RoomLoby from './RoomLoby/RoomLoby'
 
 const Home = () => {
     let { username, isConnect } = useSelector(state => state.user);
@@ -36,17 +31,10 @@ const Home = () => {
     return (
         <>
             {(!isConnect && room === null) &&
-                <CenterPage>
-                    <HeaderBar text={'RED TETRIS'} variant={'h3'} />
-                    <FormCreateUser />
-                </CenterPage>
+               <Login />
             }
             {(isConnect && room === null) &&
-                <CenterPage>
-                    <HeaderBar text={`${username}`} variant={'h5'} />
-                    <FormCreateRoom />
-                    <SelectorRooms />
-                </CenterPage>
+                <RoomLoby username={username} />
             }
 
             { 
