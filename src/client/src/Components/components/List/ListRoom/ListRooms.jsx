@@ -1,6 +1,4 @@
 import React, {useEffect} from 'react'
-import Button from '@material-ui/core/Button';
-import axios from 'axios';
 
 import Typography from '@material-ui/core/Typography';
 import {useSelector, useDispatch} from 'react-redux';

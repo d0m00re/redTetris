@@ -1,8 +1,7 @@
-import React from 'react'
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-
+import React from 'react';
+import Typographie from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
+import BasicForm from './../../../Atoms/BasicForm/BasicForm';
 
 import {
     SET_ROOMNAME_FORM,  
@@ -10,19 +9,10 @@ import {
 
 import {
     SOCKET_JOIN_ROOM
-} from './../../../../redux/Constant/SocketIOProtocol';
-
-import { makeStyles } from '@material-ui/core/styles';
- 
-const useStyles = makeStyles({
-  button: {
-    justifyContent: 'center', marginTop: '8px'
-  }
-});
+} from './../../../../redux/Constant/SocketIOProtocol'; 
 
 const FormCreateRoom = () => {
-    const classes = useStyles();
-    const {roomnameForm} = useSelector(state => state.user)
+     const {roomnameForm} = useSelector(state => state.user);
     const dispatch = useDispatch(); 
     
     const handleRoomname = (event) => {
@@ -36,10 +26,10 @@ const FormCreateRoom = () => {
 
     return (
         <>
-            <TextField label="roomname" type="text" value={roomnameForm} onChange={handleRoomname} variant='outlined' />
-            <Button variant='contained' onClick={submitRoomname} className={classes.button}>CREATE ROOM</Button>
+            <Typographie variant={'h5'}>Create a room</Typographie>
+            <BasicForm  handleInput={handleRoomname} funcButton={submitRoomname} placeholder={'room name'} buttonLabel={'Create'}/>
         </>
     )
 }
 
-export default FormCreateRoom
+export default FormCreateRoom;

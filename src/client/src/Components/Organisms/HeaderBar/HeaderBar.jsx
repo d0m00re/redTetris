@@ -7,7 +7,7 @@ const HeaderBar = ({ text, variant }) => {
         <header style={{ backgroundColor: 'orange' }}>
             <Grid container direction='column' justify='center' alignItems='center'>
                 <Grid item>
-                    <Typography variant={variant} style={{ margin: '16px' }}>{text}</Typography>
+                    <Typography variant={variant} style={{ margin: '0 16px 16px  16px' }}>{text}</Typography>
                 </Grid>
             </Grid>
         </header>

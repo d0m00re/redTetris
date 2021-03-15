@@ -5,7 +5,7 @@ import {
         SOCKET_RECV_USERNAME, 
         SOCKET_CONFIRM_JOIN_ROOM,
         SOCKET_ALL_ROOMS,
-        SOCKET_NEW_ROOM,
+        SOCKET_NEW_ROOM, 
         SOCKET_LEAVE_ROOM,
         SOCKET_PATCH_USER,
         SOCKET_PATCH_ROOM,

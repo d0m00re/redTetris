@@ -8,10 +8,10 @@ import FormCreateUser from '../../components/Form/CreateUser/FormCreateUser';
 const Login = () => {
     return (
         <CenterPage>
-            <HeaderBar text={'RED TETRIS'} variant={'h3'} />
+            <HeaderBar text={'Red Tetris'} variant={'h3'} />
             <FormCreateUser />
         </CenterPage>
     )
-}
+} 
 
 export default Login

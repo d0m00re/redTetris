@@ -1,5 +1,4 @@
 import React from "react";
-import Grid from "@material-ui/core/Grid";
 import TetrisRow from '../../Molecules/TetrisRow/TetrisRow';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,4 +29,4 @@ const ViewBoard = ({currentBoard}) => {
   );
 };
 
-export default ViewBoard;  
+export default ViewBoard;
