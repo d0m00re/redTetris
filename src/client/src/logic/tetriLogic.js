@@ -66,21 +66,33 @@ const getAllFullLine = (myMap) => {
         if (currLine.includes(0) === false){
             arrId.push(i);
         }
-    }
+    } 
     return (arrId)
 }
 
 const deleteFullLine = (myMap, nbLineBlock) => {
-    let getLines = getAllFullLine(myMap);
-    //    // exlucde specific line
-    getLines = getLines.filter(index => index + nbLineBlock < myMap.length);
-
-    let replaceLine = getLines.map(() => Array(myMap[0].length).fill(0));
-
+    // get all fullline
     
+    //get index full line
+    let getLinesIndex = getAllFullLine(myMap);
+    let nbLineDelete = 0;
+    
+    // nbLineBlock - block delete operation on  specific line interval
+    getLinesIndex = getLinesIndex.filter(index => index + nbLineBlock < myMap.length);
+    nbLineDelete = getLinesIndex.length;
+    //
+    let replaceLine = getLinesIndex.map(() => Array(myMap[0].length).fill(0));
+    
+    // delete line fill
+    getLinesIndex = myMap.filter((elem, index) => !getLinesIndex.includes(index));
+    
+    replaceLine = replaceLine.concat(getLinesIndex);
+    return {newMap : replaceLine, nbLineDelete : nbLineDelete};
+}
 
-    getLines = myMap.filter((elem, index) => !getLines.includes(index));
-    return replaceLine.concat(getLines);
+const nbLineWillBeDelete = (myMap) => {
+    return (myMap.filter(line => !(line.includes(0)))).length;
+    //return ();
 }
 
 
@@ -91,4 +103,5 @@ module.exports = {
     getAllFullLine,
     deleteFullLine,
     checkAndPushSpace,
+    nbLineWillBeDelete,
 }

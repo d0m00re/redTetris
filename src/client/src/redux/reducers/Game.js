@@ -8,10 +8,12 @@ import {
   UPDATE_USERNAME,
   UPDATE_ROOM,
   SET_NB_LINE_BLOCK,
+  
 } from "../Constant/Constant";
 
 import {
-  GAME_RESET_CURRMAP
+  GAME_RESET_CURRMAP,
+  INCR_NB_LINE_BLOCK
 } from "../Constant/Game";
 
 import {END_TURN_PUT, ADD_TETRI, RESET_TETRI } from './../Constant/Tetri';
@@ -26,7 +28,7 @@ const initialState = {
   posTetriminos: { x: 3, y: -2 },
   currMap: Array(20).fill().map(() => Array(10).fill(0)),
   tetriList: [],
-  nbLineBlock: 1, // blok line - multiplayer
+  nbLineBlock: 0, // blok line - multiplayer
 
   //--------------------------------------
   gameRunning: true, // false : game stop
@@ -73,6 +75,17 @@ const GameReducer = (state = initialState, action) => {
         nbLineBlock: action.payload
       }
 
+    case INCR_NB_LINE_BLOCK:
+      console.log(INCR_NB_LINE_BLOCK);
+      console.log(action.payload);
+      
+      
+      let _nbLineBlock = state.nbLineBlock + action.payload;
+    return {
+        ...state,
+        nbLineBlock : _nbLineBlock
+      }
+
     case ADD_TETRI:      
       return {
         ...state,
@@ -92,15 +105,16 @@ const GameReducer = (state = initialState, action) => {
         posTetriminos: { x: 3, y: -2 },
         currMap: Array(20).fill().map(() => Array(10).fill(0)),
         tetriList: [],
-        nbLineBlock: 1,
+        nbLineBlock: 0,
       }
 
       case END_TURN_PUT:
         console.log(' generate new map');
+        //let cpMap = state.currMap;
         let cpMap = _.cloneDeep(state.currMap);
         mergeTetriOnMap(cpMap, state.tetriList[0].shape[state.currRotation], state.posTetriminos);
         cpMap = deleteFullLine(cpMap, state.nbLineBlock);
-        
+         
         let newTetriList = [...state.tetriList];
         newTetriList.shift();
 
@@ -108,7 +122,7 @@ const GameReducer = (state = initialState, action) => {
         ...state,
         currRotation : 0,
         tetriList : newTetriList,
-        currMap: cpMap,
+        currMap: cpMap.newMap,
         posTetriminos: { x: 5, y: -1 },
       }
 

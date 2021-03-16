@@ -10,12 +10,13 @@ import {
         SOCKET_PATCH_USER,
         SOCKET_PATCH_ROOM,
         SOCKET_DELETE_ROOM,
-        SOCKET_RESET_ROOM} from './redux/Constant/SocketIOProtocol';
+        SOCKET_RESET_ROOM,
+        SOCKET_LINE_DELETE} from './redux/Constant/SocketIOProtocol';
 import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM, SET_USER_ALIVE, USER_RESET_ROOM} from './redux/Constant/User';
-import {SET_ROOMS, SET_USERS, ADD_ROOM, PATCH_LIST_ROOM, DELETE_ROOM, SET_ROOM, SET_LIST_USERS, PATCH_LIST_USERS, PATCH_USER} from './redux/Constant/GeneralSocketInfo';
+import {SET_ROOMS, ADD_ROOM, PATCH_LIST_ROOM, DELETE_ROOM, SET_ROOM, SET_LIST_USERS, PATCH_USER} from './redux/Constant/GeneralSocketInfo';
 import {ADD_TETRI} from './redux/Constant/Tetri';
 
-import {GAME_RESET_CURRMAP} from './redux/Constant/Game';
+import {GAME_RESET_CURRMAP, INCR_NB_LINE_BLOCK} from './redux/Constant/Game';
 
 
 const initApiSocket = (store) => {
@@ -24,6 +25,11 @@ const initApiSocket = (store) => {
     const user = store.getState().user;   
   
     socket.on('connect', () => {console.log('connect success : ');});// connection
+
+    socket.on(SOCKET_LINE_DELETE, (nbDeleteLine) => {
+      console.log(SOCKET_LINE_DELETE);
+      dispatch({type : INCR_NB_LINE_BLOCK, payload : nbDeleteLine});
+    })
 
     socket.on(SOCKET_RECV_USERNAME, (resp) => { 
       console.log('SOCKET_RECV_USERNAME')
@@ -72,16 +78,6 @@ const initApiSocket = (store) => {
 
     socket.on(SOCKET_UPDATE_ROOM, (resp) => { 
       console.log('SOCKET UPDATE ROOM');
-      console.log('fucking user :');
-      console.log(resp.room.userList);
-      console.log(user.username);
-      console.log(user);
-      console.log(store.getState())
-      
-      console.log('---');
-      
-      
-      console.log(resp.room.userList.filter(_user => _user === store.getState().user.username).length === 1);
       
       if (resp.error) return resp.errorMsg;
 

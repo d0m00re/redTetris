@@ -18,7 +18,7 @@ export class User {
         this.room = room;
         this.uuid = uuid;
         this.alive = true;
-        this.saveTetriBoard = Array(20).fill([]).map(() => Array(10).fill(0))
+        this.saveTetriBoard = Array(20).fill([]).map(() => Array(10).fill(0));
     }
 
     reset() {

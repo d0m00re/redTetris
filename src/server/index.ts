@@ -41,6 +41,8 @@ export const SOCKET_PLAY_AGAIN = 'SOCKET_PLAY_AGAIN';
 
 export const SOCKET_RESET_ROOM = 'SOCKET_RESET_ROOM';
 
+export const SOCKET_LINE_DELETE = 'SOCKET_LINE_DELETE';
+
 
 
 let global : Global = new Global();
@@ -56,8 +58,7 @@ let http = require("http").Server(app);
 // http server.
 let io = require("socket.io")(http, {
   cors: {
-    origin: "http://0.0.0.0:8088",
-    methods: ["GET", "POST"]
+    origin: "*",
   }
 });
 
@@ -224,6 +225,15 @@ io.on("connection", function (socket: any) {
 
    // io.in(roomName).broadcast.emit(SOCKET_PATCH_USER, udpateTetriBoard);
     socket.broadcast.to(roomName).emit(SOCKET_PATCH_USER, updateTetriBoard);
+  })
+
+  socket.on(SOCKET_LINE_DELETE, (nbLineDelete : number) => {
+    console.log(SOCKET_LINE_DELETE);
+    console.log(nbLineDelete);
+    
+    let roomName = global.rooms.getRoomNameWithUsername(socket.username);
+
+    socket.broadcast.to(roomName).emit(SOCKET_LINE_DELETE, nbLineDelete);
   })
 
   socket.on(SOCKET_LEAVE_ROOM, () => {

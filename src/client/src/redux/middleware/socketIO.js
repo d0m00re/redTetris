@@ -7,7 +7,8 @@ import {SOCKET_USER_DEAD,
         SOCKET_JOIN_ROOM_WT_NAME,
         SOCKET_UPDATE_USER_TETRI_BOARD, 
         SOCKET_LEAVE_ROOM,
-        SOCKET_PLAY_AGAIN
+        SOCKET_PLAY_AGAIN,
+        SOCKET_LINE_DELETE
 } from './../Constant/SocketIOProtocol';
 
 const socketIoMiddleware = ({ getState }) => {
@@ -63,6 +64,13 @@ const socketIoMiddleware = ({ getState }) => {
             socket.emit(SOCKET_PLAY_AGAIN);
         }
 
+        const socketLineDelete = (nbLineDelete) => {
+            //SOCKET_LINE_DELETE
+            console.log(SOCKET_LINE_DELETE);
+            socket.emit(SOCKET_LINE_DELETE, nbLineDelete);
+            
+        }
+
         switch(type) {
             case SOCKET_SEND_USERNAME:
                 socketSendUsername();
@@ -90,6 +98,9 @@ const socketIoMiddleware = ({ getState }) => {
             break;
             case SOCKET_PLAY_AGAIN:
                 socketPlayAgain();
+            break;
+            case SOCKET_LINE_DELETE:
+                socketLineDelete(payload.nbLineDelete);
             break;
             default: 
             break;
