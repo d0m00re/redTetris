@@ -6,22 +6,46 @@ import Typography from '@material-ui/core/Typography'
 
 import CenterPage from './../../../Atoms/Layout/CenterPage';//'./../components/Layout/CenterPage'
 
-const GameMenu = ({ username, room, funcRunGame, funcLeaveRoom, owner}) => {
+import { makeStyles } from '@material-ui/core/styles';
+
+
+ 
+const useStyles = makeStyles({
+    flexRow: {
+          padding: '16px',
+          margin: '10px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          backgroundColor: '#fcbf49',
+          width : '90%'
+      }
+  });
+
+const GameMenu = ({ username, room, funcRunGame, funcLeaveRoom, owner }) => {
+    const classes = useStyles();
+
     return (
         <CenterPage>
             <HeaderBar text={`${username} @ ${room?.name}`} variant={'h5'} />
-            {owner &&
-            <Button onClick={funcRunGame}>RUN GAME</Button>
-            }
+            
+            <div className={classes.flexRow}>
             <Typography variant='body1'>Player {room?.userList?.length} / 7</Typography>
             {
                 room?.userList.length > 0 &&
-            room.userList.map((_username) =>
-                <Typography variant='body2'>{_username}</Typography>)
+                room.userList.map((_username) =>
+                    <Typography variant='body2'>{_username}</Typography>)
             }
-            <Button onClick={funcLeaveRoom}>LEAVE ROOM</Button>
+            </div>
+
+            <div>
+                {owner &&
+                    <Button onClick={funcRunGame} color='primary' variant='contained'>Run</Button>
+                }
+                <Button onClick={funcLeaveRoom} color='secondary' variant='contained'>Leave</Button>
+            </div>
         </CenterPage>
     )
 }
 
-export default GameMenu;
+export default GameMenu;  

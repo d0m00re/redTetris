@@ -14,4 +14,4 @@ Primary.args = {
   roomname : 'room1',
   status : 'WAIT_GAME',
   nbPlayer : 5
-};
+}; 

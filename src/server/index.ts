@@ -108,12 +108,7 @@ io.on("connection", function (socket: any) {
       io.emit(SOCKET_PATCH_ROOM, {room : roomUpdate});
     }
 
-
-    // room update - client side
-    console.log('user update');
-    
-    console.log(userUpdate);
-    
+  // user update    
     if (userUpdate !== undefined)
     {
       console.log('user update');

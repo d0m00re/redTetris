@@ -16,6 +16,7 @@ const useStyles = makeStyles({
         alignItems: 'center'
     }
 })
+
 const RoomInfoWtChild = ({children, name, status, nbPlayer}) => {
     const classes = useStyles();
 
