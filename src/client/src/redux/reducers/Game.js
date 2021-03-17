@@ -2,18 +2,15 @@ import _ from "lodash" // Import the entire lodash library
 import {mergeTetriOnMap, deleteFullLine} from './../../logic/tetriLogic';
 
 import {
+  GAME_RESET_CURRMAP,
+  INCR_NB_LINE_BLOCK,
+  SET_NB_LINE_BLOCK,
   UPDATE_FINAL_MAP,
+
   UPDATE_TETRIMINOS_POS,
   TETRI_ROTATION,
   UPDATE_USERNAME,
-  UPDATE_ROOM,
-  SET_NB_LINE_BLOCK,
-  
-} from "../Constant/Constant";
-
-import {
-  GAME_RESET_CURRMAP,
-  INCR_NB_LINE_BLOCK
+  UPDATE_ROOM,  
 } from "../Constant/Game";
 
 import {END_TURN_PUT, ADD_TETRI, RESET_TETRI } from './../Constant/Tetri';

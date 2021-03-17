@@ -72,7 +72,6 @@ io.on("connection", function (socket: any) {
     // set all user alive on the room
     // send back room reset
     // 
-    console.log('PLAY AGAIN');
     let room  = global.rooms.getRoomWithUsername(socket.username);
     let user = global.users.getUser(socket.username);
     let roomName = global.rooms.getRoomNameWithUsername(socket.username);
@@ -92,9 +91,7 @@ io.on("connection", function (socket: any) {
     io.in(roomName).emit(SOCKET_RESET_ROOM);
   });
 
-  socket.on(SOCKET_USER_DEAD, function() {
-    console.log('SOCKET USER DEAD');
-    
+  socket.on(SOCKET_USER_DEAD, function() {    
     // update room with user dead server side
     let userUpdate = global.setUserDeadInRoom(socket.username);
   
@@ -110,9 +107,7 @@ io.on("connection", function (socket: any) {
 
   // user update    
     if (userUpdate !== undefined)
-    {
-      console.log('user update');
-      
+    {      
       io.emit(SOCKET_PATCH_USER, userUpdate);
     }
   })
@@ -133,8 +128,6 @@ io.on("connection", function (socket: any) {
   
 
   socket.on(SOCKET_JOIN_ROOM, function (roomName: string) {
-    console.log('* join a room : ' + roomName);
-
     let newRoom : IRoom;
     let user : IUser | undefined = global.getUserWithId(socket.id); //findUser(socket.id);
  
@@ -157,11 +150,7 @@ io.on("connection", function (socket: any) {
       //currentRoom?.userList.push(socket.username);
       global.rooms.addUser(roomName, socket.username);
 
-
       let response = {room : currentRoom, err : false, errMsg : ''}
-     
-      console.log(SOCKET_CONFIRM_JOIN_ROOM);
-      console.log(currentRoom);
      
       socket.join(roomName);
       user.room = roomName;  
@@ -172,8 +161,6 @@ io.on("connection", function (socket: any) {
   })
 
   socket.on(SOCKET_GET_NEXT_TETRIMINOS, () => {
-    console.log(' get next tetriminos');
-
     let tetri = [tetriGenerator.getRandom(), tetriGenerator.getRandom()];
      let roomName = global.rooms.getRoomNameWithUsername(socket.username);
     io.in(roomName).emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
@@ -199,17 +186,11 @@ io.on("connection", function (socket: any) {
 
    let tetri = [tetriGenerator.getRandom(), tetriGenerator.getRandom()];
    let roomName = global.rooms.getRoomNameWithUsername(socket.username);
-    //socket.to(roomName).emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
-    console.log(SOCKET_GET_NEXT_TETRIMINOS + ' ===> ' + roomName);
-    
+    //socket.to(roomName).emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});    
     io.to(roomName).emit(SOCKET_GET_NEXT_TETRIMINOS, {tetri : tetri, err : false, errMsg : ''});
   })
 
-  socket.on(SOCKET_UPDATE_USER_TETRI_BOARD, (saveTetriBoard : number[][]) => {
-    //console.log(SOCKET_UPDATE_USER_TETRI_BOARD);
-    
-    //console.log(saveTetriBoard);
-    
+  socket.on(SOCKET_UPDATE_USER_TETRI_BOARD, (saveTetriBoard : number[][]) => {    
     let updateTetriBoard = global.setSaveTetriBoard(socket.username, saveTetriBoard);
     let roomName = global.rooms.getRoomNameWithUsername(socket.username);
 
@@ -217,17 +198,13 @@ io.on("connection", function (socket: any) {
     socket.broadcast.to(roomName).emit(SOCKET_PATCH_USER, updateTetriBoard);
   })
 
-  socket.on(SOCKET_LINE_DELETE, (nbLineDelete : number) => {
-    console.log(SOCKET_LINE_DELETE);
-    console.log(nbLineDelete);
-    
+  socket.on(SOCKET_LINE_DELETE, (nbLineDelete : number) => {    
     let roomName = global.rooms.getRoomNameWithUsername(socket.username);
 
     socket.broadcast.to(roomName).emit(SOCKET_LINE_DELETE, nbLineDelete);
   })
 
   socket.on(SOCKET_LEAVE_ROOM, () => {
-    console.log(SOCKET_LEAVE_ROOM);
     let roomName = global.rooms.getRoomNameWithUsername(socket.username);
 
     // server side :
@@ -248,17 +225,11 @@ io.on("connection", function (socket: any) {
     // update room userlist
 
     // return update room,
-    // return update user
-    console.log(global.getIRoomWithRoomname(roomName));
-    
+    // return update user    
     let data = {
       room : global.getIRoomWithRoomname(roomName),
       user : global.getIUserWithUsername(socket.username)
     }
-
-    console.log('--> DATA');
-    console.log(data);
-    
 
     socket.emit(SOCKET_LEAVE_ROOM); // reset user room tmp store
     // if we update a room

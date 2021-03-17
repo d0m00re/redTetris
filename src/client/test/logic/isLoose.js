@@ -32,26 +32,18 @@ describe('Check line complete', function() {
         })
 
         it('loose game - tetri [1,1,1,1]', function() {
-            let ret = isLoose(board2, tetri1, {x : 0, y : -1});
-            console.log('ret : '); console.log(ret);
-            
+            let ret = isLoose(board2, tetri1, {x : 0, y : -1});            
             
             assert.deepEqual(ret, true)
         })
 
         it('not loose game - tetri [1,1,1,1]', function() {
-            let ret = isLoose(board2, tetri1, {x : 5, y : -2});
-            console.log('ret : '); console.log(ret);
-            
-            
+            let ret = isLoose(board2, tetri1, {x : 5, y : -2});            
             assert.deepEqual(ret, false)
         })
 
         it('not loose game - tetri [1,1,1,1]', function() {
-            let ret = isLoose(board2, tetri1, {x : 5, y : 10});
-            console.log('ret : '); console.log(ret);
-            
-            
+            let ret = isLoose(board2, tetri1, {x : 5, y : 10});            
             assert.deepEqual(ret, false)
         })
 
@@ -67,14 +59,7 @@ describe('Check line complete', function() {
             let ret = isLoose(board, tetri2, {x: 10, y : 5});
             assert.deepEqual(ret, false);
         })
-        /*
-        it('false', function() 
-        {
-            let ret = isTetriCasePresent(tetri2, {x: 1, y : 0});
-            assert.deepEqual(ret, false);
-        })
-        */
     })
   });
   
-    
+     

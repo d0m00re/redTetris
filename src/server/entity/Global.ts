@@ -102,9 +102,7 @@ export class Global {
     createRoom(room: IRoom) {
         this.rooms.addRoom(room);
     }
-    leaveRoom(username : string) :boolean {
-        console.log('leave room');
-        
+    leaveRoom(username : string) :boolean {        
         this.users.resetUser(username);
         // delete room if no moore user i nit
         let roomIsDelete = this.rooms.deleteUser(username);

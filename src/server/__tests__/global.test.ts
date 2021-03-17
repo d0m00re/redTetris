@@ -17,8 +17,8 @@ describe('User class test', function() {
         global.users.add('jack');
         global.users.add('john');
 
-        global.createRoom({name : 'room0', uuid : '', userList : [], state : ERoomState.WAIT_USER, owner : 'jack'});       
-        global.createRoom({name : 'room1', uuid : '', userList : [], state : ERoomState.WAIT_USER, owner : 'd0m'});
+        global.createRoom({name : 'room0', uuid : '', userList : [], state : ERoomState.WAIT_USER, owner : 'jack', leaderboard : []});       
+        global.createRoom({name : 'room1', uuid : '', userList : [], state : ERoomState.WAIT_USER, owner : 'd0m', leaderboard : []});
         global.userSubscribeToRoom('room1', 'john');
 
         let room = global.getIRoomWithUsername('john');
@@ -32,8 +32,8 @@ describe('User class test', function() {
         global.users.add('jack');
         global.users.add('john');
 
-        global.createRoom({name : 'room0', uuid : '', userList : [], state : ERoomState.WAIT_USER, owner : 'jack'});       
-        global.createRoom({name : 'room1', uuid : '', userList : [], state : ERoomState.WAIT_USER, owner : 'd0m'});
+        global.createRoom({name : 'room0', uuid : '', userList : [], state : ERoomState.WAIT_USER, owner : 'jack', leaderboard : []});       
+        global.createRoom({name : 'room1', uuid : '', userList : [], state : ERoomState.WAIT_USER, owner : 'd0m', leaderboard : []});
         global.userSubscribeToRoom('room1', 'john');
 
         let room = global.getIRoomWithRoomname('room1');
@@ -47,7 +47,7 @@ describe('User class test', function() {
         global.users.add('jack');
         global.users.add('john');
 
-        global.createRoom({name : 'room0', uuid : '', userList : [], state : ERoomState.WAIT_USER, owner : 'd0m'});
+        global.createRoom({name : 'room0', uuid : '', userList : [], state : ERoomState.WAIT_USER, owner : 'd0m', leaderboard : []});
         global.leaveRoom('d0m');
         expect(undefined).toEqual(global.getIRoomWithRoomname('room0'));       
     });
@@ -59,16 +59,11 @@ describe('User class test', function() {
         global.users.add('jack');
         global.users.add('john');
 
-        global.createRoom({name : 'room0', uuid : '', userList : [], state : ERoomState.WAIT_USER, owner : 'd0m'});
+        global.createRoom({name : 'room0', uuid : '', userList : [], state : ERoomState.WAIT_USER, owner : 'd0m', leaderboard : []});
         global.rooms.addUser('room0', 'jack');
         global.leaveRoom('d0m');
 
         let room = global.getIRoomWithRoomname('room0');
-
-        console.log('------------------------------------------');
-        console.log(global.rooms.gets());
-        
-        
 
         expect(room).toMatchObject({name : 'room0', uuid : '', userList : ['jack'], state : ERoomState.WAIT_USER, owner : 'jack'});       
     });

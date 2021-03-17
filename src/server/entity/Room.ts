@@ -71,10 +71,7 @@ export class Room {
   deleteUser(username: string): void {
     this.userList = this.userList.filter(_user => _user !== username);
     if (this.owner === username && this.userList.length > 0)
-      this.owner = this.userList[0];
-    console.log('---- END');
-    console.log(this.getInfo());
-    
+      this.owner = this.userList[0];    
   }
 
   removeUser(name: string): boolean {
@@ -212,14 +209,7 @@ export class RoomList {
 
   // find room name with username
   getRoomWithUsername(username: string): Room | undefined {
-
-    console.log('Get room with username : ' + username);
-
-
     let roomId = this.rooms.findIndex(room => this.containUsername(room, username));
-
-    console.log('Room id : ' + roomId);
-
 
     if (roomId === -1)
       return undefined;

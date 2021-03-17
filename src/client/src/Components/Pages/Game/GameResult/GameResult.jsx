@@ -29,13 +29,13 @@ const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom }) => {
     return (
         <CenterPage>
             <>
-                <Typography>Result Board</Typography>
+                <Typography variant='h5'>Game report</Typography>
                 <div className={classes.flexRow}>
                     <Typography> Winner : {winner}</Typography>
                     {
                         otherPlayer.length > 0 &&
                         otherPlayer.map((user, index) =>
-                            <Typography>{index + 1}) {user.username}, score : {user.score}</Typography>
+                            <Typography>{index + 1}) {user.username}</Typography>
                         )
                     }
                 </div>

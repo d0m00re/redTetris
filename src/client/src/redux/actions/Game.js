@@ -1,13 +1,8 @@
-import {UPDATE_FINAL_MAP, UPDATE_TMP_MAP, UPDATE_TETRIMINOS_POS,
-    TETRI_ROTATION, UPDATE_USERNAME, UPDATE_ROOM} from '../Constant/Constant';
+import {UPDATE_FINAL_MAP, UPDATE_TETRIMINOS_POS,
+    TETRI_ROTATION, UPDATE_USERNAME, UPDATE_ROOM} from '../Constant/Game';
 
 export const updateFinalMap = payload => ({
     type : UPDATE_FINAL_MAP,
-    payload
-})
-
-export const updateTmpMap  = payload => ({
-    type : UPDATE_TMP_MAP,
     payload
 })
 

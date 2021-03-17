@@ -31,4 +31,4 @@ roomLoby.generalSocketInfo.roomlist = [
 
 roomLoby.user.username = 'JackR';
 
-export default configureStore(roomLoby);
+export default configureStore(roomLoby); 
