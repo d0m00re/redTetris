@@ -78,12 +78,6 @@ export class UserList {
         return this.users[index].getInfo();
     }
 
-    /*
-    setUserAlive(username : string) {
-
-    }
-    */
-
     add(name : string) {
         let newUser  = new User({name : name, room : '', uuid : ''});
         this.users.push(newUser);
