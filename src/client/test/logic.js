@@ -1,6 +1,14 @@
 const assert = require('assert');
 
-const {checkAndPush, checkValidPushTetri, getAllFullLine, deleteFullLine} = require('./../src/logic/tetriLogic');
+const {
+    mergeTetriOnMap,
+    checkValidPushTetri,
+    checkAndPush,
+    getAllFullLine,
+    deleteFullLine,
+    checkAndPushSpace,
+    nbLineWillBeDelete,    
+} = require('./../src/logic/tetriLogic');
 
 const tetriBlue = [
     [
@@ -26,6 +34,25 @@ const tetriBlue = [
   ]
 
 describe('Logic',function() {
+
+    describe('MergeTetriOnMap', () => {
+        it ('check valid merge', () => {
+            let tab = Array(20).fill().map(() => Array(10).fill(0));
+            let result = Array(20).fill().map(() => Array(10).fill(0));
+
+            result[0][0] = 1;
+            result[1][0] = 1;
+            result[1][1] = 1;
+            result[1][2] = 1;
+
+
+            mergeTetriOnMap(tab, tetriBlue[0], {x : 0, y : 0});
+
+            assert.deepEqual(tab, result);
+          //  assert.equal(tab, result);
+          //  expect(tab).deep.to.equal(result);
+        })        
+    })
     
     describe('checkValidPushTetri', function(){
         it('check valid {x: 0, y : 0', function() {
@@ -33,7 +60,7 @@ describe('Logic',function() {
         
             let ret = checkValidPushTetri(tab, tetriBlue[0], {x : 0, y : 0});
             assert.equal(ret, true);
-        }),
+        })
         it('check valid {x: -10, y : -10', function() {
             let tab = Array(20).fill().map(() => Array(10).fill(0));
         
@@ -68,7 +95,7 @@ describe('Logic',function() {
             assert.equal(ret, true);
         })
     })
-    describe('checkAndPush--', function() {
+    describe('CheckAndPush', function() {
         it('check invalid complety outsite', function() {
             let tab = Array(20).fill().map(() => Array(10).fill(0));
         
@@ -88,7 +115,7 @@ describe('Logic',function() {
             assert.equal(ret, true);
         })
     });
-    describe('get all line fullLine', function() {
+    describe('getAllFullLine', function() {
         it('check complete one line', function() {
             let tab = Array(20).fill().map(() => Array(10).fill(0));
             tab[19]=Array(10).fill(1);
@@ -110,5 +137,79 @@ describe('Logic',function() {
             let ret = getAllFullLine(tab);
             assert.deepEqual(ret, [18, 19]);
         })
-    });  
-})
+    });
+    describe('deleteFullLine', function() {
+        it('no delete line', (() => {
+            let tab = Array(20).fill().map(() => Array(10).fill(0));
+            let {newMap} = deleteFullLine(tab, 0);
+
+            assert.deepEqual(tab, newMap);
+        }))
+        it('delete one line', () => {
+            let tab = Array(20).fill().map(() => Array(10).fill(0));
+            let result = Array(20).fill().map(() => Array(10).fill(0))
+            tab[19] = Array(10).fill(1);
+            let {newMap} = deleteFullLine(tab, 0);
+
+            assert.deepEqual(result, newMap);
+        })
+        it('one line block', () => {
+            let test = Array(20).fill().map(() => Array(10).fill(0));
+            let result = Array(20).fill().map(() => Array(10).fill(0));
+            test[19] = Array(10).fill(1);
+            result[19] = Array(10).fill(1);
+            let {newMap} = deleteFullLine(test, 1);
+
+            assert.deepEqual(result, newMap);
+        })
+    })
+    describe('checkAndPushSpace', function() {
+        it ('emptyBoard', () => {
+            let test = Array(20).fill().map(() => Array(10).fill(0));
+            let result = Array(20).fill().map(() => Array(10).fill(0));
+
+            result[18][0] = 1;
+            result[19][0] = 1;
+            result[19][1] = 1;
+            result[19][2] = 1;
+
+            checkAndPushSpace(test, tetriBlue[0], {x : 0, y : 0}, 1);
+            assert.deepEqual(test, result);
+        });
+
+        it ('one line y : 19', () => {
+            let test = Array(20).fill().map(() => Array(10).fill(0));
+            let result = Array(20).fill().map(() => Array(10).fill(0));
+
+            test[19] = Array(10).fill(1);
+            result[19] = Array(10).fill(1);
+
+            result[17][0] = 1;
+            result[18][0] = 1;
+            result[18][1] = 1;
+            result[18][2] = 1;
+
+            checkAndPushSpace(test, tetriBlue[0], {x : 0, y : 0}, 1);
+            assert.deepEqual(test, result);
+        })
+    })
+    describe('nbLineWillBeDelete', function() {
+        it('no delete line', () => {
+            let test = Array(20).fill().map(() => Array(10).fill(0));
+            assert.equal(nbLineWillBeDelete(test), 0)
+        });
+
+        it('1) one delete line', () => {
+            let test = Array(20).fill().map(() => Array(10).fill(0));
+            test[1] = Array(10).fill(1);
+            assert.equal(nbLineWillBeDelete(test), 1)
+        });
+
+        it('2) one delete line', () => {
+            let test = Array(20).fill().map(() => Array(10).fill(0));
+            test[1] = Array(10).fill(1);
+            test[10] = [...Array(9).fill(1), 0]
+            assert.equal(nbLineWillBeDelete(test), 1);
+        });
+    })
+}) 
