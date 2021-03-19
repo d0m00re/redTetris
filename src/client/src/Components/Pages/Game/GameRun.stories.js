@@ -112,6 +112,8 @@ export const MaxUser = () =>
 
 
 
-export default {
+const Info = {
     title : 'Page - Game m - miaou'
 } 
+
+export default Info;

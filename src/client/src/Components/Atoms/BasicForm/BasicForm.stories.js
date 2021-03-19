@@ -7,6 +7,8 @@ export const LoginForm = Template.bind({});
 
 LoginForm.args = {placeholder : 'username', buttonLabel : 'Play !'}
 
-export default {
+const Info = {
     title : 'Atoms/BasicForm'
 }
+
+export default Info;

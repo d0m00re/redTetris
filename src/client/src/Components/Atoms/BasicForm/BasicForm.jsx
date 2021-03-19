@@ -38,6 +38,7 @@ const useStyles = makeStyles({
     padding: '8px 4px'
   },
   flexRow: {
+        width : '95%',
         margin: '5px',
         padding: '16px',
         display: 'flex',

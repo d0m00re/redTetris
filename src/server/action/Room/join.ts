@@ -5,6 +5,10 @@ import {
 } from './../../constant/socket';
 
 import {
+  MAX_USER_BY_ROOM
+} from './../../constant/config';
+
+import {
     Global
 } from '../../entity/Global';
 
@@ -20,7 +24,19 @@ const join = (io : any, socket : any, global : Global, roomName: string) => {
     let newRoom : IRoom;
     let user : IUser | undefined = global.getUserWithId(socket.id); //findUser(socket.id);
  
-    if (user === undefined) return 0;
+    let currRoom = global.rooms.getRoomWithRoomName(roomName);
+
+    if (currRoom !== undefined && currRoom.userList.length >= MAX_USER_BY_ROOM)
+    {
+      return (0);
+    }
+    if (user === undefined) {
+      socket.emit('SOCKET_ERROR', {msg : 'User not found'});
+      return (0);
+    }
+
+    //if (global.rooms.roomExist(e)
+
       // unsubscribe to room and reset user.room
     if (user.room !== '')
     {

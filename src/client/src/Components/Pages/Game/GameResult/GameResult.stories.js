@@ -9,6 +9,8 @@ export const GameResultTest = () =>
         funcLeaveRoom={null}
     />;
 
-export default {
+const Info = {
     title : 'Pages/Game Result'
-} 
+};
+
+export default Info;

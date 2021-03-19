@@ -54,7 +54,7 @@ app.get("/", (req: any, res: any) => {
 io.on("connection", function (socket: any) {
 
   socket.on(SOCKET_SEND_USERNAME, function (username: string) {
-    login(io, socket, username, global);
+    login(io, socket, global, username);
   });
 
 

@@ -19,17 +19,17 @@ const checkValidPushTetri  = (tetriMap, tetri, pos) =>{
                 return(false);
         }
     }
-    return (true);
+    return (true); 
 }
 
 // check case on our current tetri
 
 
-const  mergeTetriOnMap = (tetriMap, tetri, pos, value = 1) =>{
+const  mergeTetriOnMap = (tetriMap, tetri, pos) =>{
     for (let y = 0; y < tetri.length;y++){
         for (let x = 0; x < tetri.length;x++) {
             if (!isOutPos(tetriMap, pos, {x:x,y:y}))
-            tetriMap[y + pos.y][x + pos.x] = (tetri[y][x]) ? tetri[y][x] : tetriMap[y + pos.y][x + pos.x];//tetriMap[y + pos.y][x + pos.x] = (tetri[y][x]) ? value : tetriMap[y + pos.y][x + pos.x];
+             tetriMap[y + pos.y][x + pos.x] = (tetri[y][x]) ? tetri[y][x] : tetriMap[y + pos.y][x + pos.x];//tetriMap[y + pos.y][x + pos.x] = (tetri[y][x]) ? value : tetriMap[y + pos.y][x + pos.x];
         }
     }
 }
@@ -91,7 +91,7 @@ const deleteFullLine = (myMap, nbLineBlock) => {
 }
 
 const nbLineWillBeDelete = (myMap) => {
-    return (myMap.filter(line => !(line.includes(0)))).length;
+    return (myMap.filter(line => !(line.includes(0)))).length; 
     //return ();
 }
 

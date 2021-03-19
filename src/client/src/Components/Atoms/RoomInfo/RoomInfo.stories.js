@@ -2,10 +2,12 @@ import React from 'react';
 
 import RoomInfo from './RoomInfo';
 
-export default {
+const Info=  {
   title: 'Atoms/Roominfo',
   component: RoomInfo,
 };
+
+export default Info;
 
 const Template = (args) => <RoomInfo {...args} />;
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles({
     root: {

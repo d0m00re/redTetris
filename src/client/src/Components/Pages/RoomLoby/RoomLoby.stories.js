@@ -15,6 +15,8 @@ reduxUpdate.args = {
     }
 }
 
-export default {
+const Info = {
     title : 'Pages/RoomLoby'
-} 
+}
+
+export default Info;

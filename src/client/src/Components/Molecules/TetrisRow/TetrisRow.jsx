@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import CaseColor from './../../Atoms/CaseColor/CaseColor';
 
 const TetrisRow = ({row}) => {

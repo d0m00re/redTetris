@@ -8,6 +8,8 @@ tab[10] = Array(10).fill(2);
 
 export const ByDefault = () => <BoardWithoutGameLoop currentBoard={tab} />;
 
-export default {
+const Info = {
     title: 'Game Board'
 };
+
+export default Info;

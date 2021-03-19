@@ -10,6 +10,8 @@ tab[19] = Array(10).fill(2);
 
 export const ByDefault = () => <ViewBoardAdv currentBoard={tab} />;
 
-export default {
+const Info = {
     title: 'Game Board Adv'
 };
+
+export default Info;

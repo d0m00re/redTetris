@@ -23,7 +23,6 @@ const useGameLoop = () => {
     const alive = useSelector(state => state.user.alive);
     const tetriList = useSelector(state => state.game.tetriList);
     const currRotation = useSelector(state => state.game.currRotation);
-    const nbLineBlock = useSelector(state => state.game.nbLineBlock);
     const dispatch = useDispatch();
 
     const fallAlgo = () => {

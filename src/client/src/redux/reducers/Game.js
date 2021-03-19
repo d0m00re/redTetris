@@ -16,7 +16,7 @@ import {
 import {END_TURN_PUT, ADD_TETRI, RESET_TETRI } from './../Constant/Tetri';
 
  
-const initialState = {
+export const initialState = {
   currentKey: '',
   username: '',
   roomname: '', 
@@ -31,7 +31,6 @@ const initialState = {
   gameRunning: true, // false : game stop
   gameEnd: false,
 };
-
 
 const GameReducer = (state = initialState, action) => {
   switch (action.type) {

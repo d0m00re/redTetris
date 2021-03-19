@@ -12,7 +12,7 @@ const RoomLoby = ({username}) => {
             <FormCreateRoom />
             <SelectorRooms />
         </CenterPage>
-    )
-}
+    ) 
+} 
 
 export default RoomLoby

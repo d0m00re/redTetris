@@ -9,8 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import ViewBoardAdv from '../../Organisms/ViewBoardAdv/ViewBoardAdv';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { requirePropFactory } from '@material-ui/core';
-
 
 const useStyles = makeStyles({
     root: {
