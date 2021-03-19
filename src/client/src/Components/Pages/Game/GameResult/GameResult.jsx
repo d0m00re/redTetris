@@ -2,7 +2,8 @@ import React from 'react'
 
 import CenterPage from './../../../Atoms/Layout/CenterPage';//'./../components/Layout/CenterPage'
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+
+import TwoButton from '../../../Molecules/TwoButton/TwoButton';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -39,13 +40,11 @@ const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom }) => {
                         )
                     }
                 </div>
-                <div>
-                    <Button color='primary' variant='contained' onClick={funcPlayAgain}>Play Again!</Button>
-                    <Button color='secondary' variant='contained' onClick={funcLeaveRoom}>Leave</Button>
-                </div>
+                <TwoButton label1={'Play Again!'} label2 = {'Leave'} func1={funcPlayAgain} func2={funcLeaveRoom} />
             </>
         </CenterPage>
     )
 }
 
 export default GameResult;
+  

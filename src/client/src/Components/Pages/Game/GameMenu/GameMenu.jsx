@@ -8,6 +8,8 @@ import CenterPage from './../../../Atoms/Layout/CenterPage';//'./../components/L
 
 import { makeStyles } from '@material-ui/core/styles';
 
+import TwoButton from '../../../Molecules/TwoButton/TwoButton';
+
 
  
 const useStyles = makeStyles({
@@ -37,13 +39,15 @@ const GameMenu = ({ username, room, funcRunGame, funcLeaveRoom, owner }) => {
                     <Typography variant='body2'>{_username}</Typography>)
             }
             </div>
-
+        
+            {owner &&
+            <TwoButton label1={'Run'} label2={'Leave'} func1={funcRunGame} func2={funcLeaveRoom}/>
+            }
+            {!owner &&
             <div>
-                {owner &&
-                    <Button onClick={funcRunGame} color='primary' variant='contained'>Run</Button>
-                }
                 <Button onClick={funcLeaveRoom} color='secondary' variant='contained'>Leave</Button>
             </div>
+            }
         </CenterPage>
     )
 }
