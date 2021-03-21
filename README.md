@@ -4,13 +4,31 @@
 ## Multiplayer online tetris.
 
 ## Server
-cd src/server; npm install; npm start
+
+```js
+npm run srv-install; npm run srv-start;
+```
 
 ## Client
-cd src/client; npm install; npm start
+```js
+npm run clt-install; npm run clt-start;
+```
+
+## Run test
+#### server
+```js
+npm run srv-test
+```
+####client
+```js
+npm run clt-test
+```
+
 
 ### storybook
-cd src/client; npm run storybook
+```js
+npm run clt-storybook;
+```
 
 ## TECHNO
 ## FRONT
