@@ -3,6 +3,8 @@ import TetrisRowAdv from '../../Molecules/TetriRowAdv/TetriRowAdv'
  
 import { makeStyles } from '@material-ui/core/styles';
 
+import skull from './../../../ressource/svg/skull.svg'
+
 const useStyles = makeStyles({
     root: {
         //backgroundColor : '#333',
@@ -17,6 +19,10 @@ const useStyles = makeStyles({
  const ViewBoardAdv = ({currentBoard}) => {
    const styles = useStyles();
      return (
+       <>
+       {/*}
+       <img src={skull} alt="player death" />
+     */}
        <div className={styles.root}>
         {currentBoard.map((row, indexRow) => (
           <div className={styles.flexRow} key={"rowrow" + indexRow}>
@@ -24,6 +30,7 @@ const useStyles = makeStyles({
           </div>
         ))}
         </div>
+        </>
      )
  }
  
