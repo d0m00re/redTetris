@@ -1,6 +1,6 @@
 import { UserList, IUser, User } from './User';
 import { IRoom, Room, RoomList, ERoomState } from './Room';
-
+ 
 export interface IGlobal {
     users: UserList;
     rooms: RoomList;

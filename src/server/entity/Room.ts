@@ -1,4 +1,4 @@
-import { IUser, UserList } from './User';
+import diffString from './../utils/diffString';
 
 export enum ERoomState {
   WAIT_USER = 'WAIT_USER',
@@ -91,6 +91,21 @@ export class Room {
   }
 
   stop(): void {
+
+    // multiplier case
+    if (this.userList.length !== this.leaderboard.length)
+    {
+      // find winner and add it to the leaderboard
+      //let winner = this.userList.filter(_user => _user.filter(elem => elem));
+      let win = diffString(this.userList, this.leaderboard.map(elem => elem.username))?.[0];
+
+      if (win) {
+        this.leaderboardAdd({username : win, score : 679});
+      }
+    }
+
+    console.log('Final leaderboard\n');
+    console.log(this.leaderboard);    
     this.state = ERoomState.END_GAME;
   }
 

@@ -24,6 +24,25 @@ const useStyles = makeStyles({
     }
 });
 
+const MultiplePlayer = ({ winner, otherPlayer }) => {
+    return (
+        <>
+            <Typography> Winner : {otherPlayer[0].username}</Typography>
+            {
+                otherPlayer.length > 0 &&
+                otherPlayer.filter((e, i) => i !== 0).map((user, index) =>
+                    <Typography>{index + 1}) {user.username}</Typography>
+                )
+            }
+        </>);
+}
+
+const SoloPlayer = () => {
+    return (
+        <Typography> Looser!</Typography>
+    );
+}
+
 const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom }) => {
     const classes = useStyles();
 
@@ -32,19 +51,12 @@ const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom }) => {
             <>
                 <Typography variant='h5'>Game report</Typography>
                 <div className={classes.flexRow}>
-                    <Typography> Winner : {winner}</Typography>
-                    {
-                        otherPlayer.length > 0 &&
-                        otherPlayer.map((user, index) =>
-                            <Typography>{index + 1}) {user.username}</Typography>
-                        )
-                    }
+                   <MultiplePlayer winner = {winner} otherPlayer = {otherPlayer}/>
                 </div>
-                <TwoButton label1={'Play Again!'} label2 = {'Leave'} func1={funcPlayAgain} func2={funcLeaveRoom} />
+                <TwoButton label1={'Play Again!'} label2={'Leave'} func1={funcPlayAgain} func2={funcLeaveRoom} />
             </>
         </CenterPage>
     )
 }
 
 export default GameResult;
-  
