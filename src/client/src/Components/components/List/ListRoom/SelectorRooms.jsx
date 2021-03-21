@@ -44,7 +44,7 @@ const SelectorRooms = () => {
             <Typography variant='h5' className={classes.typography}>List of room</Typography>
             {
                 roomlist.map(_room =>
-                        <RoomInfoWtChild roomname={_room.name} status={_room.state} nbPlayer={(_room?.userList?.length === undefined) ? 0 : _room?.userList?.length} >
+                        <RoomInfoWtChild name={_room.name} status={_room.state} nbPlayer={(_room?.userList?.length === undefined) ? 0 : _room?.userList?.length} >
                             <div>
                                 <Button className={classes.button} onClick={() => submitRoomname(_room.name)}>JOIN</Button>
                             </div>
