@@ -11,9 +11,10 @@ import {
         SOCKET_PATCH_ROOM,
         SOCKET_DELETE_ROOM,
         SOCKET_RESET_ROOM,
-        SOCKET_LINE_DELETE} from './redux/Constant/SocketIOProtocol';
+        SOCKET_LINE_DELETE,
+        SOCKET_USER_LOGOUT} from './redux/Constant/SocketIOProtocol';
 import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM, SET_USER_ALIVE} from './redux/Constant/User';
-import {SET_ROOMS, ADD_ROOM, PATCH_LIST_ROOM, DELETE_ROOM, SET_LIST_USERS, PATCH_USER} from './redux/Constant/GeneralSocketInfo';
+import {SET_ROOMS, ADD_ROOM, PATCH_LIST_ROOM, DELETE_ROOM, SET_LIST_USERS, PATCH_USER, DELETE_USER_FROM_USERLIST} from './redux/Constant/GeneralSocketInfo';
 import {ADD_TETRI} from './redux/Constant/Tetri';
 import {SET_GAME_ROOM, GAME_ROOM_RESET} from './redux/Constant/GameRoom';
 
@@ -130,20 +131,25 @@ const initApiSocket = (store) => {
       });
 
     socket.on(SOCKET_LEAVE_ROOM, () => {
-      console.log('fuck of');
-       
+        
       dispatch({type : GAME_ROOM_RESET});
       dispatch({type : GAME_RESET_CURRMAP});
-    })
+    });
 
     socket.on(SOCKET_RESET_ROOM, () => {
       dispatch({type : GAME_RESET_CURRMAP});
-    })
+    });
 
     socket.on(SOCKET_DELETE_ROOM, (roomName) => {
       console.log('DELETE A ROOM')
       dispatch({type : DELETE_ROOM, payload : roomName});
-    })    
+    });
+
+    socket.on(SOCKET_USER_LOGOUT, (username) => {
+      console.log('SOCKET LOG OUT --> ' + username);
+      dispatch({type : DELETE_USER_FROM_USERLIST, payload : username});
+      
+    })
 }
 
 export default initApiSocket;

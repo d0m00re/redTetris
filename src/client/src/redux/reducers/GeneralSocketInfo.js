@@ -1,7 +1,14 @@
 import * as io from 'socket.io-client';
 import {WS_BASE} from './../../config/config';
 
-import {SET_ROOMS, PATCH_LIST_USERS, SET_LIST_USERS, PATCH_LIST_ROOM, DELETE_ROOM, ADD_ROOM, PATCH_USER} from '../Constant/GeneralSocketInfo';
+import {SET_ROOMS,
+    PATCH_LIST_USERS,
+    SET_LIST_USERS,
+    PATCH_LIST_ROOM,
+    DELETE_ROOM,
+    ADD_ROOM,
+    PATCH_USER,
+    DELETE_USER_FROM_USERLIST} from '../Constant/GeneralSocketInfo';
 
 
 export const initialState = {
@@ -21,13 +28,24 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 roomlist : [...state.roomlist, action.payload]
-            }
+            };
+
+        case DELETE_USER_FROM_USERLIST:
+            let newUserList = state.userlist.filter(_user => _user?.name !== action.payload);
+            
+            console.log('New user list without : ' + action.payload);
+            console.log(newUserList);
+            
+            return {
+                ...state,
+                userlist : newUserList
+            };
         
         case SET_ROOMS:             
             return {
                 ...state,
                 roomlist : action.payload
-            }
+            };
         case DELETE_ROOM:
             console.log('reducer delete room : ' + action.payload);
             
@@ -35,7 +53,7 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 roomlist : tmpRoomList 
-            }
+            };
         case PATCH_LIST_ROOM:
             let newRoom = action.payload;
             
@@ -53,7 +71,7 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 roomlist : tmpListRoom
-            }
+            };
 
         case SET_LIST_USERS:
             return {
@@ -78,7 +96,7 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userlist : tmpUserList
-            }
+            };
 
         case PATCH_USER:            
             newUser = action.payload;
@@ -96,7 +114,7 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userlist : tmpUserList
-            }
+            };
 
         default:
             return state;

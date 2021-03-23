@@ -10,7 +10,17 @@ import {
 } from '../../entity/Global';
 
 const leaveRoom = (io : any, socket : any, global : Global) => {
-    let roomName = global.rooms.getRoomNameWithUsername(socket.username);
+    
+  console.log('leave room: ')
+  let roomName = global.rooms.getRoomNameWithUsername(socket.username);
+
+  console.log(roomName);
+  
+
+  if (roomName === undefined){
+    console.log('User ' + socket.username) + ' have no room : ';
+    return (0);    
+  }
 
     // server side :
     //    unsubscribe user
@@ -38,6 +48,9 @@ const leaveRoom = (io : any, socket : any, global : Global) => {
 
     socket.emit(SOCKET_LEAVE_ROOM); // reset user room tmp store
     // if we update a room
+    console.log(SOCKET_PATCH_ROOM);
+    console.log(data.room);
+    
     io.emit(SOCKET_PATCH_ROOM, {room : data.room});
 
     // if no moore use in it we delete it

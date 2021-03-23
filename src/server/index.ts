@@ -20,6 +20,8 @@ import {
 } from './constant/socket';
 
 import login from './action/Login/login';
+import logout from './action/Login/logout';
+
 import leaveRoom from "./action/Room/leave";
 import joinRoom from './action/Room/join';
 import nextTetriminos from './action/Game/Tetriminos/Next';
@@ -52,6 +54,11 @@ app.get("/", (req: any, res: any) => {
 });
 
 io.on("connection", function (socket: any) {
+
+  socket.on('disconnecting', () => {
+    console.log('user disconnect : ' + socket.username);
+    logout(io, socket, global);
+  })
 
   socket.on(SOCKET_SEND_USERNAME, function (username: string) {
     login(io, socket, global, username);
