@@ -37,7 +37,7 @@ const useStyles = makeStyles({
     }
 })
 
-const GameRun = ({ newTmpMap, tetriList, userList, user, userlist, noGameLoop = false }) => {
+const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noGameLoop = false }) => {
     const styles = useStyles();
 
     return (
@@ -60,13 +60,13 @@ const GameRun = ({ newTmpMap, tetriList, userList, user, userlist, noGameLoop = 
                         <ViewBoard currentBoard={tetriList[1].shape[0]} /></>
                 }
                 {
-                    (userList?.length > 1) &&
+                    (userListRoom?.length > 1) &&
                     <div className={styles.containerFlexAdv}>
                         {
-                            userList.filter(username => username !== user.username).map(username => <>
+                            userListRoom.filter(username => username !== user.username).map(username => <>
                                 <div className={styles.containerFlexItemAdv}>
                                     <Typography variant='body2'>{username}</Typography>
-                                    <ViewBoardAdv currentBoard={userlist.filter(user => user.name === username)[0].saveTetriBoard} usersDeath={user?.room?.leaderboard} />
+                                    <ViewBoardAdv currentBoard={userListServer.filter(user => user.name === username)[0].saveTetriBoard} usersDeath={user?.room?.leaderboard} username={username} />
                                 </div>
                             </>)
                         }

@@ -15,8 +15,8 @@ const HomeGame = () => {
     const {game} = useSelector(state => state);
 
     const {userlist} = useSelector(state => state.generalSocketInfo);
-    const user = useSelector(state => state.user);
-    const userList = useSelector(state => state?.user?.room?.userList);
+    const userListServer = useSelector(state => state.user);
+    const userListRoom = useSelector(state => state?.gameRoom?.userList);
 
     useEffect(() => {
         if (game.tetriList.length){
@@ -32,9 +32,9 @@ const HomeGame = () => {
                 alive &&
                 <GameRun newTmpMap={newTmpMap}
                          tetriList={tetriList}
-                         userList = {userList}
-                         user = {user}
-                         userlist = {userlist} />
+                         userListRoom = {userListRoom}
+                         user = {userListServer}
+                         userListServer = {userlist} />
             }
 
             {
