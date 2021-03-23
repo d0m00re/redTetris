@@ -19,7 +19,7 @@ const useGameLoop = () => {
     let [action] = useActionUser();
 
     const state = useSelector(state => state.game); //nbLineBlock
-    const room = useSelector(state => state.user.room);
+    const room = useSelector(state => state.gameRoom);
     const alive = useSelector(state => state.user.alive);
     const tetriList = useSelector(state => state.game.tetriList);
     const currRotation = useSelector(state => state.game.currRotation);

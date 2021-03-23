@@ -1,5 +1,4 @@
 export const SET_ROOMS = 'SET_MULT_ROOMLIST';
-export const SET_ROOM = 'SET_ROOM';
 
 export const ADD_A_ROOM = 'ADD_A_ROOM';
 export const SET_ALL_ROOMS = 'SET_ALL_ROOMS';

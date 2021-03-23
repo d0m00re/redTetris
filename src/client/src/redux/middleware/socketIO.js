@@ -34,7 +34,7 @@ const socketIoMiddleware = ({ getState }) => {
 
         //run game
         const socketRunGame = () => {
-            socket.emit(SOCKET_RUN_GAME, state.user.room.name);
+            socket.emit(SOCKET_RUN_GAME, state.gameRoom.name);
         }
 
         const getNextTetriminos = () => {

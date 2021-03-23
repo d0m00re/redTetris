@@ -17,8 +17,7 @@ import RoomLoby from './RoomLoby/RoomLoby'
 
 const Home = () => {
     let { username, isConnect } = useSelector(state => state.user);
-    let { room } = useSelector(state => state.user);
-    //let room.state = useSelector(state => state.user.state);
+    let room = useSelector(state => state.gameRoom);
 
     let dispatch = useDispatch();
 
@@ -30,15 +29,15 @@ const Home = () => {
 
     return (
         <>
-            {(!isConnect && room === null) &&
+            {(!isConnect && room.name.length === 0) &&
                <Login />
             }
-            {(isConnect && room === null) &&
+            {(isConnect &&  room.name.length === 0) &&
                 <RoomLoby username={username} />
             }
 
             { 
-                (room !== null && room !== undefined) &&
+                ((isConnect &&  room.name.length > 0)) &&
                 <>
                     {
                         (room.userList.filter(_user => _user === username) && room.state === 'WAIT_USER') &&

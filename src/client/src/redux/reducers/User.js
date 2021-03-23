@@ -3,9 +3,7 @@ import {
     SET_USERNAME,
     SET_ROOMNAME_FORM,
     SET_IS_CONNECT,
-    SET_ROOM,
     SET_USER_ALIVE,
-    USER_RESET_ROOM
 } from '../Constant/User';
 
 export const initialState = {
@@ -44,29 +42,10 @@ const UserReducer = (state = initialState, action) => {
                 isConnect: action.payload
             }
 
-        case SET_ROOM:            
-            console.log('SET ROOM');
-            console.log(action.payload)
-            
-            //return (state.room.name === action.payload.name) ?
-            //return (action.payload.userList.findIndex(user => user === state.username) !== -1) ?
-            return (
-            {
-                ...state,
-                room: action.payload
-            });// : state
-
         case SET_USER_ALIVE:
             return ({
                 ...state,
                 alive : action.payload
-            });
-
-        case USER_RESET_ROOM:
-            return ({
-                ...state,
-                room : null,
-                //alive : true
             });
 
         default:

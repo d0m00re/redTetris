@@ -9,6 +9,7 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import GameReducer from './reducers/Game';
 import GeneralSocketInfoReducer from './reducers/GeneralSocketInfo';
 import UserReducer from './reducers/User';
+import GameRoomReducer from './reducers/GameRoom';
 
 import SocketClient from './middleware/socketIO';
 
@@ -16,10 +17,8 @@ export const reducers = combineReducers({
   game: GameReducer,
   generalSocketInfo : GeneralSocketInfoReducer,
   user : UserReducer,
+  gameRoom : GameRoomReducer
 });
-
-// store.js
-//                            );
 
 export function configureStore(initialState = {}) {  
 

@@ -1,0 +1,9 @@
+* limiter la partie a 7 joueurs
+* no user duplication
+* no room duplication
+
+
+* ajouter un espace entre list of room et le form au dessus
+* ajouter un espace entre les boutons
+* room name same size of the element behind
+* fixer le nombre d utilisateur vue dans la room loby

@@ -7,5 +7,3 @@ export const SET_IS_CONNECT = 'SET_IS_CONNECT';
 export const SET_ERROR = 'SET_ERROR';
 
 export const SET_USER_ALIVE = 'SET_USER_ALIVE';
-
-export const USER_RESET_ROOM = 'USER_RESET_ROOM';

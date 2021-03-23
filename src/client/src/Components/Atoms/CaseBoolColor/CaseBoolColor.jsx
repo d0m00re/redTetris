@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
@@ -17,14 +17,15 @@ const useStyles = makeStyles({
     
 })
 
-const CaseBoolColor = ({caseValue}) => {
+const CaseBoolColor = ({caseValue, indexRow = 0, indexCase = 0}) => {
     const classes = useStyles();
 
     return (
-        <div key={'casouille'}
+        <div key={`caseboolColor${indexRow}-${indexCase}`}
               className={clsx(classes.root, (caseValue !== 0) ? classes.trueColor : classes.falseColor)}>
         </div>
     )
 }
 
-export default CaseBoolColor
+export default React.memo(CaseBoolColor);
+ 

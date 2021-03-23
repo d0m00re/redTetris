@@ -1,17 +1,10 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 
 import Typography from '@material-ui/core/Typography';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 const ListRooms = () => {
     let roomlist = useSelector(state => state.generalSocketInfo.roomlist);
-
-    useEffect(() => {
-        console.log('********** room list');
-        console.log(roomlist);
-        
-        
-    }, [roomlist]);
 
     return (
         <div>

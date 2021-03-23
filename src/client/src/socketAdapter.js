@@ -12,9 +12,10 @@ import {
         SOCKET_DELETE_ROOM,
         SOCKET_RESET_ROOM,
         SOCKET_LINE_DELETE} from './redux/Constant/SocketIOProtocol';
-import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM, SET_USER_ALIVE, USER_RESET_ROOM} from './redux/Constant/User';
-import {SET_ROOMS, ADD_ROOM, PATCH_LIST_ROOM, DELETE_ROOM, SET_ROOM, SET_LIST_USERS, PATCH_USER} from './redux/Constant/GeneralSocketInfo';
+import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM, SET_USER_ALIVE} from './redux/Constant/User';
+import {SET_ROOMS, ADD_ROOM, PATCH_LIST_ROOM, DELETE_ROOM, SET_LIST_USERS, PATCH_USER} from './redux/Constant/GeneralSocketInfo';
 import {ADD_TETRI} from './redux/Constant/Tetri';
+import {SET_GAME_ROOM, GAME_ROOM_RESET} from './redux/Constant/GameRoom';
 
 import {GAME_RESET_CURRMAP, INCR_NB_LINE_BLOCK} from './redux/Constant/Game';
 
@@ -22,7 +23,6 @@ import {GAME_RESET_CURRMAP, INCR_NB_LINE_BLOCK} from './redux/Constant/Game';
 const initApiSocket = (store) => {
     const dispatch = store.dispatch;
     const socket = store.getState().generalSocketInfo.socket; 
-    const user = store.getState().user;   
   
     socket.on('connect', () => {console.log('connect success : ');});// connection
 
@@ -52,7 +52,7 @@ const initApiSocket = (store) => {
         }
         else{
           // svae current user room
-            dispatch({type : SET_ROOM, payload : resp.room})
+            dispatch({type : SET_GAME_ROOM, payload : resp.room})
             dispatch({type : SET_ROOMNAME_FORM, payload : ''})
         }
     });
@@ -80,16 +80,10 @@ const initApiSocket = (store) => {
       console.log('SOCKET UPDATE ROOM');
       
       if (resp.error) return resp.errorMsg;
-
-      //console.log(user.room.name + ' === ' + resp.room.name);
-     // console.log(resp.room.room);
-   //   if (user.room.name === resp.room.name )
-  
-   
    
   // if (resp.room.userList.filter(_user => _user === user.username).length === 1)
   if (resp.room.userList.filter(_user => _user === store.getState().user.username).length === 1)
-    dispatch({type : SET_ROOM, payload : resp.room});
+    dispatch({type : SET_GAME_ROOM, payload : resp.room});
       //dispatch
       dispatch({type : PATCH_LIST_ROOM, payload : resp.room});
       // need update room list
@@ -131,12 +125,14 @@ const initApiSocket = (store) => {
       console.log('SOCKET PATCH ROOM: ');
       console.log(resp);
       if (resp.room.userList.findIndex(_username => _username === store.getState().user.username) !== -1)
-        dispatch({type : SET_ROOM, payload : resp.room});
+        dispatch({type : SET_GAME_ROOM, payload : resp.room});
         dispatch({type : PATCH_LIST_ROOM, payload : resp.room});
       });
 
     socket.on(SOCKET_LEAVE_ROOM, () => {
-      dispatch({type : USER_RESET_ROOM});
+      console.log('fuck of');
+       
+      dispatch({type : GAME_ROOM_RESET});
       dispatch({type : GAME_RESET_CURRMAP});
     })
 
@@ -147,16 +143,7 @@ const initApiSocket = (store) => {
     socket.on(SOCKET_DELETE_ROOM, (roomName) => {
       console.log('DELETE A ROOM')
       dispatch({type : DELETE_ROOM, payload : roomName});
-    })
-
-      /*
-    socket.on(SOCKET_LEAVE_ROOM, (resp) => {
-      console.log('socketAdapter : ' + SOCKET_LEAVE_ROOM);
-      console.log(resp);
-      
-    })
-    */
-    
+    })    
 }
 
 export default initApiSocket;

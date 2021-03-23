@@ -8,7 +8,8 @@ tab[17] = [...Array(8).fill(2), 0, 0];
 tab[18] = [...Array(9).fill(2), 0];
 tab[19] = Array(10).fill(2);
 
-export const ByDefault = () => <ViewBoardAdv currentBoard={tab} />;
+export const Death = () => <ViewBoardAdv currentBoard={tab} username='jack' usersDeath={['miaou', 'jack']} />;
+export const Alive = () => <ViewBoardAdv currentBoard={tab} username='jack' usersDeath={['miaou']} />;
 
 const Info = {
     title: 'Game Board Adv'

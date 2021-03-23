@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     },
     containerFlexItemAdv: {
         width : '33%',
-        margin : '8px'
+        margin : '8px' 
     }
 })
 
@@ -66,7 +66,7 @@ const GameRun = ({ newTmpMap, tetriList, userList, user, userlist, noGameLoop = 
                             userList.filter(username => username !== user.username).map(username => <>
                                 <div className={styles.containerFlexItemAdv}>
                                     <Typography variant='body2'>{username}</Typography>
-                                    <ViewBoardAdv currentBoard={userlist.filter(user => user.name === username)[0].saveTetriBoard} />
+                                    <ViewBoardAdv currentBoard={userlist.filter(user => user.name === username)[0].saveTetriBoard} usersDeath={user?.room?.leaderboard} />
                                 </div>
                             </>)
                         }
