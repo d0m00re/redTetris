@@ -17,6 +17,8 @@ const HomeGame = () => {
     const {userlist} = useSelector(state => state.generalSocketInfo);
     const userListServer = useSelector(state => state.user);
     const userListRoom = useSelector(state => state?.gameRoom?.userList);
+    const userListDeath = useSelector(state => state?.gameRoom?.leaderboard);
+
 
     useEffect(() => {
         if (game.tetriList.length){
@@ -34,7 +36,9 @@ const HomeGame = () => {
                          tetriList={tetriList}
                          userListRoom = {userListRoom}
                          user = {userListServer}
-                         userListServer = {userlist} />
+                         userListServer = {userlist}
+                         userListDeath = {userListDeath}         
+                />
             }
 
             {

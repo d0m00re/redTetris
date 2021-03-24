@@ -29,15 +29,16 @@ const useStyles = makeStyles({
     containerFlexAdv: {
         display : 'grid',
         gridTemplateColumns: 'repeat(3, 100px)',
-        gridTemplateRows: 'repeat(2, 120px)'
+        gridTemplateRows: 'repeat(2, 180px)'
     },
     containerFlexItemAdv: {
-        width : '33%',
-        margin : '8px' 
+        //width : '33%',
+        //margin : '8px'
+        alignSelf: 'center' 
     }
 })
 
-const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noGameLoop = false }) => {
+const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noGameLoop = false, userListDeath = [] }) => {
     const styles = useStyles();
 
     return (
@@ -66,10 +67,10 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noG
                             userListRoom.filter(username => username !== user.username).map(username => <>
                                 <div className={styles.containerFlexItemAdv}>
                                     <Typography variant='body2'>{username}</Typography>
-                                    <ViewBoardAdv currentBoard={userListServer.filter(user => user.name === username)[0].saveTetriBoard} usersDeath={user?.room?.leaderboard} username={username} />
+                                    <ViewBoardAdv currentBoard={userListServer.filter(user => user.name === username)[0].saveTetriBoard} userListDeath={userListDeath} username={username} />
                                 </div>
                             </>)
-                        }
+                        } 
                     </div>
                 } 
             </div>

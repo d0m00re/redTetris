@@ -1,6 +1,8 @@
 import React from 'react';
 import GameRun from './GameRun';
 
+const Template = (args) => <GameRun {...args} />
+
 let tetri1 = {
     shape : [[
         [2,0,0],
@@ -35,7 +37,7 @@ newTmpMap[18] = [...Array(9).fill(2), 0];
 newTmpMap[19] = Array(10).fill(2);
 
 let tetriList = [tetri1, tetri1, tetri1];
-let userList = ['d0m', 'jack', 'john'];
+let userListRoom = ['d0m', 'jack', 'john'];
 let user = {
     usernameForm: "",
     roomnameForm: "",
@@ -50,22 +52,32 @@ let user = {
         state: "RUNING_GAME"
     }
    }
-let userlist = [
+let userListServer = [
     {name : 'd0m',  room : 'room1', uuid : 'gfdgf', alive : true, saveTetriBoard : newTmpMap},
     {name : 'jack', room : 'room1', uuid : 'erte', alive : true, saveTetriBoard : newTmpMap},
     {name : 'john', room : 'room1', uuid : 'dfg', alive : true, saveTetriBoard : newTmpMap},
 ];
 
+let userListDeath= ['jack'];
 
-export const ByDefault = () =>
-    <GameRun
-        newTmpMap = {newTmpMap}
-        tetriList = {tetriList}
-        userList = {userList}
-        user = {user}
-        userlist = {userlist}
-        noGameLoop = {true}
-    />
+//export const SoloPlayer = Template.bind({});
+export const BasicCase = Template.bind({});
+export const ExtremCase = Template.bind({});
+export const UserDeath = Template.bind({});
+
+BasicCase.args = {
+    newTmpMap : newTmpMap,
+    tetriList : tetriList,
+    userListRoom : userListRoom, 
+    user : user,
+    userListServer : userListServer,
+    noGameLoop : true,
+    userListDeath : userListDeath
+}
+
+
+
+
 
     //--------------------------------
 /*
@@ -73,7 +85,7 @@ newTmpMap, tetriList, userList, user, userlist
 */
 
 let tetriList2 = [tetri1, tetri1, tetri1];
-let userList2 = ['d0m', 'jack', 'john', 'miaou', 'master', 'hater', 'xRambo'];
+let userListRoom2 = ['d0m', 'jack', 'john', 'miaou', 'master', 'hater', 'xRambo'];
 
 let user2 = {
     usernameForm: "",
@@ -89,7 +101,7 @@ let user2 = {
         state: "RUNING_GAME"
     }
    }
-let userlist2 = [
+let userListServer2 = [
     {name : 'd0m',  room : 'room1', uuid : 'gfdgf', alive : true, saveTetriBoard : newTmpMap},
     {name : 'jack', room : 'room1', uuid : 'erte', alive : true, saveTetriBoard : newTmpMap},
     {name : 'john', room : 'room1', uuid : 'dfg', alive : true, saveTetriBoard : newTmpMap},
@@ -99,21 +111,29 @@ let userlist2 = [
     {name : 'xRambo', room : 'room1', uuid : 'dfg', alive : true, saveTetriBoard : newTmpMap},
 ];
 
-
-export const MaxUser = () =>
-    <GameRun
-        newTmpMap = {newTmpMap}
-        tetriList = {tetriList2}
-        userList = {userList2}
-        user = {user2}
-        userlist = {userlist2}
-        noGameLoop = {true}
-    />
+ExtremCase.args = {
+    newTmpMap : newTmpMap,
+    tetriList : tetriList2,
+    userListRoom : userListRoom2,
+    user : user2,
+    userListServer :userListServer2,
+    noGameLoop : true
+}
 
 
+UserDeath.args = {
+    newTmpMap : newTmpMap,
+    tetriList : tetriList2,
+    userListRoom : userListRoom2,
+    user : user2,
+    userListServer :userListServer2,
+    noGameLoop : true,
+    userListDeath : ['d0m', 'john', 'master', 'xRambo']
+}
 
 const Info = {
-    title : 'Page - Game m - miaou'
+    title : 'Pages/GameRun'
 } 
 
-export default Info;
+
+export default Info; 

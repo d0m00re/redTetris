@@ -4,13 +4,14 @@ import clsx from 'clsx';
 
 const useStyles = makeStyles({
     root: {
-        width: '5px !important',
-        height : '5px',
+        width: '6px !important',
+        height : '6px',
     },
 
     trueColor: {
         backgroundColor: 'orange'
     },
+
     falseColor: {
         backgroundColor: 'white'
     }
