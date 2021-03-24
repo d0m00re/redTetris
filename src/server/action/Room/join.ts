@@ -20,13 +20,15 @@ import {
     IUser
 } from './../../entity/User';
 
+
+
 const join = (io : any, socket : any, global : Global, roomName: string) => {
     let newRoom : IRoom;
     let user : IUser | undefined = global.getUserWithId(socket.id); //findUser(socket.id);
  
     let currRoom = global.rooms.getRoomWithRoomName(roomName);
 
-    if (currRoom !== undefined && currRoom.userList.length >= MAX_USER_BY_ROOM)
+    if ((currRoom !== undefined && currRoom.userList.length >= MAX_USER_BY_ROOM) || (currRoom !== undefined && currRoom.state !== ERoomState.WAIT_USER))
     {
       return (0);
     }
