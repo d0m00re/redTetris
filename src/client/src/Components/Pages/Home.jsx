@@ -60,7 +60,8 @@ const Home = () => {
                             <GameResult winner={room.userList[0]}
                                         otherPlayer={room.leaderboard}
                                         funcLeaveRoom={leaveRoom}
-                                        funcPlayAgain={playAgain}/>
+                                        funcPlayAgain={playAgain}
+                                        ownerBool={room.owner === username} />
                     }
                 </>
             }

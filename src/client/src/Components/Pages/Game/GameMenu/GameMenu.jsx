@@ -17,12 +17,12 @@ const useStyles = makeStyles({
           padding: '16px',
           margin: '10px',
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'column', 
           alignItems: 'center',
           backgroundColor: '#fcbf49',
           width : '90%'
       }
-  });
+  }); 
 
 const GameMenu = ({ username, room, funcRunGame, funcLeaveRoom, owner }) => {
     const classes = useStyles();

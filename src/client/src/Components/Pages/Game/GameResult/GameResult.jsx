@@ -5,7 +5,9 @@ import Typography from '@material-ui/core/Typography';
 
 import TwoButton from '../../../Molecules/TwoButton/TwoButton';
 
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'; 
+
+import Button from '@material-ui/core/Button' ;
 
 /*
 result board
@@ -43,7 +45,7 @@ const SoloPlayer = () => {
     );
 }
 
-const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom }) => {
+const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom, ownerBool }) => {
     const classes = useStyles();
 
     return (
@@ -53,10 +55,16 @@ const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom }) => {
                 <div className={classes.flexRow}>
                    <MultiplePlayer winner = {winner} otherPlayer = {otherPlayer}/>
                 </div>
+                {ownerBool &&
                 <TwoButton label1={'Play Again!'} label2={'Leave'} func1={funcPlayAgain} func2={funcLeaveRoom} />
+                }
+                {!ownerBool &&
+                    <Button onClick={funcLeaveRoom} color='secondary' variant='contained'>Leave</Button>
+                }
             </>
         </CenterPage>
     )
 }
 
 export default GameResult;
+  
