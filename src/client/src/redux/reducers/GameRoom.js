@@ -1,6 +1,7 @@
 import {
     SET_GAME_ROOM,
-    GAME_ROOM_RESET
+    GAME_ROOM_RESET,
+    GAME_ROOM_INIT_STATE
 } from './../Constant/GameRoom';
 
 export const initialState = { 
@@ -14,6 +15,10 @@ export const initialState = {
 
 const GameRoomReducer = (state = initialState, action) => {
     switch (action.type) {
+        case GAME_ROOM_INIT_STATE:
+            return {
+                ...initialState
+            }
         case SET_GAME_ROOM:
             return {
                 ...state,

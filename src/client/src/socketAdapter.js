@@ -27,9 +27,9 @@ import {SET_ROOMS,
 
 import {ADD_TETRI} from './redux/Constant/Tetri';
 
-import {SET_GAME_ROOM, GAME_ROOM_RESET} from './redux/Constant/GameRoom';
+import {SET_GAME_ROOM, GAME_ROOM_RESET, GAME_ROOM_INIT_STATE} from './redux/Constant/GameRoom';
 
-import {GAME_RESET_CURRMAP, INCR_NB_LINE_BLOCK, GAME_RESET} from './redux/Constant/Game';
+import {GAME_RESET_CURRMAP, INCR_NB_LINE_BLOCK, GAME_RESET, GAME_INIT_STATE} from './redux/Constant/Game';
 
  
 const initApiSocket = (store) => {
@@ -153,6 +153,8 @@ const initApiSocket = (store) => {
     })
 
     socket.on(SOCKET_PATCH_ROOM, (resp) => {
+      console.log('SOCKET PATCH ROOM');
+      console.log(resp);
       if (resp.room.userList.findIndex(_username => _username === store.getState().user.username) !== -1)
       {
         dispatch({type : SET_GAME_ROOM, payload : resp.room});
@@ -161,8 +163,11 @@ const initApiSocket = (store) => {
       });
 
     socket.on(SOCKET_LEAVE_ROOM, () => {
+      console.log('SOCKET LEAVE ROOM')
         
-      dispatch({type : GAME_ROOM_RESET});
+      //dispatch({type : GAME_ROOM_RESET});
+      dispatch({type : GAME_INIT_STATE});
+      dispatch({type : GAME_ROOM_INIT_STATE});
       dispatch({type : GAME_RESET_CURRMAP});
     });
 

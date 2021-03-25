@@ -9,3 +9,5 @@ export const UPDATE_USERNAME = 'UPDATE_USERNAME';
 export const UPDATE_ROOM = 'UPDATE_ROOM';
 
 export const GAME_RESET = 'GAME_RESET';
+
+export const GAME_INIT_STATE = 'GAME_INIT_STATE';
