@@ -59,7 +59,7 @@ const Death = ({ key }) => {
 }
 
 const DeathOrAlive = ({ username, userListDeath, currentBoard, className, row}) => {
-  if (userListDeath?.includes(username))
+  if (userListDeath?.map(_user => _user.username).includes(username))
     return (<Death className={className} key={`${username}-death`} />);
   else
     return (<>{currentBoard.map((row, indexRow) => (<Alive className={className} row={row} indexRow={indexRow} />))}</>);
@@ -69,9 +69,6 @@ const ViewBoardAdv = ({ currentBoard, userListDeath, username }) => {
   const styles = useStyles();
   return (
     <>
-      {/*}
-       <img src={skull} alt="player death" />
-     */}
       <div className={styles.root}>
         <DeathOrAlive username={username} currentBoard={currentBoard} userListDeath={userListDeath} className={styles.flexRow} />
       </div>
@@ -80,3 +77,4 @@ const ViewBoardAdv = ({ currentBoard, userListDeath, username }) => {
 }
 
 export default ViewBoardAdv
+ 

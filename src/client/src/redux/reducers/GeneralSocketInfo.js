@@ -1,5 +1,6 @@
 import * as io from 'socket.io-client';
 import {WS_BASE} from './../../config/config';
+import _ from 'lodash'; //cloneDeep
 
 import {SET_ROOMS,
     PATCH_LIST_USERS,
@@ -8,7 +9,8 @@ import {SET_ROOMS,
     DELETE_ROOM,
     ADD_ROOM,
     PATCH_USER,
-    DELETE_USER_FROM_USERLIST} from '../Constant/GeneralSocketInfo';
+    DELETE_USER_FROM_USERLIST,
+    RESET_ROOM_AND_USER} from '../Constant/GeneralSocketInfo';
 
 
 export const initialState = {
@@ -24,6 +26,47 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
     let tmpUserList = [];
 
     switch(action.type) {
+        case RESET_ROOM_AND_USER:
+            console.log('reset for this roomname')
+            console.log(action.payload);
+
+        // reset iformation about room : 
+            //payload.roomName
+            let {roomName} = action.payload;
+            let id = state.roomlist.findIndex(_room => _room.name === roomName);
+            console.log('index : ' + id);
+            let cpRoomList = _.cloneDeep(state.roomlist);
+            let cpUserList = _.cloneDeep(state.userlist);
+
+            console.log(cpRoomList);
+            console.log(cpUserList);
+            
+
+            cpRoomList[id] = {
+                ...cpRoomList[id],
+                leaderboard : [], 
+                state : 'WAIT_USER'
+            }
+
+            cpUserList = cpUserList.map(_user =>
+                (cpRoomList[id].userList.includes(name => name === _user.name)) ?
+                    {..._user, alive : true, saveTetriBoard : Array(20).fill([]).map(() => Array(10).fill(0))} : _user
+            );
+            console.log(roomName + ' - ' + id);
+
+            console.log(
+                {
+                    ...state,
+                    roomlist : cpRoomList,
+                    userlist : cpUserList
+                }
+            );
+
+            return {
+                ...state,
+                roomlist : cpRoomList,
+                userlist : cpUserList
+            }
         case ADD_ROOM:   
             return {
                 ...state,

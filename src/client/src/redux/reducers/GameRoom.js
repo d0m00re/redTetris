@@ -22,7 +22,9 @@ const GameRoomReducer = (state = initialState, action) => {
 
         case GAME_ROOM_RESET:
             return {
-                ...initialState
+                ...state,
+                state : 'WAIT_USER',
+                leaderboard : []
             }
 
         default:

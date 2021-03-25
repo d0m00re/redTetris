@@ -12,15 +12,26 @@ import {
         SOCKET_DELETE_ROOM,
         SOCKET_RESET_ROOM,
         SOCKET_LINE_DELETE,
-        SOCKET_USER_LOGOUT} from './redux/Constant/SocketIOProtocol';
-import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM, SET_USER_ALIVE} from './redux/Constant/User';
-import {SET_ROOMS, ADD_ROOM, PATCH_LIST_ROOM, DELETE_ROOM, SET_LIST_USERS, PATCH_USER, DELETE_USER_FROM_USERLIST} from './redux/Constant/GeneralSocketInfo';
+        SOCKET_USER_LOGOUT,
+  
+        SOCKET_PLAY_AGAIN} from './redux/Constant/SocketIOProtocol';
+import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM, SET_USER_ALIVE, USER_ROOM_RESET} from './redux/Constant/User';
+import {SET_ROOMS,
+        ADD_ROOM,
+        PATCH_LIST_ROOM,
+        DELETE_ROOM,
+        SET_LIST_USERS,
+        PATCH_USER,
+        DELETE_USER_FROM_USERLIST,
+        RESET_ROOM_AND_USER} from './redux/Constant/GeneralSocketInfo';
+
 import {ADD_TETRI} from './redux/Constant/Tetri';
+
 import {SET_GAME_ROOM, GAME_ROOM_RESET} from './redux/Constant/GameRoom';
 
-import {GAME_RESET_CURRMAP, INCR_NB_LINE_BLOCK} from './redux/Constant/Game';
+import {GAME_RESET_CURRMAP, INCR_NB_LINE_BLOCK, GAME_RESET} from './redux/Constant/Game';
 
-
+ 
 const initApiSocket = (store) => {
     const dispatch = store.dispatch;
     const socket = store.getState().generalSocketInfo.socket; 
@@ -116,17 +127,36 @@ const initApiSocket = (store) => {
         console.log('resp alive -->');
         console.log(resp);
         
-        
+        //if ()
         dispatch({type : SET_USER_ALIVE, payload : resp.alive});
+        
       }
       
-      })
+      });
+
+    socket.on(SOCKET_PLAY_AGAIN, ({roomName, username}) => {
+      console.log(SOCKET_PLAY_AGAIN + ' : ' + roomName);
+      // reset user store for a new game
+      if (username === store.getState().user.username)
+        dispatch({type : SET_USER_ALIVE, payload : true});
+      // reset all user | alive and saveTetriboard inside userlist
+    //  let currentRoom = state.getState().generalSocketInfo.roomList.find(_room => _room.name === roomName);
+    //  if (currentRoom !== undefined) {
+
+      //}
+      dispatch({type : GAME_ROOM_RESET})
+      dispatch({type : RESET_ROOM_AND_USER, payload : {roomName : roomName}});
+      dispatch({type : GAME_RESET});
+      // reset roomlist reducer
+
+      // resret room current user
+    })
 
     socket.on(SOCKET_PATCH_ROOM, (resp) => {
-      console.log('SOCKET PATCH ROOM: ');
-      console.log(resp);
       if (resp.room.userList.findIndex(_username => _username === store.getState().user.username) !== -1)
+      {
         dispatch({type : SET_GAME_ROOM, payload : resp.room});
+      }
         dispatch({type : PATCH_LIST_ROOM, payload : resp.room});
       });
 
@@ -141,14 +171,11 @@ const initApiSocket = (store) => {
     });
 
     socket.on(SOCKET_DELETE_ROOM, (roomName) => {
-      console.log('DELETE A ROOM')
       dispatch({type : DELETE_ROOM, payload : roomName});
     });
 
     socket.on(SOCKET_USER_LOGOUT, (username) => {
-      console.log('SOCKET LOG OUT --> ' + username);
-      dispatch({type : DELETE_USER_FROM_USERLIST, payload : username});
-      
+      dispatch({type : DELETE_USER_FROM_USERLIST, payload : username});      
     })
 }
 

@@ -3,7 +3,7 @@ import {
     SET_USERNAME,
     SET_ROOMNAME_FORM,
     SET_IS_CONNECT,
-    SET_USER_ALIVE,
+    SET_USER_ALIVE, 
 } from '../Constant/User';
 
 export const initialState = {
@@ -13,7 +13,6 @@ export const initialState = {
     username: '',
     isConnect: false,
     alive : true,
-    room : null
 }
 
 const UserReducer = (state = initialState, action) => {

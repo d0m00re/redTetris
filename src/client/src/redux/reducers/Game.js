@@ -10,7 +10,8 @@ import {
   UPDATE_TETRIMINOS_POS,
   TETRI_ROTATION,
   UPDATE_USERNAME,
-  UPDATE_ROOM,  
+  UPDATE_ROOM,
+  GAME_RESET
 } from "../Constant/Game";
 
 import {END_TURN_PUT, ADD_TETRI, RESET_TETRI } from './../Constant/Tetri';
@@ -34,6 +35,15 @@ export const initialState = {
 
 const GameReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GAME_RESET:
+        return {
+          ...state,
+          posTetriminos: { x: 3, y: -2 },
+          currMap: Array(20).fill().map(() => Array(10).fill(0)),
+          tetriList: [],
+          nbLineBlock: 0,
+          currRotation : 0
+        }
     case UPDATE_FINAL_MAP:
       // check delete line
       return {

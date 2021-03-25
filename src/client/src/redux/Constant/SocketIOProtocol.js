@@ -33,8 +33,8 @@ export const SOCKET_LEAVE_ROOM = 'SOCKET_LEAVE_ROOM';
 export const SOCKET_DELETE_ROOM = 'SOCKET_DELETE_ROOM';
 
 // launch new party  on the same room go back on basic state
-export const SOCKET_PLAY_AGAIN = 'SOCKET_PLAY_AGAIN';
-
 export const SOCKET_RESET_ROOM = 'SOCKET_RESET_ROOM';
 
 export const SOCKET_LINE_DELETE = 'SOCKET_LINE_DELETE';
+
+export const SOCKET_PLAY_AGAIN = 'SOCKET_PLAY_AGAIN';

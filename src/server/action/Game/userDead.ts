@@ -14,23 +14,16 @@ const userDead = (io : any, socket : any, global : Global) => {
        // sinon la fin de la partie dne se finit que si il reste un seul joueur en vie
        // change game state
        let roomUpdate = global.checkEndGame(socket?.username);
-   
+       
        if (roomUpdate !== undefined) {
-         console.log('room update');
-         console.log(roomUpdate);
-         
-         
-         io.emit(SOCKET_PATCH_ROOM, { room: roomUpdate });
+         //err : false, errMsg : ''
+         io.emit(SOCKET_PATCH_ROOM, { room: roomUpdate, err : false, errMsg : '' });
        }
    
        // user update    
-       if (userUpdate !== undefined) {
-         console.log('user dead : ');
-         console.log(userUpdate);
-         
-         
+       if (userUpdate !== undefined) {         
          io.emit(SOCKET_PATCH_USER, userUpdate);
        }
 }
 
-export default userDead;
+export default userDead; 

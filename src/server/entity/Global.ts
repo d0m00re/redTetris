@@ -59,12 +59,17 @@ export class Global {
         let countAlive : number = listUserInterface.filter(_user => _user?.alive === true).length;
         let countDeath : number = listUserInterface.filter(_user => _user?.alive === false).length;
         
+        console.log(`${countAlive} === 0 || (${countAlive} ===  1 && ${countDeath} > 0) === ${countAlive === 0 || (countAlive === 1 && countDeath > 0)}`)
         if (countAlive === 0 || (countAlive === 1 && countDeath > 0)) // game loose
         {
+            console.log('END GAME');
             room.stop();
-            return room.getInfo();
+
+            //return room.getInfo();
         }
-        return undefined;
+        console.log('ONE USER DEAD');
+        console.log(room.getInfo());
+        return room.getInfo();
     }
 
     createUser(user: IUser) {
