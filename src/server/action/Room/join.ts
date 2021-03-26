@@ -48,7 +48,9 @@ const join = (io : any, socket : any, global : Global, roomName: string) => {
     if (global.rooms.roomExist(roomName) === false) {      
       newRoom  = {name : roomName, uuid : roomName, userList : [], state : ERoomState.WAIT_USER, owner : socket.username, leaderboard : []};
       global.createRoom(newRoom);
-      
+      //new room
+      console.log(SOCKET_NEW_ROOM);
+      console.log(newRoom);
       io.emit(SOCKET_NEW_ROOM, newRoom); // utile????
     }    
       let currentRoom = global.rooms.getWithName(roomName);
@@ -63,7 +65,10 @@ const join = (io : any, socket : any, global : Global, roomName: string) => {
       user.room = roomName;  
 
 //      socket.in(roomName).emit(SOCKET_CONFIRM_JOIN_ROOM, response); // ici on envoii la confirmation de la nouvelle room
-      io.emit(SOCKET_PATCH_ROOM, response); // update user room
+      
+    console.log(SOCKET_PATCH_ROOM);
+    console.log(response);
+  io.emit(SOCKET_PATCH_ROOM, response); // update user room
   
 }
 

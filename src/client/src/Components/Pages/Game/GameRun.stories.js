@@ -37,7 +37,7 @@ newTmpMap[18] = [...Array(9).fill(2), 0];
 newTmpMap[19] = Array(10).fill(2);
 
 let tetriList = [tetri1, tetri1, tetri1];
-let userListRoom = ['d0m', 'jack', 'john'];
+let userListRoom = [{username : 'd0m', score : 55}, {username : 'jack', score : 15}, {username : 'john', score : 5}]//['d0m', 'jack', 'john'];
 let user = {
     usernameForm: "",
     roomnameForm: "",
@@ -85,8 +85,11 @@ newTmpMap, tetriList, userList, user, userlist
 */
 
 let tetriList2 = [tetri1, tetri1, tetri1];
-let userListRoom2 = ['d0m', 'jack', 'john', 'miaou', 'master', 'hater', 'xRambo'];
-
+//let userListRoom2 = ['d0m', 'jack', 'john', 'miaou', 'master', 'hater', 'xRambo'];
+let userListRoom2 = [{username : 'd0m', score : 55}, {username : 'jack', score : 55},
+                    {username : 'john', score : 55}, {username : 'miaou', score : 55},
+                    {username : 'master', score : 55}, {username : 'hater', score : 55},
+                    {username : 'xRambo', score : 55}]
 let user2 = {
     usernameForm: "",
     roomnameForm: "",

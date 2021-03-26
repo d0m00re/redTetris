@@ -1,15 +1,21 @@
 import diffString from './../utils/diffString';
-
+ 
 export enum ERoomState {
   WAIT_USER = 'WAIT_USER',
   RUNING_GAME = 'RUNING_GAME',
   END_GAME = 'END_GAME',
 }
 
+export interface IScore {
+  username : string;
+  score : number;
+}
+
 export interface IRoom {
   name: string;
   uuid: string;
-  userList: string[];
+  userList: IScore[];
+  //userList: string[]; //userList : IScore
   owner: string;
   state: ERoomState;
   leaderboard : IGameLeaderboard[];
@@ -28,7 +34,7 @@ export interface IGameLeaderboard {
 export class Room {
   name: string;
   uuid: string;
-  userList: string[];
+  userList: IScore[];
   owner: string;
   state: ERoomState;
   leaderboard : IGameLeaderboard[];
@@ -36,7 +42,7 @@ export class Room {
   constructor({ name, owner }: IRoomConstructor) {
     this.name = name;
     this.uuid = '';
-    this.userList = [owner];
+    this.userList = [{username : owner, score : 0}];
     this.owner = owner;
     this.state = ERoomState.WAIT_USER;
     this.leaderboard = [];
@@ -61,17 +67,17 @@ export class Room {
   }
 
   addUser(name: string): boolean {
-    if (this.userList.findIndex(_name => _name === name) !== -1)
+    if (this.userList.findIndex(({username}) => username === name) !== -1)
       return false;
-    this.userList.push(name);
+    this.userList.push({username : name, score : 0});
     return true;
   }
 
   // delet euse rfrom user list
   deleteUser(username: string): void {
-    this.userList = this.userList.filter(_user => _user !== username);
+    this.userList = this.userList.filter(_user => _user.username !== username);
     if (this.owner === username && this.userList.length > 0)
-      this.owner = this.userList[0];    
+      this.owner = this.userList[0].username;    
   }
 
   removeUser(name: string): boolean {
@@ -82,7 +88,7 @@ export class Room {
 
     if (name === this.owner)
       this.owner = '';
-    this.userList = this.userList.filter(_name => _name !== name);
+    this.userList = this.userList.filter(_name => _name.username !== name);
     return lenOri === this.userList.length;
   }
 
@@ -97,7 +103,7 @@ export class Room {
     {
       // find winner and add it to the leaderboard
       //let winner = this.userList.filter(_user => _user.filter(elem => elem));
-      let win = diffString(this.userList, this.leaderboard.map(elem => elem.username))?.[0];
+      let win = diffString(this.userList.map(({username}) => username), this.leaderboard.map(elem => elem.username))?.[0];
 
       if (win) {
         this.leaderboardAdd({username : win, score : 679});
@@ -123,9 +129,8 @@ export class Room {
       leaderboard : this.leaderboard
     })
   }
-
 }
-
+ 
 export class RoomList {
   rooms: Room[];
 
@@ -210,7 +215,7 @@ export class RoomList {
 
   //find room with username
   containUsername(room: IRoom, username: string) {
-    return (room.userList.findIndex(_username => _username === username) !== -1);
+    return (room.userList.findIndex(_username => _username.username === username) !== -1);
   }
 
   // find room name with username

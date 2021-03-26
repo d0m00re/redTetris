@@ -46,8 +46,6 @@ if (roomName === undefined){
 
   socket.emit(SOCKET_LEAVE_ROOM); // reset user room tmp store
   // if we update a room
-  console.log(SOCKET_PATCH_ROOM);
-  console.log(data.room);
   
   //io.emit(SOCKET_PATCH_ROOM, {room : data.room});
 

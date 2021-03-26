@@ -76,9 +76,11 @@ const socketIoMiddleware = ({ getState }) => {
                 socketSendUsername();
             break;
             case SOCKET_JOIN_ROOM:
+                console.log(SOCKET_JOIN_ROOM);
                 socketJoinRoom();
             break;
             case SOCKET_JOIN_ROOM_WT_NAME:
+                console.log(SOCKET_JOIN_ROOM_WT_NAME + '  ==> ' +  payload.roomname);
                 socketJoinRoomWtName(payload.roomname);
             break;
             case SOCKET_GET_NEXT_TETRIMINOS:

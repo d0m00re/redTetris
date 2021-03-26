@@ -47,7 +47,7 @@ let io = require("socket.io")(http, {
   cors: {
     origin: "*",
   }
-});
+}); 
 
 app.get("/", (req: any, res: any) => {
   res.sendFile(path.resolve("./client/index.html"));
@@ -74,6 +74,7 @@ io.on("connection", function (socket: any) {
   })
 
   socket.on(SOCKET_JOIN_ROOM, function (roomName: string) {
+    console.log('SOCKET_JOIN_ROOM : ' + roomName);
     joinRoom(io, socket, global, roomName);
   });
 

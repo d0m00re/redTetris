@@ -53,7 +53,7 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noG
                     <BoardWithoutGameLoop currentBoard={newTmpMap} />
                 }
             </div>
-            <div className={styles.margin}>
+            <div className={styles.margin}> 
                 
                 {
                     (tetriList.length > 1) && <>
@@ -64,15 +64,15 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noG
                     (userListRoom?.length > 1) &&
                     <div className={styles.containerFlexAdv}>
                         {
-                            userListRoom.filter(username => username !== user.username).map(username => <>
+                            userListRoom.filter(_user => _user.username !== user.username).map(username => <>
                                 <div className={styles.containerFlexItemAdv}>
-                                    <Typography variant='body2'>{username}</Typography>
-                                    <ViewBoardAdv currentBoard={userListServer.filter(user => user.name === username)[0].saveTetriBoard} userListDeath={userListDeath} username={username} />
+                                    <Typography variant='body2'>{username.username}</Typography>
+                                    <ViewBoardAdv currentBoard={userListServer.filter(user => user.name === username.username)[0].saveTetriBoard} userListDeath={userListDeath} username={username} />
                                 </div>
                             </>)
-                        } 
+                            } 
                     </div>
-                } 
+                    } 
             </div>
         </div>
     );

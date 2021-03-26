@@ -94,8 +94,8 @@ const initApiSocket = (store) => {
       if (resp.error) return resp.errorMsg;
    
   // if (resp.room.userList.filter(_user => _user === user.username).length === 1)
-  if (resp.room.userList.filter(_user => _user === store.getState().user.username).length === 1)
-    dispatch({type : SET_GAME_ROOM, payload : resp.room});
+  if (resp.room.userList.filter(_user => _user.username === store.getState().user.username).length === 1)
+      dispatch({type : SET_GAME_ROOM, payload : resp.room});
       //dispatch
       dispatch({type : PATCH_LIST_ROOM, payload : resp.room});
       // need update room list
@@ -155,7 +155,7 @@ const initApiSocket = (store) => {
     socket.on(SOCKET_PATCH_ROOM, (resp) => {
       console.log('SOCKET PATCH ROOM');
       console.log(resp);
-      if (resp.room.userList.findIndex(_username => _username === store.getState().user.username) !== -1)
+      if (resp.room.userList.findIndex(_username => _username.username === store.getState().user.username) !== -1)
       {
         dispatch({type : SET_GAME_ROOM, payload : resp.room});
       }

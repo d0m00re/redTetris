@@ -54,7 +54,7 @@ export class Global {
             return undefined;
 
         // get user interface total
-        let listUserInterface = room.userList.map(_user => this.users.getUser(_user)?.getInfo());
+        let listUserInterface = room.userList.map(_user => this.users.getUser(_user.username)?.getInfo());
 
         let countAlive : number = listUserInterface.filter(_user => _user?.alive === true).length;
         let countDeath : number = listUserInterface.filter(_user => _user?.alive === false).length;

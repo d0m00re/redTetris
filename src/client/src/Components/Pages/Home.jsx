@@ -40,7 +40,7 @@ const Home = () => {
                 ((isConnect &&  room.name.length > 0)) &&
                 <>
                     {
-                        (room.userList.filter(_user => _user === username) && room.state === 'WAIT_USER') &&
+                        (room.userList.filter(_user => _user.username === username) && room.state === 'WAIT_USER') &&
                             <GameMenu username={username}
                                       room={room}
                                       funcRunGame={runGame}
