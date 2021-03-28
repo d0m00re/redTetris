@@ -61,7 +61,9 @@ const Home = () => {
                                         otherPlayer={room.leaderboard}
                                         funcLeaveRoom={leaveRoom}
                                         funcPlayAgain={playAgain}
-                                        ownerBool={room.owner === username} />
+                                        ownerBool={room.owner === username}
+                                        userList={room.userList}
+                                        />
                     }
                 </>
             }

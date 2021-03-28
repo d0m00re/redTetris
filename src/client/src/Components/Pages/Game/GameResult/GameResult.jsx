@@ -5,15 +5,41 @@ import Typography from '@material-ui/core/Typography';
 
 import TwoButton from '../../../Molecules/TwoButton/TwoButton';
 
-import { makeStyles } from '@material-ui/core/styles'; 
+import Button from '@material-ui/core/Button';
 
-import Button from '@material-ui/core/Button' ;
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 /*
 result board
 userlist
 relaunch  game
 */
+const StyledTableCell = withStyles((theme) => ({
+    head: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    body: {
+        fontSize: 14,
+    },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+    root: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.action.hover,
+        },
+    },
+}))(TableRow);
+
 const useStyles = makeStyles({
     flexRow: {
         padding: '16px',
@@ -26,26 +52,30 @@ const useStyles = makeStyles({
     }
 });
 
-const MultiplePlayer = ({ winner, otherPlayer }) => {
+const MultiplePlayer = ({ otherPlayer }) => {
     return (
-        <>
-            <Typography> Winner : {otherPlayer[0].username}</Typography>
-            {
-                otherPlayer.length > 0 &&
-                otherPlayer.filter((e, i) => i !== 0).map((user, index) =>
-                    <Typography>{index + 1}) {user.username}</Typography>
-                )
-            }
-        </>);
-}
-
-const SoloPlayer = () => {
-    return (
-        <Typography> Looser!</Typography>
+        <TableContainer>
+            <Table>
+                <TableHead>
+                    <StyledTableCell>Rank</StyledTableCell>
+                    <StyledTableCell>Name</StyledTableCell>
+                    <StyledTableCell>Score</StyledTableCell>
+                </TableHead>
+                <TableBody>
+                    {otherPlayer.map((user, index) => (
+                        <StyledTableRow key={`leaderboard-${user.username}`}>
+                            <StyledTableCell component="th" scope="row">{index + 1}</StyledTableCell>
+                            <StyledTableCell>{user.username} </StyledTableCell>
+                            <StyledTableCell>{user.score} </StyledTableCell>
+                        </StyledTableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 }
 
-const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom, ownerBool }) => {
+const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom, ownerBool, userList }) => {
     const classes = useStyles();
 
     return (
@@ -53,18 +83,21 @@ const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom, ownerBo
             <>
                 <Typography variant='h5'>Game report</Typography>
                 <div className={classes.flexRow}>
-                   <MultiplePlayer winner = {winner} otherPlayer = {otherPlayer}/>
+                    <MultiplePlayer winner={winner} otherPlayer2={otherPlayer} otherPlayer={otherPlayer.map(_username => 
+                        ({
+                            username : _username,
+                            score : userList.find(_user => _user.username === _username).score
+                        }))}/>
                 </div>
                 {ownerBool &&
-                <TwoButton label1={'Play Again!'} label2={'Leave'} func1={funcPlayAgain} func2={funcLeaveRoom} />
+                    <TwoButton label1={'Play Again!'} label2={'Leave'} func1={funcPlayAgain} func2={funcLeaveRoom} />
                 }
                 {!ownerBool &&
                     <Button onClick={funcLeaveRoom} color='secondary' variant='contained'>Leave</Button>
                 }
             </>
-        </CenterPage>
+        </CenterPage> 
     )
 }
 
 export default GameResult;
-  

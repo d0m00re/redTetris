@@ -1,12 +1,13 @@
-import { Room, IRoom, RoomList } from './../entity/Room';
+import { Room, IRoom, RoomList, ERoomState } from './../entity/Room';
 import { User, IUser } from './../entity/User';
 
-let room1 = {
+let room1 : IRoom = {
     name: 'room1',
     uuid: '',
-    userList: ['d0m'],
+    userList: [{username : 'd0m', score : 0}],
     owner: 'd0m',
-    state: 'WAIT_USER'
+    state: ERoomState.WAIT_USER,
+    leaderboard : []
 };
 
 //read only test

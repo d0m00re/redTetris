@@ -39,7 +39,7 @@ const initApiSocket = (store) => {
     socket.on('connect', () => {console.log('connect success : ');});// connection
 
     socket.on(SOCKET_LINE_DELETE, (nbDeleteLine) => {
-      console.log(SOCKET_LINE_DELETE);
+      console.log(SOCKET_LINE_DELETE + ' --> ' + nbDeleteLine);
       dispatch({type : INCR_NB_LINE_BLOCK, payload : nbDeleteLine});
     })
 

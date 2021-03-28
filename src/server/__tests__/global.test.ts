@@ -1,5 +1,5 @@
 import {Global} from './../entity/Global';
-import {ERoomState} from './../entity/Room';
+import {ERoomState, IRoom} from './../entity/Room';
 
 describe('User class test', function() {
     test('add one user', () => {
@@ -11,6 +11,7 @@ describe('User class test', function() {
     })
 
     test('userSubscribeToRoom', () => {
+        let expectedObj = {name : 'room1', uuid : '', userList : [{username : 'd0m', score : 0}, {username : 'john', score : 0}], state : ERoomState.WAIT_USER, owner : 'd0m'};
         let global = new Global();
 
         global.users.add('d0m');
@@ -22,10 +23,11 @@ describe('User class test', function() {
         global.userSubscribeToRoom('room1', 'john');
 
         let room = global.getIRoomWithUsername('john');
-        expect(room).toMatchObject({name : 'room1', uuid : '', userList : ['d0m', 'john'], state : ERoomState.WAIT_USER, owner : 'd0m'});
+        expect(room).toMatchObject(expectedObj);
     })
 
     test('getIRoomWithRoomname', () => {
+        let expectedObj = {name : 'room1', uuid : '', userList : [{username : 'd0m', score : 0}, {username : 'john', score : 0}], state : ERoomState.WAIT_USER, owner : 'd0m'};
         let global = new Global();
 
         global.users.add('d0m');
@@ -37,7 +39,7 @@ describe('User class test', function() {
         global.userSubscribeToRoom('room1', 'john');
 
         let room = global.getIRoomWithRoomname('room1');
-        expect(room).toMatchObject({name : 'room1', uuid : '', userList : ['d0m', 'john'], state : ERoomState.WAIT_USER, owner : 'd0m'});
+        expect(room).toMatchObject(expectedObj);
     })
 
     test('Room destroy when userList is empty', () => {
@@ -53,6 +55,7 @@ describe('User class test', function() {
     });
 
     test('Room remove owner and replace it', () => {
+        let expectedObj = {name : 'room0', uuid : '', userList : [{username : 'jack', score : 0}], state : ERoomState.WAIT_USER, owner : 'jack'};
         let global = new Global();
 
         global.users.add('d0m');
@@ -65,7 +68,7 @@ describe('User class test', function() {
 
         let room = global.getIRoomWithRoomname('room0');
 
-        expect(room).toMatchObject({name : 'room0', uuid : '', userList : ['jack'], state : ERoomState.WAIT_USER, owner : 'jack'});       
+        expect(room).toMatchObject(expectedObj);       
     });
 
 })

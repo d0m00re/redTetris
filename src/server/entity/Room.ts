@@ -18,7 +18,7 @@ export interface IRoom {
   //userList: string[]; //userList : IScore
   owner: string;
   state: ERoomState;
-  leaderboard : IGameLeaderboard[];
+  leaderboard : string[];
 }
 
 export interface IRoomConstructor {
@@ -26,9 +26,11 @@ export interface IRoomConstructor {
   owner: string;
 }
 
-export interface IGameLeaderboard {
-  username : string;
-  score : number;
+const score : {[id : number] : number}  = {
+  0 : 0,
+  1 : 100,
+  2 : 300,
+  3 : 1200
 }
 
 export class Room {
@@ -37,15 +39,33 @@ export class Room {
   userList: IScore[];
   owner: string;
   state: ERoomState;
-  leaderboard : IGameLeaderboard[];
+  leaderboard : string[];
 
   constructor({ name, owner }: IRoomConstructor) {
     this.name = name;
-    this.uuid = '';
+    this.uuid = ''; 
     this.userList = [{username : owner, score : 0}];
     this.owner = owner;
     this.state = ERoomState.WAIT_USER;
     this.leaderboard = [];
+  }
+
+  /*
+** incr score
+  */
+  incrUserScore(username : string, nbLineDelete : number) : boolean {
+    let id = this.userList.findIndex(user => user.username === username);
+    let scoreAdd = score[nbLineDelete];
+    if (id === -1){
+      console.log('incrUserScore : user not found : ' + username);
+      return (false);
+    }
+    if (scoreAdd === undefined){
+      console.log('incrUserScore : invalid nbLineDelete');
+      return (false);
+    }
+    this.userList[id].score = this.userList[id].score + scoreAdd;
+    return (true);
   }
 
   /*
@@ -56,7 +76,7 @@ export class Room {
     this.leaderboard = [];
   }
 
-  leaderboardAdd(user : IGameLeaderboard) {
+  leaderboardAdd(user : string) {
     this.leaderboard.unshift(user);
   }
 
@@ -103,10 +123,10 @@ export class Room {
     {
       // find winner and add it to the leaderboard
       //let winner = this.userList.filter(_user => _user.filter(elem => elem));
-      let win = diffString(this.userList.map(({username}) => username), this.leaderboard.map(elem => elem.username))?.[0];
+      let win = diffString(this.userList.map(({username}) => username), this.leaderboard);
 
       if (win) {
-        this.leaderboardAdd({username : win, score : 679});
+        this.leaderboardAdd(win[0]);
       }
     }
 
@@ -167,7 +187,7 @@ export class RoomList {
       this.rooms.splice(indexRoom, 1);
 
     return (deleteRoom);
-    //  if ()
+    //  if () 
   }
 
   addRoom(room: IRoom) {
@@ -242,6 +262,15 @@ export class RoomList {
     if (room === undefined || room[0] === undefined)
       return (undefined);
     return room[0];
+  }
+
+  incrUserScore(roomname : string, username : string, nbLineDelete : number) {
+    let index = this.rooms.findIndex(room => room.name === roomname)
+
+    console.log('INCR USER SCORE');
+    if (index !== -1)
+      this.rooms[index].incrUserScore(username, nbLineDelete);
+    console.log(this.rooms[index].getInfo());
   }
 
   roomExist(name: string): boolean {
