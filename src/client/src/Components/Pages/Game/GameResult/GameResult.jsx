@@ -83,11 +83,7 @@ const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom, ownerBo
             <>
                 <Typography variant='h5'>Game report</Typography>
                 <div className={classes.flexRow}>
-                    <MultiplePlayer winner={winner} otherPlayer2={otherPlayer} otherPlayer={otherPlayer.map(_username => 
-                        ({
-                            username : _username,
-                            score : userList.find(_user => _user.username === _username).score
-                        }))}/>
+                    <MultiplePlayer winner={winner} otherPlayer={otherPlayer}/>
                 </div>
                 {ownerBool &&
                     <TwoButton label1={'Play Again!'} label2={'Leave'} func1={funcPlayAgain} func2={funcLeaveRoom} />

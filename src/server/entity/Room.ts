@@ -18,7 +18,7 @@ export interface IRoom {
   //userList: string[]; //userList : IScore
   owner: string;
   state: ERoomState;
-  leaderboard : string[];
+  leaderboard : IScore[];
 }
 
 export interface IRoomConstructor {
@@ -36,10 +36,10 @@ const score : {[id : number] : number}  = {
 export class Room {
   name: string;
   uuid: string;
-  userList: IScore[];
+  userList: IScore[]; //
   owner: string;
   state: ERoomState;
-  leaderboard : string[];
+  leaderboard : IScore[]; // save leaderboad score
 
   constructor({ name, owner }: IRoomConstructor) {
     this.name = name;
@@ -77,7 +77,11 @@ export class Room {
   }
 
   leaderboardAdd(user : string) {
-    this.leaderboard.unshift(user);
+    let data : IScore | undefined = this.userList.find(_user => _user.username === user);
+
+    if (data === undefined)
+      return ;
+    this.leaderboard.unshift(data);
   }
 
   //-----------------------------
@@ -123,7 +127,7 @@ export class Room {
     {
       // find winner and add it to the leaderboard
       //let winner = this.userList.filter(_user => _user.filter(elem => elem));
-      let win = diffString(this.userList.map(({username}) => username), this.leaderboard);
+      let win = diffString(this.userList.map(({username}) => username), this.leaderboard.map((_lead) => _lead.username));
 
       if (win) {
         this.leaderboardAdd(win[0]);
@@ -136,6 +140,7 @@ export class Room {
   }
 
   restart(): void {
+    this.userList = this.userList.map(_user => ({username : _user.username, score : 0}));
     this.state = ERoomState.WAIT_USER;
   }
 
