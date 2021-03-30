@@ -13,6 +13,7 @@ const useStyles = makeStyles({
     height: '120px',
     width : '60px',
     border: '1px solid black',
+    margin: '0 auto'
   },
 
   death: {

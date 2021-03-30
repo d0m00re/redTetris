@@ -5,13 +5,16 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
     root: {
-        backgroundColor : '#333',
-        border : '1px',
-        borderColor : '#666',
+   //     backgroundColor : '#333',
+     //   border : '1px',
+     //   borderColor : '#666',
+     paddingBottom : '8px'
+
     },
     flexRow:{
         display: 'flex',
-        flexDirection: 'row'
+        justifyContent : 'center',
+        flexDirection: 'row',
     }
 })
 
@@ -19,7 +22,7 @@ const ViewBoard = ({currentBoard}) => {
   const styles = useStyles();
 
   return (
-    <div >    
+    <div className={styles.root}>    
       {currentBoard.map((row, indexRow) => (
         <div key={"rowrow" + indexRow} className={styles.flexRow}>
           <TetrisRow row={row}></TetrisRow>

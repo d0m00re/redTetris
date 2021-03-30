@@ -8,7 +8,11 @@ import Typography from '@material-ui/core/Typography';
 
 import ViewBoardAdv from '../../Organisms/ViewBoardAdv/ViewBoardAdv';
 
+import ViewInformation from './../../Organisms/ViewInformation/ViewInformation';
+
 import { makeStyles } from '@material-ui/core/styles';
+
+import {useSelector} from 'react-redux';
 
 const useStyles = makeStyles({
     root: {
@@ -29,17 +33,32 @@ const useStyles = makeStyles({
     containerFlexAdv: {
         display : 'grid',
         gridTemplateColumns: 'repeat(3, 100px)',
-        gridTemplateRows: 'repeat(2, 180px)'
+        gridTemplateRows: 'repeat(2, 180px)',
+        backgroundColor: '#fcbf49',
     },
     containerFlexItemAdv: {
         //width : '33%',
         //margin : '8px'
-        alignSelf: 'center' 
+        alignSelf: 'center',
+        justifyContent : 'center'
+        //justifyContent : 'center'
+    },
+    next: {
+        backgroundColor: '#fcbf49',
+        margin : '8px 0 8px 0'
+    },
+    title: {
+        padding: '8px',
+        textAlign : 'center'
+    },
+    general: {
+        textAlign : 'center'
     }
 })
 
 const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noGameLoop = false, userListDeath = [] }) => {
     const styles = useStyles();
+    let {nbLineBlock, score} = useSelector(state => state.game);
 
     return (
         <div className={styles.flexRow}>
@@ -53,12 +72,15 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noG
                     <BoardWithoutGameLoop currentBoard={newTmpMap} />
                 }
             </div>
+            
             <div className={styles.margin}> 
-                
+            <div>
+                <ViewInformation score={score} block={nbLineBlock} />
+            </div>
                 {
-                    (tetriList.length > 1) && <>
-                        <Typography variant='h3'>Next</Typography>
-                        <ViewBoard currentBoard={tetriList[1].shape[0]} /></>
+                    (tetriList.length > 1) && <div className={styles.next}>
+                        <Typography variant='h5' className={styles.title}>Next</Typography>
+                        <ViewBoard currentBoard={tetriList[1].shape[0]} /></div>
                 }
                 {
                     (userListRoom?.length > 1) &&
@@ -66,7 +88,7 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noG
                         {
                             userListRoom.filter(_user => _user.username !== user.username).map(username => <>
                                 <div className={styles.containerFlexItemAdv}>
-                                    <Typography variant='body2'>{username.username}</Typography>
+                                    <Typography variant='body2' className={styles.general}>{username.username}</Typography>
                                     <ViewBoardAdv currentBoard={userListServer.filter(user => user.name === username.username)[0].saveTetriBoard} userListDeath={userListDeath} username={username} />
                                 </div>
                             </>)

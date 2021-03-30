@@ -13,7 +13,7 @@ import GameResult from './Game/GameResult/GameResult';//'./../Pages/GameResult/G
 
 import Login from './Login/Login';
 
-import RoomLoby from './RoomLoby/RoomLoby'
+import RoomLoby from './RoomLoby/RoomLoby';
 
 const Home = () => {
     let { username, isConnect } = useSelector(state => state.user);

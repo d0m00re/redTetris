@@ -12,7 +12,8 @@ import {
   UPDATE_USERNAME,
   UPDATE_ROOM,
   GAME_RESET,
-  GAME_INIT_STATE
+  GAME_INIT_STATE,
+  GAME_INCR_SCORE
 } from "../Constant/Game";
 
 import {END_TURN_PUT, ADD_TETRI, RESET_TETRI } from './../Constant/Tetri';
@@ -28,14 +29,28 @@ export const initialState = {
   currMap: Array(20).fill().map(() => Array(10).fill(0)),
   tetriList: [],
   nbLineBlock: 0, // blok line - multiplayer
+  score : 0,
 
   //--------------------------------------
   gameRunning: true, // false : game stop
   gameEnd: false,
 };
 
+let dictScore = {
+  0 : 0,
+  1 : 100,
+  2 : 300,
+  3 : 1200
+};
+
 const GameReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GAME_INCR_SCORE:
+        let score = dictScore[action.payload] ? dictScore[action.payload] : 0;
+        return {
+          ...state ,
+          score : (state.score + score)
+        }
     case GAME_INIT_STATE:
         return {
           ...initialState
@@ -47,7 +62,8 @@ const GameReducer = (state = initialState, action) => {
           currMap: Array(20).fill().map(() => Array(10).fill(0)),
           tetriList: [],
           nbLineBlock: 0,
-          currRotation : 0
+          currRotation : 0,
+          score : 0
         }
     case UPDATE_FINAL_MAP:
       // check delete line
@@ -117,6 +133,7 @@ const GameReducer = (state = initialState, action) => {
         currMap: Array(20).fill().map(() => Array(10).fill(0)),
         tetriList: [],
         nbLineBlock: 0,
+        score : 0
       }
 
       case END_TURN_PUT:

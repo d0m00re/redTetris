@@ -7,6 +7,9 @@ import { mergeTetriOnMap, checkValidPushTetri, checkAndPush, checkAndPushSpace, 
 import { useDispatch, useSelector } from 'react-redux';
 
 import { tetriRotation, updateTetriminosPos} from './../../redux/actions/Game';
+
+import { GAME_INCR_SCORE } from './../../redux/Constant/Game';
+
 import {SOCKET_GET_NEXT_TETRIMINOS,
         SOCKET_USER_DEAD,
         SOCKET_UPDATE_USER_TETRI_BOARD,
@@ -65,9 +68,12 @@ const useGameLoop = () => {
             dispatch({type : END_TURN_PUT});
             dispatch({type : SOCKET_UPDATE_USER_TETRI_BOARD}); // maybe  data nn - 1
             if (nbLineDelete)
+            {
                 dispatch({type : SOCKET_LINE_DELETE, payload : {nbLineDelete : nbLineDelete}});
-            // get next tetriminos
-            if (tetriList.length < 4) 
+                dispatch({type : GAME_INCR_SCORE, payload : nbLineDelete});
+            }
+                // get next tetriminos
+            if (tetriList.length < 4)
                 dispatch({type : SOCKET_GET_NEXT_TETRIMINOS});
             return 1;
             }
