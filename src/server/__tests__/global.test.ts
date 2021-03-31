@@ -71,4 +71,56 @@ describe('User class test', function() {
         expect(room).toMatchObject(expectedObj);       
     });
 
+    const testouille = (global : Global) => {
+        console.log('Try send data each x seconds');
+    
+        console.log('Send new shadow for every RUNING ROOM');
+        //let roomActif = global.rooms.rooms.filter(_room => _room.state === ERoomState.RUNING_GAME);
+        let roomRunning = global.rooms.getRunningRooms();
+    
+        if (roomRunning === undefined || roomRunning.length === 0)
+          return (0);
+    
+        let reEncodeData =  roomRunning.map(_room => {
+          // tramsform room userlist in saveTetriBoard
+          let data = _room?.userList.map(_user => {
+            // find saveTetriBoard for each user
+            return {
+              username : _user.username,
+              shadow : global.users.getUser(_user.username)?.saveTetriBoard
+            } 
+          });
+          return ({
+            roomName : _room.name,
+            data : data});
+        });
+    
+        return (reEncodeData);
+          // pour chaque room en train de tourner on va envoyer l ensdesemble ees tetriminos
+        /*  
+        roomActif.map(_room => {
+          //
+          let data = global.users.users.map(_user => )
+        })
+        */
+      }
+
+    test('Tetsouille : ', () => {
+        let globalInfo = new Global();
+
+        globalInfo.users.add('d0m');
+        globalInfo.users.add('u1');
+        globalInfo.users.add('u2');
+
+        globalInfo.createRoom({name : 'room0', uuid : '', userList : [], state : ERoomState.WAIT_USER, owner : 'd0m', leaderboard : []});
+        globalInfo.rooms.addUser('room0', 'u1');
+        globalInfo.rooms.addUser('room0', 'u2');
+
+        let ret = testouille(globalInfo);
+
+        console.log(testouille)
+
+        expect(ret).toMatchObject({});
+    })
+
 })

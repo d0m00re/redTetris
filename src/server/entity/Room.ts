@@ -32,7 +32,7 @@ const score : {[id : number] : number}  = {
   2 : 300,
   3 : 1200
 }
-
+ 
 export class Room {
   name: string;
   uuid: string;
@@ -134,7 +134,7 @@ export class Room {
       }
     }
 
-    console.log('Final leaderboard\n');
+    console.log('Final leaderboard\n'); 
     console.log(this.leaderboard);    
     this.state = ERoomState.END_GAME;
   }
@@ -161,6 +161,12 @@ export class RoomList {
 
   constructor() {
     this.rooms = [];
+  }
+
+  getRunningRooms() : IRoom[] | undefined {
+    console.log('room ---->')
+    console.log(this.rooms);
+    return this.rooms.filter(_room => _room.state === ERoomState.RUNING_GAME);
   }
 
   add({ name, owner }: IRoomConstructor) {

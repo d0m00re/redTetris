@@ -37,11 +37,8 @@ const useStyles = makeStyles({
         backgroundColor: '#fcbf49',
     },
     containerFlexItemAdv: {
-        //width : '33%',
-        //margin : '8px'
         alignSelf: 'center',
         justifyContent : 'center'
-        //justifyContent : 'center'
     },
     next: {
         backgroundColor: '#fcbf49',
@@ -59,6 +56,8 @@ const useStyles = makeStyles({
 const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noGameLoop = false, userListDeath = [] }) => {
     const styles = useStyles();
     let {nbLineBlock, score} = useSelector(state => state.game);
+    let {shadows} = useSelector(state => state.gameRoom);
+
 
     return (
         <div className={styles.flexRow}>
@@ -80,7 +79,7 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noG
                 {
                     (tetriList.length > 1) && <div className={styles.next}>
                         <Typography variant='h5' className={styles.title}>Next</Typography>
-                        <ViewBoard currentBoard={tetriList[1].shape[0]} /></div>
+                        <ViewBoard currentBoard={tetriList[1].shape[0]} /></div> 
                 }
                 {
                     (userListRoom?.length > 1) &&
@@ -89,7 +88,8 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noG
                             userListRoom.filter(_user => _user.username !== user.username).map(username => <>
                                 <div className={styles.containerFlexItemAdv}>
                                     <Typography variant='body2' className={styles.general}>{username.username}</Typography>
-                                    <ViewBoardAdv currentBoard={userListServer.filter(user => user.name === username.username)[0].saveTetriBoard} userListDeath={userListDeath} username={username} />
+                                  {/*}  <ViewBoardAdv currentBoard={userListServer.filter(user => user.name === username.username)[0].saveTetriBoard} userListDeath={userListDeath} username={username} /> */}
+                                  <ViewBoardAdv currentBoard={shadows.find(_shadow => _shadow.username === username.username)?.shadow} userListDeath={userListDeath} username={username} />
                                 </div>
                             </>)
                             } 

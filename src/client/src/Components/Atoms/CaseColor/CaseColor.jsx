@@ -42,6 +42,10 @@ const useStyles = makeStyles({
     
     red: {
         backgroundColor : 'red'
+    },
+
+    grey: {
+        backgroundColor: 'grey'
     }
 })
 
@@ -55,7 +59,7 @@ const CaseColor =({caseValue, indexCase}) =>{
             case 2:
                 return classes.blue;
             case 3:
-                return classes.orange;
+                return classes.orange; 
             case 4:
                 return classes.yellow;
             case 5:
@@ -64,7 +68,8 @@ const CaseColor =({caseValue, indexCase}) =>{
                 return classes.green;
             case 7:
                 return classes.red;
-
+            case 8:
+                return classes.grey;
             default:
                 return classes.defaultColor;
         }

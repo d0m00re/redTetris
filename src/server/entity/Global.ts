@@ -1,6 +1,16 @@
 import { UserList, IUser, User } from './User';
 import { IRoom, Room, RoomList, ERoomState } from './Room';
  
+export interface IShadow  {
+    username : string,
+    shadow : number[][] | undefined
+}
+
+export interface IShadowRoom {
+    roomname : string,
+    shadows : IShadow[]
+}
+
 export interface IGlobal {
     users: UserList;
     rooms: RoomList;
@@ -123,5 +133,34 @@ export class Global {
             rooms: allRooms,
             users: allUsers,
         });
+    }
+
+    generateAllRoomRunningShadows() :IShadowRoom[] | undefined {
+        console.log('Try send data each x seconds');
+    
+        console.log('Send new shadow for every RUNING ROOM');
+        //let roomActif = global.rooms.rooms.filter(_room => _room.state === ERoomState.RUNING_GAME);
+        let roomRunning : IRoom[] | undefined = this.rooms.getRunningRooms();
+        
+        if (roomRunning === undefined || roomRunning.length === 0)
+        {
+            console.log('No room running')
+            return (undefined);
+        }
+        let reEncodeData = roomRunning.map(_room  => {
+            // tramsform room userlist in saveTetriBoard
+            let data = _room?.userList.map(_user => {
+                // find saveTetriBoard for each user
+                return {
+                    username: _user.username,
+                    shadow: this.users.getUser(_user.username)?.saveTetriBoard
+                }
+            });
+            return ({
+                roomname: _room.name,
+                shadows: data
+            });
+        });
+        return (reEncodeData);
     }
 }

@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     },
 
     trueColor: {
-        backgroundColor: 'orange'
+        backgroundColor: 'orange' 
     },
 
     falseColor: {

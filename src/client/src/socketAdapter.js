@@ -13,7 +13,7 @@ import {
         SOCKET_RESET_ROOM,
         SOCKET_LINE_DELETE,
         SOCKET_USER_LOGOUT,
-  
+        SOCKET_SHADOWS_ROOM,
         SOCKET_PLAY_AGAIN} from './redux/Constant/SocketIOProtocol';
 import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM, SET_USER_ALIVE, USER_ROOM_RESET} from './redux/Constant/User';
 import {SET_ROOMS,
@@ -27,7 +27,7 @@ import {SET_ROOMS,
 
 import {ADD_TETRI} from './redux/Constant/Tetri';
 
-import {SET_GAME_ROOM, GAME_ROOM_RESET, GAME_ROOM_INIT_STATE} from './redux/Constant/GameRoom';
+import {SET_GAME_ROOM, GAME_ROOM_RESET, GAME_ROOM_INIT_STATE, GAME_ROOM_SHADOW_RESET, GAME_ROOM_UPD_SHADOW} from './redux/Constant/GameRoom';
 
 import {GAME_RESET_CURRMAP, INCR_NB_LINE_BLOCK, GAME_RESET, GAME_INIT_STATE} from './redux/Constant/Game';
 
@@ -181,6 +181,11 @@ const initApiSocket = (store) => {
 
     socket.on(SOCKET_USER_LOGOUT, (username) => {
       dispatch({type : DELETE_USER_FROM_USERLIST, payload : username});      
+    });
+
+    socket.on(SOCKET_SHADOWS_ROOM, (shadow) => {
+      console.log('------------  socket update shadow' + shadow.roomname);
+      dispatch({type : GAME_ROOM_UPD_SHADOW, payload : shadow.shadows});
     })
 }
 

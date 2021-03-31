@@ -3,8 +3,10 @@ import express from "express";
 import path from "path";
 import cors from 'cors';
 
-import { Global } from './entity/Global';
+import { Global, IShadowRoom, IShadow } from './entity/Global';
 import { TetriminosGenerator } from './entity/TetriminosGenerator';
+
+import {ERoomState} from './entity/Room';
 
 import {
   SOCKET_SEND_USERNAME,
@@ -16,7 +18,8 @@ import {
   SOCKET_UPDATE_USER_TETRI_BOARD,
   SOCKET_LEAVE_ROOM,
   SOCKET_PLAY_AGAIN,
-  SOCKET_LINE_DELETE
+  SOCKET_LINE_DELETE,
+  SOCKET_SHADOWS_ROOM
 } from './constant/socket';
 
 import login from './action/Login/login';
@@ -53,6 +56,22 @@ app.get("/", (req: any, res: any) => {
   res.sendFile(path.resolve("./client/index.html"));
 });
 
+setInterval(() => {
+  console.log('Interval turn : ');
+  let shadowsRooms : IShadowRoom[] | undefined = global.generateAllRoomRunningShadows();
+
+  if (shadowsRooms === undefined) {
+    console.log('No room run!');
+    return (0);
+  }
+
+  shadowsRooms.map((shadowRoom : IShadowRoom) => {
+    console.log('emit shadow for this room : ' + shadowRoom.roomname);
+    io.to(shadowRoom.roomname).emit(SOCKET_SHADOWS_ROOM, shadowRoom);
+  });
+
+}, 1000);
+
 io.on("connection", function (socket: any) {
 
   socket.on('disconnecting', () => {
@@ -63,7 +82,6 @@ io.on("connection", function (socket: any) {
   socket.on(SOCKET_SEND_USERNAME, function (username: string) {
     login(io, socket, global, username);
   });
-
 
   socket.on(SOCKET_PLAY_AGAIN, function () {
     playAgain(io, socket, global);

@@ -32,4 +32,4 @@ const runGame = (io : any, socket : any, global : Global, payload : string, tetr
     io.to(roomName).emit(SOCKET_GET_NEXT_TETRIMINOS, { tetri: tetri, err: false, errMsg: '' });
 }
 
-export default runGame;
+export default runGame; 

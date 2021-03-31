@@ -70,9 +70,15 @@ const ViewBoardAdv = ({ currentBoard, userListDeath, username }) => {
   const styles = useStyles();
   return (
     <>
+      {currentBoard !== undefined &&
       <div className={styles.root}>
         <DeathOrAlive username={username} currentBoard={currentBoard} userListDeath={userListDeath} className={styles.flexRow} />
       </div>
+      }
+      {
+        currentBoard === undefined &&
+        <p>coucou fail undefined</p>
+      }
     </>
   )
 }

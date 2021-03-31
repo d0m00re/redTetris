@@ -1,7 +1,10 @@
 import {
     SET_GAME_ROOM,
     GAME_ROOM_RESET,
-    GAME_ROOM_INIT_STATE
+    GAME_ROOM_INIT_STATE,
+
+    GAME_ROOM_UPD_SHADOW,
+    GAME_ROOM_SHADOW_RESET
 } from './../Constant/GameRoom';
 
 export const initialState = { 
@@ -10,7 +13,8 @@ export const initialState = {
     userList: [],
     owner: '',
     state: '',
-    leaderboard: []
+    leaderboard: [],
+    shadows : [] 
 };
 
 const GameRoomReducer = (state = initialState, action) => {
@@ -30,6 +34,18 @@ const GameRoomReducer = (state = initialState, action) => {
                 ...state,
                 state : 'WAIT_USER',
                 leaderboard : []
+            }
+
+        case GAME_ROOM_UPD_SHADOW:
+            return {
+                ...state,
+                shadows : action.payload
+            }
+
+        case GAME_ROOM_SHADOW_RESET:
+            return {
+                ...state,
+                shadows : []
             }
 
         default:

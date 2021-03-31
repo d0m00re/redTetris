@@ -13,6 +13,6 @@ const Template = (args) => <ViewInformation {...args} />;
 
 export const Test = Template.bind({});
 Test.args = {
-    score : 56,
+    score : 56, 
     block : 10
 };
