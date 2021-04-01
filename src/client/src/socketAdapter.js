@@ -25,11 +25,9 @@ import {SET_ROOMS,
         DELETE_USER_FROM_USERLIST,
         RESET_ROOM_AND_USER} from './redux/Constant/GeneralSocketInfo';
 
-import {ADD_TETRI} from './redux/Constant/Tetri';
-
 import {SET_GAME_ROOM, GAME_ROOM_RESET, GAME_ROOM_INIT_STATE, GAME_ROOM_SHADOW_RESET, GAME_ROOM_UPD_SHADOW} from './redux/Constant/GameRoom';
 
-import {GAME_RESET_CURRMAP, INCR_NB_LINE_BLOCK, GAME_RESET, GAME_INIT_STATE} from './redux/Constant/Game';
+import {GAME_RESET_CURRMAP, INCR_NB_LINE_BLOCK, GAME_RESET, GAME_INIT_STATE, ADD_TETRI} from './redux/Constant/Game';
 
  
 const initApiSocket = (store) => {

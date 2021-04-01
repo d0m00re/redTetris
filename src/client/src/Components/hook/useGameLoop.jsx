@@ -8,13 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { tetriRotation, updateTetriminosPos} from './../../redux/actions/Game';
 
-import { GAME_INCR_SCORE } from './../../redux/Constant/Game';
+import { GAME_INCR_SCORE, END_TURN_PUT } from './../../redux/Constant/Game';
 
 import {SOCKET_GET_NEXT_TETRIMINOS,
         SOCKET_USER_DEAD,
         SOCKET_UPDATE_USER_TETRI_BOARD,
         SOCKET_LINE_DELETE} from './../../redux/Constant/SocketIOProtocol';
-import {END_TURN_PUT} from './../../redux/Constant/Tetri';
  
 import {isLoose} from './../../logic/isLoose';
 

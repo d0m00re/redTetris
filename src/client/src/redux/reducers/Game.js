@@ -13,11 +13,12 @@ import {
   UPDATE_ROOM,
   GAME_RESET,
   GAME_INIT_STATE,
-  GAME_INCR_SCORE
+  GAME_INCR_SCORE,
+
+  END_TURN_PUT,
+  ADD_TETRI,
+  RESET_TETRI
 } from "../Constant/Game";
-
-import {END_TURN_PUT, ADD_TETRI, RESET_TETRI } from './../Constant/Tetri';
-
  
 export const initialState = {
   currentKey: '',
