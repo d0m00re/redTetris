@@ -3,7 +3,8 @@ import HomeGame from './../Pages/HomeGame';
 
 import { useSelector, useDispatch } from 'react-redux';
 import CenterPage from '../Atoms/Layout/CenterPage';//'./../components/Layout/CenterPage'
-import { SOCKET_RUN_GAME, SOCKET_LEAVE_ROOM, SOCKET_PLAY_AGAIN } from './../../redux/Constant/SocketIOProtocol';
+
+import * as actionSocket from './../../redux/actions/SocketIOProtocol';
 
 import HeaderBar from './../Organisms/HeaderBar/HeaderBar';
 
@@ -21,11 +22,11 @@ const Home = () => {
 
     let dispatch = useDispatch();
 
-    const runGame = () => dispatch({ type: SOCKET_RUN_GAME });
+    const runGame = () => dispatch(actionSocket.socketRunGame());
 
-    const leaveRoom = () => dispatch({type : SOCKET_LEAVE_ROOM});
+    const leaveRoom = () => dispatch(actionSocket.socketLeaveRoom());
 
-    const playAgain = () => dispatch({type : SOCKET_PLAY_AGAIN});
+    const playAgain = () => dispatch(actionSocket.socketPlayAgain());
 
     return (
         <>

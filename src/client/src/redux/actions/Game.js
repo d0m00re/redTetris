@@ -1,27 +1,48 @@
-import {UPDATE_FINAL_MAP, UPDATE_TETRIMINOS_POS,
-    TETRI_ROTATION, UPDATE_USERNAME, UPDATE_ROOM} from '../Constant/Game';
+import * as types from './../Constant/Game';
 
 export const updateFinalMap = payload => ({
-    type : UPDATE_FINAL_MAP,
+    type : types.UPDATE_FINAL_MAP,
     payload
 })
 
 export const updateTetriminosPos  = payload => ({
-    type : UPDATE_TETRIMINOS_POS,
+    type : types.UPDATE_TETRIMINOS_POS,
     payload
 })
 
 export const tetriRotation = payload => ({
-    type : TETRI_ROTATION,
+    type : types.TETRI_ROTATION,
     payload
 })
 
 export const updateUsername = payload => ({
-    type : UPDATE_USERNAME,
+    type : types.UPDATE_USERNAME,
     payload
 })
 
 export const updateRoom = payload => ({
-    type : UPDATE_ROOM,
+    type : types.UPDATE_ROOM,
     payload
-}); 
+});
+
+export const incrNbLineBlock = (payload) => ({
+    type : types.INCR_NB_LINE_BLOCK,
+    payload : payload
+})
+
+export const gameReset = () => ({
+    type : types.GAME_RESET
+});
+
+export const gameInitState = () => ({
+    type : types.GAME_INIT_STATE
+});
+
+export const addTetri = (payload) => ({
+    type : types.ADD_TETRI,
+    payload : payload.tetri
+})
+
+export const resetCurrentMap = () => ({
+    type : types.GAME_RESET_CURRMAP
+})
