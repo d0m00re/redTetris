@@ -16,7 +16,7 @@ export const initialState = {
     leaderboard: [],
     shadows : [] 
 };
-
+ 
 const GameRoomReducer = (state = initialState, action) => {
     switch (action.type) {
         case GAME_ROOM_INIT_STATE:
@@ -37,6 +37,8 @@ const GameRoomReducer = (state = initialState, action) => {
             }
 
         case GAME_ROOM_UPD_SHADOW:
+            console.log('GAME ROOM SHADOW : ');
+            console.log(action.payload);
             return {
                 ...state,
                 shadows : action.payload

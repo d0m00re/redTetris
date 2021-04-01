@@ -2,21 +2,12 @@
 import * as typesSocket from './redux/Constant/SocketIOProtocol';
 import * as actionUser from './redux/actions/User';
 
-import {SET_ROOMS,
-        ADD_ROOM,
-        PATCH_LIST_ROOM,
-        DELETE_ROOM,
-        SET_LIST_USERS, 
-        PATCH_USER,
-        DELETE_USER_FROM_USERLIST,
-        RESET_ROOM_AND_USER} from './redux/Constant/GeneralSocketInfo';
-
-import {SET_GAME_ROOM, GAME_ROOM_RESET, GAME_ROOM_UPD_SHADOW} from './redux/Constant/GameRoom';
-
 import * as actionsGame from './redux/actions/Game';
 
-import * as typesGameRoom from './redux/Constant/GameRoom';
+import * as actionsGameRoom from './redux/actions/GameRoom';
  
+import * as actionsGeneralSocketInfo from './redux/actions/GeneralSocketInfo';
+
 const initApiSocket = (store) => {
     const dispatch = store.dispatch;
     const socket = store.getState().generalSocketInfo.socket; 
@@ -24,7 +15,6 @@ const initApiSocket = (store) => {
     socket.on('connect', () => {console.log('connect success : ');});// connection
 
     socket.on(typesSocket.SOCKET_LINE_DELETE, (nbDeleteLine) => {
-    ///  dispatch({type : INCR_NB_LINE_BLOCK, payload : nbDeleteLine});
       dispatch(actionsGame.incrNbLineBlock(nbDeleteLine));
   })
 
@@ -32,42 +22,35 @@ const initApiSocket = (store) => {
       console.log('SOCKET_RECV_USERNAME')
       if (resp.err)
       {
-        //dispatch({type : SET_ERROR, payload : {error : true, errorMsg : resp.errorMsg}})
         dispatch(actionUser.setError(resp));
         
       }
       else {
-        //dispatch({type : SET_USERNAME, payload : resp.username});
         dispatch(actionUser.setUsername(resp));
-        //dispatch({type : SET_IS_CONNECT, payload : true});
         dispatch(actionUser.setIsConnected());
       }
     })
 
     socket.on(typesSocket.SOCKET_CONFIRM_JOIN_ROOM, (resp) => { 
-        console.log('CONFIRM JOIN ROOM'); 
         if (resp.err)
         {
-//            dispatch({type : SET_ERROR, payload : {error : true, errorMsg : resp.errorMsg}})
             dispatch(actionUser.setError(resp));
 
         }
         else{
           // svae current user room
-            dispatch({type : SET_GAME_ROOM, payload : resp.room})
-            //dispatch({type : SET_ROOMNAME_FORM, payload : ''})
+            dispatch(actionsGameRoom.setGameRoom(resp.room));
             dispatch(actionUser.setRoomnameForm(''));
         }
     });
 
     socket.on(typesSocket.SOCKET_ALL_ROOMS, (resp) => {
       let {rooms, users} = resp;
- 
-        dispatch({type : SET_ROOMS, payload : rooms});
- 
+
+        dispatch(actionsGeneralSocketInfo.setRooms(rooms));
         
-        dispatch({type : SET_LIST_USERS, payload : users})
-       });
+        dispatch(actionsGeneralSocketInfo.setListUsers(users));
+      });
 
        // de la grosse merde
     socket.on(typesSocket.SOCKET_NEW_ROOM, (resp) => {
@@ -75,20 +58,17 @@ const initApiSocket = (store) => {
         if (resp.err){
             return 0;
         }
-            
-        dispatch({type : ADD_ROOM, payload : resp})
-    }) 
+        console.log('SOCKET NEW ROOM')
+        console.log(resp);
+        dispatch(actionsGeneralSocketInfo.addRoom(resp));
+      }) 
 
-    socket.on(typesSocket.SOCKET_UPDATE_ROOM, (resp) => { 
-      console.log('SOCKET UPDATE ROOM');
-      
+    socket.on(typesSocket.SOCKET_UPDATE_ROOM, (resp) => {       
       if (resp.error) return resp.errorMsg;
    
-  // if (resp.room.userList.filter(_user => _user === user.username).length === 1)
   if (resp.room.userList.filter(_user => _user.username === store.getState().user.username).length === 1)
-      dispatch({type : typesGameRoom.SET_GAME_ROOM, payload : resp.room});
-      //dispatch
-      dispatch({type : PATCH_LIST_ROOM, payload : resp.room});
+      dispatch(actionsGameRoom.setGameRoom(resp.room));
+      dispatch(actionsGeneralSocketInfo.patchListRoom(resp));
       // need update room list
     });
 
@@ -103,13 +83,10 @@ const initApiSocket = (store) => {
 
     // patch user
     socket.on(typesSocket.SOCKET_PATCH_USER, (resp) => {      
-      dispatch({type : PATCH_USER, payload : resp})
-      
+      dispatch(actionsGeneralSocketInfo.patchUser(resp));
        
       if (store.getState().user.username === resp.name)
       {                
-        //if ()
-        //dispatch({type : SET_USER_ALIVE, payload : resp.alive});
         dispatch(actionUser.setUserAlive(resp.alive));
         
       }
@@ -125,8 +102,10 @@ const initApiSocket = (store) => {
     //  if (currentRoom !== undefined) {
 
       //}
-      dispatch({type : GAME_ROOM_RESET})
-      dispatch({type : RESET_ROOM_AND_USER, payload : {roomName : roomName}});
+      dispatch(actionsGameRoom.gameRoomReset());
+
+      dispatch(actionsGeneralSocketInfo.resetRoomAndUser(roomName))
+
       dispatch(actionsGame.gameReset());
       // reset roomlist reducer
 
@@ -138,39 +117,34 @@ const initApiSocket = (store) => {
       console.log(resp);
       if (resp.room.userList.findIndex(_username => _username.username === store.getState().user.username) !== -1)
       {
-        
-        dispatch({type : typesGameRoom.SET_GAME_ROOM, payload : resp.room});
+          dispatch(actionsGameRoom.setGameRoom(resp.room));
+
       }
-        dispatch({type : PATCH_LIST_ROOM, payload : resp.room});
+        dispatch(actionsGeneralSocketInfo.patchListRoom(resp));
+
       });
 
-    socket.on(typesSocket.SOCKET_LEAVE_ROOM, () => {
-      console.log('SOCKET LEAVE ROOM')
-        
-      //dispatch({type : GAME_INIT_STATE});
+    socket.on(typesSocket.SOCKET_LEAVE_ROOM, () => {        
       dispatch(actionsGame.gameInitState());
-      dispatch({type : typesGameRoom.GAME_ROOM_INIT_STATE});
-      //dispatch({type : typesGame.GAME_RESET_CURRMAP});
+      dispatch(actionsGameRoom.setInitState());
       dispatch(actionsGame.resetCurrentMap());
     });
 
     socket.on(typesSocket.SOCKET_RESET_ROOM, () => {
-      //dispatch({type : typesGame.GAME_RESET_CURRMAP});
       dispatch(actionsGame.resetCurrentMap());
     });
 
     socket.on(typesSocket.SOCKET_DELETE_ROOM, (roomName) => {
-      dispatch({type : DELETE_ROOM, payload : roomName});
+      dispatch(actionsGeneralSocketInfo.deleteRoom(roomName));
     });
 
     socket.on(typesSocket.SOCKET_USER_LOGOUT, (username) => {
-      dispatch({type : DELETE_USER_FROM_USERLIST, payload : username});      
+      dispatch(actionsGeneralSocketInfo.deleteUserFromUserlist(username));      
     });
 
     socket.on(typesSocket.SOCKET_SHADOWS_ROOM, (shadow) => {
-      console.log('------------  socket update shadow' + shadow.roomname);
-      dispatch({type :  GAME_ROOM_UPD_SHADOW, payload : shadow.shadows});
-    })
+      dispatch(actionsGameRoom.gameRoomUpdateShadow(shadow));
+  })
 }
 
 export default initApiSocket;

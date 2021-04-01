@@ -50,7 +50,9 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
                 roomlist : cpRoomList,
                 userlist : cpUserList
             }
-        case ADD_ROOM:   
+        case ADD_ROOM:
+            console.log('ADD ROOM ---')
+            console.log(action.payload);
             return {
                 ...state,
                 roomlist : [...state.roomlist, action.payload]
@@ -79,6 +81,9 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
                 roomlist : tmpRoomList 
             };
         case PATCH_LIST_ROOM:
+            console.log('---> PATCH_LIST_ROOM');
+            console.log(action.payload);
+
             let newRoom = action.payload;
             
             index = state.roomlist.findIndex(room => room.name === newRoom.name);
@@ -122,7 +127,9 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
                 userlist : tmpUserList
             };
 
-        case PATCH_USER:            
+        case PATCH_USER:    
+            console.log('PATCH USER :');
+            console.log(action.payload);       
             newUser = action.payload;
 
             index = state.userlist.findIndex(user => user.name === newUser.name);
