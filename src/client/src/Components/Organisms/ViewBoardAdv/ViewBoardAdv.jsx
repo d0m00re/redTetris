@@ -75,10 +75,10 @@ const ViewBoardAdv = ({ currentBoard, userListDeath, username }) => {
         <DeathOrAlive username={username} currentBoard={currentBoard} userListDeath={userListDeath} className={styles.flexRow} />
       </div>
       }
-      {
+      {/*
         currentBoard === undefined &&
         <p>coucou fail undefined</p>
-      }
+      */}
     </>
   )
 }

@@ -89,11 +89,11 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noG
                                 <div className={styles.containerFlexItemAdv}>
                                     <Typography variant='body2' className={styles.general}>{username.username}</Typography>
                                   {/*}  <ViewBoardAdv currentBoard={userListServer.filter(user => user.name === username.username)[0].saveTetriBoard} userListDeath={userListDeath} username={username} /> */}
-                                  <ViewBoardAdv currentBoard={shadows.find(_shadow => _shadow.username === username.username)?.shadow} userListDeath={userListDeath} username={username} />
+                                  <ViewBoardAdv currentBoard={shadows.find(_shadow => _shadow.username === username.username)?.shadow} userListDeath={userListDeath} username={username.username} />
                                 </div>
                             </>)
                             } 
-                    </div>
+                    </div> 
                     } 
             </div>
         </div>
