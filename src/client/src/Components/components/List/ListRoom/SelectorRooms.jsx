@@ -4,12 +4,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-    SOCKET_JOIN_ROOM_WT_NAME
-} from './../../../../redux/Constant/SocketIOProtocol';
 import { Typography } from '@material-ui/core';
 
 import RoomInfoWtChild from './../../../Molecules/RoomInfoWtChild/RoomInfoWtChild';
+
+import * as actions from './../../../../redux/actions/SocketIOProtocol';
 
 const useStyles = makeStyles({
     flexRow: {
@@ -36,7 +35,7 @@ const SelectorRooms = () => {
     let roomlist = useSelector(state => state.generalSocketInfo.roomlist);
 
     const submitRoomname = (roomname) => {
-        dispatch({ type: SOCKET_JOIN_ROOM_WT_NAME, payload: { roomname: roomname } });
+        dispatch(actions.socketJoinRoomWtName(roomname));
     }
 
     return (

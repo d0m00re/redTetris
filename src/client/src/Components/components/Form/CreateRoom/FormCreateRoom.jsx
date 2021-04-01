@@ -3,25 +3,21 @@ import Typographie from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import BasicForm from './../../../Atoms/BasicForm/BasicForm';
 
-import {
-    SET_ROOMNAME_FORM,  
-} from './../../../../redux/Constant/User';
- 
-import {
-    SOCKET_JOIN_ROOM
-} from './../../../../redux/Constant/SocketIOProtocol'; 
+import * as actionsUser from './../../../../redux/actions/User';
+import * as actionSIP  from './../../../../redux/actions/SocketIOProtocol';
+
 
 const FormCreateRoom = () => {
      const {roomnameForm} = useSelector(state => state.user);
     const dispatch = useDispatch(); 
     
     const handleRoomname = (event) => {
-        dispatch({type : SET_ROOMNAME_FORM, payload : event.target.value});
+        dispatch(actionsUser.setRoomnameForm(event.target.value));
     }
 
     const submitRoomname = () => {
         console.log('---> socket_join_room : ' + roomnameForm);        
-        dispatch({type : SOCKET_JOIN_ROOM});
+        dispatch(actionSIP.socketJoinRoom());
     }
 
     return (

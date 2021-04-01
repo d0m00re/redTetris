@@ -114,7 +114,6 @@ const useGameLoop = () => {
                     dispatch(actionsGame.updateTetriminosPos(tmpPos)); 
                 break;
             case 'left':
-                console.log('------>>>>>>')
                 tmpPos = { ...state.posTetriminos };
                 cpMap = _.cloneDeep(state.currMap);
                 tmpPos.x -= 1;

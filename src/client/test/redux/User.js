@@ -40,6 +40,17 @@ describe('User Actions', () => {
         assert.deepEqual(actions.setUsername(username), expectedAction);
     });
 
+    it ('set userform form', () => {
+        const username = 'user1';
+        const expectedAction = {
+            type : types.SET_USERNAME_FORM,
+            payload : username
+        };
+
+       // expect(actions.setIsConnected()).toEqual(expectedAction);
+        assert.deepEqual(actions.setUsernameForm(username), expectedAction);
+    });
+
     it ('set roomname form', () => {
         const roomName = 'room0';
         const expectedAction = {

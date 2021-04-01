@@ -37,8 +37,33 @@ describe('Actions : SocketIoProtocol', () => {
         };
 
         assert.deepEqual(expectedAction, actions.socketNbLineDelete(nb));
+    });
+
+    it ('join room to server', () => {
+        const expectedAction = {
+            type : types.SOCKET_JOIN_ROOM
+        };
+
+        assert.deepEqual(expectedAction, actions.socketJoinRoom())
+    });
+
+    it ('send username to server', () => {
+        const expectedAction = {
+            type : types.SOCKET_SEND_USERNAME
+        };
+
+        assert.deepEqual(expectedAction, actions.socketSendUsername());
+    });
+
+    it ('join new room', () => {
+        const roomname = 'room1';
+
+        const expectedAction = {
+            type : types.SOCKET_JOIN_ROOM_WT_NAME,
+            payload : {roomname : roomname}
+        };
+
+        assert.deepEqual(expectedAction, actions.socketJoinRoomWtName(roomname));
     })
-
-
 
 });
