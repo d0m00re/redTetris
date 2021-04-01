@@ -24,4 +24,4 @@ export const updateUsername = payload => ({
 export const updateRoom = payload => ({
     type : UPDATE_ROOM,
     payload
-})
+}); 

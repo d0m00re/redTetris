@@ -37,7 +37,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode=development --config ./webpack.config.js --port 8088 --host 0.0.0.0 --open",
     "build": "react-scripts build",
-    "test": "mocha --recursive",
+    "test": "mocha -r esm --recursive",
     "test:only": "cross-env NODE_ENV=test jest",
     "test:coverage": "npm run test:only -- --collectCoverageFrom=\"src/**/*.js\" --coverage",
     "storybook": "start-storybook -p 6006 -s public",
@@ -62,6 +62,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.13.8",
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@storybook/addon-actions": "^6.1.21",
     "@storybook/addon-essentials": "^6.1.21",
@@ -69,6 +70,7 @@
     "@storybook/node-logger": "^6.1.21",
     "@storybook/preset-create-react-app": "^3.1.6",
     "@storybook/react": "^6.1.21",
+    "esm": "^3.2.25",
     "mocha": "^8.2.1",
     "mocha-loader": "^5.1.5",
     "svg-url-loader": "^7.1.1"

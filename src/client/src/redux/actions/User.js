@@ -6,10 +6,3 @@ export const setIsConnected = () => {
         payload : true
     }
 }
-
-export const setIsDisconnected = () => {
-    return {
-        type : SET_IS_CONNECT,
-        payload : false
-    }
-}
