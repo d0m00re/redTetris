@@ -5,16 +5,10 @@ import useActionUser from './../hook/useActionUser';
 
 import { mergeTetriOnMap, checkValidPushTetri, checkAndPush, checkAndPushSpace, nbLineWillBeDelete} from './../../logic/tetriLogic';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { tetriRotation, updateTetriminosPos} from './../../redux/actions/Game';
-
-import { GAME_INCR_SCORE, END_TURN_PUT } from './../../redux/Constant/Game';
-
-import {SOCKET_GET_NEXT_TETRIMINOS,
-        SOCKET_USER_DEAD,
-        SOCKET_UPDATE_USER_TETRI_BOARD,
-        SOCKET_LINE_DELETE} from './../../redux/Constant/SocketIOProtocol';
  
+import * as actionsSIP from './../../redux/actions/SocketIOProtocol';
+import * as actionsGame from './../../redux/actions/Game';
+
 import {isLoose} from './../../logic/isLoose';
 
 const useGameLoop = () => {
@@ -48,7 +42,8 @@ const useGameLoop = () => {
             // si contact line 1 && (pas de contact line 0 && tetriminos case present on line 0)
             if(isLoose(state.currMap, state.tetriList[0].shape[currRotation], {x : pos.x, y : pos.y - 1}))
             {
-                dispatch({type : SOCKET_USER_DEAD});
+              //  dispatch({type : SOCKET_USER_DEAD});
+                dispatch(actionsSIP.socketUserDead());
                 return 0;   
             }
             else { 
@@ -58,28 +53,24 @@ const useGameLoop = () => {
             mergeTetriOnMap(cpMap, tetriList[0].shape[state.currRotation], pos);
             // add nbLineBlock management
             let nbLineDelete = nbLineWillBeDelete(cpMap);
-
-  
-            console.log('---------------------------')
-            console.log('Nb line will be delete : ' + nbLineDelete);
-            console.log(cpMap)
             
-            dispatch({type : END_TURN_PUT});
-            dispatch({type : SOCKET_UPDATE_USER_TETRI_BOARD}); // maybe  data nn - 1
-            if (nbLineDelete)
+            dispatch(actionsGame.endTurnPut());
+
+            dispatch(actionsSIP.socketUpdateUserTetriBoard());
+           if (nbLineDelete)
             {
-                dispatch({type : SOCKET_LINE_DELETE, payload : {nbLineDelete : nbLineDelete}});
-                dispatch({type : GAME_INCR_SCORE, payload : nbLineDelete});
+                dispatch(actionsSIP.socketNbLineDelete(nbLineDelete));
+             dispatch(actionsGame.gameIncrScore(nbLineDelete));
             }
                 // get next tetriminos
             if (tetriList.length < 4)
-                dispatch({type : SOCKET_GET_NEXT_TETRIMINOS});
+                dispatch(actionsSIP.socketGetNextTetriminos());//dispatch({type : SOCKET_GET_NEXT_TETRIMINOS});
             return 1;
             }
         }
          
         else {        
-            dispatch(updateTetriminosPos(pos)); //update tetriminos pos
+            dispatch(actionsGame.updateTetriminosPos(pos)); //update tetriminos pos
         }
         
         /*
@@ -112,7 +103,7 @@ const useGameLoop = () => {
             case 'rotate':
                 ret = checkValidPushTetri(state.currMap, currTetriminos.shape[(state.currRotation + 1) % currTetriminos.shape.length], state.posTetriminos);
                 if (ret)
-                    dispatch(tetriRotation((state.currRotation + 1) % currTetriminos.shape.length))
+                    dispatch(actionsGame.tetriRotation((state.currRotation + 1) % currTetriminos.shape.length))
                 break;
             case 'right':
                 tmpPos = { ...state.posTetriminos };
@@ -120,7 +111,7 @@ const useGameLoop = () => {
                 tmpPos.x += 1;
                 ret = checkAndPush(cpMap, currTetriminos.shape[state.currRotation], tmpPos);
                 if (ret)
-                    dispatch(updateTetriminosPos(tmpPos)); 
+                    dispatch(actionsGame.updateTetriminosPos(tmpPos)); 
                 break;
             case 'left':
                 console.log('------>>>>>>')
@@ -129,7 +120,7 @@ const useGameLoop = () => {
                 tmpPos.x -= 1;
                 ret = checkAndPush(cpMap, currTetriminos.shape[state.currRotation], tmpPos);
                 if (ret)
-                    dispatch(updateTetriminosPos(tmpPos)); 
+                    dispatch(actionsGame.updateTetriminosPos(tmpPos)); 
                 break;
             case 'down':
                 tmpPos = { ...state.posTetriminos };
@@ -137,14 +128,14 @@ const useGameLoop = () => {
                 tmpPos.y += 1;
                 ret = checkAndPush(cpMap, currTetriminos.shape[state.currRotation], tmpPos);
                 if (ret)
-                    dispatch(updateTetriminosPos(tmpPos)); 
+                    dispatch(actionsGame.updateTetriminosPos(tmpPos)); 
                 break;
             case 'space':
                 tmpPos = { ...state.posTetriminos };
                 cpMap = _.cloneDeep(state.currMap);
 
                 checkAndPushSpace(cpMap, currTetriminos.shape[state.currRotation], tmpPos);
-                dispatch(updateTetriminosPos(tmpPos)); 
+                dispatch(actionsGame.updateTetriminosPos(tmpPos)); 
 
                 break;
             default:

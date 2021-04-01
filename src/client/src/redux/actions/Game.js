@@ -46,3 +46,13 @@ export const addTetri = (payload) => ({
 export const resetCurrentMap = () => ({
     type : types.GAME_RESET_CURRMAP
 })
+
+//----
+export const gameIncrScore = (nbLineDelete) => ({
+    type : types.GAME_INCR_SCORE,
+    payload : nbLineDelete
+});
+
+export const endTurnPut = () => ({
+    type : types.END_TURN_PUT
+})

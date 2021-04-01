@@ -3,13 +3,13 @@ import * as types from  './../../src/redux/Constant/GameRoom';
 
 const assert = require('assert');
 
-describe('Game Room Actions', () => {
+describe('Actions : Game Room', () => {
   it ('Restore init state', () => {
       const expectedAction = {type : types.GAME_ROOM_INIT_STATE};
 
       assert.deepEqual(expectedAction, actions.setInitState());
   });
-  
+
   it ('Set current game room', () => {
     let room = {
         leaderboard : [],

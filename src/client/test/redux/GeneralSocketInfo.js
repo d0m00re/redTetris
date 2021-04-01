@@ -3,7 +3,7 @@ import * as types from './../../src/redux/Constant/GeneralSocketInfo';
 
 const assert = require('assert');
 
-describe('General socket info Actions', () => {
+describe('Actions : General socket info Actions', () => {
     it('Restore room and user (play again)', () => {
 
 
