@@ -1,5 +1,8 @@
-import { UserList, IUser, User } from './User';
-import { IRoom, Room, RoomList, ERoomState } from './Room';
+import { IUser, User } from './User';
+import {UserList} from './UserList';
+
+import { IRoom, Room } from './Room';
+import {RoomList} from './RoomList';
  
 export interface IShadow  {
     username : string,
@@ -7,7 +10,7 @@ export interface IShadow  {
 }
 
 export interface IShadowRoom {
-    roomname : string,
+    roomname : string, 
     shadows : IShadow[]
 }
 

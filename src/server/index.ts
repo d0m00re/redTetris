@@ -6,15 +6,12 @@ import cors from 'cors';
 import { Global, IShadowRoom, IShadow } from './entity/Global';
 import { TetriminosGenerator } from './entity/TetriminosGenerator';
 
-import {ERoomState} from './entity/Room';
-
 import {
   SOCKET_SEND_USERNAME,
   SOCKET_JOIN_ROOM,
   SOCKET_GET_NEXT_TETRIMINOS,
   SOCKET_RUN_GAME,
   SOCKET_USER_DEAD,
-  SOCKET_PATCH_USER,
   SOCKET_UPDATE_USER_TETRI_BOARD,
   SOCKET_LEAVE_ROOM,
   SOCKET_PLAY_AGAIN,

@@ -1,4 +1,4 @@
-import {UserList} from '../entity/User';
+import {UserList} from '../entity/UserList';
 
 describe('User class test', function() {
     test('add one user', () => {

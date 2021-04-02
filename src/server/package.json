@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "test": "jest",
+    "testCoverage" : "jest --coverage",
     "start": "nodemon index.ts"
   },
   "keywords": [],

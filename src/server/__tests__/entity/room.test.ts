@@ -1,5 +1,5 @@
-import { Room, IRoom } from './../entity/Room';
-import { User, IUser } from './../entity/User';
+import { Room, IRoom } from './../../entity/Room';
+import { User, IUser } from './../../entity/User';
 
 describe('Room', function () {
     test('create empty room', () => {

@@ -3,3 +3,4 @@ dist
 frontend/dist
 backend/node_modules
 node_modules/
+src/server/coverage

@@ -1,5 +1,5 @@
-import {Global} from './../entity/Global';
-import {ERoomState, IRoom} from './../entity/Room';
+import {Global} from './../../entity/Global';
+import {ERoomState} from './../../entity/Room';
 
 describe('User class test', function() {
     test('add one user', () => {
@@ -105,6 +105,8 @@ describe('User class test', function() {
         */
       }
 
+      /*
+
     test('Tetsouille : ', () => {
         let globalInfo = new Global();
 
@@ -122,5 +124,6 @@ describe('User class test', function() {
 
         expect(ret).toMatchObject({});
     })
+    */
 
 })

@@ -1,5 +1,6 @@
-import { Room, IRoom, RoomList, ERoomState } from './../entity/Room';
-import { User, IUser } from './../entity/User';
+import { Room, IRoom,  ERoomState } from './../../entity/Room';
+import {RoomList} from './../../entity/RoomList';
+import { User, IUser } from './../../entity/User';
 
 let room1 : IRoom = {
     name: 'room1',

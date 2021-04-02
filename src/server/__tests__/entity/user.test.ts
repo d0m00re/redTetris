@@ -1,4 +1,4 @@
-import {IUser, User} from '../entity/User';
+import {IUser, User} from '../../entity/User';
 
 describe('User test', function () {
     test('create empty room', () => {
