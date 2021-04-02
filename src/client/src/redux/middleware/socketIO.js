@@ -23,7 +23,7 @@ const socketIoMiddleware = ({ getState }) => {
             socket.emit(SOCKET_SEND_USERNAME, state.user.usernameForm);
         }
 
-        // join room
+        // join room 
         const socketJoinRoom = () => {
             socket.emit(SOCKET_JOIN_ROOM, state.user.roomnameForm);
         }

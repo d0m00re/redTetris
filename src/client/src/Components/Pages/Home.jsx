@@ -31,7 +31,7 @@ const Home = () => {
     return (
         <>
             {(!isConnect && room.name.length === 0) &&
-               <Login />
+               <Login /> 
             }
             {(isConnect &&  room.name.length === 0) &&
                 <RoomLoby username={username} />
