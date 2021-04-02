@@ -13,7 +13,7 @@ export const initialState = {
     username: '',
     isConnect: false,
     alive : true,
-};
+}; 
 
 const UserReducer = (state = initialState, action) => {
     switch (action.type) {

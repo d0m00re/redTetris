@@ -96,10 +96,8 @@ const initApiSocket = (store) => {
     socket.on(typesSocket.SOCKET_PLAY_AGAIN, ({roomName, username}) => {
       // reset user store for a new game
       if (username === store.getState().user.username)
-        dispatch(actionUser.setUserAlive(true));//dispatch({type : SET_USER_ALIVE, payload : true});
+        dispatch(actionUser.setUserAlive(true));
       // reset all user | alive and saveTetriboard inside userlist
-    //  let currentRoom = state.getState().generalSocketInfo.roomList.find(_room => _room.name === roomName);
-    //  if (currentRoom !== undefined) {
 
       //}
       dispatch(actionsGameRoom.gameRoomReset());
@@ -113,8 +111,6 @@ const initApiSocket = (store) => {
     })
 
     socket.on(typesSocket.SOCKET_PATCH_ROOM, (resp) => {
-      console.log('SOCKET PATCH ROOM');
-      console.log(resp);
       if (resp.room.userList.findIndex(_username => _username.username === store.getState().user.username) !== -1)
       {
           dispatch(actionsGameRoom.setGameRoom(resp.room));

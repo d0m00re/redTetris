@@ -42,7 +42,6 @@ const useGameLoop = () => {
             // si contact line 1 && (pas de contact line 0 && tetriminos case present on line 0)
             if(isLoose(state.currMap, state.tetriList[0].shape[currRotation], {x : pos.x, y : pos.y - 1}))
             {
-              //  dispatch({type : SOCKET_USER_DEAD});
                 dispatch(actionsSIP.socketUserDead());
                 return 0;   
             }
@@ -64,7 +63,7 @@ const useGameLoop = () => {
             }
                 // get next tetriminos
             if (tetriList.length < 4)
-                dispatch(actionsSIP.socketGetNextTetriminos());//dispatch({type : SOCKET_GET_NEXT_TETRIMINOS});
+                dispatch(actionsSIP.socketGetNextTetriminos());
             return 1;
             }
         }

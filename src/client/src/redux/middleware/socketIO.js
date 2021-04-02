@@ -10,7 +10,7 @@ import {SOCKET_USER_DEAD,
         SOCKET_PLAY_AGAIN,
         SOCKET_LINE_DELETE
 } from './../Constant/SocketIOProtocol';
-
+ 
 const socketIoMiddleware = ({ getState }) => {
     return (next) => (action) => {
         let { type, payload } = action;

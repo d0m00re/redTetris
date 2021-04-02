@@ -22,14 +22,17 @@ export const socketJoinRoom = () => ({
 export const socketSendUsername = () => ({
     type : types.SOCKET_SEND_USERNAME
 })
-
+ 
 export const socketJoinRoomWtName = (roomname) => ({
     type : types.SOCKET_JOIN_ROOM_WT_NAME,
     payload : {roomname : roomname}
 })
 
+export const socketRunGame = () => ({
+    type : types.SOCKET_RUN_GAME
+})
+
 //=-----------------------------------
-export const socketRunGame = () => ({type : types.SOCKET_RUN_GAME});
 export const socketLeaveRoom = () => ({type : types.SOCKET_LEAVE_ROOM});
 export const socketPlayAgain = () => ({type : types.SOCKET_PLAY_AGAIN}); 
 
