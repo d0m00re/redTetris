@@ -109,7 +109,7 @@ export class Global {
 
   
     getUserWithId(userId: string): IUser | undefined {
-        let user: User = this.users.getWithId(userId);
+        let user: User | undefined = this.users.getWithId(userId);
 
         if (user === undefined)
             return (undefined);

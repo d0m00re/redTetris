@@ -56,14 +56,9 @@ export class Room implements IRoom{
   incrUserScore(username : string, nbLineDelete : number) : boolean {
     let id = this.userList.findIndex(user => user.username === username);
     let scoreAdd = score[nbLineDelete];
-    if (id === -1){
-      console.log('incrUserScore : user not found : ' + username);
+    if (id === -1 || scoreAdd === undefined)
       return (false);
-    }
-    if (scoreAdd === undefined){
-      console.log('incrUserScore : invalid nbLineDelete');
-      return (false);
-    }
+  
     this.userList[id].score = this.userList[id].score + scoreAdd;
     return (true);
   }

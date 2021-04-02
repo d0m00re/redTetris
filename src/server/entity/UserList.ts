@@ -2,8 +2,13 @@ import {IUser, User} from './User';
 export class UserList {
     users : User[];
 
-    constructor() {
+    constructor() { 
         this.users = [];
+    }
+
+    add(name : string) {
+        let newUser  = new User({name : name, room : '', uuid : name});
+        this.users.push(newUser);
     }
 
     findIndexWtUsername(username : string) : number {
@@ -21,12 +26,13 @@ export class UserList {
         return this.users[index].getInfo();
     }
 
-    resetUser(username : string) {
+    resetUser(username : string) : undefined | IUser {
         let index = this.findIndexWtUsername(username);
 
         if (index === -1)
             return undefined;
         this.users[index].reset();
+        return this.users[index].getInfo();
     }
 
     setSaveTetriBoard(username : string , saveTetriBoard : number[][]) : IUser | undefined {
@@ -40,11 +46,6 @@ export class UserList {
         return this.users[index].getInfo();
     }
 
-    add(name : string) {
-        let newUser  = new User({name : name, room : '', uuid : ''});
-        this.users.push(newUser);
-    }
-
     addUser(user : IUser) {
        this.users.push(new User(user));
     }
@@ -53,11 +54,13 @@ export class UserList {
         this.users = this.users.filter(user => user.name !== name);
     } 
 
-    patch(name : string, user : IUser) {
+    patch(name : string, user : IUser) : boolean {
         let index = this.users.findIndex(user => user.name === name);
         if (index !== -1){
             this.users[index] = new User(user);
+            return true;
         }
+        return false;
     } 
 
     getUser(name : string) : User | undefined {
@@ -68,8 +71,13 @@ export class UserList {
         return this.users;
     }
 
-    getWithId(id : string) : User {
-        return this.users.filter(user => user.uuid === id)[0];
+    getWithId(id : string) : User | undefined {
+        let ret = this.users.filter(user => user.uuid === id);
+
+        if (ret.length !== 1)
+            return undefined;
+
+        return ret[0];
     }
 
 }

@@ -11,7 +11,7 @@ describe('Room', function () {
             state: 'WAIT_USER'
         };
         let room = new Room({ name: 'Testouille', owner: 'Jack' });
-        expect(room.getInfo()).toMatchObject(expectedObj);
+        expect(room.getInfo()).toEqual(expectedObj);
     }),
         test('incrUserScore', () => {
             let room = new Room({ name: 'room1', owner: 'jack' });
@@ -34,6 +34,6 @@ describe('Room', function () {
 
             let result = room.getInfo().userList;
 
-            expect(result).toMatchObject(expectedOutput);
+            expect(result).toEqual(expectedOutput);
         })
 }) 
