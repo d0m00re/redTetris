@@ -46,27 +46,19 @@ const socketIoMiddleware = ({ getState }) => {
             socket.emit(SOCKET_USER_DEAD); 
         }
 
-        const socketUpdateTetriBoard = () => {
-            console.log(SOCKET_UPDATE_USER_TETRI_BOARD);
-            console.log(state.game.currMap);
-            
-            
+        const socketUpdateTetriBoard = () => {            
             socket.emit(SOCKET_UPDATE_USER_TETRI_BOARD, state.game.currMap);
         }
 
         const socketLeaveRoom = () => {
-            console.log(SOCKET_LEAVE_ROOM);
             socket.emit(SOCKET_LEAVE_ROOM);
         }
 
         const socketPlayAgain = () => {
-            console.log(SOCKET_PLAY_AGAIN);
             socket.emit(SOCKET_PLAY_AGAIN);
         }
 
         const socketLineDelete = (nbLineDelete) => {
-            //SOCKET_LINE_DELETE
-            console.log(SOCKET_LINE_DELETE);
             socket.emit(SOCKET_LINE_DELETE, nbLineDelete);
             
         }
@@ -76,11 +68,9 @@ const socketIoMiddleware = ({ getState }) => {
                 socketSendUsername();
             break;
             case SOCKET_JOIN_ROOM:
-                console.log(SOCKET_JOIN_ROOM);
                 socketJoinRoom();
             break;
             case SOCKET_JOIN_ROOM_WT_NAME:
-                console.log(SOCKET_JOIN_ROOM_WT_NAME + '  ==> ' +  payload.roomname);
                 socketJoinRoomWtName(payload.roomname);
             break;
             case SOCKET_GET_NEXT_TETRIMINOS:

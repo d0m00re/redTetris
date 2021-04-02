@@ -7,11 +7,6 @@ describe('Check line complete', function() {
     let board2 = Array(20).fill().map(() => Array(10).fill(0)); board2[0] = board2[0].map(() => 1);
     let board3 = Array(20).fill().map(() => Array(10).fill(0)); board3[1] = board3[1].map(() => 1);
 
-
-    let tetri1 = [
-        [0,0,0,0],[1,1,1,1],[0,0,0,0],[0,0,0,1]
-    ];
-
     let tetri2 = [
         [1,0,0],
         [1,1,1],
@@ -69,8 +64,6 @@ describe('Check line complete', function() {
             assert.deepEqual(ret, false);
         })
         it ('false contact seconde line, board case value === 0', function() {
-            console.log(board2)
-            console.log(tetri3)
             let ret = isPosContactBoard(board2, tetri3, {x : 1, y : 4}, {x : 1, y : 0});
             assert.deepEqual(ret, false);
         })

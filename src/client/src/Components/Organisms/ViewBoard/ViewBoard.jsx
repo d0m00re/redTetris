@@ -5,9 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
     root: {
-   //     backgroundColor : '#333',
-     //   border : '1px',
-     //   borderColor : '#666',
      paddingBottom : '8px'
 
     },

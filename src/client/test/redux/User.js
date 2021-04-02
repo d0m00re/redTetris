@@ -3,9 +3,6 @@ import * as types from './../../src/redux/Constant/User';
 
 const assert = require('assert');
 
-//const {SET_IS_CONNECT} =  require('./../../src/redux/Constant/User');
-//const {setIsConnected} = require('./../../src/redux/actions/User');
-
 describe('User Actions', () => {
     it('should create an action to indicate that this user is logged in to the backend', () => {
 
@@ -14,7 +11,6 @@ describe('User Actions', () => {
             payload : true
         };       
 
-       // expect(actions.setIsConnected()).toEqual(expectedAction);
         assert.deepEqual(actions.setIsConnected(), expectedAction);
     });
 
@@ -25,7 +21,6 @@ describe('User Actions', () => {
             payload : {error : true, errorMsg : msg}
         };
 
-       // expect(actions.setIsConnected()).toEqual(expectedAction);
         assert.deepEqual(actions.setError({errorMsg : msg}), expectedAction);
     });
 
@@ -36,7 +31,6 @@ describe('User Actions', () => {
             payload : username.username
         };
 
-       // expect(actions.setIsConnected()).toEqual(expectedAction);
         assert.deepEqual(actions.setUsername(username), expectedAction);
     });
 
@@ -47,7 +41,6 @@ describe('User Actions', () => {
             payload : username
         };
 
-       // expect(actions.setIsConnected()).toEqual(expectedAction);
         assert.deepEqual(actions.setUsernameForm(username), expectedAction);
     });
 
@@ -58,7 +51,6 @@ describe('User Actions', () => {
             payload : roomName
         };
 
-       // expect(actions.setIsConnected()).toEqual(expectedAction);
         assert.deepEqual(actions.setRoomnameForm(roomName), expectedAction);
     });
 
@@ -68,7 +60,6 @@ describe('User Actions', () => {
             payload : true
         };
 
-       // expect(actions.setIsConnected()).toEqual(expectedAction);
         assert.deepEqual(actions.setUserAlive(true), expectedAction);
     });
 
@@ -78,7 +69,6 @@ describe('User Actions', () => {
             payload : false
         };
 
-       // expect(actions.setIsConnected()).toEqual(expectedAction);
         assert.deepEqual(actions.setUserAlive(false), expectedAction);
     });
 })

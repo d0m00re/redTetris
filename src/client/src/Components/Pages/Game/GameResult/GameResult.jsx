@@ -17,11 +17,6 @@ import Paper from '@material-ui/core/Paper';
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
-/*
-result board
-userlist
-relaunch  game
-*/
 const StyledTableCell = withStyles((theme) => ({
     head: {
         backgroundColor: theme.palette.common.black,

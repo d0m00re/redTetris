@@ -23,12 +23,9 @@ const useActionUser = () => {
             case 'Space':
                 setAction('space')
             break;
-            default:
-                console.log('action keypress : ' + keyPress);
-                
+            default:                
                 if (action !== '')
                     setAction('')
-                console.log(keyPress);
             break;
         }
     }, [keyPress])

@@ -16,7 +16,6 @@ const FormCreateRoom = () => {
     }
 
     const submitRoomname = () => {
-        console.log('---> socket_join_room : ' + roomnameForm);        
         dispatch(actionSIP.socketJoinRoom());
     }
 

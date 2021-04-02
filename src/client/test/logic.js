@@ -49,8 +49,6 @@ describe('Logic',function() {
             mergeTetriOnMap(tab, tetriBlue[0], {x : 0, y : 0});
 
             assert.deepEqual(tab, result);
-          //  assert.equal(tab, result);
-          //  expect(tab).deep.to.equal(result);
         })        
     })
     

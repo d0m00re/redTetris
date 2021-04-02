@@ -71,8 +71,6 @@ const getAllFullLine = (myMap) => {
 }
 
 const deleteFullLine = (myMap, nbLineBlock) => {
-    console.log('Nb line no delete *******: ' + nbLineBlock)
-    // get all fullline
     
     //get index full line
     let getLinesIndex = getAllFullLine(myMap);

@@ -32,7 +32,6 @@ export const setListUsers = (users) => ({
     payload : users
 })
 
-//------------------------
 export const addRoom  = (room) => ({
     type : types.ADD_ROOM,
     payload : room

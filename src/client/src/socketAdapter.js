@@ -19,7 +19,6 @@ const initApiSocket = (store) => {
   })
 
     socket.on(typesSocket.SOCKET_RECV_USERNAME, (resp) => { 
-      console.log('SOCKET_RECV_USERNAME')
       if (resp.err)
       {
         dispatch(actionUser.setError(resp));
@@ -38,7 +37,6 @@ const initApiSocket = (store) => {
 
         }
         else{
-          // svae current user room
             dispatch(actionsGameRoom.setGameRoom(resp.room));
             dispatch(actionUser.setRoomnameForm(''));
         }
@@ -52,14 +50,11 @@ const initApiSocket = (store) => {
         dispatch(actionsGeneralSocketInfo.setListUsers(users));
       });
 
-       // de la grosse merde
     socket.on(typesSocket.SOCKET_NEW_ROOM, (resp) => {
 
         if (resp.err){
             return 0;
         }
-        console.log('SOCKET NEW ROOM')
-        console.log(resp);
         dispatch(actionsGeneralSocketInfo.addRoom(resp));
       }) 
 
@@ -69,7 +64,6 @@ const initApiSocket = (store) => {
   if (resp.room.userList.filter(_user => _user.username === store.getState().user.username).length === 1)
       dispatch(actionsGameRoom.setGameRoom(resp.room));
       dispatch(actionsGeneralSocketInfo.patchListRoom(resp));
-      // need update room list
     });
 
     socket.on(typesSocket.SOCKET_GET_NEXT_TETRIMINOS, (resp) => {      
@@ -94,20 +88,14 @@ const initApiSocket = (store) => {
       });
 
     socket.on(typesSocket.SOCKET_PLAY_AGAIN, ({roomName, username}) => {
-      // reset user store for a new game
       if (username === store.getState().user.username)
         dispatch(actionUser.setUserAlive(true));
-      // reset all user | alive and saveTetriboard inside userlist
 
-      //}
       dispatch(actionsGameRoom.gameRoomReset());
 
       dispatch(actionsGeneralSocketInfo.resetRoomAndUser(roomName))
 
       dispatch(actionsGame.gameReset());
-      // reset roomlist reducer
-
-      // resret room current user
     })
 
     socket.on(typesSocket.SOCKET_PATCH_ROOM, (resp) => {

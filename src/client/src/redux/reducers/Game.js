@@ -32,7 +32,6 @@ export const initialState = {
   nbLineBlock: 0, // blok line - multiplayer
   score : 0,
 
-  //--------------------------------------
   gameRunning: true, // false : game stop
   gameEnd: false,
 };
@@ -67,7 +66,6 @@ const GameReducer = (state = initialState, action) => {
           score : 0
         }
     case UPDATE_FINAL_MAP:
-      // check delete line
       return {
         ...state,
         currMap: action.payload,
@@ -85,7 +83,6 @@ const GameReducer = (state = initialState, action) => {
       };
 
     case UPDATE_USERNAME:
-      //go perform axios request for saving user
       return {
         ...state,
         username: action.payload,
@@ -104,11 +101,8 @@ const GameReducer = (state = initialState, action) => {
       }
 
     case INCR_NB_LINE_BLOCK:
-      console.log(INCR_NB_LINE_BLOCK);
-      console.log(action.payload);
       
-      
-      let _nbLineBlock = state.nbLineBlock + action.payload;
+    let _nbLineBlock = state.nbLineBlock + action.payload;
     return {
         ...state,
         nbLineBlock : _nbLineBlock
@@ -138,8 +132,6 @@ const GameReducer = (state = initialState, action) => {
       }
 
       case END_TURN_PUT:
-        console.log(' generate new map');
-        //let cpMap = state.currMap;
         let cpMap = _.cloneDeep(state.currMap);
         mergeTetriOnMap(cpMap, state.tetriList[0].shape[state.currRotation], state.posTetriminos);
         cpMap = deleteFullLine(cpMap, state.nbLineBlock);

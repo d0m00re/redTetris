@@ -94,7 +94,6 @@ const useGameLoop = () => {
             return 0;
 
         if (!tetriList[0] || !tetriList[0].shape) {
-            console.log('invalid tetriminos');
             return 0;
         } 
 

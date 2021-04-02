@@ -82,7 +82,6 @@ describe('Actions : General socket info Actions', () => {
         assert.deepEqual(expectedAction, actions.setListUsers(listUser));
     });
 
-    //---
     it('Add room', () => {
         const room = {
             leaderboard: [],

@@ -72,6 +72,4 @@ const Home = () => {
     )
 }
 
-//room.owner === username
-
 export default Home

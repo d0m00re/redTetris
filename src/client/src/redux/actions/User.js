@@ -6,7 +6,6 @@ export const setIsConnected = () => {
         payload : true
     }
 };
-//import {SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM, SET_USER_ALIVE} from './redux/Constant/User';
 
 export const setError = (payload) => {
     return {
@@ -28,14 +27,6 @@ export const setUsernameForm = (payload) => {
         payload : payload
     }
 }
-/*
-export const setRoomname = (payload) => {
-    return {
-        type : types,
-        payload : {}
-    }
-}
-*/
 
 export const setRoomnameForm = (payload) => {
     return {
@@ -50,5 +41,3 @@ export const setUserAlive = (payload) => {
         payload : payload
     }
 };
-
-//SET_ERROR, SET_USERNAME, SET_IS_CONNECT, SET_ROOMNAME_FORM, SET_USER_ALIVE

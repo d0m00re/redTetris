@@ -10,8 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import TwoButton from '../../../Molecules/TwoButton/TwoButton';
 
-
- 
 const useStyles = makeStyles({
     flexRow: {
           padding: '16px',

@@ -9,7 +9,6 @@ describe('Check line complete', function() {
             let result = {x : 15, y : 4};
             let resultFunc = addPos(p1, p2);
             assert.deepEqual(result, resultFunc)
-            //assert.deepEqual(JSON.stringify(addPos(p1, p2)), JSON.stringify(result))
         })
     })
   });

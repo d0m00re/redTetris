@@ -37,8 +37,6 @@ const GameRoomReducer = (state = initialState, action) => {
             }
 
         case GAME_ROOM_UPD_SHADOW:
-            console.log('GAME ROOM SHADOW : ');
-            console.log(action.payload);
             return {
                 ...state,
                 shadows : action.payload

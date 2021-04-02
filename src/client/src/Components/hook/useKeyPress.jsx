@@ -11,7 +11,6 @@ const useKeyPress = () => {
    }
 
   const upHandler = () => {
-      console.log('up handler');
       setKeyPress('');
   };
 

@@ -27,8 +27,6 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
 
     switch(action.type) {
         case RESET_ROOM_AND_USER:
-        // reset iformation about room : 
-            //payload.roomName
             let {roomName} = action.payload;
             let id = state.roomlist.findIndex(_room => _room.name === roomName);
             let cpRoomList = _.cloneDeep(state.roomlist);
@@ -51,8 +49,6 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
                 userlist : cpUserList
             }
         case ADD_ROOM:
-            console.log('ADD ROOM ---')
-            console.log(action.payload);
             return {
                 ...state,
                 roomlist : [...state.roomlist, action.payload]
@@ -60,9 +56,6 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
 
         case DELETE_USER_FROM_USERLIST:
             let newUserList = state.userlist.filter(_user => _user?.name !== action.payload);
-            
-            console.log('New user list without : ' + action.payload);
-            console.log(newUserList);
             
             return {
                 ...state,
@@ -81,9 +74,6 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
                 roomlist : tmpRoomList 
             };
         case PATCH_LIST_ROOM:
-            console.log('---> PATCH_LIST_ROOM');
-            console.log(action.payload);
-
             let newRoom = action.payload;
             
             index = state.roomlist.findIndex(room => room.name === newRoom.name);
@@ -127,9 +117,7 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
                 userlist : tmpUserList
             };
 
-        case PATCH_USER:    
-            console.log('PATCH USER :');
-            console.log(action.payload);       
+        case PATCH_USER:          
             newUser = action.payload;
 
             index = state.userlist.findIndex(user => user.name === newUser.name);

@@ -42,8 +42,6 @@ export const socketNewRoom = () => ({type : types.SOCKET_NEW_ROOM});
 export const socketDeleteRoom = () => ({type : types.SOCKET_DELETE_ROOM});
 export const socketResetRoom = () => ({type : types.SOCKET_RESET_ROOM});
 
-//export const socket = () => ({type : });
-
 export const socketUserLogout = () => ({type : types.SOCKET_USER_LOGOUT});
 export const socketRecvUsername = () => ({type : types.SOCKET_RECV_USERNAME});
 export const socketPatchUser = () => ({type : types.SOCKET_PATCH_USER});
