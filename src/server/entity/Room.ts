@@ -44,7 +44,7 @@ export class Room implements IRoom{
   constructor({ name, owner }: IRoomConstructor) {
     this.name = name;
     this.uuid = ''; 
-    this.userList = [{username : owner, score : 0}];
+    this.userList = [{username : owner, score : 0}]; 
     this.owner = owner;
     this.state = ERoomState.WAIT_USER;
     this.leaderboard = [];
@@ -71,12 +71,13 @@ export class Room implements IRoom{
     this.leaderboard = [];
   }
 
-  leaderboardAdd(user : string) {
+  leaderboardAdd(user : string) :  boolean {
     let data : IScore | undefined = this.userList.find(_user => _user.username === user);
 
     if (data === undefined)
-      return ;
+      return false;
     this.leaderboard.unshift(data);
+    return true;
   }
 
   //-----------------------------
@@ -85,7 +86,7 @@ export class Room implements IRoom{
     return this.userList.length === 0;
   }
 
-  addUser(name: string): boolean {
+  addUser(name: string): boolean {    
     if (this.userList.findIndex(({username}) => username === name) !== -1)
       return false;
     this.userList.push({username : name, score : 0});
@@ -93,44 +94,37 @@ export class Room implements IRoom{
   }
 
   // delet euse rfrom user list
-  deleteUser(username: string): void {
+  deleteUser(username: string): boolean {
     this.userList = this.userList.filter(_user => _user.username !== username);
     if (this.owner === username && this.userList.length > 0)
+    {
       this.owner = this.userList[0].username;    
-  }
-
-  removeUser(name: string): boolean {
-    let lenOri = this.userList.length;
-
-    if (lenOri === 0)
-      return false;
-
-    if (name === this.owner)
-      this.owner = '';
-    this.userList = this.userList.filter(_name => _name.username !== name);
-    return lenOri === this.userList.length;
+      return true;
+    }
+    return false;
   }
 
   run(): void {
     this.state = ERoomState.RUNING_GAME;
   }
-
+ 
   stop(): void {
 
-    // multiplier case
+    // multiplayer case
     if (this.userList.length !== this.leaderboard.length)
     {
       // find winner and add it to the leaderboard
       //let winner = this.userList.filter(_user => _user.filter(elem => elem));
       let win = diffString(this.userList.map(({username}) => username), this.leaderboard.map((_lead) => _lead.username));
 
+     // console.log('------>');
+      
+  //    console.log(win);
+
       if (win) {
         this.leaderboardAdd(win[0]);
       }
-    }
-
-    console.log('Final leaderboard\n'); 
-    console.log(this.leaderboard);    
+    }   
     this.state = ERoomState.END_GAME;
   }
 

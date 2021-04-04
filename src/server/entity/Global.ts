@@ -10,7 +10,7 @@ export interface IShadow  {
 }
 
 export interface IShadowRoom {
-    roomname : string, 
+    roomname : string,  
     shadows : IShadow[]
 }
 
@@ -72,16 +72,10 @@ export class Global {
         let countAlive : number = listUserInterface.filter(_user => _user?.alive === true).length;
         let countDeath : number = listUserInterface.filter(_user => _user?.alive === false).length;
         
-        console.log(`${countAlive} === 0 || (${countAlive} ===  1 && ${countDeath} > 0) === ${countAlive === 0 || (countAlive === 1 && countDeath > 0)}`)
         if (countAlive === 0 || (countAlive === 1 && countDeath > 0)) // game loose
         {
-            console.log('END GAME');
             room.stop();
-
-            //return room.getInfo();
         }
-        console.log('ONE USER DEAD');
-        console.log(room.getInfo());
         return room.getInfo();
     }
 
@@ -92,8 +86,6 @@ export class Global {
     setSaveTetriBoard(username: string, saveTetriBoard: number[][]): IUser | undefined {
         return this.users.setSaveTetriBoard(username, saveTetriBoard);
     }
-
-
 
     //user dead
     setUserDeadInRoom(username: string): IUser | undefined {
@@ -139,15 +131,11 @@ export class Global {
     }
 
     generateAllRoomRunningShadows() :IShadowRoom[] | undefined {
-        console.log('Try send data each x seconds');
-    
-        console.log('Send new shadow for every RUNING ROOM');
         //let roomActif = global.rooms.rooms.filter(_room => _room.state === ERoomState.RUNING_GAME);
         let roomRunning : IRoom[] | undefined = this.rooms.getRunningRooms();
         
         if (roomRunning === undefined || roomRunning.length === 0)
         {
-            console.log('No room running')
             return (undefined);
         }
         let reEncodeData = roomRunning.map(_room  => {

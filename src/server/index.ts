@@ -53,17 +53,15 @@ app.get("/", (req: any, res: any) => {
   res.sendFile(path.resolve("./client/index.html"));
 });
 
+// send user shadow each 2 second
 setInterval(() => {
-  console.log('Interval turn : ');
   let shadowsRooms : IShadowRoom[] | undefined = global.generateAllRoomRunningShadows();
 
   if (shadowsRooms === undefined) {
-    console.log('No room run!');
     return (0);
   }
 
   shadowsRooms.map((shadowRoom : IShadowRoom) => {
-    console.log('emit shadow for this room : ' + shadowRoom.roomname);
     io.to(shadowRoom.roomname).emit(SOCKET_SHADOWS_ROOM, shadowRoom);
   });
 
@@ -72,7 +70,6 @@ setInterval(() => {
 io.on("connection", function (socket: any) {
 
   socket.on('disconnecting', () => {
-    console.log('user disconnect : ' + socket.username);
     logout(io, socket, global);
   })
 
@@ -89,7 +86,6 @@ io.on("connection", function (socket: any) {
   })
 
   socket.on(SOCKET_JOIN_ROOM, function (roomName: string) {
-    console.log('SOCKET_JOIN_ROOM : ' + roomName);
     joinRoom(io, socket, global, roomName);
   });
 

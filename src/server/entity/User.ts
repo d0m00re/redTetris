@@ -26,6 +26,12 @@ export class User implements IUser {
         this.saveTetriBoard = Array(20).fill([]).map(() => Array(10).fill(0));
     }
 
+    /*
+    leaveRoom() {
+        this.room = '';
+    } 
+    */
+
     getInfo() : IUser {
         return ({
             name : this.name,

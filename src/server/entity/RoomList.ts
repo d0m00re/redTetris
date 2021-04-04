@@ -3,14 +3,12 @@ import {IScore, IRoom, IRoomConstructor, Room, ERoomState} from './Room';
 
 export class RoomList{
     rooms: Room[];
-  
-    constructor() {
+   
+    constructor() {  
       this.rooms = [];
     }
   
     getRunningRooms() : IRoom[] | undefined {
-      console.log('room ---->')
-      console.log(this.rooms);
       return this.rooms.filter(_room => _room.state === ERoomState.RUNING_GAME);
     }
   
@@ -21,7 +19,8 @@ export class RoomList{
   
     addUser(roomName: string, userName: string): void {
       let room = this.rooms.filter(room => room.name === roomName)
-      room[0].addUser(userName); // = userName;
+      if (room.length === 1)
+        room[0].addUser(userName); // = userName;
     }
   
     //getIndex
@@ -50,7 +49,7 @@ export class RoomList{
       this.rooms.push(new Room(room));
     }
   
-    delete(name: string) {
+    delete(name: string) {      
       this.rooms = this.rooms.filter(user => user.name !== name);
     }
   
@@ -123,10 +122,8 @@ export class RoomList{
     incrUserScore(roomname : string, username : string, nbLineDelete : number) {
       let index = this.rooms.findIndex(room => room.name === roomname)
   
-      console.log('INCR USER SCORE');
       if (index !== -1)
         this.rooms[index].incrUserScore(username, nbLineDelete);
-      console.log(this.rooms[index].getInfo());
     }
   
     roomExist(name: string): boolean {
