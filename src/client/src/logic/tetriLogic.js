@@ -68,7 +68,7 @@ const getAllFullLine = (myMap) => {
         }
     } 
     return (arrId)
-}
+} 
 
 const deleteFullLine = (myMap, nbLineBlock) => {
     
@@ -89,11 +89,26 @@ const deleteFullLine = (myMap, nbLineBlock) => {
     return {newMap : replaceLine, nbLineDelete : nbLineDelete};
 }
 
-const nbLineWillBeDelete = (myMap) => {
-    return (myMap.filter(line => !(line.includes(0)))).length; 
+/*
+** nb line will be delete
+** myMap : current tetris map
+** nbLineBlock : nb line block y : {yMin : 19 - nbLineBlock, yMax : 19}
+** exemple nbLineBlock 1 yMin == 19 - 1 ==> 18, on garde uniquement les l
+*/
+const nbLineWillBeDelete = (myMap, nbLineBlock) => {
+    let min = 19 - nbLineBlock;
+
+    // array of index with full line of 1
+    let indexDestroy = myMap.reduce((arr, e, i) => {
+        if (e.includes(0) === false && i <= min)
+            arr.push(i);
+        return arr;
+    }, []);
+    
+
+    return (indexDestroy.length);
     //return ();
 }
-
 
 module.exports = {
     mergeTetriOnMap,
@@ -102,5 +117,5 @@ module.exports = {
     getAllFullLine,
     deleteFullLine,
     checkAndPushSpace,
-    nbLineWillBeDelete,
-}
+    nbLineWillBeDelete
+} 

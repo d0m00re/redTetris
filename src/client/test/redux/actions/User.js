@@ -1,5 +1,5 @@
-import * as actions from './../../src/redux/actions/User';
-import * as types from './../../src/redux/Constant/User';
+import * as actions from './../../../src/redux/actions/User';
+import * as types from './../../../src/redux/Constant/User';
 
 const assert = require('assert');
 

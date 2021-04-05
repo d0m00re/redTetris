@@ -18,4 +18,4 @@ describe('utils : getRoomStatus', () => {
     it('Loby is full', () => {
         assert.equal(roomStatus.dicoStatus.RUNING_GAME, roomStatus.getStatus('RUNING_GAME', 4));
     });
-})
+}); 

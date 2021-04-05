@@ -1,5 +1,5 @@
-import * as actions from './../../src/redux/actions/Game';
-import * as types from './../../src/redux/Constant/Game';
+import * as actions from './../../../src/redux/actions/Game';
+import * as types from './../../../src/redux/Constant/Game';
 
 const assert = require('assert');
 

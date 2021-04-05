@@ -19,6 +19,7 @@ const useGameLoop = () => {
     const alive = useSelector(state => state.user.alive);
     const tetriList = useSelector(state => state.game.tetriList);
     const currRotation = useSelector(state => state.game.currRotation);
+    const nbLineBlock = useSelector(state => state.game.nbLineBlock)
     const dispatch = useDispatch();
 
     const fallAlgo = () => {
@@ -51,15 +52,18 @@ const useGameLoop = () => {
             
             mergeTetriOnMap(cpMap, tetriList[0].shape[state.currRotation], pos);
             // add nbLineBlock management
-            let nbLineDelete = nbLineWillBeDelete(cpMap);
-            
+            let nbLineDelete = nbLineWillBeDelete(cpMap, nbLineBlock);
+            console.log('NB LINE DELETE : ' + nbLineDelete);
+            console.log(cpMap);
+            console.log(nbLineBlock);
             dispatch(actionsGame.endTurnPut());
 
             dispatch(actionsSIP.socketUpdateUserTetriBoard());
            if (nbLineDelete)
             {
-                dispatch(actionsSIP.socketNbLineDelete(nbLineDelete));
-             dispatch(actionsGame.gameIncrScore(nbLineDelete));
+                console.log('Valid line delete go go go : ' + nbLineDelete);
+                dispatch(actionsSIP.socketNbLineDelete(nbLineDelete)); 
+                dispatch(actionsGame.gameIncrScore(nbLineDelete));
             }
                 // get next tetriminos
             if (tetriList.length < 4)

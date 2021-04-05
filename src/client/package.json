@@ -38,7 +38,7 @@
     "start": "webpack-dev-server --mode=development --config ./webpack.config.js --port 8088 --host 0.0.0.0 --open",
     "build": "react-scripts build",
     "test": "mocha -r esm --recursive",
-    "test:only": "cross-env NODE_ENV=test jest",
+    "coverage": "nyc --reporter=text mocha -r esm --recursive",
     "test:coverage": "npm run test:only -- --collectCoverageFrom=\"src/**/*.js\" --coverage",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
@@ -73,6 +73,7 @@
     "esm": "^3.2.25",
     "mocha": "^8.2.1",
     "mocha-loader": "^5.1.5",
+    "nyc": "^15.1.0",
     "svg-url-loader": "^7.1.1"
   }
 }

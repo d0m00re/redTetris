@@ -7,7 +7,7 @@ const {
     getAllFullLine,
     deleteFullLine,
     checkAndPushSpace,
-    nbLineWillBeDelete,    
+    nbLineWillBeDelete
 } = require('./../src/logic/tetriLogic');
 
 const tetriBlue = [
@@ -51,7 +51,7 @@ describe('Logic',function() {
             assert.deepEqual(tab, result);
         })        
     })
-    
+     
     describe('checkValidPushTetri', function(){
         it('check valid {x: 0, y : 0', function() {
             let tab = Array(20).fill().map(() => Array(10).fill(0));
@@ -191,23 +191,37 @@ describe('Logic',function() {
             assert.deepEqual(test, result);
         })
     })
-    describe('nbLineWillBeDelete', function() {
+
+    describe('nbLineWillBeDelete', () => {
         it('no delete line', () => {
             let test = Array(20).fill().map(() => Array(10).fill(0));
-            assert.equal(nbLineWillBeDelete(test), 0)
+            assert.equal(nbLineWillBeDelete(test, 0), 0)
         });
 
         it('1) one delete line', () => {
             let test = Array(20).fill().map(() => Array(10).fill(0));
             test[1] = Array(10).fill(1);
-            assert.equal(nbLineWillBeDelete(test), 1)
+            assert.equal(nbLineWillBeDelete(test, 0), 1)
         });
 
         it('2) one delete line', () => {
             let test = Array(20).fill().map(() => Array(10).fill(0));
             test[1] = Array(10).fill(1);
             test[10] = [...Array(9).fill(1), 0]
-            assert.equal(nbLineWillBeDelete(test), 1);
+            assert.equal(nbLineWillBeDelete(test, 0), 1);
+        });
+
+        it('3) line block', () => {
+            let test = Array(20).fill().map(() => Array(10).fill(0));
+            test[19] = Array(10).fill(1);
+            test[10] = Array(10).fill(1);
+            assert.equal(nbLineWillBeDelete(test, 2), 1);
+        });
+
+        it('4) line block', () => {
+            let test = Array(20).fill().map(() => Array(10).fill(0));
+            test[10] = Array(10).fill(1);
+            assert.equal(nbLineWillBeDelete(test, 10), 1);
         });
     })
 }) 

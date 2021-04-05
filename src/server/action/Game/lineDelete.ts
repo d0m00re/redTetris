@@ -17,7 +17,8 @@ const lineDelete = (io : any, socket : any, global : Global, nbLineDelete: numbe
 
     global.rooms.incrUserScore(roomName, socket.username, nbLineDelete);
 
-    socket.broadcast.to(roomName).emit(SOCKET_LINE_DELETE, nbLineDelete);   
+    console.log('SOCKET_LINE_DELETE ---> ' + nbLineDelete + ' | roomName ; ' + roomName);
+    socket.broadcast.to(roomName).emit(SOCKET_LINE_DELETE, nbLineDelete);
 }
 
 export default lineDelete;

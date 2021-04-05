@@ -1,5 +1,5 @@
-import * as actions from './../../src/redux/actions/GeneralSocketInfo';
-import * as types from './../../src/redux/Constant/GeneralSocketInfo';
+import * as actions from './../../../src/redux/actions/GeneralSocketInfo';
+import * as types from './../../../src/redux/Constant/GeneralSocketInfo';
 
 const assert = require('assert');
 

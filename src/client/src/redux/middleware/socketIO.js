@@ -21,47 +21,47 @@ const socketIoMiddleware = ({ getState }) => {
         // set username
         const socketSendUsername = () => {
             socket.emit(SOCKET_SEND_USERNAME, state.user.usernameForm);
-        }
+        };
 
         // join room 
         const socketJoinRoom = () => {
             socket.emit(SOCKET_JOIN_ROOM, state.user.roomnameForm);
-        }
+        };
 
         const socketJoinRoomWtName = (roomname) => {
             socket.emit(SOCKET_JOIN_ROOM, roomname);
-        }
+        };
 
         //run game
         const socketRunGame = () => {
             socket.emit(SOCKET_RUN_GAME, state.gameRoom.name);
-        }
+        };
 
         const getNextTetriminos = () => {
             socket.emit(SOCKET_GET_NEXT_TETRIMINOS);
-        }
+        };
 
         // current user loose the game
         const socketUserDead = () => {
             socket.emit(SOCKET_USER_DEAD); 
-        }
+        };
 
         const socketUpdateTetriBoard = () => {            
             socket.emit(SOCKET_UPDATE_USER_TETRI_BOARD, state.game.currMap);
-        }
+        };
 
         const socketLeaveRoom = () => {
             socket.emit(SOCKET_LEAVE_ROOM);
-        }
+        };
 
         const socketPlayAgain = () => {
             socket.emit(SOCKET_PLAY_AGAIN);
-        }
+        };
 
         const socketLineDelete = (nbLineDelete) => {
+            console.log('SOCK_LINE_DELETE ===> ' + nbLineDelete);
             socket.emit(SOCKET_LINE_DELETE, nbLineDelete);
-            
-        }
+        };
 
         switch(type) {
             case SOCKET_SEND_USERNAME:
