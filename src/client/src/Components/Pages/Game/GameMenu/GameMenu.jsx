@@ -33,8 +33,8 @@ const GameMenu = ({ username, room, funcRunGame, funcLeaveRoom, owner }) => {
             <Typography variant='body1'>Player {room?.userList?.length} / 7</Typography>
             {
                 room?.userList.length > 0 &&
-                room.userList.map((_username) =>
-                    <Typography variant='body2'>{_username.username}</Typography>)
+                room.userList.map((_username, index) =>
+                    <Typography key={`user-${index}`} variant='body2'>{_username.username}</Typography>)
             }
             </div>
         

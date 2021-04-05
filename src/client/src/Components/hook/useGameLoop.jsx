@@ -53,15 +53,11 @@ const useGameLoop = () => {
             mergeTetriOnMap(cpMap, tetriList[0].shape[state.currRotation], pos);
             // add nbLineBlock management
             let nbLineDelete = nbLineWillBeDelete(cpMap, nbLineBlock);
-            console.log('NB LINE DELETE : ' + nbLineDelete);
-            console.log(cpMap);
-            console.log(nbLineBlock);
             dispatch(actionsGame.endTurnPut());
 
             dispatch(actionsSIP.socketUpdateUserTetriBoard());
            if (nbLineDelete)
             {
-                console.log('Valid line delete go go go : ' + nbLineDelete);
                 dispatch(actionsSIP.socketNbLineDelete(nbLineDelete)); 
                 dispatch(actionsGame.gameIncrScore(nbLineDelete));
             }

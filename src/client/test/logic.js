@@ -195,13 +195,13 @@ describe('Logic',function() {
     describe('nbLineWillBeDelete', () => {
         it('no delete line', () => {
             let test = Array(20).fill().map(() => Array(10).fill(0));
-            assert.equal(nbLineWillBeDelete(test, 0), 0)
+            assert.equal(nbLineWillBeDelete(test, 0), 0);
         });
 
         it('1) one delete line', () => {
             let test = Array(20).fill().map(() => Array(10).fill(0));
             test[1] = Array(10).fill(1);
-            assert.equal(nbLineWillBeDelete(test, 0), 1)
+            assert.equal(nbLineWillBeDelete(test, 0), 1);
         });
 
         it('2) one delete line', () => {
@@ -221,7 +221,7 @@ describe('Logic',function() {
         it('4) line block', () => {
             let test = Array(20).fill().map(() => Array(10).fill(0));
             test[10] = Array(10).fill(1);
-            assert.equal(nbLineWillBeDelete(test, 10), 1);
+            assert.equal(nbLineWillBeDelete(test, 10), 0);
         });
     })
 }) 

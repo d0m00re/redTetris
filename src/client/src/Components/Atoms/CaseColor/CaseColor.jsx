@@ -76,8 +76,7 @@ const CaseColor =({caseValue, indexCase}) =>{
     }
 
     return (
-        <Grid item key={'case' + indexCase}
-        className={clsx(classes.root, getColorWtValue(caseValue))}></Grid>
+        <Grid item key={'case' + indexCase} className={clsx(classes.root, getColorWtValue(caseValue))}></Grid>
     );
 };
 

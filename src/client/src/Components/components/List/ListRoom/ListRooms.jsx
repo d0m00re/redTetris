@@ -10,8 +10,8 @@ const ListRooms = () => {
         <div>
             <Typography variant='h3'>List rooms : </Typography>
             {
-                roomlist.map(room => 
-                <Typography variant='h5'>#{room.name}, owner : {room.owner}</Typography>
+                roomlist.map((room, index) => 
+                <Typography key={'inforoom-' + index} variant='h5'>#{room.name}, owner : {room.owner}</Typography>
                 )
             }
         </div>

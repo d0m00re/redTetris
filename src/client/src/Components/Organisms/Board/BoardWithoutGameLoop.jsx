@@ -18,8 +18,8 @@ const BoardWithoutGameLoop = ({currentBoard}) => {
     <div >    
       <div>
       {currentBoard.map((row, indexRow) => (
-        <Grid container direction="row" key={"rowrow" + indexRow} className={useStyles.root}>
-          <TetrisRow row={row}></TetrisRow>
+        <Grid container key={`boardWithoutGameLoop-${indexRow}`} direction="row" className={useStyles.root}>
+          <TetrisRow row={row} keyFather={indexRow}></TetrisRow>
         </Grid>
       ))}
       </div>

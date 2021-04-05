@@ -17,13 +17,16 @@ const useStyles = makeStyles({
     }
 })
 
-const RoomInfoWtChild = ({children, name, status, nbPlayer}) => {
+const RoomInfoWtChild = ({children, name, status, nbPlayer, keyFather}) => {
     const classes = useStyles();
 
     return (
-        <div className={classes.flexRow}>
+        <div className={classes.flexRow} key={keyFather}>
+            <>
+            key father : {keyFather}
             <RoomInfo roomname={name} status={status} nbPlayer={nbPlayer} />
             {children}
+            </>
         </div>
     )
 }
@@ -32,7 +35,8 @@ RoomInfoWtChild.propTypes = {
     roomname : PropTypes.string,
     status : PropTypes.string,
     nbPlayer : PropTypes.number,
-    children : PropTypes.element
+    children : PropTypes.element,
+    keyFather : PropTypes.string
 };
 
 export default RoomInfoWtChild

@@ -1,15 +1,15 @@
 import React from 'react';
 import CaseBoolColor from './../../Atoms/CaseBoolColor/CaseBoolColor';
 
-const TetriRowAdv = ({row, indexRow = 0}) => {    
+const TetriRowAdv = ({row, key}) => {    
     return (
         <>
             {
-                row.map((value, indexElem) => <CaseBoolColor caseValue={value} indexRow={indexRow} indexCase={indexElem} />)
+                row.map((value, indexElem) => <CaseBoolColor caseValue={value} key={`${key}-${indexElem}`} />)
             }
         </>
     )
 }
 
-export default TetriRowAdv
+export default React.memo(TetriRowAdv);
   
