@@ -86,7 +86,8 @@ const initApiSocket = (store) => {
   });
 
   socket.on(typesSocket.SOCKET_PLAY_AGAIN, ({ roomName, username }) => {
-    if (username === store.getState().user.username)
+    //if (username === store.getState().user.username)
+    if (roomName === store.getState().gameRoom.name)
       dispatch(actionUser.setUserAlive(true));
 
     dispatch(actionsGameRoom.gameRoomReset());

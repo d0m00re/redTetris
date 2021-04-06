@@ -3,7 +3,7 @@ import _ from "lodash" // Import the entire lodash library
 import useInterval from './useInterval';
 import useActionUser from './../hook/useActionUser';
 
-import { mergeTetriOnMap, checkValidPushTetri, checkAndPush, checkAndPushSpace, nbLineWillBeDelete} from './../../logic/tetriLogic';
+import { mergeTetriOnMap, checkValidPushTetri, checkAndPush, checkAndPushSpace, nbLineWillBeDelete, deleteFullLine} from './../../logic/tetriLogic';
 import { useDispatch, useSelector } from 'react-redux';
  
 import * as actionsSIP from './../../redux/actions/SocketIOProtocol';
@@ -48,13 +48,20 @@ const useGameLoop = () => {
             }
             else { 
             //cpMap check nb delete line 
-            
-            
-            mergeTetriOnMap(cpMap, tetriList[0].shape[state.currRotation], pos);
-            // add nbLineBlock management
-            let nbLineDelete = nbLineWillBeDelete(cpMap, nbLineBlock);
-            dispatch(actionsGame.endTurnPut());
+   
 
+            
+               cpMap = _.cloneDeep(state.currMap);
+               mergeTetriOnMap(cpMap, state.tetriList[0].shape[state.currRotation], state.posTetriminos);
+
+              let  nbLineDelete = nbLineWillBeDelete(cpMap, nbLineBlock);
+
+               cpMap = deleteFullLine(cpMap, state.nbLineBlock);
+      
+                dispatch(actionsGame.endTurnPut(cpMap));
+               // dispatch({type : 'END_TURN_PUT', payload : {cpMap : cpMap}});
+
+                //-----------
             dispatch(actionsSIP.socketUpdateUserTetriBoard());
            if (nbLineDelete)
             {

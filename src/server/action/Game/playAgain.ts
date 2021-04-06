@@ -23,6 +23,8 @@ const playAgain = (io : any, socket : any, global : Global) => {
         user.reset();
     }
     io.emit(SOCKET_PLAY_AGAIN, {roomName : roomName, username : user?.name});
+ //   io.to(roomName).emit(SOCKET_PLAY_AGAIN, {roomName : roomName, username : user?.name});
+
 }
 
-export default playAgain;
+export default playAgain; 

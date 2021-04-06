@@ -53,6 +53,7 @@ export const gameIncrScore = (nbLineDelete) => ({
     payload : nbLineDelete
 });
 
-export const endTurnPut = () => ({
-    type : types.END_TURN_PUT
+export const endTurnPut = (newMap) => ({
+    type : types.END_TURN_PUT,
+    payload : newMap
 })

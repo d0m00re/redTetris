@@ -23,9 +23,8 @@ const RoomInfoWtChild = ({children, name, status, nbPlayer, keyFather}) => {
     return (
         <div className={classes.flexRow} key={keyFather}>
             <>
-            key father : {keyFather}
-            <RoomInfo roomname={name} status={status} nbPlayer={nbPlayer} />
-            {children}
+                <RoomInfo roomname={name} status={status} nbPlayer={nbPlayer} />
+                {children}
             </>
         </div>
     )
