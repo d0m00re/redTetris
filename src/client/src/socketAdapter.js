@@ -18,7 +18,7 @@ const initApiSocket = (store) => {
     console.log('RECEIVE SOCKET_LINE_DELETE : ' + nbDeleteLine);
     dispatch(actionsGame.incrNbLineBlock(nbDeleteLine));
   });
-
+ 
   socket.on(typesSocket.SOCKET_RECV_USERNAME, (resp) => {
     if (resp.err) {
       dispatch(actionUser.setError(resp));

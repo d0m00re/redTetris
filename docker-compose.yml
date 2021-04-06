@@ -1,0 +1,15 @@
+version : '3'
+
+services :
+  backend-service:
+    build : ./src/server
+
+    ports :
+      -  4242:4242
+
+  frontend-service:
+    build : ./src/client
+    ports :
+      - 8088:8088
+    depends_on :
+      - backend-service

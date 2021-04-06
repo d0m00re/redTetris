@@ -31,7 +31,22 @@ const tetriBlue = [
         [0,1,0],
         [1,1,0],
     ],
-  ]
+  ];
+
+const tetriList = [
+    [
+        [0,0,3,0],
+        [3,3,3,0],
+        [0,0,0,0],
+        [0,0,0,0]
+    ],
+    [
+        [0,5,5,0],
+        [5,5,0,0],
+        [0,0,0,0],
+        [0,0,0,0]
+    ]
+];
 
 describe('Logic',function() {
 
@@ -53,6 +68,22 @@ describe('Logic',function() {
     })
      
     describe('checkValidPushTetri', function(){
+        it('check invalid superposition :', () => {
+            let tab = Array(20).fill().map(() => Array(10).fill(0));
+
+            mergeTetriOnMap(tab, tetriList[1], {x : 3, y : 10});
+            let ret = checkValidPushTetri(tab, tetriList[0], {x : 3, y : 10});
+            assert.equal(ret, false);
+
+        });
+        it('check invalid superposition :', () => {
+            let tab = Array(20).fill().map(() => Array(10).fill(0));
+
+            mergeTetriOnMap(tab, tetriList[0], {x : 3, y : 10});
+            let ret = checkValidPushTetri(tab, tetriList[1], {x : 3, y : 10});
+            assert.equal(ret, false);
+
+        });
         it('check valid {x: 0, y : 0', function() {
             let tab = Array(20).fill().map(() => Array(10).fill(0));
         

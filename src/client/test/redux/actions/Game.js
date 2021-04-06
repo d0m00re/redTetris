@@ -70,10 +70,11 @@ describe('Actions : Game', () => {
     
     it('End of a game turn', () => {
         const expectedAction = {
-            type : types.END_TURN_PUT
+            type : types.END_TURN_PUT,
+            payload : Array(20).fill().map(() => Array(10).fill(0))
         };
 
-        assert.deepEqual(actions.endTurnPut(), expectedAction);
+        assert.deepEqual(actions.endTurnPut(Array(20).fill().map(() => Array(10).fill(0))), expectedAction);
     });
 
     it ('Shape rotation', () => {
@@ -97,16 +98,4 @@ describe('Actions : Game', () => {
 
         assert.deepEqual(actions.updateTetriminosPos(pos), expectedAction);
     });
-
-
-/*
-    it('Reset tetriminos data board', () => {
-        const expectedAction = {
-            type :,
-            payload ; 
-        }
-
-        assert.deepEqual(expectedAction, ..)
-    })
-    */
 })

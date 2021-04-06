@@ -18,12 +18,6 @@ describe('Check line complete', function() {
         [0,0,0],
     ]
 
-    let tetri3 = [
-        [0,1,1],
-        [1,1,0],
-        [0,0,0],
-    ]
-
 
     describe('Loose game', function() {
         it('loose game - first line full of 1', function() {
