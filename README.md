@@ -1,6 +1,12 @@
 # redTetris
 42projects
 
+## Install an run project with docker
+sudo docker-compose up
+then go on this url : http://localhost:8088
+
+## OR
+
 ## Multiplayer online tetris.
 
 ## Server
@@ -27,7 +33,7 @@ npm run clt-test
 
 ### storybook
 ```js
-npm run clt-storybook;
+cd src/client; npm run storybook;
 ```
 
 ## TECHNO
