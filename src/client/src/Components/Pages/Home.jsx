@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import HomeGame from './../Pages/HomeGame';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,6 +16,10 @@ import Login from './Login/Login';
 
 import RoomLoby from './RoomLoby/RoomLoby';
 
+import hashParsing from './../../utils/hashParsing';
+
+import {socketSendUsernameWtUsername, socketJoinRoomWtName} from './../../redux/actions/SocketIOProtocol';
+
 const Home = () => {
     let { username, isConnect } = useSelector(state => state.user);
     let room = useSelector(state => state.gameRoom);
@@ -27,6 +31,19 @@ const Home = () => {
     const leaveRoom = () => dispatch(actionSocket.socketLeaveRoom());
 
     const playAgain = () => dispatch(actionSocket.socketPlayAgain());
+
+    useEffect(() => {
+        console.log('window object:');
+        let hash = hashParsing(window.location.hash)
+        if (hash !== undefined){
+            console.log('auto join : ' + hash);
+            console.log(hash);
+            // dispatch user
+            dispatch(socketSendUsernameWtUsername(hash.username));
+            // dispatch join room 
+            dispatch(socketJoinRoomWtName(hash.roomname));
+        }
+    }, [window.location.hash])
 
     return (
         <>

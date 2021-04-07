@@ -8,8 +8,9 @@ import {SOCKET_USER_DEAD,
         SOCKET_UPDATE_USER_TETRI_BOARD, 
         SOCKET_LEAVE_ROOM,
         SOCKET_PLAY_AGAIN,
-        SOCKET_LINE_DELETE
-} from './../Constant/SocketIOProtocol';
+        SOCKET_LINE_DELETE,
+        SOCKET_SEND_USERNAME_WT_USERNAME
+} from './../Constant/SocketIOProtocol'; 
  
 const socketIoMiddleware = ({ getState }) => {
     return (next) => (action) => {
@@ -21,6 +22,10 @@ const socketIoMiddleware = ({ getState }) => {
         // set username
         const socketSendUsername = () => {
             socket.emit(SOCKET_SEND_USERNAME, state.user.usernameForm);
+        };
+
+        const socketSendUsernameWtUsername = (username) => {
+            socket.emit(SOCKET_SEND_USERNAME, username);
         };
 
         // join room 
@@ -66,6 +71,9 @@ const socketIoMiddleware = ({ getState }) => {
         switch(type) {
             case SOCKET_SEND_USERNAME:
                 socketSendUsername();
+            break;
+            case SOCKET_SEND_USERNAME_WT_USERNAME:
+                socketSendUsernameWtUsername(payload);
             break;
             case SOCKET_JOIN_ROOM:
                 socketJoinRoom();
