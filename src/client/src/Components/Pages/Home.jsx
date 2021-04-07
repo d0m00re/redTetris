@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import HomeGame from './../Pages/HomeGame';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -20,6 +20,7 @@ import hashParsing from './../../utils/hashParsing';
 
 import {socketSendUsernameWtUsername, socketJoinRoomWtName} from './../../redux/actions/SocketIOProtocol';
 
+
 const Home = () => {
     let { username, isConnect } = useSelector(state => state.user);
     let room = useSelector(state => state.gameRoom);
@@ -32,23 +33,30 @@ const Home = () => {
 
     const playAgain = () => dispatch(actionSocket.socketPlayAgain());
 
+    const [errorUrl, setErrorUrl] = useState(false);
+
+
     useEffect(() => {
         console.log('window object:');
         let hash = hashParsing(window.location.hash)
         if (hash !== undefined){
-            console.log('auto join : ' + hash);
-            console.log(hash);
             // dispatch user
             dispatch(socketSendUsernameWtUsername(hash.username));
             // dispatch join room 
             dispatch(socketJoinRoomWtName(hash.roomname));
+        }
+        else {
+            console.log('fuck you');
+            console.log()
+            if (window.location.hash.length > 0)// hash?.length !== undefined)
+                setErrorUrl(true);
         }
     }, [window.location.hash])
 
     return (
         <>
             {(!isConnect && room.name.length === 0) &&
-               <Login /> 
+               <Login err={errorUrl} errMsg={'Invalid Url'} /> 
             }
             {(isConnect &&  room.name.length === 0) &&
                 <RoomLoby username={username} />
