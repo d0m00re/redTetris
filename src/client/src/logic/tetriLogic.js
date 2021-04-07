@@ -19,7 +19,7 @@ const checkValidPushTetri  = (tetriMap, tetri, pos) =>{
                 return(false);
         }
     }
-    return (true); 
+    return (true);  
 }
 
 // check case on our current tetri
@@ -111,6 +111,7 @@ const nbLineWillBeDelete = (myMap, nbLineBlock) => {
 }
 
 module.exports = {
+    isOutPos,
     mergeTetriOnMap,
     checkValidPushTetri,
     checkAndPush,
