@@ -51,12 +51,12 @@ const Home = () => {
             if (window.location.hash.length > 0)// hash?.length !== undefined)
                 setErrorUrl(true);
         }
-    }, [window.location.hash])
+    }, [window.location.hash]);
 
     return (
         <>
             {(!isConnect && room.name.length === 0) &&
-               <Login err={errorUrl} errMsg={'Invalid Url'} /> 
+               <Login err={errorUrl} errMsg={'Invalid Url, should be an url like : #room[<username>]'} /> 
             }
             {(isConnect &&  room.name.length === 0) &&
                 <RoomLoby username={username} />
