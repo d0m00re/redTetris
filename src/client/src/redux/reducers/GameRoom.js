@@ -4,13 +4,12 @@ import {
     GAME_ROOM_INIT_STATE,
 
     GAME_ROOM_UPD_SHADOW,
-    GAME_ROOM_SHADOW_RESET
 } from './../Constant/GameRoom';
 
 export const initialState = { 
     name: '',
     uuid: '',
-    userList: [],
+    userList: [], 
     owner: '',
     state: '',
     leaderboard: [],
@@ -40,12 +39,6 @@ const GameRoomReducer = (state = initialState, action) => {
             return {
                 ...state,
                 shadows : action.payload
-            }
-
-        case GAME_ROOM_SHADOW_RESET:
-            return {
-                ...state,
-                shadows : []
             }
 
         default:

@@ -4,9 +4,8 @@ import { mergeTetriOnMap, deleteFullLine } from './../../logic/tetriLogic';
 import {
   GAME_RESET_CURRMAP,
   INCR_NB_LINE_BLOCK,
-  SET_NB_LINE_BLOCK,
   UPDATE_FINAL_MAP,
-
+ 
   UPDATE_TETRIMINOS_POS,
   TETRI_ROTATION,
   UPDATE_USERNAME,
@@ -21,7 +20,6 @@ import {
 } from "../Constant/Game";
 
 export const initialState = {
-  currentKey: '',
   username: '',
   roomname: '',
   currRotation: 0,
@@ -31,9 +29,6 @@ export const initialState = {
   tetriList: [],
   nbLineBlock: 0, // blok line - multiplayer
   score: 0,
-
-  gameRunning: true, // false : game stop
-  gameEnd: false,
 };
 
 let dictScore = {
@@ -94,12 +89,6 @@ const GameReducer = (state = initialState, action) => {
         roomname: action.payload,
       };
 
-    case SET_NB_LINE_BLOCK:
-      return {
-        ...state,
-        nbLineBlock: action.payload
-      }
-
     case INCR_NB_LINE_BLOCK:
 
       let _nbLineBlock = state.nbLineBlock + action.payload;
@@ -136,13 +125,12 @@ const GameReducer = (state = initialState, action) => {
       let newTetriList = [...state.tetriList];
       newTetriList.shift();
 
-      console.log(action.payload)
       return {
         ...state,
         currRotation: 0,
         tetriList: newTetriList,
         currMap: action.payload.newMap,
-        posTetriminos: { x: 5, y: -1 },
+        posTetriminos: { x: 3, y: -2 },
       }
     default:
       return state;

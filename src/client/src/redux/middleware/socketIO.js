@@ -64,7 +64,6 @@ const socketIoMiddleware = ({ getState }) => {
         };
 
         const socketLineDelete = (nbLineDelete) => {
-            console.log('SOCK_LINE_DELETE ===> ' + nbLineDelete);
             socket.emit(SOCKET_LINE_DELETE, nbLineDelete);
         };
 

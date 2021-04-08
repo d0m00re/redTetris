@@ -12,7 +12,7 @@ export const initialState = {
 
     username: '',
     isConnect: false,
-    alive : true,
+    alive : true, 
 }; 
 
 const UserReducer = (state = initialState, action) => {
@@ -33,7 +33,7 @@ const UserReducer = (state = initialState, action) => {
             return {
                 ...state, 
                 username: action.payload
-            }
+            } 
 
         case SET_IS_CONNECT:
             return {
