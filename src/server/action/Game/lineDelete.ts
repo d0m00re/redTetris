@@ -10,14 +10,10 @@ import {
 
 
 const lineDelete = (io : any, socket : any, global : Global, nbLineDelete: number) => {
-    console.log(SOCKET_LINE_DELETE + ' : ' + nbLineDelete);
-
-//    let sco = score[nbLineDelete];
     let roomName = global.rooms.getRoomNameWithUsername(socket.username);
 
     global.rooms.incrUserScore(roomName, socket.username, nbLineDelete);
 
-    console.log('SOCKET_LINE_DELETE ---> ' + nbLineDelete + ' | roomName ; ' + roomName);
     socket.broadcast.to(roomName).emit(SOCKET_LINE_DELETE, nbLineDelete);
 }
 

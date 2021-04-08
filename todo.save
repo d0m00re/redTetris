@@ -1,0 +1,4 @@
+add:
+	http://<server_name_or_ip>:<port>/#<room>[<player_name>]
+	test:
+		http://localhost:8088/#room1[d0m]
