@@ -23,7 +23,7 @@ const GameRoomReducer = (state = initialState, action) => {
                 ...initialState
             }
         case SET_GAME_ROOM:
-            return {
+            return { 
                 ...state,
                 ...action.payload
             }

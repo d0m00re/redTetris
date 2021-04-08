@@ -17,7 +17,6 @@ export const initialState = {
     socket : io.connect(WS_BASE),
     roomlist : [], 
     userlist : [], 
-    room : null,
 };
 
 const GeneralSocketInfoReducer = (state = initialState, action) => {

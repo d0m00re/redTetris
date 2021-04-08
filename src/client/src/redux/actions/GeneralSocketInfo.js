@@ -4,7 +4,7 @@ import * as types from './../../redux/Constant/GeneralSocketInfo';
 export const updateFinalMap = payload => ({
     type : types.UPDATE_FINAL_MAP,
     payload
-})
+}) 
  */
 
 export const resetRoomAndUser = (roomname) => ({

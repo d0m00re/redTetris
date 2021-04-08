@@ -46,8 +46,6 @@ const Home = () => {
             dispatch(socketJoinRoomWtName(hash.roomname));
         }
         else {
-            console.log('fuck you');
-            console.log()
             if (window.location.hash.length > 0)// hash?.length !== undefined)
                 setErrorUrl(true);
         }

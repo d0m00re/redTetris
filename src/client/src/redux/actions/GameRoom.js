@@ -22,4 +22,4 @@ export const gameRoomUpdateShadow = (payload) => ({
 
 export const setInitState = () => ({
     type : types.GAME_ROOM_INIT_STATE
-});
+}); 
