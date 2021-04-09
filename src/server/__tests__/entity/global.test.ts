@@ -1,7 +1,6 @@
 import { Global, IShadowRoom } from './../../entity/Global';
 import { ERoomState } from './../../entity/Room';
-import { User, IUser } from './../../entity/User';
-import { Room, IRoom } from './../../entity/Room';
+
 import * as RoomData from './../../dataset/room';
 import * as UserData from './../../dataset/user';
 

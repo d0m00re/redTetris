@@ -3,7 +3,7 @@ import reducer, {initialState} from './../../../src/redux/reducers/GameRoom';
 
 describe('GameRoom reducer', () => {
     test('should return the initial state', () => {
-        let expectedValue = initialState;
+        let expectedValue = initialState; 
 
         expect(reducer(undefined, {})).toEqual(expectedValue);
     });

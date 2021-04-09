@@ -3,7 +3,6 @@ import {WS_BASE} from './../../config/config';
 import _ from 'lodash'; //cloneDeep
 
 import {SET_ROOMS,
-    PATCH_LIST_USERS,
     SET_LIST_USERS,
     PATCH_LIST_ROOM,
     DELETE_ROOM,
@@ -16,7 +15,7 @@ import {SET_ROOMS,
 export const initialState = {
     socket : io.connect(WS_BASE),
     roomlist : [], 
-    userlist : [], 
+    userlist : [],  
 };
 
 const GeneralSocketInfoReducer = (state = initialState, action) => {
@@ -96,25 +95,6 @@ const GeneralSocketInfoReducer = (state = initialState, action) => {
                 ...state,
                 userlist : action.payload
             }
-
-        case PATCH_LIST_USERS:
-            newUser = action.payload;
-
-            index = state.userlist.findIndex(user => user.name === newUser.name);
-            
-
-            if (index !== -1){
-                tmpUserList = [...state.userlist];
-                tmpUserList[index] = newUser;
-            }
-            else {
-                tmpUserList = [...state.userlist, newUser];
-            }
-            
-            return {
-                ...state,
-                userlist : tmpUserList
-            };
 
         case PATCH_USER:          
             newUser = action.payload;

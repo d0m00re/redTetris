@@ -10,7 +10,6 @@ export const ADD_ROOM = 'ADD_ROOM';
 export const PATCH_LIST_ROOM = 'PATCH_LIST_ROOM';
 
 export const SET_LIST_USERS = 'SET_LIST_USERS';
-export const PATCH_LIST_USERS = 'PATCH_LIST_USERS';
 
 export const PATCH_USER = 'PATCH_USER';
 

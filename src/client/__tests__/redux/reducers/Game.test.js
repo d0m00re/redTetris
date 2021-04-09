@@ -84,7 +84,7 @@ test('should handle SET_USERNAME_FORM', () => {
             roomname: 'room1',
             currRotation: 0,
 
-            posTetriminos: { x: 3, y: -2 },
+            posTetriminos: { x: 3, y: -1 },
             currMap: Array(20).fill().map(() => Array(10).fill(0)),
             tetriList: [],
             nbLineBlock: 0, // blok line - multiplayer
@@ -114,7 +114,7 @@ test('should handle SET_USERNAME_FORM', () => {
             roomname: 'room1',
             currRotation: 0,
 
-            posTetriminos: { x: 3, y: -2 },
+            posTetriminos: { x: 3, y: -1 },
             currMap: Array(20).fill().map(() => Array(10).fill(1)),
             tetriList: [[[2,2,2,2]]],
             nbLineBlock : 0,

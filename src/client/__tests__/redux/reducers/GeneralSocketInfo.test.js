@@ -157,20 +157,6 @@ describe('GeneralSocketInfo Reducer', () => {
     });
 
     test('should handle patchUser', () => {
-        /*
-let userlist = [{
-    name : 'u1',
-    room : '',
-    uuid : 'dsdfs',
-    saveTetriBoard :  Array(20).fill([]).map(() => Array(10).fill(2))
-},
-{
-    name : 'u2',
-    room : '',
-    uuid : 'dddd',
-    saveTetriBoard :  Array(20).fill([]).map(() => Array(10).fill(2))
-}];
-        */
        let patchUserlist = [{
         name : 'u1',
         room : 'room1',

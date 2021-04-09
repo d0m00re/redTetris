@@ -23,12 +23,16 @@ const useGameLoop = () => {
     const dispatch = useDispatch();
 
     const fallAlgo = () => {
+        console.log('Game turn ...');
+        console.log(alive)
         if (alive === false)
             return (1);
 
+        console.log(room.state);
         if (room.state !== 'RUNING_GAME')
             return (0);
 
+        console.log(tetriList)
         if (!tetriList[0] || !tetriList[0].shape) {
             return 0;
         }
@@ -37,6 +41,7 @@ const useGameLoop = () => {
         let pos = { ...state.posTetriminos };
         pos.y += 1;
  
+        console.log('Before big if')
         if (!checkValidPushTetri(state.currMap, state.tetriList[0].shape[state.currRotation], pos)) {
 
             // check loose Array(20).map(() => Array(10).fill(0)) 0 === loose

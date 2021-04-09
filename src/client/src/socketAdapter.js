@@ -15,7 +15,6 @@ const initApiSocket = (store) => {
   socket.on('connect', () => { console.log('connect success : '); });// connection
 
   socket.on(typesSocket.SOCKET_LINE_DELETE, (nbDeleteLine) => {
-    console.log('RECEIVE SOCKET_LINE_DELETE : ' + nbDeleteLine);
     dispatch(actionsGame.incrNbLineBlock(nbDeleteLine));
   });
  
@@ -88,13 +87,13 @@ const initApiSocket = (store) => {
   socket.on(typesSocket.SOCKET_PLAY_AGAIN, ({ roomName, username }) => {
     //if (username === store.getState().user.username)
     if (roomName === store.getState().gameRoom.name)
+    {
       dispatch(actionUser.setUserAlive(true));
-
-    dispatch(actionsGameRoom.gameRoomReset());
-
+      dispatch(actionsGameRoom.gameRoomReset());
+      dispatch(actionsGame.gameReset());
+    }
     dispatch(actionsGeneralSocketInfo.resetRoomAndUser(roomName))
 
-    dispatch(actionsGame.gameReset());
   })
 
   socket.on(typesSocket.SOCKET_PATCH_ROOM, (resp) => {

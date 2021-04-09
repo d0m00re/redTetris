@@ -37,7 +37,6 @@ const Home = () => {
 
 
     useEffect(() => {
-        console.log('window object:');
         let hash = hashParsing(window.location.hash)
         if (hash !== undefined){
             // dispatch user

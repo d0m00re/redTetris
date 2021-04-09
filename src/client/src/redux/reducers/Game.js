@@ -92,7 +92,6 @@ const GameReducer = (state = initialState, action) => {
     case INCR_NB_LINE_BLOCK:
 
       let _nbLineBlock = state.nbLineBlock + action.payload;
-      console.log('------> ' + state.nbLineBlock + ' : ' + action.payload + ' = ' + state.nbLineBlock + action.payload);
       return {
         ...state,
         nbLineBlock: _nbLineBlock
