@@ -3,9 +3,9 @@ import React from 'react'
 import CenterPage from '../../Atoms/Layout/CenterPage';//'./../components/Layout/CenterPage'
 import HeaderBar from '../../Organisms/HeaderBar/HeaderBar';
 import FormCreateUser from '../../components/Form/CreateUser/FormCreateUser';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import { Alert } from '@material-ui/lab';
 
-
+import PropTypes from 'prop-types';
 
 const Login = ({err, errMsg}) => {
     return (
@@ -18,6 +18,16 @@ const Login = ({err, errMsg}) => {
             </Alert>}
         </CenterPage>
     )
-} 
+};
+
+Login.defaultProps = {
+    err : false,
+    errMsg : ''
+}
+
+Login.propTypes = {
+    err : PropTypes.bool,
+    errMsg : PropTypes.string
+}
 
 export default Login

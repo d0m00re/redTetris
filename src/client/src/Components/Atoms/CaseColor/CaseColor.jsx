@@ -4,6 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 
+import PropTypes from 'prop-types';
+
+
 const useStyles = makeStyles({
     root: {
         borderColor : '#666',
@@ -79,5 +82,16 @@ const CaseColor =({caseValue, indexCase}) =>{
         <Grid item key={'case' + indexCase} className={clsx(classes.root, getColorWtValue(caseValue))}></Grid>
     );
 };
+
+CaseColor.defaultProps = {
+    caseValue : 0,
+    indexCase: ''
+}
+
+CaseColor.propTypes = {
+    caseValue : PropTypes.number,
+    indexCase : PropTypes.string 
+}
+
 
 export default React.memo(CaseColor);

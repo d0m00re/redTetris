@@ -3,6 +3,8 @@ import Paper from '@material-ui/core/Paper';
 
 import clsx from 'clsx';
 
+import PropTypes from 'prop-types';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
@@ -28,6 +30,7 @@ const useStyles = makeStyles({
     padding: '16px'
   }
 });
+
 const CenterPage = ({children}) => {
     const classes = useStyles();
 
@@ -39,5 +42,13 @@ const CenterPage = ({children}) => {
       </section>
     )
 }
+
+CenterPage.defaultProps = {
+  children : React.createElement('div')
+};
+
+CenterPage.propTypes = {
+  children : PropTypes.element
+};
 
 export default CenterPage

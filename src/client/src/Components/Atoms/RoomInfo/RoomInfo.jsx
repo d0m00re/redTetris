@@ -5,7 +5,7 @@ import { Typography } from '@material-ui/core';
 
 import {getStatus} from './../../../utils/getRoomStatus';
 
-const RoomInfo = ({ roomname, status, nbPlayer = 0 }) => {
+const RoomInfo = ({ roomname, status, nbPlayer }) => {
     return (
         <div>
             <Typography variant='body1'>Roomname : {roomname}</Typography>
@@ -14,6 +14,12 @@ const RoomInfo = ({ roomname, status, nbPlayer = 0 }) => {
         </div>
     );
 };
+
+RoomInfo.defaultProps = {
+    roomname : '',
+    status : '',
+    nbPlayer : 0
+}
 
 RoomInfo.propTypes = {
     roomname : PropTypes.string,

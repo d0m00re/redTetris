@@ -12,12 +12,15 @@
     "@testing-library/jest-dom": "^5.11.8",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "axios": "^0.21.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^26.6.3",
     "babel-loader": "^8.2.2",
     "babel-register": "^6.26.0",
     "clsx": "^1.1.1",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2",
     "fastify-cors": "^5.1.0",
     "html-webpack-plugin": "^4.5.1",
     "install": "^0.13.0",
@@ -40,13 +43,11 @@
   "scripts": {
     "start": "webpack-dev-server --mode=development --config ./webpack.config.js --port 8088 --host 0.0.0.0 --open",
     "build": "react-scripts build",
-
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "test": "jest",
-    "test:coverage" : "jest --coverage --collectCoverageFrom 'src/logic/*.js' --collectCoverageFrom 'src/utils/*.js' --collectCoverageFrom 'src/redux/middleware/*.js' --collectCoverageFrom 'src/redux/reducers/*.js' --collectCoverageFrom 'src/redux/actions/*.js'"
-   
-
+    "test:coverage": "jest --coverage --collectCoverageFrom 'src/logic/*.js' --collectCoverageFrom 'src/utils/*.js' --collectCoverageFrom 'src/redux/middleware/*.js' --collectCoverageFrom 'src/redux/reducers/*.js' --collectCoverageFrom 'src/redux/actions/*.js'",
+    "test:coverage-component": "jest --coverage --collectCoverageFrom 'src/Components/*/*/*.jsx'"
   },
   "eslintConfig": {
     "extends": [
