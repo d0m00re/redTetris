@@ -13,12 +13,15 @@ import GameRoomReducer from './reducers/GameRoom';
 
 import SocketClient from './middleware/socketIO';
 
-export const reducers = combineReducers({
+export const defaultState = {
   game: GameReducer,
   generalSocketInfo : GeneralSocketInfoReducer,
   user : UserReducer,
   gameRoom : GameRoomReducer
-});
+};
+
+
+export const reducers = combineReducers(defaultState);
 
 export function configureStore(initialState = {}) {  
 

@@ -4,6 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import DeathOrAlive from './Components/DeathOrAlive';
 
+import PropTypes from 'prop-types';
+
+
 const useStyles = makeStyles({
   root: {
     height: '120px',
@@ -30,7 +33,21 @@ const ViewBoardAdv = ({ currentBoard, userListDeath, username, indexBoard}) => {
       }
     </> 
   )
-}
+};
+
+ViewBoardAdv.propTypes = {
+  currentBoard : PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+  userListDeath : PropTypes.object,
+  username : PropTypes.string,
+  indexBoard : PropTypes.number
+};
+
+ViewBoardAdv.defaultProps = {
+  currentBoard : Array(20).fill().map(() => Array(10).fill(0)),
+  userListDeath : [],
+  username : 'd0m',
+  indexBoard : 455
+};
 
 export default React.memo(ViewBoardAdv);
  

@@ -13,7 +13,7 @@ const Login = ({err, errMsg}) => {
             <HeaderBar text={'Red Tetris'} variant={'h3'} />
             <FormCreateUser />
             {err &&
-            <Alert severity={'error'} style={{width: '90%'}}>
+            <Alert severity={'error'} style={{width: '90%'}}> 
                 {errMsg}
             </Alert>}
         </CenterPage>

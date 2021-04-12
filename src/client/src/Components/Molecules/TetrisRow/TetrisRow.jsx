@@ -1,5 +1,6 @@
 import React from 'react'
 import CaseColor from './../../Atoms/CaseColor/CaseColor';
+import PropTypes from 'prop-types';
 
 const TetrisRow = ({row, keyFather}) => {
     return (
@@ -9,6 +10,11 @@ const TetrisRow = ({row, keyFather}) => {
         } 
         </>
     );
+}
+
+TetrisRow.propsTypes = {
+    row : PropTypes.arrayOf(PropTypes.number),
+    keyFather : PropTypes.string
 }
 
 export default React.memo(TetrisRow);

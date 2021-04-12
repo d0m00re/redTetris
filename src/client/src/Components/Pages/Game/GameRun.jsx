@@ -14,6 +14,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import {useSelector} from 'react-redux';
 
+import PropTypes from 'prop-types';
+
+
 const useStyles = makeStyles({
     root: {
         //backgroundColor : '#333',
@@ -53,7 +56,7 @@ const useStyles = makeStyles({
     }
 })
 
-const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noGameLoop = false, userListDeath = [] }) => {
+const GameRun = ({ newTmpMap, tetriList, userListRoom, user, noGameLoop, userListDeath}) => {
     const styles = useStyles();
     let {nbLineBlock, score} = useSelector(state => state.game);
     let {shadows} = useSelector(state => state.gameRoom);
@@ -77,7 +80,7 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noG
                 <ViewInformation score={score} block={nbLineBlock} />
             </div>
                 {
-                    (tetriList.length > 1) && <div className={styles.next}>
+                    (tetriList?.length > 1) && <div className={styles.next}>
                         <Typography variant='h5' className={styles.title}>Next</Typography>
                         <ViewBoard currentBoard={tetriList[1].shape[0]} /></div> 
                 }
@@ -88,8 +91,7 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noG
                             userListRoom.filter(_user => _user.username !== user.username).map((username, index) => <>
                                 <div className={styles.containerFlexItemAdv}>
                                     <Typography variant='body2' className={styles.general}>{username.username}</Typography>
-                                  {/*}  <ViewBoardAdv currentBoard={userListServer.filter(user => user.name === username.username)[0].saveTetriBoard} userListDeath={userListDeath} username={username} /> */}
-                                  <ViewBoardAdv indexBoard={index} currentBoard={shadows.find(_shadow => _shadow.username === username.username)?.shadow} userListDeath={userListDeath} username={username.username} />
+                                  <ViewBoardAdv indexBoard={index} currentBoard={shadows?.find(_shadow => _shadow.username === username.username)?.shadow} userListDeath={userListDeath} username={username.username} />
                                 </div>
                             </>)
                             } 
@@ -98,6 +100,24 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, userListServer, noG
             </div>
         </div>
     );
-}
+};
+
+GameRun.defaultProps = {
+    newTmpMap : Array(20).fill().map(() => Array(10).fill(0)),
+    tetriList : [],
+    userListRoom : [],
+    user : {},
+    noGameLoop : false,
+    userListDeath : []
+};
+
+GameRun.propTypes = {
+    newTmpMap : PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+    tetriList :PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))),
+    userListRoom : PropTypes.arrayOf(PropTypes.shape({username : PropTypes.string, score : PropTypes.number})),
+    user : PropTypes.object,
+    noGameLoop : PropTypes.bool,
+    userListDeath : PropTypes.arrayOf(PropTypes.shape({username : PropTypes.string, score : PropTypes.number}))
+};
 
 export default GameRun; 

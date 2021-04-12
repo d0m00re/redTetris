@@ -1,6 +1,8 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+
 
 const useStyles = makeStyles({
     root: {
@@ -54,6 +56,16 @@ const ViewInformation = ({ score, block }) => {
             </div>
         </div>
     )
+};
+
+ViewInformation.defaultProps = {
+    score : 0,
+    block : 0
+};
+
+ViewInformation.propsTypes = {
+    score : PropTypes.number,
+    block : PropTypes.number
 }
 
 export default ViewInformation

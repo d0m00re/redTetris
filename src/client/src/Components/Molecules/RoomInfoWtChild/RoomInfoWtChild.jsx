@@ -31,8 +31,8 @@ const RoomInfoWtChild = ({children, name, status, nbPlayer, keyFather}) => {
 }
 
 RoomInfoWtChild.propTypes = {
-    roomname : PropTypes.string,
     status : PropTypes.string,
+    name : PropTypes.string,
     nbPlayer : PropTypes.number,
     children : PropTypes.element,
     keyFather : PropTypes.string

@@ -1,6 +1,7 @@
 import React from 'react'
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import PropTypes from 'prop-types';
 
 const HeaderBar = ({ text, variant }) => {
     return (
@@ -12,6 +13,16 @@ const HeaderBar = ({ text, variant }) => {
             </Grid>
         </header>
     );
-}
+};
+
+HeaderBar.defaultProps = {
+    text : '',
+    variant : ''
+};
+
+HeaderBar.propsTypes = {
+    text : PropTypes.string,
+    variant : PropTypes.string
+};
 
 export default HeaderBar;
