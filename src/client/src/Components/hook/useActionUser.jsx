@@ -1,36 +1,22 @@
 import {useState, useEffect} from 'react'
 import useKeyPress from './useKeyPress';
+import getKey from './../../utils/getKey';
 
 const useActionUser = () => {
     const [keyPress] = useKeyPress();
     const [action, setAction] = useState('');
     
     useEffect(() => {
-        
-    switch(keyPress){
-            case 'ArrowRight':
-                setAction('right');
-            break;
-            case 'ArrowLeft':
-                setAction('left');
-            break;
-            case 'ArrowUp':
-                setAction('rotate');
-            break;
-            case 'ArrowDown':
-                setAction('down');
-            break;
-            case 'Space':
-                setAction('space')
-            break;
-            default:                
-                if (action !== '')
-                    setAction('')
-            break;
-        }
+        let key = getKey(keyPress);
+
+        if (key !== undefined)
+            setAction(key);
+        else if (key === undefined && action !== '')
+            setAction('');
     }, [keyPress])
 
     return ([action])
 }
 
 export default useActionUser
+ 

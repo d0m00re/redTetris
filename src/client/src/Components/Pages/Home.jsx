@@ -70,7 +70,6 @@ const Home = () => {
                                       funcLeaveRoom={leaveRoom}
                                       owner={room.owner === username}/>
                     }
-
                     {
                         (room.state === 'RUNING_GAME') &&
                         <CenterPage>

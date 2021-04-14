@@ -49,4 +49,4 @@ const HomeGame = () => {
     );
 }
 
-export default HomeGame 
+export default HomeGame;

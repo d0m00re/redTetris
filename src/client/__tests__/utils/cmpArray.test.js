@@ -8,12 +8,19 @@ describe('cmpArray', function () {
 
     test('cmpArray - same', function () {
         expect(cmpArray(a, c)).toBe(true);
-    })
+    });
     test('cmpArray - different', function () {
         expect(cmpArray(a, b)).toBe(false);
-    })
+    });
     test('cmpArray - not the same size', function () {
         expect(cmpArray(a, d)).toBe(false);
+    });
+
+    test('cmpArray - incalid param', function () {
+        expect(cmpArray(44, d)).toBe(false);
+        expect(cmpArray(d, 44)).toBe(false);
+        expect(cmpArray(44, 444)).toBe(false);
+
     })
 });
 

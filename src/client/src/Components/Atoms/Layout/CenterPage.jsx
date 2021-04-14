@@ -41,8 +41,9 @@ const CenterPage = ({children}) => {
         </Paper>
       </section>
     )
-}
+};
 
+/*
 CenterPage.defaultProps = {
   children : React.createElement('div')
 };
@@ -50,5 +51,6 @@ CenterPage.defaultProps = {
 CenterPage.propTypes = {
   children : PropTypes.element
 };
+*/
 
 export default CenterPage

@@ -19,5 +19,5 @@ describe('RoomInfoWtChild Component', () => {
         });
 
         expect(component.find('div')?.length).toBe(3);
-    })
-})
+    });
+});

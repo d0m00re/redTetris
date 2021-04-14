@@ -6,7 +6,7 @@ export const dicoStatus = {
 }
 
 export const getStatus = (status, nbPlayer) => {
-    if (status === dicoStatus.WAIT_USER && nbPlayer === 7)
+    if (status === 'WAIT_USER' && nbPlayer === 7)
         return (dicoStatus.LOBY_FULL);
     return (dicoStatus[status]);
 }
