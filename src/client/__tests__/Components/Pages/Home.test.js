@@ -22,7 +22,7 @@ describe('Test own store', () => {
         const component = mount(
             makeComponent(storeRunningGame)
         );
-        console.log(component.debug());
+//        console.log(component.debug());
         expect(component.find('div').length).toBe(3);
     });
 
@@ -30,7 +30,7 @@ describe('Test own store', () => {
         const component = mount(
             makeComponent(storeGameEnd)
         );
-        console.log(component.debug());
+ //       console.log(component.debug());
         expect(component.find('div').length).toBe(3);
     });
 
@@ -38,7 +38,7 @@ describe('Test own store', () => {
         const component = mount(
             makeComponent(storeWaitUser)
         );
-        console.log(component.debug());
+  //      console.log(component.debug());
         expect(component.find('div').length).toBe(3);
     });
 });

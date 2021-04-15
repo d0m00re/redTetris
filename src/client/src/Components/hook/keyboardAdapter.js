@@ -7,7 +7,7 @@ const keyboardAdapter = (dispatch, {action, room, alive, tetriList, gameState}) 
     if (alive === false)
         return (1);
 
-    let tmpPos;
+    let tmpPos; 
     let cpMap;
     let ret;
     let currTetriminos = tetriList[0];
@@ -20,7 +20,8 @@ const keyboardAdapter = (dispatch, {action, room, alive, tetriList, gameState}) 
             ret = checkValidPushTetri(gameState.currMap, currTetriminos.shape[(gameState.currRotation + 1) % currTetriminos.shape.length], gameState.posTetriminos);
             if (ret)
                 dispatch(actionsGame.tetriRotation((gameState.currRotation + 1) % currTetriminos.shape.length))
-            break;
+            return 'rotate';
+
         case 'right':
             tmpPos = { ...gameState.posTetriminos };
             cpMap = _.cloneDeep(gameState.currMap);
@@ -28,7 +29,8 @@ const keyboardAdapter = (dispatch, {action, room, alive, tetriList, gameState}) 
             ret = checkAndPush(cpMap, currTetriminos.shape[gameState.currRotation], tmpPos);
             if (ret)
                 dispatch(actionsGame.updateTetriminosPos(tmpPos));
-            break;
+            return 'right';
+
         case 'left':
             tmpPos = { ...gameState.posTetriminos };
             cpMap = _.cloneDeep(gameState.currMap);
@@ -36,7 +38,7 @@ const keyboardAdapter = (dispatch, {action, room, alive, tetriList, gameState}) 
             ret = checkAndPush(cpMap, currTetriminos.shape[gameState.currRotation], tmpPos);
             if (ret)
                 dispatch(actionsGame.updateTetriminosPos(tmpPos));
-            break;
+            return 'left';
         case 'down':
             tmpPos = { ...gameState.posTetriminos };
             cpMap = _.cloneDeep(gameState.currMap);
@@ -44,17 +46,17 @@ const keyboardAdapter = (dispatch, {action, room, alive, tetriList, gameState}) 
             ret = checkAndPush(cpMap, currTetriminos.shape[gameState.currRotation], tmpPos);
             if (ret)
                 dispatch(actionsGame.updateTetriminosPos(tmpPos));
-            break;
+            return 'down';
         case 'space':
             tmpPos = { ...gameState.posTetriminos };
             cpMap = _.cloneDeep(gameState.currMap);
 
             checkAndPushSpace(cpMap, currTetriminos.shape[gameState.currRotation], tmpPos);
             dispatch(actionsGame.updateTetriminosPos(tmpPos));
-
-            break;
+            return 'space';
+            
         default:
-            break;
+            return 'none'; 
     }
 };
 

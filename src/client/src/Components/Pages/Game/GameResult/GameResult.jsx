@@ -13,7 +13,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
@@ -47,30 +46,7 @@ const useStyles = makeStyles({
     }
 });
 
-const MultiplePlayer = ({ otherPlayer }) => {
-    return (
-        <TableContainer>
-            <Table>
-                <TableHead>
-                    <StyledTableCell>Rank</StyledTableCell>
-                    <StyledTableCell>Name</StyledTableCell>
-                    <StyledTableCell>Score</StyledTableCell>
-                </TableHead>
-                <TableBody>
-                    {otherPlayer.map((user, index) => (
-                        <StyledTableRow key={`leaderboard-${user.username}`}>
-                            <StyledTableCell component="th" scope="row">{index + 1}</StyledTableCell>
-                            <StyledTableCell>{user.username} </StyledTableCell>
-                            <StyledTableCell>{user.score} </StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-    );
-}
-
-const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom, ownerBool, userList }) => {
+const GameResult = ({ otherPlayer, funcPlayAgain, funcLeaveRoom, ownerBool }) => {
     const classes = useStyles();
 
     return (
@@ -78,8 +54,24 @@ const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom, ownerBo
             <>
                 <Typography variant='h5'>Game report</Typography>
                 <div className={classes.flexRow}>
-                    <MultiplePlayer winner={winner} otherPlayer={otherPlayer}/>
-                </div>
+                    <TableContainer>
+                        <Table>
+                            <TableHead>
+                                <StyledTableCell>Rank</StyledTableCell>
+                                <StyledTableCell>Name</StyledTableCell>
+                                <StyledTableCell>Score</StyledTableCell>
+                            </TableHead>
+                            <TableBody>
+                                {otherPlayer.map((user, index) => (
+                                    <StyledTableRow key={`leaderboard-${user.username}`}>
+                                        <StyledTableCell component="th" scope="row">{index + 1}</StyledTableCell>
+                                        <StyledTableCell>{user.username} </StyledTableCell>
+                                        <StyledTableCell>{user.score} </StyledTableCell>
+                                    </StyledTableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>                </div>
                 {ownerBool &&
                     <TwoButton label1={'Play Again!'} label2={'Leave'} func1={funcPlayAgain} func2={funcLeaveRoom} />
                 }
@@ -87,7 +79,7 @@ const GameResult = ({ winner, otherPlayer, funcPlayAgain, funcLeaveRoom, ownerBo
                     <Button onClick={funcLeaveRoom} color='secondary' variant='contained'>Leave</Button>
                 }
             </>
-        </CenterPage> 
+        </CenterPage>
     )
 }
 

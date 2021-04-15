@@ -21,7 +21,7 @@ beforeEach(() => {
 
 describe('CenterPage Component', () => {
     test('should render without error', () => {
-        console.log(component.debug());
+       // console.log(component.debug());
         expect(component.find('div')?.length).toBe(1);
     });
 });

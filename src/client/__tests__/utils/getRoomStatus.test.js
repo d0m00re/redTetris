@@ -8,7 +8,7 @@ describe('utils : getRoomStatus', () => {
         expect(roomStatus.getStatus('WAIT_USER', 4)).toBe(roomStatus.dicoStatus.WAIT_USER);
     });
     test('Game running', () => {
-        expect(roomStatus.getStatus('WAIT_USER', 7)).toBe(roomStatus.dicoStatus.WAIT_USER);
+        expect(roomStatus.getStatus('RUNING_GAME', 5)).toBe(roomStatus.dicoStatus.RUNING_GAME);
     });
     test('Game End', () => {
         expect(roomStatus.getStatus('END_GAME', 3)).toBe(roomStatus.dicoStatus.END_GAME);

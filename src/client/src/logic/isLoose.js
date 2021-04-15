@@ -23,4 +23,4 @@ const isLoose = (tetriMap, tetri, pos) => {
 
 module.exports = {
     isLoose
-}
+};
