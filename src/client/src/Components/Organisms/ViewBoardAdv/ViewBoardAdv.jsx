@@ -25,19 +25,19 @@ const useStyles = makeStyles({
 const ViewBoardAdv = ({ currentBoard, userListDeath, username, indexBoard}) => {
   const styles = useStyles();
   return (
-    <>
+    <React.Fragment key={`ViewBoardAdv-${indexBoard}`}>
       {currentBoard !== undefined &&
       <div className={styles.root} key={`BoardAdv-${indexBoard}`}>
         <DeathOrAlive indexBoard={indexBoard} username={username} currentBoard={currentBoard} userListDeath={userListDeath} className={styles.flexRow} />
       </div>
       }
-    </> 
+    </React.Fragment> 
   )
 };
 
 ViewBoardAdv.propTypes = {
   currentBoard : PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
-  userListDeath : PropTypes.object,
+  userListDeath : PropTypes.any,
   username : PropTypes.string,
   indexBoard : PropTypes.number
 };

@@ -16,6 +16,8 @@ import TableRow from '@material-ui/core/TableRow';
 
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
+import clsx from 'clsx';
+
 const StyledTableCell = withStyles((theme) => ({
     head: {
         backgroundColor: theme.palette.common.black,
@@ -34,8 +36,8 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-const useStyles = makeStyles({
-    flexRow: {
+/*
+ flexRow: {
         padding: '16px',
         margin: '10px',
         display: 'flex',
@@ -43,6 +45,39 @@ const useStyles = makeStyles({
         alignItems: 'center',
         backgroundColor: '#fcbf49',
         width: '90%'
+    },
+*/
+const useStyles = makeStyles({
+
+    flexColumn: {
+        display: 'flex',
+        flexDirection: 'column',
+      //  width: '90%',
+        padding : '16px',
+        backgroundColor: '#fcbf49',
+        margin : '16px 0 8px 0'
+
+    },
+    flexRow: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
+    flexRowItem : {
+        width : '100px',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap', /* Don't forget this one */
+        textOverflow: 'ellipsis',
+        textAlign : 'center'
+    },
+
+    flexRowHeader : {
+        backgroundColor : 'black',
+        color : '#fcbf49',
+        padding : '8px 0'
+    },
+
+    flexRowItemPlayer : {
+        paddingTop : '8px'
     }
 });
 
@@ -52,7 +87,25 @@ const GameResult = ({ otherPlayer, funcPlayAgain, funcLeaveRoom, ownerBool }) =>
     return (
         <CenterPage>
             <>
+
                 <Typography variant='h5'>Game report</Typography>
+                <div className={classes.flexColumn}>
+                    <div className={clsx(classes.flexRow, classes.flexRowHeader)}>
+                        <div className={classes.flexRowItem}>Rank</div>
+                        <div className={classes.flexRowItem}>Name</div>
+                        <div className={classes.flexRowItem}>Score</div>
+                    </div>
+
+                    {otherPlayer.map((user, index) => (
+                        <div className={clsx(classes.flexRow, classes.flexRowItemPlayer)}>
+                            <div className={classes.flexRowItem}>{index + 1}</div>
+                            <div className={classes.flexRowItem}>{user.username} </div>
+                            <div className={classes.flexRowItem}>{user.score} </div>
+                        </div>
+                    ))}
+
+                </div>
+                {/*}
                 <div className={classes.flexRow}>
                     <TableContainer>
                         <Table>
@@ -72,6 +125,7 @@ const GameResult = ({ otherPlayer, funcPlayAgain, funcLeaveRoom, ownerBool }) =>
                             </TableBody>
                         </Table>
                     </TableContainer>                </div>
+                                */}
                 {ownerBool &&
                     <TwoButton label1={'Play Again!'} label2={'Leave'} func1={funcPlayAgain} func2={funcLeaveRoom} />
                 }

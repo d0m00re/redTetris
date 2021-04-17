@@ -8,16 +8,14 @@ export const gameResultSolo = Template.bind({});
 
 gameResultMultipleGame.args = {
     winner : 'john',
-    otherPlayer : ['john', 'roups'],
-    userList : [{username : 'john', score : 66}, {username :'roups', score : 10}],
+    otherPlayer : [{username : 'john', score : 66}, {username :'roups', score : 10}],
     funcPlayAgain : null,
     funcLeaveRoom : null
 };
 
 gameResultSolo.args = {
     winner : 'jack',
-    otherPlayer : ['jack'],
-    userList : [{username : 'jack', score : 660}],
+    otherPlayer : [{username : 'jackdsdfsfds', score : 55}],
     funcPlayAgain : null,
     funcLeaveRoom : null
 };

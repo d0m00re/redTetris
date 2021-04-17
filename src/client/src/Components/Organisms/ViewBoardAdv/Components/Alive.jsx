@@ -7,17 +7,17 @@ import TetrisRowAdv from '../../../Molecules/TetriRowAdv/TetriRowAdv'
 
 const useStyles = makeStyles({    
     flexRow: {
-      display: 'flex',
+      display: 'flex', 
       flexDirection: 'row',
     }
   })
 
-const Alive = ({ row, key }) => {
+const Alive = ({ row, keyFather }) => {
     const classes = useStyles();
   
     return (
-      <div className={classes.flexRow} key={"row-" + key}>
-        <TetrisRowAdv row={row} key={key}></TetrisRowAdv>
+      <div className={classes.flexRow} key={"row-" + keyFather}>
+        <TetrisRowAdv row={row} keyFather={keyFather}></TetrisRowAdv>
       </div>);
   }
 

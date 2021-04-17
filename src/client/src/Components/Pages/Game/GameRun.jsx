@@ -60,8 +60,7 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, noGameLoop, userLis
     const styles = useStyles();
     let {nbLineBlock, score} = useSelector(state => state.game);
     let {shadows} = useSelector(state => state.gameRoom);
-
-
+ 
     return (
         <div className={styles.flexRow}>
             <div className={styles.margin}>
@@ -88,12 +87,11 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, noGameLoop, userLis
                     (userListRoom?.length > 1) &&
                     <div className={styles.containerFlexAdv}>
                         {
-                            userListRoom.filter(_user => _user.username !== user.username).map((username, index) => <>
-                                <div className={styles.containerFlexItemAdv}>
+                            userListRoom.filter((_user) => _user.username !== user.username).map((username, index) =>
+                                <div className={styles.containerFlexItemAdv} key={`gameRun-${index}-key`}>
                                     <Typography variant='body2' className={styles.general}>{username.username}</Typography>
                                   <ViewBoardAdv indexBoard={index} currentBoard={shadows?.find(_shadow => _shadow.username === username.username)?.shadow} userListDeath={userListDeath} username={username.username} />
-                                </div>
-                            </>)
+                                </div>)
                             } 
                     </div> 
                     } 
@@ -108,16 +106,15 @@ GameRun.defaultProps = {
     userListRoom : [],
     user : {},
     noGameLoop : false,
-    userListDeath : []
 };
 
 GameRun.propTypes = {
     newTmpMap : PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
-    tetriList :PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))),
+    tetriList : PropTypes.any,//PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))),
     userListRoom : PropTypes.arrayOf(PropTypes.shape({username : PropTypes.string, score : PropTypes.number})),
     user : PropTypes.object,
     noGameLoop : PropTypes.bool,
-    userListDeath : PropTypes.arrayOf(PropTypes.shape({username : PropTypes.string, score : PropTypes.number}))
+    userListDeath : PropTypes.any//PropTypes.arrayOf(PropTypes.shape({username : PropTypes.string, score : PropTypes.number}))
 };
 
 export default GameRun; 
