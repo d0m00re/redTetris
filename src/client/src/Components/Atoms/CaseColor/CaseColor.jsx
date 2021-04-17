@@ -6,17 +6,21 @@ import clsx from 'clsx';
 
 import PropTypes from 'prop-types';
 
-
-const useStyles = makeStyles({
+// 20
+const useStyles = makeStyles(theme => ({
     root: {
         borderColor : '#666',
         width: '30px !important',
         height : '30px',
-        border : '0.1rem solid'
+        border : '0.1rem solid',
+        [theme.breakpoints.down('md')] : {
+            width : '20px !important',
+            height : '20px'
+        }
     },
 
     defaultColor: {
-        backgroundColor: 'white'
+        backgroundColor:'#ece6f2'//'white'
     },
 
     cyan: {
@@ -50,7 +54,7 @@ const useStyles = makeStyles({
     grey: {
         backgroundColor: 'grey'
     }
-})
+}));
 
 const CaseColor =({caseValue, indexCase}) =>{
     const classes = useStyles(); // how to assign UseStyle

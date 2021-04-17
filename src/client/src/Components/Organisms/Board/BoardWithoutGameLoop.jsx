@@ -14,13 +14,13 @@ const useStyles = makeStyles({
 })
 
 
-const BoardWithoutGameLoop = ({currentBoard}) => { 
+const BoardWithoutGameLoop = ({currentBoard, nbLineBlock}) => { 
   return (
     <div >    
       <div>
       {currentBoard.map((row, indexRow) => (
         <Grid container key={`boardWithoutGameLoop-${indexRow}`} direction="row" className={useStyles.root}>
-          <TetrisRow row={row} keyFather={indexRow}></TetrisRow>
+          <TetrisRow row={row} keyFather={indexRow} block={(20 - nbLineBlock <= indexRow )}></TetrisRow>
         </Grid>
       ))}
       </div>
@@ -29,11 +29,13 @@ const BoardWithoutGameLoop = ({currentBoard}) => {
 };
 
 BoardWithoutGameLoop.defaultProps = {
-  currentBoard :Array(20).fill().map(() => Array(10).fill(0))
+  currentBoard :Array(20).fill().map(() => Array(10).fill(0)),
+  nbLineBlock : 0
 };
 
 BoardWithoutGameLoop.propTypes = {
-  currentBoard : PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))
+  currentBoard : PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+  nbLineBlock : PropTypes.number
 };
 
 export default BoardWithoutGameLoop;

@@ -3,12 +3,12 @@ import useGameLoop from '../../hook/useGameLoop';
 import BoardWithoutGameLoop from './BoardWithoutGameLoop';
 import PropTypes from 'prop-types';
 
-const Board = ({currentBoard}) => {
+const Board = ({currentBoard, nbLineBlock}) => {
   useGameLoop();
  
   return (
     <>
-      <BoardWithoutGameLoop currentBoard={currentBoard} />
+      <BoardWithoutGameLoop currentBoard={currentBoard} nbLineBlock={nbLineBlock}/>
     </>
   );
 };
@@ -21,4 +21,4 @@ Board.propTypes = {
   currentBoard : PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number))
 };
 
-export default Board;
+export default Board; 

@@ -67,7 +67,7 @@ const GameRun = ({ newTmpMap, tetriList, userListRoom, user, noGameLoop, userLis
             <div className={styles.margin}>
                 {
                     noGameLoop === false &&
-                    <Board currentBoard={newTmpMap} />
+                    <Board currentBoard={newTmpMap} nbLineBlock={nbLineBlock} />
                 }
                 {
                     noGameLoop === true &&
