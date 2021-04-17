@@ -13,7 +13,7 @@ describe('HeaderBar Component', () => {
     test('should not crash', () => {
         let component = setUp({
             text : 'Header info',
-            variant : ''
+            variant : 'h1'
         });
 
         expect(component.find('div')?.length).toBe(2);

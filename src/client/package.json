@@ -46,7 +46,6 @@
     "test": "jest",
     "test:coverage": "jest --coverage --collectCoverageFrom 'src/logic/*.js' --collectCoverageFrom 'src/utils/*.js' --collectCoverageFrom 'src/redux/middleware/*.js' --collectCoverageFrom 'src/redux/reducers/*.js' --collectCoverageFrom 'src/redux/actions/*.js' --collectCoverageFrom 'src/Components/*/*/*.jsx' --collectCoverageFrom 'src/Components/*/*.jsx' --collectCoverageFrom 'src/Components/hook/*.jsx' --collectCoverageFrom 'src/Components/hook/*.js'",
     "test:coverage2": "jest --coverage"
-
   },
   "eslintConfig": {
     "extends": [
@@ -78,13 +77,9 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/react-hooks": "^5.1.1",
     "@testing-library/user-event": "^12.8.3",
-    "esm": "^3.2.25",
     "jest": "^26.6.3",
     "jest-svg-transformer": "^1.0.0",
     "jest-transform-stub": "^2.0.0",
-    "mocha": "^8.2.1",
-    "mocha-loader": "^5.1.5",
-    "nyc": "^15.1.0",
     "react-test-renderer": "^17.0.2",
     "redux-mock-store": "^1.5.4",
     "svg-url-loader": "^7.1.1",

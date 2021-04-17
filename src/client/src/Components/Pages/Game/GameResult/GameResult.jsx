@@ -97,7 +97,7 @@ const GameResult = ({ otherPlayer, funcPlayAgain, funcLeaveRoom, ownerBool }) =>
                     </div>
 
                     {otherPlayer.map((user, index) => (
-                        <div className={clsx(classes.flexRow, classes.flexRowItemPlayer)}>
+                        <div className={clsx(classes.flexRow, classes.flexRowItemPlayer)} key={`gameResult-${index}`}>
                             <div className={classes.flexRowItem}>{index + 1}</div>
                             <div className={classes.flexRowItem}>{user.username} </div>
                             <div className={classes.flexRowItem}>{user.score} </div>
@@ -105,27 +105,7 @@ const GameResult = ({ otherPlayer, funcPlayAgain, funcLeaveRoom, ownerBool }) =>
                     ))}
 
                 </div>
-                {/*}
-                <div className={classes.flexRow}>
-                    <TableContainer>
-                        <Table>
-                            <TableHead>
-                                <StyledTableCell>Rank</StyledTableCell>
-                                <StyledTableCell>Name</StyledTableCell>
-                                <StyledTableCell>Score</StyledTableCell>
-                            </TableHead>
-                            <TableBody>
-                                {otherPlayer.map((user, index) => (
-                                    <StyledTableRow key={`leaderboard-${user.username}`}>
-                                        <StyledTableCell component="th" scope="row">{index + 1}</StyledTableCell>
-                                        <StyledTableCell>{user.username} </StyledTableCell>
-                                        <StyledTableCell>{user.score} </StyledTableCell>
-                                    </StyledTableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>                </div>
-                                */}
+
                 {ownerBool &&
                     <TwoButton label1={'Play Again!'} label2={'Leave'} func1={funcPlayAgain} func2={funcLeaveRoom} />
                 }

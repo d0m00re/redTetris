@@ -17,7 +17,7 @@ const HeaderBar = ({ text, variant }) => {
 
 HeaderBar.defaultProps = {
     text : '',
-    variant : ''
+    variant : 'h6'
 };
 
 HeaderBar.propsTypes = {

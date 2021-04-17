@@ -94,7 +94,7 @@ CaseColor.defaultProps = {
 
 CaseColor.propTypes = {
     caseValue : PropTypes.number,
-    indexCase : PropTypes.string 
+    indexCase : PropTypes.any
 }
 
 

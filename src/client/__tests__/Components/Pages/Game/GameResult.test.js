@@ -22,12 +22,12 @@ let component = undefined;
 describe('GameResult component', () => {
    test('Owner view', () => {
        component = setUpDefault({ownerBool : true});
-        expect(component.find('div').length).toBe(1);
+        expect(component.find('div').length).toBe(13);
     });
 
    test('No owner view', () => {
         component = setUpDefault({ownerBool : false});
-        expect(component.find('div').length).toBe(1);
+        expect(component.find('div').length).toBe(13);
     });
 
 });
