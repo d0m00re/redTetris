@@ -23,8 +23,13 @@ import {
 
 
 const join = (io : any, socket : any, global : Global, roomName: string) => {
-    let newRoom : IRoom;
+  if (socket.username === undefined)
+    return 0;  
+  
+  let newRoom : IRoom;
     let user : IUser | undefined = global.getUserWithId(socket.id); //findUser(socket.id);
+
+    
  
     let currRoom = global.rooms.getRoomWithRoomName(roomName);
 

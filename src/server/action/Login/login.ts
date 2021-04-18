@@ -12,8 +12,8 @@ import {
 } from '../../entity/Global';
 
 const userRegister = (io : any, socket : any, global : Global, username : string) => {
-    socket.username = username;
     let user: IUser = { name: username, uuid: socket.id, room: '' };
+    socket.username = undefined;
 
     if (username === '' || username === undefined) {
         socket.emit('SOCKET_ERROR', {msg : 'Invalid username'});
@@ -24,6 +24,7 @@ const userRegister = (io : any, socket : any, global : Global, username : string
         socket.emit('SOCKET_ERROR', {msg : 'Username already exist'});
         return (false);
     }
+    socket.username = username;
 
     global.createUser(user);
     // send back username :
