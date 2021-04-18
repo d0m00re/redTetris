@@ -12,11 +12,6 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /test\.js$/,
-        use: 'mocha-loader',
-        exclude: /node_modules/,
-      },
-      {
         test: /\.svg$/,
         use: [
           {
@@ -26,7 +21,15 @@ module.exports = {
             }
           }
         ]
-      }
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
   resolve: {
