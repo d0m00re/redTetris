@@ -1,7 +1,8 @@
 const path = require('path');
 const HWP = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
- 
 module.exports = {
   entry: path.resolve(__dirname, './src/index.js'),
   module: {
@@ -23,7 +24,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|ico)$/i,
         use: [
           {
             loader: 'file-loader',
@@ -48,9 +49,12 @@ module.exports = {
     compress: true,
     port: 9001
   },
+  
   plugins: [
     new HWP({
       template: path.join(__dirname, './public/index.html'),
+      favicon: "./public/favicon.ico"
     }),
   ],
+  
 };
