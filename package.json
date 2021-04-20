@@ -1,13 +1,11 @@
 {
     "scripts": {
-
-        "srv-install" : "npm --prefix ./src/server/ install",
-        "clt-install" : "npm --prefix ./src/client/ install",
-
-        "srv-start" : "npm --prefix ./src/server/ start",
-        "srv-test" : "npm --prefix ./src/server/ test",
-        "clt-start" : "npm --prefix ./src/client/ start",
-        "clt-test" : "npm --prefix ./src/client/ test:coverage",
-        "clt-storybook" : "npm --prefix ./src/client/ storybook"
+        "srv-install": "npm --prefix ./src/server/ install",
+        "clt-install": "npm --prefix ./src/client/ install",
+        "srv-start": "npm --prefix ./src/server/ start",
+        "srv-test": "npm --prefix ./src/server/ test",
+        "clt-start": "npm --prefix ./src/client/ start",
+        "clt-test": "npm --prefix ./src/client/ test:coverage",
+        "clt-storybook": "npm --prefix ./src/client/ storybook"
     }
 }
