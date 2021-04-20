@@ -1,6 +1,5 @@
-frontend/node_modules
-dist
-frontend/dist
 backend/node_modules
 node_modules/
 src/server/coverage
+src/client/dist
+src/client/nodes_modules
