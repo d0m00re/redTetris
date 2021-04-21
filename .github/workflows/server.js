@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: ReactClient CI
+name: ExpressServer CI
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     strategy:
       matrix:
@@ -23,7 +23,6 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm run prod:build --if-present
-    - run: npm run test:coverage
-    - run: npm run prod:start --if-present
+    - run: npm --prefix src/server install
+    - run: npm --prefix src/server test-coverage --if-present
+    - run: npm --prefic src/server start

@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "jest",
     "test:coverage" : "jest --coverage",
     "start": "nodemon index.ts"
   },
