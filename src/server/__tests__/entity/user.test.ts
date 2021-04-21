@@ -1,5 +1,5 @@
-import {IUser, User} from '../../entity/User';
-import * as UserData from '../../dataset/user';
+import {IUser, User} from '@entity/User';
+import * as UserData from '@dataset/user';
 
 
 describe('User test', function () {

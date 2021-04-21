@@ -1,6 +1,6 @@
-import {UserList} from '../../entity/UserList';
-import * as UserData from './../../dataset/user';
-import * as UserListData from './../../dataset/userList'
+import {UserList} from '@entity/UserList';
+import * as UserData from '@dataset/user';
+import * as UserListData from '@dataset/userList'
 
 describe('UserList', function() {
     test('add', () => {

@@ -47,8 +47,7 @@
 
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "test:coverage": "jest --coverage --collectCoverageFrom 'src/logic/*.js' --collectCoverageFrom 'src/utils/*.js' --collectCoverageFrom 'src/redux/middleware/*.js' --collectCoverageFrom 'src/redux/reducers/*.js' --collectCoverageFrom 'src/redux/actions/*.js' --collectCoverageFrom 'src/Components/*/*/*.jsx' --collectCoverageFrom 'src/Components/*/*.jsx' --collectCoverageFrom 'src/Components/hook/*.jsx' --collectCoverageFrom 'src/Components/hook/*.js'",
-
+    "test:coverage": "jest --coverage --collectCoverageFrom 'src/logic/*.js' --collectCoverageFrom 'src/utils/*.js' --collectCoverageFrom 'src/redux/middleware/*.js' --collectCoverageFrom 'src/redux/reducers/*.js' --collectCoverageFrom 'src/redux/actions/*.js' --collectCoverageFrom 'src/Components/*/*/*.jsx' --collectCoverageFrom 'src/Components/*/*.jsx' --collectCoverageFrom 'src/Components/hook/*.jsx' --collectCoverageFrom 'src/Components/hook/*.js'"
   },
   "eslintConfig": {
     "extends": [

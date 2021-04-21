@@ -25,6 +25,14 @@ export default {
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage",
 
+  moduleNameMapper: {
+    "^@dataset/(.*)$": "<rootDir>/dataset/$1",
+    "^@action/(.*)$": "<rootDir>/src/action/$1",
+    "^@constant/(.*)$": "<rootDir>/src/constant/$1",
+    "^@entity/(.*)$": "<rootDir>/src/entity/$1",
+    "^@utils/(.*)$": "<rootDir>/src/utils/$1"
+  },
+
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
   //   "/node_modules/"

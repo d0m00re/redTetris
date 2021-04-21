@@ -1,4 +1,4 @@
-import {IRoom, ERoomState} from '../entity/Room';
+import {IRoom, ERoomState} from '@entity/Room';
 
 export const room1_wait_1user : IRoom = {
     name: 'room1',

@@ -1,8 +1,8 @@
-import { Global, IShadowRoom } from './../../entity/Global';
-import { ERoomState } from './../../entity/Room';
+import { Global, IShadowRoom } from '@entity/Global';
+import { ERoomState } from '@entity/Room';
 
-import * as RoomData from './../../dataset/room';
-import * as UserData from './../../dataset/user';
+import * as RoomData from '@dataset/room';
+import * as UserData from '@dataset/user';
 
 describe('User class test', function () {
   test('getIUserWithUsername', () => {

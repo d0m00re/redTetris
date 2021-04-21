@@ -1,4 +1,4 @@
-import {IUser} from './../entity/User';
+import {IUser} from '@entity/User';
 import * as dataUser from './user'
 
 export let userListEmpty : IUser[] = [];

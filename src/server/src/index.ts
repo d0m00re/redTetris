@@ -1,4 +1,4 @@
-// src/server.ts
+//require("@babel/register")({extensions: ['.js', '.ts']});
 import express from "express";
 import path from "path";
 import cors from 'cors';

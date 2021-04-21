@@ -1,4 +1,4 @@
-import diffString from './../../utils/diffString';
+import diffString from '@utils/diffString';
 
 describe('diffString', () => {
     test('diffString', () => {

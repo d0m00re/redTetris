@@ -1,4 +1,4 @@
-import {IUser} from './../entity/User';
+import {IUser} from '@entity/User';
 
 export let d0m_room1 : IUser = {
         name : 'd0m',
