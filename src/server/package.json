@@ -9,7 +9,7 @@
 
     "clean:prod": "rm -rf build && mkdir build ",
     "start:prod": "pm2 start ./build/index.js --name=BackendAPI",
-    "build:prod": "npx babel src/ --extensions '.ts' --out-dir build",
+    "build:prod": "npx babel src/ --extensions '.ts' --out-dir build"
   },
   "keywords": [],
   "author": "",
