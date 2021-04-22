@@ -3,14 +3,13 @@
         "srv-test": "npm --prefix ./src/server/ test",
         "clt-test": "npm --prefix ./src/client/ test:coverage",
         "clt-storybook": "npm --prefix ./src/client/ storybook",
+        "clt:prod:build": "npm run --prefix ./src/client/ prod:build",
+        "clt:prod:start": "npm run --prefix ./src/client/ prod:start",
+        "clt:dev:start": "npm run --prefix ./src/client/ dev:start",
 
-        "clt:prod:build" : "npm run --prefix ./src/client/ prod:build",
-        "clt:prod:start" : "npm run --prefix ./src/client/ prod:start",
-        "clt:dev:start" : "npm run --prefix ./src/client/ dev:start",
-
-        "srv:dev:start" : "npm run --prefix ./src/server/ start:dev",
-        "srv:prod:build" : "npm run --prefix ./src/server/ build:prod",
-        "srv:prod:start" : "npm run --prefix ./src/server/ start:prod"
-
-    }
+	"srv:dev:start": "npm run --prefix ./src/server/ start:dev",
+        "srv:prod:build": "npm run --prefix ./src/server/ build:prod",
+        "srv:prod:start": "npm run --prefix ./src/server/ start:prod"
+    },
+    "dependencies": {}
 }

@@ -3,3 +3,4 @@ node_modules/
 src/server/coverage
 src/client/dist
 src/client/nodes_modules
+src/server/build
