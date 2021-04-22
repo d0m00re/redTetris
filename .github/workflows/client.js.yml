@@ -24,6 +24,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm --prefix src/client install
-    - run: npm --prefix src/client prod:build
-    - run: npm --prefix src/client prod:start
-    - run: npm --prefix src/client test:coverage
+    - run: npm run --prefix src/client prod:build
+    - run: npm run --prefix src/client prod:start
+    - run: npm run --prefix src/client test:coverage
