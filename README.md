@@ -61,12 +61,12 @@ then go on this url : http://localhost:8088
 ### Server
 #### Install
 ```js
-npm run srv-install;
+npm run srv:install;
 ```
 
 #### Start Server dev
 ```js
-npm run clt:dev:start
+npm run srv:dev:start
 ```
 
 #### Start Server prod
@@ -77,7 +77,7 @@ npm run srv:prod:build; npm run srv:prod:start;
 ### Client
 #### Install
 ```js
-npm run clt-install;
+npm run clt:install;
 ```
 
 #### Start client Dev
@@ -93,11 +93,11 @@ npm run clt:prod:build; npm run clt:prod:start;
 ## Run test
 #### server
 ```js
-npm run srv-test
+npm run srv:test
 ```
 #### client
 ```js
-npm run clt-test
+npm run clt:test
 ```
 
 
