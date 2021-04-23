@@ -82,7 +82,7 @@ npm run clt:install;
 
 #### Start client Dev
 ```js
-npm run srv:dev:start
+npm run clt:dev:start
 ```
 
 #### Start Client Prod
