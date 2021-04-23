@@ -38,13 +38,10 @@
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-
     "prod:build": "webpack --config ./webpack.prod.js",
     "prod:start": "webpack serve --config ./webpack.prod.js --port 8088 --host 0.0.0.0 --open",
-
     "dev:build": "webpack --config ./webpack.dev.js",
     "dev:start": "webpack serve --config ./webpack.dev.js  --port 8088 --host 0.0.0.0",
-
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "test:coverage": "jest --coverage --collectCoverageFrom 'src/logic/*.js' --collectCoverageFrom 'src/utils/*.js' --collectCoverageFrom 'src/redux/middleware/*.js' --collectCoverageFrom 'src/redux/reducers/*.js' --collectCoverageFrom 'src/redux/actions/*.js' --collectCoverageFrom 'src/Components/*/*/*.jsx' --collectCoverageFrom 'src/Components/*/*.jsx' --collectCoverageFrom 'src/Components/hook/*.jsx' --collectCoverageFrom 'src/Components/hook/*.js'"

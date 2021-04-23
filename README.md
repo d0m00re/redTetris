@@ -37,7 +37,7 @@ Socket server has been developed using NodeJS, Express and SocketIO.
 * nodejs, express, socket.io
 
 ### Test
-* mocha / jest
+* jest
 
 ### Language
 * javascript / typescript
@@ -59,13 +59,35 @@ then go on this url : http://localhost:8088
 
 ## Without Docker
 ### Server
+#### Install
 ```js
-npm run srv-install; npm run srv-start;
+npm run srv-install;
+```
+
+#### Start Server dev
+```js
+npm run clt:dev:start
+```
+
+#### Start Server prod
+```js
+npm run srv:prod:build; npm run srv:prod:start;
 ```
 
 ### Client
+#### Install
 ```js
-npm run clt-install; npm run clt-start;
+npm run clt-install;
+```
+
+#### Start client Dev
+```js
+npm run srv:dev:start
+```
+
+#### Start Client Prod
+```js
+npm run clt:prod:build; npm run clt:prod:start;
 ```
 
 ## Run test

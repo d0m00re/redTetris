@@ -23,7 +23,7 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm --prefix src/server install
+    - run: npm run srv:install
     - run: npm run srv:prod:build
     - run: npm run srv:prod:start
-    - run: npm run --prefix src/server test:coverage
+    - run: npm run srv:test

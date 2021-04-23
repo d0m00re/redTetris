@@ -23,7 +23,7 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm --prefix src/client install
-    - run: npm run --prefix src/client prod:build
-    - run: npm run --prefix src/client prod:start
-    - run: npm run --prefix src/client test:coverage
+    - run: npm run clt:install
+    - run: npm run clt:prod:build
+    - run: npm run clt:prod:start
+    - run: npm run clt:test

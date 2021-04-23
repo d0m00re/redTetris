@@ -49,8 +49,10 @@ let io = require("socket.io")(http, {
   }
 }); 
 
+
 app.get("/", (req: any, res: any) => {
-  res.sendFile(path.resolve("./client/index.html"));
+	res.send('Server Alive!')
+	//res.sendFile(path.resolve("./client/index.html"));
 });
 
 // send user shadow each 2 second

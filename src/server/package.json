@@ -6,7 +6,6 @@
   "scripts": {
     "test:coverage": "jest --coverage",
     "dev:start": "nodemon ./src/index.ts",
-
     "clean:prod": "rm -rf build && mkdir build ",
     "start:prod": "pm2 start ./build/index.js --name=BackendAPI",
     "build:prod": "npx babel src/ --extensions '.ts' --out-dir build"
