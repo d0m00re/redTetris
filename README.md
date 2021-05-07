@@ -51,11 +51,7 @@ Socket server has been developed using NodeJS, Express and SocketIO.
 ### In game
 
 ## Instalation
-### With Docker
-```
-sudo docker-compose up
-then go on this url : http://localhost:8088
-```
+
 
 ## Without Docker
 ### Server
@@ -105,3 +101,18 @@ npm run clt:test
 ```js
 cd src/client; npm run storybook;
 ```
+
+
+## todo
+fix docker
+### With Docker
+```
+sudo docker-compose up
+then go on this url : http://localhost:8088
+```
+
+fix few bug :
+* shadow not reset
+* max string length
+* error message
+* storybook fix
