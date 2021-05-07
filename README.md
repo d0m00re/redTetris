@@ -52,36 +52,41 @@ Socket server has been developed using NodeJS, Express and SocketIO.
 
 ## Instalation
 
+### With Docker
+```
+sudo docker-compose up
+then go on this url : http://localhost:8088
+```
 
-## Without Docker
-### Server
-#### Install
+### Without Docker
+#### Server
+##### Install
 ```js
 npm run srv:install;
 ```
 
-#### Start Server dev
+##### Start Server dev
 ```js
 npm run srv:dev:start
 ```
 
-#### Start Server prod
+##### Start Server prod
 ```js
 npm run srv:prod:build; npm run srv:prod:start;
 ```
 
-### Client
-#### Install
+#### Client
+##### Install
 ```js
 npm run clt:install;
 ```
 
-#### Start client Dev
+##### Start client Dev
 ```js
 npm run clt:dev:start
 ```
 
-#### Start Client Prod
+##### Start Client Prod
 ```js
 npm run clt:prod:build; npm run clt:prod:start;
 ```
@@ -104,14 +109,8 @@ cd src/client; npm run storybook;
 
 
 ## todo
-fix docker
-### With Docker
-```
-sudo docker-compose up
-then go on this url : http://localhost:8088
-```
 
-fix few bug :
+fix few bugs :
 * shadow not reset
 * max string length
 * error message
