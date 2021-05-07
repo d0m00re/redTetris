@@ -1,15 +1,15 @@
 {
     "scripts": {
         "clt:test": "npm --prefix ./src/client/ test:coverage",
-	"clt:install" : "npm --prefix ./src/client/ install",
+	    "clt:install" : "npm --prefix ./src/client/ install",
         "clt-storybook": "npm --prefix ./src/client/ storybook",
         "clt:prod:build": "npm run --prefix ./src/client/ prod:build",
         "clt:prod:start": "npm run --prefix ./src/client/ prod:start",
         "clt:dev:start": "npm run --prefix ./src/client/ dev:start",
 
-	"srv:test": "npm --prefix ./src/server/ test:coverage",
-	"srv:install": "npm --prefix ./src/server/ install",
-	"srv:dev:start": "npm run --prefix ./src/server/ dev:start",
+	    "srv:test": "npm --prefix ./src/server/ test:coverage",
+	    "srv:install": "npm --prefix ./src/server/ install",
+	    "srv:dev:start": "npm run --prefix ./src/server/ dev:start",
         "srv:prod:build": "npm run --prefix ./src/server/ build:prod",
         "srv:prod:start": "npm run --prefix ./src/server/ start:prod"
     },

@@ -28,12 +28,12 @@ const useStyles = makeStyles({
       }
   });
 
-const BasicForm = ({handleInput, funcButton, placeholder, buttonLabel}) => {
+const BasicForm = ({handleInput, funcButton, placeholder, buttonLabel, maxCaractere}) => {
     const classes = useStyles();
 
     return (
         <form className={classes.flexRow}>
-            <input type='text' className={classes.inputColor} onChange={handleInput} placeholder={placeholder}/>
+            <input type='text' className={classes.inputColor} onChange={handleInput} placeholder={placeholder} maxLength={maxCaractere}/>
             <Button variant='contained' onClick={funcButton} className={classes.button}>{buttonLabel}</Button>
         </form>
     );
@@ -43,14 +43,16 @@ BasicForm.defaultProps = {
   handleInput : null,
   funcButton : null,
   placeholder : '',
-  buttonLabel : ''
+  buttonLabel : '',
+  maxCaractere : '20'
 };
 
 BasicForm.propTypes = {
   handleInput : PropTypes.func,
   funcButton : PropTypes.func,
   placeholder : PropTypes.string,
-  buttonLabel : PropTypes.string
+  buttonLabel : PropTypes.string,
+  maxCaractere : PropTypes.string
 };
 
 
